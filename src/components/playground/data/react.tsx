@@ -29,32 +29,43 @@ return profiles.map((p) => <ProfileCard key={p.name} profile={p} />);`,
     id: 'compoundpattern',
     title: '컴파운드 패턴(탭 예시)',
     tags: ['React', 'Compound'],
-    description: 'Tabs.Root/List/Trigger로 조립하는 예시',
+    description: 'Context 흐름에 맞춰 Card.Root/Badge를 읽는 법 정리',
     categories: ['react'],
     demo: <CompoundPatternDemo />,
-    code: `const tabs = [
-  { key: 'one', label: '탭 1', content: '첫 번째 탭 내용' },
-  { key: 'two', label: '탭 2', content: '두 번째 탭 내용' },
-  { key: 'three', label: '탭 3', content: '세 번째 탭 내용' },
-];
-const [active, setActive] = React.useState(tabs[0].key);
-const current = tabs.find((t) => t.key === active);
+    code: `// 핵심 한 문장: CardRoot가 Provider로 variant를 내려주고, CardBadge가 useContext로 꺼낸다
 
-<Tabs.Root value={active} defaultValue={tabs[0].key} onValueChange={setActive}>
-  <Tabs.List>
-    {tabs.map((tab) => (
-      <Tabs.Trigger key={tab.key} value={tab.key}>
-        {tab.label}
-      </Tabs.Trigger>
-      ))}
-  </Tabs.List>
+// 1) 공유 통로(Context)
+const CardContext = React.createContext(null);
 
-  {current && (
-    <Tabs.Content key={current.key} value={current.key}>
-      <div className="section-component">{current.content}</div>
-    </Tabs.Content>
-  )}
-</Tabs.Root>`,
+// 2) Provider = 스코프 생성자, children이 Provider 아래로 들어감
+function CardRoot({ variant = 'primary', children }) {
+  return (
+    <CardContext.Provider value={{ variant }}>
+      <div className="card">{children}</div>
+    </CardContext.Provider>
+  );
+}
+
+// 3) Context 그 자체가 아니라 꺼내는 로직 + 가드 헬퍼
+function useCard() {
+  const ctx = React.useContext(CardContext);
+  if (!ctx) throw new Error('Card.* 는 <Card.Root> 안에서만 사용하세요');
+  return ctx;
+}
+
+// 4) Sub 컴포넌트는 Provider 범위 안에서 값 소비
+function CardBadge({ children }) {
+  const { variant } = useCard();
+  return <span data-variant={variant}>{children}</span>;
+}
+
+// 5) Card.Root / Card.Badge 표기는 컴포넌트를 객체로 묶은 네임스페이스
+export const Card = { Root: CardRoot, Badge: CardBadge };
+
+// 사용 예시: DOM에 찍히는 건 Root/Badge가 반환하는 요소뿐, Card 자체는 렌더 X
+<Card.Root variant="success">
+  <Card.Badge>예약완료</Card.Badge>
+</Card.Root>;`,
   },
   {
     id: 'memo-usecallback',

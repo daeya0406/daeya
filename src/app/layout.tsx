@@ -6,6 +6,7 @@ import { ReactQueryProvider } from '@/components/providers/ReactQueryProvider';
 import { Toaster } from 'sonner';
 import { ThemeProvider } from 'next-themes';
 import Script from 'next/script';
+import { Analytics } from '@vercel/analytics/next';
 export const metadata = {
   title: 'Daeya Portfolio',
   description: '프론트엔드 개발자 김정대 포트폴리오',
@@ -56,6 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <TopButton />
             <Footer />
             <Toaster position="bottom-right" richColors />
+            <Analytics />
           </ReactQueryProvider>
         </ThemeProvider>
       </body>

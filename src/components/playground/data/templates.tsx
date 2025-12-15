@@ -1,7 +1,6 @@
 import FormPatternDemo from '../examples/templates/FormPatternDemo';
 import TableFilterDemo from '../examples/templates/TableFilterDemo';
 import DataBoundaryDemo from '../examples/templates/DataBoundaryDemo';
-import CompoundPatternDemo from '../examples/react/CompoundPatternDemo';
 import { InfoBlock } from '../examples/InfoBlock';
 import type { PlaygroundItem } from '@/types/playground';
 
@@ -149,27 +148,6 @@ export default function Demo() {
     const bTime = dayjs(b.date, 'YYYY.MM.DD').valueOf();
     return sort === 'desc' ? bTime - aTime : aTime - bTime;
   });`,
-  },
-  {
-    id: 'compoundpattern',
-    title: '컴파운드 패턴',
-    tags: ['React', 'Compound Pattern'],
-    description: '부모 컴포넌트가 하위 컴포넌트를 노출해 조립하는 패턴',
-    categories: ['templates'],
-    demo: <CompoundPatternDemo />,
-    code: `function CompoundList({ children }) {
-  return <div>{children}</div>;
-}
-function CompoundItem({ title }) {
-  return <div>{title}</div>;
-}
-CompoundList.Item = CompoundItem;
-
-<CompoundList>
-  <CompoundList.Item title="Item 1" active />
-  <CompoundList.Item title="Item 2" />
-  <CompoundList.Item title="Item 3" />
-</CompoundList>;`,
   },
   {
     id: 'eslint-prettier',
