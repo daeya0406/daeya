@@ -191,23 +191,28 @@ export default function Demo() {
     id: 'query-template',
     title: 'React Query 템플릿',
     tags: ['Template', 'Query'],
-    description: '쿼리/뮤테이션 기본 패턴',
+    description: 'queryKey + enabled + staleTime 기본 패턴',
     categories: ['templates'],
     demo: (
       <InfoBlock
         title="Query 템플릿"
         points={[
-          'queryKey, staleTime, select로 데이터 정제',
-          'mutateAsync + onSuccess refetch 패턴',
-          'Suspense/ErrorBoundary와 함께 사용',
+          'queryKey로 캐시 구분, enabled로 조건부 실행',
+          'staleTime으로 캐시 신선도 조절',
+          'isPending/error 분기, data는 캐시에서 재활용',
         ]}
       />
     ),
-    code: `const query = useQuery({
-  queryKey: ['todos'],
-  queryFn: fetchTodos,
-  staleTime: 1000 * 60,
-});`,
+    code: `const { data, isPending, error } = useQuery({
+  queryKey: ['posts', page],   // 캐시 식별
+  queryFn: () => getPosts(page), // 패칭 함수
+  enabled: !!page,             // 조건부 요청
+  staleTime: 1000 * 60,        // 캐시 신선도(1분)
+});
+
+if (isPending) return <Skeleton />;
+if (error) return <Error />;
+return <PostList posts={data} />;`,
   },
   {
     id: 'zustand-template',

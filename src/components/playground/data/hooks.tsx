@@ -1,7 +1,7 @@
 import ToggleHookDemo from '../examples/hooks/ToggleHookDemo';
 import UseEffectDependencyDemo from '../examples/hooks/UseEffectDependencyDemo';
 import UseStateDemo from '../examples/hooks/UseStateDemo';
-import UseQueryDemo from '../examples/hooks/UseQueryDemo';
+import UseReducerDemo from '../examples/hooks/UseReducerDemo';
 import UseMemoDemo from '../examples/hooks/UseMemotDemo';
 import UseRefDemo from '../examples/hooks/UseRefDemo';
 import type { PlaygroundItem } from '@/types/playground';
@@ -32,6 +32,53 @@ return (
     <button onClick={() => setHeavy(heavyInit())}>무거운 연산 다시 실행</button>
   </>
 );`,
+  },
+  {
+    id: 'use-reducer',
+    title: 'useReducer',
+    tags: ['Hooks', 'Reducer'],
+    description: 'state + action을 한곳에서 관리, dispatch로 명령 전달',
+    categories: ['hooks'],
+    demo: <UseReducerDemo />,
+    code: `type State = { count: number; todos: { id: number; text: string; done: boolean }[] };
+type Action =
+  | { type: 'inc' }
+  | { type: 'dec' }
+  | { type: 'add'; text: string }
+  | { type: 'toggle'; id: number }
+  | { type: 'reset' };
+
+function reducer(state: State, action: Action): State {
+  switch (action.type) {
+    case 'inc':
+      return { ...state, count: state.count + 1 };
+    case 'dec':
+      return { ...state, count: state.count - 1 };
+    case 'add':
+      return {
+        ...state,
+        todos: [{ id: Date.now(), text: action.text, done: false }, ...state.todos],
+      };
+    case 'toggle':
+      return {
+        ...state,
+        todos: state.todos.map((t) =>
+          t.id === action.id ? { ...t, done: !t.done } : t
+        ),
+      };
+    case 'reset':
+      return { count: 0, todos: [] };
+    default:
+      return state;
+  }
+}
+
+const initial: State = { count: 0, todos: [] };
+const [state, dispatch] = useReducer(reducer, initial);
+
+dispatch({ type: 'inc' });
+dispatch({ type: 'add', text: '새 할 일' });
+dispatch({ type: 'toggle', id: 1 });`,
   },
   {
     id: 'use-effect-deps',
@@ -101,32 +148,6 @@ const silentRef = useRef(0);
 const [visible, setVisible] = useState(0); // 렌더링 시켜서 값 확인용
 const add = () => { silentRef.current += 1; }; // 렌더 X
 const sync = () => setVisible(silentRef.current); // 이때만 렌더`,
-  },
-  {
-    id: 'use-query',
-    title: 'useQuery 패턴',
-    tags: ['Hooks', 'Query'],
-    description: 'queryKey + select + staleTime, pending/error 상태 분기까지 함께',
-    categories: ['hooks'],
-    demo: <UseQueryDemo />,
-    code: `const { data, isPending, isFetching, error, refetch } = useQuery({
-  queryKey: ['todos'],
-  queryFn: fetchTodos, // Promise 리턴
-  staleTime: 1000 * 30,
-  select: (todos) => ({
-    todo: todos.filter((t) => !t.done),
-    done: todos.filter((t) => t.done),
-  }),
-});
-
-if (isPending) return <Spinner />;
-if (error) return <Error />;
-return (
-  <div>
-    <pre>{JSON.stringify(data, null, 2)}</pre>
-    <Button onClick={() => refetch()}>refetch</Button>
-  </div>
-);`,
   },
   {
     id: 'use-toggle',

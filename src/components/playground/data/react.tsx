@@ -1,6 +1,7 @@
 import ComponentSplitDemo from '../examples/react/ComponentSplitDemo';
 import CompoundPatternDemo from '../examples/react/CompoundPatternDemo';
 import ReactMemoDemo from '../examples/react/ReactMemoDemo';
+import UseQueryDemo from '../examples/hooks/UseQueryDemo';
 import { InfoBlock } from '../examples/InfoBlock';
 import type { PlaygroundItem } from '@/types/playground';
 
@@ -24,6 +25,24 @@ export const reactItems: PlaygroundItem[] = [
 
 const profiles = [...];
 return profiles.map((p) => <ProfileCard key={p.name} profile={p} />);`,
+  },
+  {
+    id: 'use-query',
+    title: 'React Query 기본 패턴',
+    tags: ['React', 'Query'],
+    description: 'queryKey + 조건부 enabled + staleTime 구성',
+    categories: ['react'],
+    demo: <UseQueryDemo />,
+    code: `const { data, isPending, error } = useQuery({
+  queryKey: ['posts', page],  // 캐시 식별
+  queryFn: () => getPosts(page), // 데이터 가져오는 함수
+  enabled: !!page,            // 조건부 요청
+  staleTime: 1000 * 60,       // 캐시 신선도(1분)
+});
+
+if (isPending) return <Spinner />;
+if (error) return <Error />;
+return <PostList posts={data} />;`,
   },
   {
     id: 'compoundpattern',
