@@ -17,7 +17,7 @@ import {
 } from '@/components/ui/Form';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
-import { Typo } from '@/components/ui/Text';
+import { Text } from '@/components/ui/Text';
 import { supabase } from '@/lib/supabase';
 
 export default function SignUpPage() {
@@ -64,7 +64,7 @@ function SignUpPageContent() {
   return (
     <section className="mx-auto flex min-h-[70vh] max-w-md flex-col justify-center px-4 py-10">
       <div className="rounded-2xl border border-slate-200/70 bg-white/80 p-6 shadow-md backdrop-blur dark:border-slate-700 dark:bg-slate-800">
-        <Typo.h3 className="mb-8 text-center font-bold">회원가입</Typo.h3>
+        <Text.H3 className="mb-8 text-center font-bold">회원가입</Text.H3>
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">

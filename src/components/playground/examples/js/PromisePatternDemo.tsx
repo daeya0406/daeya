@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Typo } from '@/components/ui/Text';
+import { Text } from '@/components/ui/Text';
 
 export default function PromisePatternDemo() {
   const [logs, setLogs] = useState<string[]>([]);
@@ -34,9 +34,9 @@ export default function PromisePatternDemo() {
 
   return (
     <div className="section-component">
-      <Typo.bodySm className="font-semibold text-slate-900 dark:text-slate-50">
+      <Text.Body14 className="font-semibold text-slate-900 dark:text-slate-50">
         Promise 패턴
-      </Typo.bodySm>
+      </Text.Body14>
       <div className="mt-2 space-y-1 font-mono text-xs text-slate-700 dark:text-slate-200">
         {logs.map((line, idx) => (
           <div key={idx}>{line}</div>

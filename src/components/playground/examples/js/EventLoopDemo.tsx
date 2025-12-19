@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { Typo } from '@/components/ui/Text';
+import { Text } from '@/components/ui/Text';
 
 export default function EventLoopDemo() {
   const [logs, setLogs] = useState<string[]>(['sync']);
@@ -15,9 +15,9 @@ export default function EventLoopDemo() {
 
   return (
     <div className="section-component">
-      <Typo.bodySm className="font-semibold text-slate-900 dark:text-slate-50">
+      <Text.Body14 className="font-semibold text-slate-900 dark:text-slate-50">
         이벤트 루프 순서
-      </Typo.bodySm>
+      </Text.Body14>
       <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
         실행 흐름을 바로 찍어봤습니다.
       </p>

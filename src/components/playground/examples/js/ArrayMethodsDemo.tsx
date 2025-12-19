@@ -1,4 +1,4 @@
-import { Typo } from '@/components/ui/Text';
+import { Text } from '@/components/ui/Text';
 
 export default function ArrayMethodsDemo() {
   const nums = [1, 2, 3, 4];
@@ -31,7 +31,7 @@ export default function ArrayMethodsDemo() {
 function DemoCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="section-component">
-      <Typo.bodySm className="font-semibold text-slate-900 dark:text-slate-50">{title}</Typo.bodySm>
+      <Text.Body14 className="font-semibold text-slate-900 dark:text-slate-50">{title}</Text.Body14>
       <div className="mt-2 space-y-1 font-mono text-xs text-slate-700 dark:text-slate-200">
         {children}
       </div>

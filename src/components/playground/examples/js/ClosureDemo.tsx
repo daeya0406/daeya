@@ -1,4 +1,4 @@
-import { Typo } from '@/components/ui/Text';
+import { Text } from '@/components/ui/Text';
 
 export default function ClosureDemo() {
   const logs: string[] = [];

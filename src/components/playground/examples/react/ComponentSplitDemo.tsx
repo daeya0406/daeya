@@ -1,6 +1,6 @@
 'use client';
 
-import { Typo } from '@/components/ui/Text';
+import { Text } from '@/components/ui/Text';
 import { Badge } from '@/components/ui/Badge';
 
 type Profile = {
@@ -12,10 +12,10 @@ type Profile = {
 function ProfileCard({ profile }: { profile: Profile }) {
   return (
     <div className="section-component">
-      <Typo.bodyLg className="font-semibold text-slate-900 dark:text-slate-50">
+      <Text.Body16 className="font-semibold text-slate-900 dark:text-slate-50">
         {profile.name}
-      </Typo.bodyLg>
-      <Typo.caption className="text-slate-600 dark:text-slate-300">{profile.role}</Typo.caption>
+      </Text.Body16>
+      <Text.Caption className="text-slate-600 dark:text-slate-300">{profile.role}</Text.Caption>
       <div className="mt-2 flex flex-wrap gap-2">
         {profile.tags.map((tag) => (
           <Badge key={tag} variant="outline">

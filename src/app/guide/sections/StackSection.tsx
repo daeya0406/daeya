@@ -1,6 +1,6 @@
 'use client';
 
-import { Typo } from '@/components/ui/Text';
+import { Text } from '@/components/ui/Text';
 
 type StackGroup = {
   title: string;
@@ -49,7 +49,7 @@ const stacks: StackGroup[] = [
     title: 'UI Base',
     items: [
       { name: 'Radix UI', desc: 'Dialog/Dropdown/Select 등 접근성 베이스' },
-      { name: 'Typo + CVA Buttons', desc: '스케일·variant 기반 시스템' },
+      { name: 'Text Scale + CVA Buttons', desc: '스케일·variant 기반 시스템' },
       { name: 'Sonner', desc: '토스트 알림' },
     ],
   },
@@ -66,10 +66,10 @@ export default function StackSection() {
   return (
     <div className="space-y-6">
       <div className="line-bottom mb-8 space-y-2">
-        <Typo.h3 className="text-primary">Stack</Typo.h3>
-        <Typo.caption className="block">
+        <Text.H3 className="text-primary">Stack</Text.H3>
+        <Text.Caption className="block">
           프로젝트에서 사용하는 프레임워크·라이브러리·패턴 리스트입니다.
-        </Typo.caption>
+        </Text.Caption>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
@@ -78,7 +78,7 @@ export default function StackSection() {
             key={group.title}
             className="rounded-2xl border border-slate-200/60 bg-white/80 p-6 shadow-sm ring-1 ring-white/40 backdrop-blur md:p-8 dark:border-slate-800/70 dark:bg-slate-900/60 dark:ring-slate-800/50"
           >
-            <Typo.h4 className="text-slate-900 dark:text-slate-50">{group.title}</Typo.h4>
+            <Text.H4 className="text-slate-900 dark:text-slate-50">{group.title}</Text.H4>
             <ul className="mt-4 space-y-3 text-sm text-slate-700 dark:text-slate-200">
               {group.items.map((item) => (
                 <li key={item.name} className="flex items-start gap-2">

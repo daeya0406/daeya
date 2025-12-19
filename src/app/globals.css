@@ -10,9 +10,9 @@
   --black: 0 0 0; /* #000000 */
 
   /* Brand */
-  --brand-primary: 81 137 250; /* #10B981 */
-  --brand-secondary: 14 165 233; /* #0EA5E9 */
-  --brand-tertiary: 29 78 216; /* #1D4ED8 */
+  --brand-primary: 81 137 250; /* #5189FA */
+  --brand-secondary: 238 243 255; /* #EEF3FF */
+  --brand-tertiary: 49 82 150; /* #315296 */
 
   /* Point */
   --point-purple: 168 85 247; /* #A855F7 */
@@ -23,34 +23,34 @@
   --point-yellow: 234 179 8; /* #EAB308 */
 
   /* Status */
-  --status-danger: 220 38 38; /* #DC2626 */
+  --status-danger: 252 72 72; /* #FC4848 */
 
   /* Background (light) */
   --bg-primary: var(--white); /* #FFFFFF */
-  --bg-secondary: 248 250 252; /* #F8FAFC */
-  --bg-tertiary: 241 245 249; /* #F1F5F9 */
-  --bg-inverse: 15 23 42; /* #0F172A */
+  --bg-secondary: 241 245 249; /* #F1F5F9 */
+  --bg-tertiary: 226 232 240; /* #E2E8F0 */
+  --bg-inverse: var(--white); /* #FFFFFF */
 
   /* Text (light) */
-  --text-primary: 15 23 42; /* #0F172A */
+  --text-primary: 30 41 56; /* #1E2938 */
   --text-secondary: 51 65 85; /* #334155 */
-  --text-tertiary: 226 232 240; /* #E2E8F0 */
+  --text-tertiary: 15 23 42; /* #0F172A */
   --text-default: 100 116 139; /* #64748B */
   --text-inverse: 255 255 255; /* #FFFFFF */
   --text-disabled: 148 163 184; /* #94A3B8 */
 
   /* Interaction */
   --interaction-inactive: 148 163 184; /* #94A3B8 */
-  --interaction-hover: 14 165 233; /* #0EA5E9 */
-  --interaction-pressed: 29 78 216; /* #1D4ED8 */
+  --interaction-hover: 65 110 200; /* #416EC8 */
+  --interaction-pressed: 59 99 181; /* #3B63B5 */
 
   /* Border */
-  --border-primary: 226 232 240; /* #E2E8F0 */
+  --border-primary: 230 230 230; /* #e6e6e6 */
 
   /* Icon */
   --icon-primary: 100 116 139; /* #64748B */
   --icon-inverse: 248 250 252; /* #F8FAFC */
-  --icon-brand: var(--brand-primary);
+  --icon-brand: 116 161 251; /* #74A1FB */
 
   /* Semantic */
   --background: var(--bg-secondary);
@@ -63,8 +63,8 @@
   --primary-foreground: var(--text-inverse);
 
   /* Kept for existing utility usage */
-  --primary-100: 229 243 255; /* #E5F3FF */
-  --primary-500: var(--brand-primary);
+  --primary-100: var(--brand-secondary); /* #EEF3FF */
+  --primary-500: var(--brand-primary); /* #5189FA */
 }
 
 .dark {
@@ -82,7 +82,7 @@
   --text-inverse: 15 23 42; /* #0F172A */
   --text-disabled: 100 116 139; /* #64748B */
 
-  --border-primary: 71 85 105; /* #475569 */
+  --border-primary: 148 163 184 / 0.5; /* #94A3B8 50% */
 
   --background: var(--bg-primary);
   --foreground: var(--text-primary);
@@ -96,8 +96,8 @@
 .dark {
   /* Brand */
   --brand-primary: color-mix(in srgb, rgb(81 137 250) 85%, white 15%);
-  --brand-secondary: color-mix(in srgb, rgb(14 165 233) 85%, white 15%);
-  --brand-tertiary: color-mix(in srgb, rgb(29 78 216) 85%, white 15%);
+  --brand-secondary: color-mix(in srgb, rgb(238 243 255) 85%, white 15%);
+  --brand-tertiary: color-mix(in srgb, rgb(49 82 150) 85%, white 15%);
 
   /* Points */
   --point-purple: color-mix(in srgb, rgb(168 85 247) 82%, white 18%);
@@ -108,12 +108,12 @@
   --point-yellow: color-mix(in srgb, rgb(234 179 8) 82%, white 18%);
 
   /* Status */
-  --status-danger: color-mix(in srgb, rgb(220 38 38) 85%, white 15%);
+  --status-danger: color-mix(in srgb, rgb(252 72 72) 85%, white 15%);
 
   /* Interaction */
   --interaction-inactive: color-mix(in srgb, rgb(148 163 184) 80%, white 20%);
-  --interaction-hover: color-mix(in srgb, rgb(14 165 233) 85%, white 15%);
-  --interaction-pressed: color-mix(in srgb, rgb(29 78 216) 85%, white 15%);
+  --interaction-hover: color-mix(in srgb, rgb(65 110 200) 85%, white 15%);
+  --interaction-pressed: color-mix(in srgb, rgb(59 99 181) 85%, white 15%);
 
   /* Text */
   --text-primary: color-mix(in srgb, rgb(248 250 252) 95%, white 5%);
@@ -123,8 +123,10 @@
   --text-disabled: color-mix(in srgb, rgb(100 116 139) 90%, white 10%);
   --text-inverse: 15 23 42;
 
-  /* Border/Icon */
-  --border-primary: color-mix(in srgb, rgb(71 85 105) 85%, white 15%);
+  /* Border */
+  --border-primary: 148 163 184; /* #94A3B8
+
+  /* Icon */
   --icon-primary: color-mix(in srgb, rgb(100 116 139) 85%, white 15%);
   --icon-inverse: color-mix(in srgb, rgb(248 250 252) 90%, white 10%);
   --icon-brand: color-mix(in srgb, rgb(81 137 250) 85%, white 15%);
@@ -205,61 +207,45 @@
 }
 
 @layer utilities {
-  /* Typography System */
-  .typo-h1 {
-    @apply text-[32px] font-bold leading-[38px] tracking-tight md:text-[36px] md:leading-[42px];
+  /* Typography */
+  .text-4xl {
+    @apply text-[40px] leading-[48px];
   }
 
-  .typo-h2 {
-    @apply text-[28px] font-semibold leading-[34px] tracking-tight md:text-[32px] md:leading-[38px];
+  .text-3xl {
+    @apply text-[32px] leading-[38px];
   }
 
-  .typo-h3 {
-    @apply text-[24px] font-semibold leading-[30px] md:text-[28px] md:leading-[34px];
+  .text-2xl {
+    @apply text-[24px] leading-[28px];
   }
 
-  .typo-h4 {
-    @apply text-[20px] font-semibold leading-[26px] md:text-[22px] md:leading-[28px];
+  .text-xl {
+    @apply text-[20px] leading-[24px];
   }
 
-  .typo-h5 {
-    @apply text-[18px] font-semibold leading-[24px];
+  .text-2lg {
+    @apply text-[18px] leading-[21px];
   }
 
-  .typo-h6 {
-    @apply text-[16px] font-semibold leading-[22px];
+  .text-lg {
+    @apply text-[16px] leading-[19px];
   }
 
-  .typo-body-xl {
-    @apply text-[18px] leading-[26px];
+  .text-md {
+    @apply text-[14px] leading-[17px];
   }
 
-  .typo-body-lg {
-    @apply text-[16px] leading-[24px];
+  .text-sm {
+    @apply text-[13px] leading-[16px];
   }
 
-  .typo-body-md {
-    @apply text-[15px] leading-[22px];
+  .text-xs {
+    @apply text-[12px] leading-[14px];
   }
 
-  .typo-body-sm {
-    @apply text-[14px] leading-[20px];
-  }
-
-  .typo-body-xs {
-    @apply text-[13px] leading-[18px];
-  }
-
-  .typo-body {
-    @apply text-[15px] leading-[22px];
-  }
-
-  .typo-caption {
-    @apply text-muted-foreground text-[12px] leading-[16px] tracking-[0.01em];
-  }
-
-  .typo-overline {
-    @apply text-muted-foreground text-[11px] uppercase leading-[14px] tracking-[0.08em];
+  .text-2xs {
+    @apply text-[11px] leading-[14px];
   }
 
   /* Custom */

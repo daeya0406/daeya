@@ -1,6 +1,6 @@
 'use client';
 
-import { Typo } from '@/components/ui/Text';
+import { Text } from '@/components/ui/Text';
 
 const users = [
   { id: 1, name: 'A', age: 20 },
@@ -24,19 +24,19 @@ export default function TestGroundDemo2() {
   return (
     <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
       <section className="section-component">
-        <Typo.h6>1. 추가</Typo.h6>
+        <Text.H6>1. 추가</Text.H6>
         {added.map((user) => user.name).join(', ')}
       </section>
       <section className="section-component">
-        <Typo.h6>2. 수정</Typo.h6>
+        <Text.H6>2. 수정</Text.H6>
         {updated.map((user) => user.name).join(', ')}
       </section>
       <section className="section-component">
-        <Typo.h6>3. 삭제</Typo.h6>
+        <Text.H6>3. 삭제</Text.H6>
         {removed.map((user) => user.name).join(', ')}
       </section>
       <section className="section-component">
-        <Typo.h6>4. 정렬</Typo.h6>
+        <Text.H6>4. 정렬</Text.H6>
         {sorted.map((user) => user.name).join(', ')}
       </section>
     </div>

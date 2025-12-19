@@ -1,146 +1,110 @@
 'use client';
 
+import type { ReactNode } from 'react';
 import { toast } from 'sonner';
-import { Typo } from '@/components/ui/Text';
+import { Text } from '@/components/ui/Text';
 
 type Scale = {
   label: string;
-  className: string;
-  sample: string;
+  size: string;
   snippet: string;
+  render: ReactNode;
 };
 
-const headings: Scale[] = [
-  {
-    label: 'typo-h1',
-    className: 'typo-h1',
-    sample: 'H1 / 32px Bold',
-    snippet: '<Typo.h1>Heading</Typo.h1>',
-  },
-  {
-    label: 'typo-h2',
-    className: 'typo-h2',
-    sample: 'H2 / 28px SemiBold',
-    snippet: '<Typo.h2>Heading</Typo.h2>',
-  },
-  {
-    label: 'typo-h3',
-    className: 'typo-h3',
-    sample: 'H3 / 24px SemiBold',
-    snippet: '<Typo.h3>Heading</Typo.h3>',
-  },
-  {
-    label: 'typo-h4',
-    className: 'typo-h4',
-    sample: 'H4 / 20px SemiBold',
-    snippet: '<Typo.h4>Heading</Typo.h4>',
-  },
-  {
-    label: 'typo-h5',
-    className: 'typo-h5',
-    sample: 'H5 / 18px SemiBold',
-    snippet: '<Typo.h5>Heading</Typo.h5>',
-  },
-  {
-    label: 'typo-h6',
-    className: 'typo-h6',
-    sample: 'H6 / 16px SemiBold',
-    snippet: '<Typo.h6>Heading</Typo.h6>',
-  },
+const headingTokens: Scale[] = [
+  { label: 'Text.H1', size: '32px / 38px', render: <Text.H1>Pretendard</Text.H1>, snippet: '<Text.H1>Pretendard</Text.H1>' },
+  { label: 'Text.H2', size: '24px / 28px', render: <Text.H2>Pretendard</Text.H2>, snippet: '<Text.H2>Pretendard</Text.H2>' },
+  { label: 'Text.H3', size: '20px / 24px', render: <Text.H3>Pretendard</Text.H3>, snippet: '<Text.H3>Pretendard</Text.H3>' },
+  { label: 'Text.H4', size: '18px / 21px', render: <Text.H4>Pretendard</Text.H4>, snippet: '<Text.H4>Pretendard</Text.H4>' },
+  { label: 'Text.H5', size: '16px / 19px', render: <Text.H5>Pretendard</Text.H5>, snippet: '<Text.H5>Pretendard</Text.H5>' },
+  { label: 'Text.H6', size: '14px / 17px', render: <Text.H6>Pretendard</Text.H6>, snippet: '<Text.H6>Pretendard</Text.H6>' },
 ];
 
-const bodies: Scale[] = [
-  {
-    label: 'typo-body-xl',
-    className: 'typo-body-xl',
-    sample: 'Body XL / 18px',
-    snippet: '<Typo.bodyXl>Body</Typo.bodyXl>',
-  },
-  {
-    label: 'typo-body-lg',
-    className: 'typo-body-lg',
-    sample: 'Body LG / 16px',
-    snippet: '<Typo.bodyLg>Body</Typo.bodyLg>',
-  },
-  {
-    label: 'typo-body-md',
-    className: 'typo-body-md',
-    sample: 'Body MD / 15px',
-    snippet: '<Typo.bodyMd>Body</Typo.bodyMd>',
-  },
-  {
-    label: 'typo-body-sm',
-    className: 'typo-body-sm',
-    sample: 'Body SM / 14px',
-    snippet: '<Typo.bodySm>Body</Typo.bodySm>',
-  },
-  {
-    label: 'typo-body-xs',
-    className: 'typo-body-xs',
-    sample: 'Body XS / 13px',
-    snippet: '<Typo.bodyXs>Body</Typo.bodyXs>',
-  },
-  {
-    label: 'typo-body',
-    className: 'typo-body',
-    sample: 'Body / 15px',
-    snippet: '<Typo.body>Body</Typo.body>',
-  },
+const tokens: Scale[] = [
+  { label: 'Text.H1', size: '32px / 38px', render: <Text.H1>Pretendard</Text.H1>, snippet: '<Text.H1>Pretendard</Text.H1>' },
+  { label: 'Text.H2', size: '24px / 28px', render: <Text.H2>Pretendard</Text.H2>, snippet: '<Text.H2>Pretendard</Text.H2>' },
+  { label: 'Text.H3', size: '20px / 24px', render: <Text.H3>Pretendard</Text.H3>, snippet: '<Text.H3>Pretendard</Text.H3>' },
+  { label: 'Text.H4', size: '18px / 21px', render: <Text.H4>Pretendard</Text.H4>, snippet: '<Text.H4>Pretendard</Text.H4>' },
+  { label: 'Text.H5', size: '16px / 19px', render: <Text.H5>Pretendard</Text.H5>, snippet: '<Text.H5>Pretendard</Text.H5>' },
+  { label: 'Text.H6', size: '14px / 17px', render: <Text.H6>Pretendard</Text.H6>, snippet: '<Text.H6>Pretendard</Text.H6>' },
+
+  { label: 'Text.S24.Bold', size: '24px / 28px', render: <Text.S24.Bold>Pretendard</Text.S24.Bold>, snippet: '<Text.S24.Bold>Pretendard</Text.S24.Bold>' },
+  { label: 'Text.S24', size: '24px / 28px', render: <Text.S24>Pretendard</Text.S24>, snippet: '<Text.S24>Pretendard</Text.S24>' },
+  { label: 'Text.S20.Bold', size: '20px / 24px', render: <Text.S20.Bold>Pretendard</Text.S20.Bold>, snippet: '<Text.S20.Bold>Pretendard</Text.S20.Bold>' },
+  { label: 'Text.S20', size: '20px / 24px', render: <Text.S20>Pretendard</Text.S20>, snippet: '<Text.S20>Pretendard</Text.S20>' },
+  { label: 'Text.S16.Bold', size: '16px / 19px', render: <Text.S16.Bold>Pretendard</Text.S16.Bold>, snippet: '<Text.S16.Bold>Pretendard</Text.S16.Bold>' },
+  { label: 'Text.S16', size: '16px / 19px', render: <Text.S16>Pretendard</Text.S16>, snippet: '<Text.S16>Pretendard</Text.S16>' },
+  { label: 'Text.S14.Bold', size: '14px / 17px', render: <Text.S14.Bold>Pretendard</Text.S14.Bold>, snippet: '<Text.S14.Bold>Pretendard</Text.S14.Bold>' },
+  { label: 'Text.S14', size: '14px / 17px', render: <Text.S14>Pretendard</Text.S14>, snippet: '<Text.S14>Pretendard</Text.S14>' },
+  { label: 'Text.S13.Bold', size: '13px / 16px', render: <Text.S13.Bold>Pretendard</Text.S13.Bold>, snippet: '<Text.S13.Bold>Pretendard</Text.S13.Bold>' },
+  { label: 'Text.S13', size: '13px / 16px', render: <Text.S13>Pretendard</Text.S13>, snippet: '<Text.S13>Pretendard</Text.S13>' },
+  { label: 'Text.S12.Bold', size: '12px / 14px', render: <Text.S12.Bold>Pretendard</Text.S12.Bold>, snippet: '<Text.S12.Bold>Pretendard</Text.S12.Bold>' },
+  { label: 'Text.S12', size: '12px / 14px', render: <Text.S12>Pretendard</Text.S12>, snippet: '<Text.S12>Pretendard</Text.S12>' },
+  { label: 'Text.S11.Bold', size: '11px / 14px', render: <Text.S11.Bold>Pretendard</Text.S11.Bold>, snippet: '<Text.S11.Bold>Pretendard</Text.S11.Bold>' },
+  { label: 'Text.S11', size: '11px / 14px', render: <Text.S11>Pretendard</Text.S11>, snippet: '<Text.S11>Pretendard</Text.S11>' },
+
+  { label: 'Text.Body16', size: '16px / auto', render: <Text.Body16>Pretendard</Text.Body16>, snippet: '<Text.Body16>Pretendard</Text.Body16>' },
+  { label: 'Text.Body14', size: '14px / auto', render: <Text.Body14>Pretendard</Text.Body14>, snippet: '<Text.Body14>Pretendard</Text.Body14>' },
+  { label: 'Text.Caption', size: '12px / 14px', render: <Text.Caption>Pretendard</Text.Caption>, snippet: '<Text.Caption>Pretendard</Text.Caption>' },
+  { label: 'Text.Overline', size: '12px / 14px', render: <Text.Overline>Pretendard</Text.Overline>, snippet: '<Text.Overline>Pretendard</Text.Overline>' },
 ];
 
-const meta: Scale[] = [
-  {
-    label: 'typo-caption',
-    className: 'typo-caption',
-    sample: 'Caption / 12px',
-    snippet: '<Typo.caption>Caption</Typo.caption>',
-  },
-  {
-    label: 'typo-overline',
-    className: 'typo-overline',
-    sample: 'OVERLINE / 11px',
-    snippet: '<Typo.overline>OVERLINE</Typo.overline>',
-  },
-];
-
-function ScaleGrid({ title, items }: { title: string; items: Scale[] }) {
+export default function FontSection() {
   const copy = (text: string, label: string) => {
     navigator.clipboard.writeText(text);
     toast.success(`Copied: ${label}`, { duration: 1200 });
   };
 
   return (
-    <div className="space-y-2">
-      <Typo.h5 className="text-foreground">{title}</Typo.h5>
-      <div className="grid gap-3 sm:grid-cols-2">
-        {items.map(({ label, className, sample, snippet }) => (
-          <button
-            key={label}
-            onClick={() => copy(snippet, label)}
-            className="border-border group flex flex-col items-start rounded-lg border bg-white/80 p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:bg-slate-800/40"
-          >
-            <span className={`${className} text-foreground mb-1`}>{sample}</span>
-            <span className="text-muted-foreground group-hover:text-primary text-xs">{label}</span>
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-export default function FontSection() {
-  return (
     <div className="space-y-6">
       <div className="line-bottom space-y-1">
-        <Typo.h3 className="text-primary">Font Tokens</Typo.h3>
-        <Typo.caption className="text-muted-foreground">
-          globals.css에 정의된 typo-* 클래스. 클릭하면 JSX 스니펫이 복사됩니다.
-        </Typo.caption>
+        <Text.H3 className="text-primary">Font Tokens</Text.H3>
+        <Text.Caption className="text-muted-foreground">
+          Pretendard 스케일(토큰 기준). 카드 클릭 시 컴포넌트 스니펫이 복사됩니다.
+        </Text.Caption>
       </div>
 
-      <ScaleGrid title="Headings" items={headings} />
-      <ScaleGrid title="Body" items={bodies} />
-      <ScaleGrid title="Meta" items={meta} />
+      <div className="space-y-4">
+        <Text.S14.Bold as="p" className="text-foreground">
+          Headings
+        </Text.S14.Bold>
+        <div className="grid gap-3 sm:grid-cols-2">
+          {headingTokens.map((t) => (
+            <button
+              key={t.label}
+              onClick={() => copy(t.snippet, t.label)}
+              className="border-border group flex flex-col items-start rounded-lg border bg-white/80 p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:bg-slate-800/40"
+            >
+              <div className="text-foreground">{t.render}</div>
+              <div className="text-muted-foreground group-hover:text-primary text-xs">
+                {t.label} · {t.size}
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <Text.S14.Bold as="p" className="text-foreground">
+          Scale & Body
+        </Text.S14.Bold>
+        <div className="grid gap-3 sm:grid-cols-2">
+          {tokens
+            .filter((t) => !t.label.startsWith('Text.H'))
+            .map((t) => (
+              <button
+                key={t.label}
+                onClick={() => copy(t.snippet, t.label)}
+                className="border-border group flex flex-col items-start rounded-lg border bg-white/80 p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:bg-slate-800/40"
+              >
+                <div className="text-foreground">{t.render}</div>
+                <div className="text-muted-foreground group-hover:text-primary text-xs">
+                  {t.label} · {t.size}
+                </div>
+              </button>
+            ))}
+        </div>
+      </div>
     </div>
   );
 }

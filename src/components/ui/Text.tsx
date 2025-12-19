@@ -2,8 +2,6 @@ import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
-type ElementTag = React.ElementType;
-type PolymorphicRef<C extends ElementTag> = React.ComponentPropsWithRef<C>['ref'];
 
 const textVariants = cva('text-slate-900 dark:text-slate-100', {
   variants: {
@@ -29,92 +27,103 @@ const textVariants = cva('text-slate-900 dark:text-slate-100', {
   },
 });
 
-type TextProps<C extends ElementTag = 'p'> = {
-  as?: C;
-} & Omit<React.ComponentPropsWithoutRef<C>, 'as' | 'ref'> &
-  VariantProps<typeof textVariants>;
+type TextProps = {
+  as?: React.ElementType;
+  className?: string;
+} & VariantProps<typeof textVariants> &
+  React.HTMLAttributes<HTMLElement>;
 
 type TextComponent = React.ForwardRefExoticComponent<
-  TextProps<ElementTag> & React.RefAttributes<HTMLElement>
+  TextProps & React.RefAttributes<HTMLElement>
 > & {
-  displayName?: string;
-} & Record<string, unknown>;
+  Bold?: TextComponent;
+};
 
-const Text = React.forwardRef<HTMLElement, TextProps<ElementTag>>(
-  ({ as, className, variant, size, ...props }, ref) => {
-    const Comp = (as ?? 'p') as ElementTag;
-    return <Comp ref={ref} className={cn(textVariants({ variant, size }), className)} {...props} />;
+type TextScaleComponent = TextComponent & { Bold: TextComponent };
+
+type TextStatics = {
+  H1: TextComponent;
+  H2: TextComponent;
+  H3: TextComponent;
+  H4: TextComponent;
+  H5: TextComponent;
+  H6: TextComponent;
+  Body16: TextComponent;
+  Body14: TextComponent;
+  Caption: TextComponent;
+  Overline: TextComponent;
+  overline: TextComponent;
+  S11: TextScaleComponent;
+  S12: TextScaleComponent;
+  S13: TextScaleComponent;
+  S14: TextScaleComponent;
+  S16: TextScaleComponent;
+  S20: TextScaleComponent;
+  S24: TextScaleComponent;
+};
+
+const TextBase = React.forwardRef<HTMLElement, TextProps>(
+  ({ as: Comp = 'p', className, variant, size, ...rest }, ref) => {
+    return <Comp ref={ref} className={cn(textVariants({ variant, size }), className)} {...rest} />;
   }
 ) as TextComponent;
 
-Text.displayName = 'Text';
+TextBase.displayName = 'Text';
 
-type BaseTypoProps = TextProps<ElementTag>;
-
-const createTypo = (defaultTag: ElementTag, defaultClass: string) => {
-  const Comp = React.forwardRef<HTMLElement, BaseTypoProps>(({ className, as, ...props }, ref) => (
-    <Text
-      ref={ref as PolymorphicRef<ElementTag>}
-      as={as ?? (defaultTag as never)}
-      className={cn(defaultClass, className)}
-      {...props}
-    />
-  )) as TextComponent;
-
-  Comp.displayName = `Typo.${typeof defaultTag === 'string' ? defaultTag : 'Custom'}`;
+const createToken = (
+  tag: React.ElementType,
+  className: string,
+  displayName?: string
+): TextComponent => {
+  const Comp = React.forwardRef<HTMLElement, Omit<TextProps, 'as'>>(
+    ({ className: extra, ...rest }, ref) => (
+      <TextBase as={tag} ref={ref} className={cn(className, extra)} {...rest} />
+    )
+  ) as TextComponent;
+  if (displayName) {
+    Comp.displayName = displayName;
+  }
   return Comp;
 };
 
-const Typo = {
-  h1: createTypo('h1', 'typo-h1'),
-  h2: createTypo('h2', 'typo-h2'),
-  h3: createTypo('h3', 'typo-h3'),
-  h4: createTypo('h4', 'typo-h4'),
-  h5: createTypo('h5', 'typo-h5'),
-  h6: createTypo('h6', 'typo-h6'),
-  bodyXl: createTypo('p', 'typo-body-xl'),
-  bodyLg: createTypo('p', 'typo-body-lg'),
-  bodyMd: createTypo('p', 'typo-body-md'),
-  bodySm: createTypo('p', 'typo-body-sm'),
-  bodyXs: createTypo('p', 'typo-body-xs'),
-  body: createTypo('p', 'typo-body'),
-  caption: createTypo('span', 'typo-caption'),
-  overline: createTypo('span', 'typo-overline'),
+const createScale = (className: string, label?: string): TextScaleComponent => {
+  const Medium = createToken('span', `${className} font-medium`, label) as TextScaleComponent;
+  Medium.Bold = createToken('span', `${className} font-bold`, label ? `${label}.Bold` : undefined);
+  return Medium;
 };
 
-const TextWithVariants = Text as TextComponent & typeof Typo & Record<string, TextComponent>;
+const TextWithVariants = TextBase as TextComponent & TextStatics;
 
-TextWithVariants.H1 = Typo.h1;
-TextWithVariants.H2 = Typo.h2;
-TextWithVariants.H3 = Typo.h3;
-TextWithVariants.H4 = Typo.h4;
-TextWithVariants.H5 = Typo.h5;
-TextWithVariants.H6 = Typo.h6;
+// Headings
+TextWithVariants.H1 = createToken('h1', 'text-3xl font-bold', 'Text.H1');
+TextWithVariants.H2 = createToken('h2', 'text-2xl font-bold', 'Text.H2');
+TextWithVariants.H3 = createToken('h3', 'text-xl font-semibold', 'Text.H3');
+TextWithVariants.H4 = createToken('h4', 'text-2lg font-bold', 'Text.H4');
+TextWithVariants.H5 = createToken('h5', 'text-lg font-semibold', 'Text.H5');
+TextWithVariants.H6 = createToken('h6', 'text-md font-semibold', 'Text.H6');
 
-TextWithVariants.Body16 = Typo.bodyLg;
-TextWithVariants.Body14 = Typo.bodySm;
-TextWithVariants.Caption = Typo.caption;
-TextWithVariants.Body = Typo.body;
-TextWithVariants.Overline = Typo.overline;
-TextWithVariants.overline = Typo.overline;
+// Body / Caption
+TextWithVariants.Body16 = createToken('p', 'text-lg font-normal', 'Text.Body16');
+TextWithVariants.Body14 = createToken('p', 'text-md font-normal', 'Text.Body14');
+TextWithVariants.Caption = createToken(
+  'span',
+  'text-xs font-medium tracking-[0.01em]',
+  'Text.Caption'
+);
+TextWithVariants.Overline = createToken(
+  'span',
+  'text-xs font-semibold uppercase tracking-[0.08em]',
+  'Text.Overline'
+);
+TextWithVariants.overline = TextWithVariants.Overline;
 
-const createScale = (sizeClass: string, leading = 'leading-tight') => {
-  const Medium = createTypo('span', `${sizeClass} font-medium ${leading}`) as TextComponent & {
-    Bold?: TextComponent;
-  };
-  const Bold = createTypo('span', `${sizeClass} font-bold ${leading}`);
-  Medium.Bold = Bold;
-  return Medium as TextComponent & { Bold: TextComponent };
-};
+// Scale tokens
+TextWithVariants.S11 = createScale('text-[11px] leading-[14px]', 'Text.S11'); // 11/14
+TextWithVariants.S12 = createScale('text-xs leading-[14px]', 'Text.S12'); // 12/14
+TextWithVariants.S13 = createScale('text-sm leading-[16px]'); // 13/16
+TextWithVariants.S14 = createScale('text-md leading-[17px]'); // 14/17
+TextWithVariants.S16 = createScale('text-lg leading-[19px]'); // 16/19
+TextWithVariants.S20 = createScale('text-xl leading-[24px]', 'Text.S20'); // 20/24
+TextWithVariants.S24 = createScale('text-2xl leading-[28px]', 'Text.S24'); // 24/28
 
-TextWithVariants.S11 = createScale('text-[11px]');
-TextWithVariants.S12 = createScale('text-[12px]');
-TextWithVariants.S13 = createScale('text-[13px]');
-TextWithVariants.S14 = createScale('text-[14px]');
-TextWithVariants.S16 = createScale('text-[16px]');
-TextWithVariants.S18 = createScale('text-[18px]');
-TextWithVariants.S20 = createScale('text-[20px]');
-TextWithVariants.S24 = createScale('text-[24px]');
-TextWithVariants.S32 = createScale('text-[32px]');
-
-export { TextWithVariants as Text, Typo, textVariants };
+export { TextWithVariants as Text, textVariants };

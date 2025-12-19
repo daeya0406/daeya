@@ -2,7 +2,7 @@
 
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/Dialog';
 import { Button } from '@/components/ui/Button';
-import { Typo } from '@/components/ui/Text';
+import { Text } from '@/components/ui/Text';
 
 type CardDeleteDialogProps = {
   open: boolean;
@@ -23,12 +23,12 @@ export function CardDeleteDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogTitle>
-          <Typo.h4 as="span">카드 삭제</Typo.h4>
+          <Text.H4 as="span">카드 삭제</Text.H4>
         </DialogTitle>
         <DialogDescription asChild>
-          <Typo.body as="span" className="text-slate-700 dark:text-slate-200">
+          <Text.Body14 as="span" className="text-slate-700 dark:text-slate-200">
             {title ? `${title} 카드를 삭제할까요?` : '카드를 삭제할까요?'}
-          </Typo.body>
+          </Text.Body14>
         </DialogDescription>
         <div className="mt-4 flex justify-end gap-2">
           <Button variant="outline" onClick={() => onOpenChange(false)} disabled={isLoading}>

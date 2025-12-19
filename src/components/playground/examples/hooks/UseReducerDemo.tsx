@@ -4,7 +4,7 @@ import { useReducer, useState } from 'react';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
-import { Typo } from '@/components/ui/Text';
+import { Text } from '@/components/ui/Text';
 
 type Todo = { id: number; text: string; done: boolean };
 type State = { count: number; todos: Todo[] };
@@ -52,7 +52,7 @@ export default function UseReducerDemo() {
       <div className="flex items-start justify-between">
         <div>
           <p className="text-sm font-semibold text-slate-900 dark:text-slate-50">useReducer</p>
-          <Typo.caption>state + action을 한곳에서 관리, dispatch로 명령 전달</Typo.caption>
+          <Text.Caption>state + action을 한곳에서 관리, dispatch로 명령 전달</Text.Caption>
         </div>
         <Badge variant="outline">dispatch</Badge>
       </div>
@@ -69,13 +69,13 @@ export default function UseReducerDemo() {
             <Button size="sm" onClick={() => dispatch({ type: 'reset' })}>
               reset
             </Button>
-            <Typo.bodySm className="ml-auto text-slate-700 dark:text-slate-100">
+            <Text.Body14 className="ml-auto text-slate-700 dark:text-slate-100">
               count: {state.count}
-            </Typo.bodySm>
+            </Text.Body14>
           </div>
-          <Typo.caption className="text-slate-500">
+          <Text.Caption className="text-slate-500">
             액션 객체에 따라 reducer가 상태를 계산. 로직이 한곳에 모여 테스트/확장이 쉬움
-          </Typo.caption>
+          </Text.Caption>
         </div>
 
         <div className="space-y-3 rounded-lg border border-slate-200/70 bg-slate-50/70 p-3 dark:border-slate-800 dark:bg-slate-800/60">
@@ -114,9 +114,9 @@ export default function UseReducerDemo() {
               </button>
             ))}
           </div>
-          <Typo.caption className="text-slate-500">
+          <Text.Caption className="text-slate-500">
             dispatch({`{ type: 'toggle', id }`}) 한 번으로 상태 계산/렌더까지 처리
-          </Typo.caption>
+          </Text.Caption>
         </div>
       </div>
     </div>

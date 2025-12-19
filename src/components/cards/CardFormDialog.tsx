@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/Dialog';
-import { Typo } from '@/components/ui/Text';
+import { Text } from '@/components/ui/Text';
 import { Input } from '@/components/ui/Input';
 import { Textarea } from '@/components/ui/Textarea';
 import { Button } from '@/components/ui/Button';
@@ -47,7 +47,7 @@ export function CardFormDialog({
 
         <div className="mt-4 space-y-3">
           <div className="space-y-1">
-            <Typo.caption className="block text-slate-600 dark:text-slate-300">제목</Typo.caption>
+            <Text.Caption className="block text-slate-600 dark:text-slate-300">제목</Text.Caption>
             <Input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -56,7 +56,7 @@ export function CardFormDialog({
             />
           </div>
           <div className="space-y-1">
-            <Typo.caption className="block text-slate-600 dark:text-slate-300">설명</Typo.caption>
+            <Text.Caption className="block text-slate-600 dark:text-slate-300">설명</Text.Caption>
             <Textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}

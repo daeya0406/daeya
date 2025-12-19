@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useRef, useState } from 'react';
-import { Typo } from '@/components/ui/Text';
+import { Text } from '@/components/ui/Text';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 
@@ -41,9 +41,9 @@ export default function ThrottleDebounceDemo() {
 
   return (
     <div className="space-y-3">
-      <Typo.caption className="block text-slate-500 dark:text-slate-300">
+      <Text.Caption className="block text-slate-500 dark:text-slate-300">
         Debounce vs Throttle (400ms)
-      </Typo.caption>
+      </Text.Caption>
       <Input
         value={text}
         onChange={(e) => handleChange(e.target.value)}

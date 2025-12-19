@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { DatePicker } from '@/components/ui/DatePicker';
-import { Typo } from '@/components/ui/Text';
+import { Text } from '@/components/ui/Text';
 import { Badge } from '@/components/ui/Badge';
 import dayjs from 'dayjs';
 
@@ -16,9 +16,9 @@ export default function DatePickerDemo() {
   return (
     <div className="space-y-3">
       <DatePicker value={date ?? undefined} onChange={(d) => setDate(d)} />
-      <Typo.caption className="block">
+      <Text.Caption className="block">
         선택 날짜: <Badge variant="outline">{display}</Badge>
-      </Typo.caption>
+      </Text.Caption>
     </div>
   );
 }

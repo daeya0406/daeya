@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Typo } from '@/components/ui/Text';
+import { Text } from '@/components/ui/Text';
 import { Button } from '@/components/ui/Button';
 export default function TestGroundDemo3() {
   const initialUsers = [
@@ -15,7 +15,7 @@ export default function TestGroundDemo3() {
   return (
     <div>
       <section className="section-component space-y-2">
-        <Typo.h6>렌더링 화면</Typo.h6>
+        <Text.H6>렌더링 화면</Text.H6>
         <p>
           {users.map((u) => (
             <span key={u.id}>{u.name}</span>

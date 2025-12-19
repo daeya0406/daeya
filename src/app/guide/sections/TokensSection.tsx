@@ -8,9 +8,9 @@ type ColorToken = { name: string; step: string; value: string };
 
 const palette: Record<string, ColorToken[]> = {
   brand: [
-    { name: 'brand-primary', step: 'default', value: '#1098B1' },
-    { name: 'brand-secondary', step: 'default', value: '#34D39B' },
-    { name: 'brand-tertiary', step: 'default', value: '#A3E635' },
+    { name: 'brand-primary', step: 'default', value: '#5189FA' },
+    { name: 'brand-secondary', step: 'default', value: '#EEF3FF' },
+    { name: 'brand-tertiary', step: 'default', value: '#315296' },
   ],
   point: [
     { name: 'point-purple', step: 'default', value: '#A855F7' },
@@ -21,30 +21,30 @@ const palette: Record<string, ColorToken[]> = {
     { name: 'point-yellow', step: 'default', value: '#EAB308' },
   ],
   background: [
-    { name: 'bg-primary', step: 'default', value: '#0F172A' },
-    { name: 'bg-secondary', step: 'default', value: '#1E2938' },
-    { name: 'bg-tertiary', step: 'default', value: '#334155' },
+    { name: 'bg-primary', step: 'default', value: '#FFFFFF' },
+    { name: 'bg-secondary', step: 'default', value: '#F1F5F9' },
+    { name: 'bg-tertiary', step: 'default', value: '#E2E8F0' },
     { name: 'bg-inverse', step: 'default', value: '#FFFFFF' },
   ],
   interaction: [
     { name: 'interaction-inactive', step: 'default', value: '#94A3B8' },
-    { name: 'interaction-hover', step: 'default', value: '#0596E9' },
-    { name: 'interaction-pressed', step: 'default', value: '#0A78E7' },
+    { name: 'interaction-hover', step: 'default', value: '#416EC8' },
+    { name: 'interaction-pressed', step: 'default', value: '#3B63B5' },
   ],
   border: [{ name: 'border-primary', step: 'default', value: '#F8FAFC' }],
   text: [
-    { name: 'text-primary', step: 'default', value: '#F8FAFC' },
-    { name: 'text-secondary', step: 'default', value: '#C8D5E1' },
-    { name: 'text-tertiary', step: 'default', value: '#E2E8F0' },
+    { name: 'text-primary', step: 'default', value: '#1E2938' },
+    { name: 'text-secondary', step: 'default', value: '#334155' },
+    { name: 'text-tertiary', step: 'default', value: '#0F172A' },
     { name: 'text-default', step: 'default', value: '#64748B' },
     { name: 'text-inverse', step: 'default', value: '#FFFFFF' },
     { name: 'text-disabled', step: 'default', value: '#94A3B8' },
   ],
-  status: [{ name: 'status-danger', step: 'default', value: '#DC2626' }],
+  status: [{ name: 'status-danger', step: 'default', value: '#FC4848' }],
   icon: [
     { name: 'icon-primary', step: 'default', value: '#64748B' },
     { name: 'icon-inverse', step: 'default', value: '#F8FAFC' },
-    { name: 'icon-brand', step: 'default', value: '#1098B1' },
+    { name: 'icon-brand', step: 'default', value: '#74A1FB' },
   ],
 };
 
@@ -112,18 +112,6 @@ const typeScale: TypeToken[] = [
     snippet: '<Text.S16.Bold></Text.S16.Bold>',
   },
   {
-    label: 'Text.S18',
-    className: 'text-[18px] font-medium leading-normal',
-    sample: '내용입니다.',
-    snippet: '<Text.S18></Text.S18>',
-  },
-  {
-    label: 'Text.S18.Bold',
-    className: 'text-[18px] font-bold leading-normal',
-    sample: '내용입니다.',
-    snippet: '<Text.S18.Bold></Text.S18.Bold>',
-  },
-  {
     label: 'Text.S20',
     className: 'text-[20px] font-medium leading-normal',
     sample: '내용입니다.',
@@ -146,18 +134,6 @@ const typeScale: TypeToken[] = [
     className: 'text-[24px] font-bold leading-normal',
     sample: '내용입니다.',
     snippet: '<Text.S24.Bold></Text.S24.Bold>',
-  },
-  {
-    label: 'Text.S32',
-    className: 'text-[32px] font-medium leading-normal',
-    sample: '내용입니다.',
-    snippet: '<Text.S32></Text.S32>',
-  },
-  {
-    label: 'Text.S32.Bold',
-    className: 'text-[32px] font-bold leading-normal',
-    sample: '내용입니다.',
-    snippet: '<Text.S32.Bold></Text.S32.Bold>',
   },
 ];
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Typo } from '@/components/ui/Text';
+import { Text } from '@/components/ui/Text';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { InfoBlock } from '../InfoBlock';
@@ -47,7 +47,7 @@ export default function ShallowDeepCopyDemo() {
             key={item.title}
             className="space-y-3 rounded-md border border-slate-200/60 p-2 dark:border-slate-700"
           >
-            <Typo.caption className="block">{item.title}</Typo.caption>
+            <Text.Caption className="block">{item.title}</Text.Caption>
             <div className="text-xs text-slate-700 dark:text-slate-200">
               <div className="flex flex-wrap gap-1">
                 tags:

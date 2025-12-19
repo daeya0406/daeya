@@ -18,7 +18,7 @@ import {
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { supabase } from '@/lib/supabase';
-import { Typo } from '@/components/ui/Text';
+import { Text } from '@/components/ui/Text';
 
 export default function LoginPage() {
   return (
@@ -58,7 +58,7 @@ function LoginPageContent() {
   return (
     <section className="mx-auto flex min-h-[70vh] max-w-md flex-col justify-center px-4 py-10">
       <div className="rounded-2xl border border-slate-200/70 bg-white/80 p-6 shadow-md backdrop-blur dark:border-slate-700 dark:bg-slate-800">
-        <Typo.h3 className="mb-8 text-center font-bold">로그인</Typo.h3>
+        <Text.H3 className="mb-8 text-center font-bold">로그인</Text.H3>
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">

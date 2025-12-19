@@ -13,7 +13,7 @@ import { supabase } from '@/lib/supabase';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/Form';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
-import { Typo } from '@/components/ui/Text';
+import { Text } from '@/components/ui/Text';
 
 type TokenState = 'pending' | 'ready' | 'invalid';
 
@@ -82,7 +82,7 @@ export default function ResetPasswordPage() {
   return (
     <section className="mx-auto flex min-h-[70vh] max-w-md flex-col justify-center px-4 py-10">
       <div className="rounded-2xl border border-slate-200/70 bg-white/80 p-6 shadow-md backdrop-blur dark:border-slate-700 dark:bg-slate-800">
-        <Typo.h3 className="font-bold text-center mb-8">비밀번호 재설정</Typo.h3>
+        <Text.H3 className="font-bold text-center mb-8">비밀번호 재설정</Text.H3>
 
         {tokenState === 'invalid' && (
           <div className="mb-4 rounded-lg border border-orange-200 bg-orange-50 p-3 text-xs text-green-400 dark:border-green-900/60 dark:bg-green-400/10 dark:text-green-500">

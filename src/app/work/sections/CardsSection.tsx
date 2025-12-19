@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Typo } from '@/components/ui/Text';
+import { Text } from '@/components/ui/Text';
 import CardList from '@/components/cards/CardList';
 import type { Card } from '@/types/card';
 import { Button } from '@/components/ui/Button';
@@ -139,10 +139,10 @@ export default function CardsSection() {
     <div className="space-y-3">
       <div className="flex items-start justify-between gap-3">
         <div>
-          <Typo.h3>Cards</Typo.h3>
-          <Typo.caption className="block text-slate-500 dark:text-slate-300">
+          <Text.H3>Cards</Text.H3>
+          <Text.Caption className="block text-slate-500 dark:text-slate-300">
             카드 목록과 모달을 Work 탭에서 바로 확인하세요.
-          </Typo.caption>
+          </Text.Caption>
         </div>
         {role === 'admin' && (
           <Button size="sm" variant="outline" onClick={() => setCreateOpen(true)}>
@@ -165,7 +165,7 @@ export default function CardsSection() {
             ))}
           </div>
         )}
-        {error && <Typo.caption className="text-red-500">{error}</Typo.caption>}
+        {error && <Text.Caption className="text-red-500">{error}</Text.Caption>}
         {!loading && !error && (
           <>
             <CardList
@@ -199,9 +199,9 @@ export default function CardsSection() {
           <DialogContent>
             <DialogTitle>{selectedCard.title}</DialogTitle>
             <DialogDescription asChild>
-              <Typo.body as="span" className="text-muted-foreground mt-2 text-sm">
+              <Text.Body14 as="span" className="text-muted-foreground mt-2 text-sm">
                 {selectedCard.description}
-              </Typo.body>
+              </Text.Body14>
             </DialogDescription>
             {role === 'admin' && (
               <div className="flex justify-end gap-2">

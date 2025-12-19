@@ -3,16 +3,16 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
-import { Typo } from '@/components/ui/Text';
+import { Text } from '@/components/ui/Text';
 
 export default function MotionDemo() {
   const [open, setOpen] = useState(true);
 
   return (
     <div className="space-y-3">
-      <Typo.bodySm className="text-slate-600 dark:text-slate-200">
+      <Text.Body14 className="text-slate-600 dark:text-slate-200">
         Fade + Slide 기본 모션 예제 (마이크로 인터랙션)
-      </Typo.bodySm>
+      </Text.Body14>
       <div className="h-32 overflow-hidden rounded-lg border border-slate-200/70 bg-white/80 p-4 dark:border-slate-700 dark:bg-slate-800/50">
         <AnimatePresence>
           {open && (

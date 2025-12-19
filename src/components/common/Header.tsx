@@ -37,14 +37,12 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky left-0 top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur dark:border-slate-800 dark:bg-slate-900/80">
+    <header className="sticky left-0 top-0 z-50 border-b border-border bg-bg-primary/80 backdrop-blur">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between gap-4">
           <Link href="/" className="flex items-center gap-2">
             <Image src="/logo.png" alt="Daeya Logo" width={32} height={17} />
-            <span className="text-lg font-bold text-slate-900 dark:text-white">
-              Daeya Portfolio
-            </span>
+            <span className="text-lg font-bold text-foreground">Daeya Portfolio</span>
           </Link>
 
           <div className="hidden items-center gap-6 text-sm md:flex">
@@ -52,7 +50,7 @@ export default function Header() {
 
             <button
               onClick={toggleLayout}
-              className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-md border border-slate-200 bg-white text-slate-700 transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700"
+              className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-md border border-border bg-bg-primary text-foreground transition hover:bg-bg-secondary"
               title={
                 effectiveMode === 'dashboard' ? '헤더 레이아웃으로 전환' : '대시보드 레이아웃으로 전환'
               }
@@ -62,14 +60,14 @@ export default function Header() {
 
             <button
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-md border border-slate-200 bg-white text-slate-700 transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700"
+              className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-md border border-border bg-bg-primary text-foreground transition hover:bg-bg-secondary"
             >
               {!mounted ? (
                 <div className="h-5 w-5" />
               ) : theme === 'dark' ? (
                 <Sun className="h-5 w-5 text-yellow-300" />
               ) : (
-                <Moon className="h-5 w-5 text-slate-700" />
+                <Moon className="h-5 w-5 text-foreground" />
               )}
             </button>
 
@@ -110,8 +108,8 @@ function DesktopNav({
               href={item.href ?? (hasChildren ? (item.children?.[0]?.href ?? '#') : '#')}
               className={`group flex items-center gap-1 rounded-md px-3 py-2 transition ${
                 active
-                  ? 'bg-slate-100 text-slate-900 dark:bg-slate-800/70 dark:text-slate-50'
-                  : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-slate-800/70'
+                  ? 'bg-bg-secondary text-foreground'
+                  : 'text-muted-foreground hover:bg-bg-secondary hover:text-foreground'
               }`}
             >
               <span>{item.label}</span>
@@ -121,7 +119,7 @@ function DesktopNav({
                 />
               )}
               {item.badge && (
-                <span className="rounded-full bg-blue-100 px-2 text-[10px] font-semibold text-blue-700 dark:bg-blue-900/50 dark:text-blue-200">
+                <span className="rounded-full bg-primary-100 px-2 text-[10px] font-semibold text-primary">
                   {item.badge}
                 </span>
               )}
@@ -134,17 +132,17 @@ function DesktopNav({
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 8 }}
                   transition={{ duration: 0.18, ease: 'easeOut' }}
-                  className="absolute left-0 top-full mt-0 min-w-[180px] rounded-lg border border-slate-200 bg-white/95 p-2 pt-3 shadow-lg backdrop-blur dark:border-slate-800 dark:bg-slate-900/95"
+                  className="absolute left-0 top-full mt-0 min-w-[180px] rounded-lg border border-border bg-bg-primary/95 p-2 pt-3 shadow-lg backdrop-blur"
                 >
                   {item.children?.map((child) => (
                     <Link
                       key={child.label}
                       href={child.href ?? '#'}
-                      className="flex items-center justify-between rounded-md px-3 py-2 text-sm text-slate-700 transition hover:bg-slate-100 dark:text-slate-100 dark:hover:bg-slate-800"
+                      className="flex items-center justify-between rounded-md px-3 py-2 text-sm text-foreground transition hover:bg-bg-secondary"
                     >
                       <span>{child.label}</span>
                       {child.badge && (
-                        <span className="rounded-full bg-blue-100 px-2 text-[10px] font-semibold text-blue-700 dark:bg-blue-900/50 dark:text-blue-200">
+                        <span className="rounded-full bg-primary-100 px-2 text-[10px] font-semibold text-primary">
                           {child.badge}
                         </span>
                       )}
@@ -173,7 +171,7 @@ function AuthMenu({ userEmail }: { userEmail: string | null }) {
     return (
       <Link
         href="/auth/login"
-        className="rounded-md border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-slate-700 dark:text-slate-100 dark:hover:bg-slate-800"
+        className="rounded-md border border-border px-3 py-2 text-sm font-semibold text-foreground transition hover:bg-bg-secondary"
       >
         로그인
       </Link>
@@ -185,7 +183,7 @@ function AuthMenu({ userEmail }: { userEmail: string | null }) {
       <DropdownOptionTrigger asChild>
         <ButtonNowrap
           aria-label="프로필 메뉴"
-          className="h-9 w-9 rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700"
+          className="h-9 w-9 rounded-full border border-border bg-bg-primary text-foreground shadow-sm transition hover:bg-bg-secondary"
         >
           <User className="h-4 w-4" />
         </ButtonNowrap>

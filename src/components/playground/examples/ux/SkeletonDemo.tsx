@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Typo } from '@/components/ui/Text';
+import { Text } from '@/components/ui/Text';
 
 export default function SkeletonDemo() {
   const [loading, setLoading] = useState(true);
@@ -13,12 +13,12 @@ export default function SkeletonDemo() {
 
   return (
     <div className="space-y-3">
-      <Typo.bodySm className="text-slate-600 dark:text-slate-200">
+      <Text.Body14 className="text-slate-600 dark:text-slate-200">
         로딩 시 Skeleton(자리 유지) vs Spinner(레이아웃 점프)
-      </Typo.bodySm>
+      </Text.Body14>
       <div className="grid gap-3 md:grid-cols-2">
         <div className="rounded-lg border border-slate-200/70 bg-white/80 p-3 text-sm dark:border-slate-700 dark:bg-slate-800/50">
-          <Typo.caption className="text-slate-500">Skeleton</Typo.caption>
+          <Text.Caption className="text-slate-500">Skeleton</Text.Caption>
           {loading ? (
             <div className="mt-2 space-y-2">
               <div className="h-4 w-3/4 animate-pulse rounded bg-slate-200 dark:bg-slate-700" />
@@ -31,7 +31,7 @@ export default function SkeletonDemo() {
         </div>
 
         <div className="rounded-lg border border-slate-200/70 bg-white/80 p-3 text-sm dark:border-slate-700 dark:bg-slate-800/50">
-          <Typo.caption className="text-slate-500">Spinner</Typo.caption>
+          <Text.Caption className="text-slate-500">Spinner</Text.Caption>
           {loading ? (
             <div className="mt-4 flex items-center gap-2 text-slate-600 dark:text-slate-200">
               <span className="h-4 w-4 animate-spin rounded-full border-2 border-slate-300 border-t-transparent dark:border-slate-600 dark:border-t-transparent" />

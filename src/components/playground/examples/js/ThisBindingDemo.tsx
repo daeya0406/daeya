@@ -1,4 +1,4 @@
-import { Typo } from '@/components/ui/Text';
+import { Text } from '@/components/ui/Text';
 
 export default function ThisBindingDemo() {
   const logs: string[] = [];
@@ -23,9 +23,9 @@ export default function ThisBindingDemo() {
 
   return (
     <div className="section-component">
-      <Typo.bodySm className="font-semibold text-slate-900 dark:text-slate-50">
+      <Text.Body14 className="font-semibold text-slate-900 dark:text-slate-50">
         this 바인딩 예시
-      </Typo.bodySm>
+      </Text.Body14>
       <div className="mt-2 space-y-1 font-mono text-xs text-slate-700 dark:text-slate-200">
         {logs.map((line, i) => (
           <div key={i}>{line}</div>

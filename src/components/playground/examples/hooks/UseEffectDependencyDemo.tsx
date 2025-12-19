@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
-import { Typo } from '@/components/ui/Text';
+import { Text } from '@/components/ui/Text';
 
 export default function UseEffectDependencyDemo() {
   const [count, setCount] = useState(0);
@@ -47,7 +47,7 @@ export default function UseEffectDependencyDemo() {
             <p className="text-sm font-semibold text-slate-900 dark:text-slate-50">
               useEffect 의존성 배열
             </p>
-            <Typo.caption>의존성 배열 없음 / [count] / [input] 비교</Typo.caption>
+            <Text.Caption>의존성 배열 없음 / [count] / [input] 비교</Text.Caption>
           </div>
         </div>
 
@@ -57,7 +57,7 @@ export default function UseEffectDependencyDemo() {
               <Button size="sm" onClick={() => setCount((c) => c + 1)}>
                 count +1
               </Button>
-              <Typo.body>count: {count}</Typo.body>
+              <Text.Body14>count: {count}</Text.Body14>
             </div>
             <Input
               value={text}
@@ -74,9 +74,9 @@ export default function UseEffectDependencyDemo() {
               <Badge variant="default">[input]</Badge>
               <span>input 변경 effect 실행: {textHits}회</span>
             </div>
-            <Typo.caption className="text-slate-500">
+            <Text.Caption className="text-slate-500">
               의존성 배열 없는 부분은 모든 렌더마다 실행 → 콘솔에서 확인 가능
-            </Typo.caption>
+            </Text.Caption>
           </div>
         </div>
       </div>
@@ -87,13 +87,13 @@ export default function UseEffectDependencyDemo() {
             <p className="text-sm font-semibold text-slate-900 dark:text-slate-50">
               [running] 의존성 + setInterval
             </p>
-            <Typo.caption>마운트 1회 등록, 버튼으로 토글</Typo.caption>
+            <Text.Caption>마운트 1회 등록, 버튼으로 토글</Text.Caption>
           </div>
           <Badge variant={running ? 'default' : 'outline'}>{running ? 'running' : 'stopped'}</Badge>
         </div>
 
         <div className="mt-3 flex items-center gap-3">
-          <Typo.body>경과: {seconds}s</Typo.body>
+          <Text.Body14>경과: {seconds}s</Text.Body14>
           <Button
             size="sm"
             variant="outline"

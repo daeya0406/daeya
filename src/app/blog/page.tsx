@@ -1,6 +1,6 @@
 'use client';
 
-import { Typo } from '@/components/ui/Text';
+import { Text } from '@/components/ui/Text';
 
 const posts = [
   { title: 'React Query 패턴 정리', date: '2024-08-01', summary: '쿼리/뮤테이션 설계와 캐시 전략' },
@@ -11,17 +11,17 @@ const posts = [
 export default function BlogPage() {
   return (
     <section className="mx-auto max-w-4xl px-4 py-10">
-      <Typo.h2 className="mb-6">Blog</Typo.h2>
+      <Text.H2 className="mb-6">Blog</Text.H2>
       <div className="space-y-3">
         {posts.map((post) => (
           <article
             key={post.title}
             className="rounded-xl border border-slate-200/70 bg-white/80 p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-slate-800 dark:bg-slate-900/60"
           >
-            <Typo.h4 className="mb-1">{post.title}</Typo.h4>
-            <Typo.caption className="block text-slate-500 dark:text-slate-300">
+            <Text.H4 className="mb-1">{post.title}</Text.H4>
+            <Text.Caption className="block text-slate-500 dark:text-slate-300">
               {post.date}
-            </Typo.caption>
+            </Text.Caption>
             <p className="mt-1 text-sm text-slate-700 dark:text-slate-200">{post.summary}</p>
           </article>
         ))}

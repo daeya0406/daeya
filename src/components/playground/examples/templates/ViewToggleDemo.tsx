@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/ToggleGroup';
 import { Badge } from '@/components/ui/Badge';
-import { Typo } from '@/components/ui/Text';
+import { Text } from '@/components/ui/Text';
 import {
   Table,
   TableBody,
@@ -44,12 +44,12 @@ export default function ViewToggleDemo() {
               key={item.title}
               className="rounded-lg border border-slate-200/70 bg-white/80 p-3 shadow-sm dark:border-slate-800 dark:bg-slate-900/60"
             >
-              <Typo.bodyLg className="text-base font-semibold text-slate-900 dark:text-slate-50">
+              <Text.Body16 className="text-base font-semibold text-slate-900 dark:text-slate-50">
                 {item.title}
-              </Typo.bodyLg>
-              <Typo.caption className="block text-slate-600 dark:text-slate-300">
+              </Text.Body16>
+              <Text.Caption className="block text-slate-600 dark:text-slate-300">
                 담당: {item.owner}
-              </Typo.caption>
+              </Text.Caption>
               <Badge className="mt-1" variant="outline">
                 {item.status}
               </Badge>

@@ -5,6 +5,7 @@ import UseReducerDemo from '../examples/hooks/UseReducerDemo';
 import UseMemoDemo from '../examples/hooks/UseMemotDemo';
 import UseRefDemo from '../examples/hooks/UseRefDemo';
 import type { PlaygroundItem } from '@/types/playground';
+import ZustandCounterDemo from '../examples/hooks/ZustandCounterDemo';
 
 export const hookItems: PlaygroundItem[] = [
   {
@@ -151,7 +152,7 @@ const sync = () => setVisible(silentRef.current); // 이때만 렌더`,
   },
   {
     id: 'use-toggle',
-    title: 'useToggle 훅',
+    title: 'useToggle',
     tags: ['Hook', 'State'],
     description: '불리언 상태를 간단히 토글/설정',
     categories: ['hooks'],
@@ -164,5 +165,25 @@ const sync = () => setVisible(silentRef.current); // 이때만 렌더`,
   }, []);
   return { value, toggle, setValue };
 }`,
+  },
+  {
+    id: 'zustand-basic',
+    title: 'Zustand',
+    tags: ['State', 'Zustand'],
+    description: 'create로 간단한 카운터 스토어 만들기',
+    categories: ['hooks'],
+    demo: <ZustandCounterDemo />,
+    code: `import { create } from 'zustand';
+
+type CounterStore = { count: number; increase: () => void; reset: () => void };
+
+export const useCounterStore = create<CounterStore>((set) => ({
+  count: 0,
+  increase: () => set((state) => ({ count: state.count + 1 })),
+  reset: () => set({ count: 0 }),
+}));
+
+// 사용
+const { count, increase, reset } = useCounterStore();`,
   },
 ];

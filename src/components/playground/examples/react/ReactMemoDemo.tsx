@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useMemo, useState } from 'react';
-import { Typo } from '@/components/ui/Text';
+import { Text } from '@/components/ui/Text';
 import { Button } from '@/components/ui/Button';
 
 const ExpensiveChild = React.memo(function ExpensiveChild({ value }: { value: number }) {
@@ -15,9 +15,9 @@ const ExpensiveChild = React.memo(function ExpensiveChild({ value }: { value: nu
   }, [value]);
 
   return (
-    <Typo.caption className="text-slate-600 dark:text-slate-300">
+    <Text.Caption className="text-slate-600 dark:text-slate-300">
       memoized 결과: {computed}
-    </Typo.caption>
+    </Text.Caption>
   );
 });
 

@@ -3,7 +3,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
-import { Typo } from '@/components/ui/Text';
+import { Text } from '@/components/ui/Text';
 
 type Todo = {
   id: number;
@@ -43,13 +43,13 @@ export default function UseQueryDemo() {
       <div className="flex items-start justify-between">
         <div>
           <p className="text-sm font-semibold text-slate-900 dark:text-slate-50">useQuery</p>
-          <Typo.caption>queryKey / select / staleTime 예시</Typo.caption>
+          <Text.Caption>queryKey / select / staleTime 예시</Text.Caption>
         </div>
         <Badge variant={isFetching ? 'default' : 'outline'}>{isFetching ? 'fetching' : 'idle'}</Badge>
       </div>
 
-      {isPending && <Typo.caption className="text-slate-500">로딩 중...</Typo.caption>}
-      {error && <Typo.caption className="text-rose-500">에러: {error.message}</Typo.caption>}
+      {isPending && <Text.Caption className="text-slate-500">로딩 중...</Text.Caption>}
+      {error && <Text.Caption className="text-rose-500">에러: {error.message}</Text.Caption>}
 
       {data && (
         <div className="space-y-1 text-sm">
@@ -67,7 +67,7 @@ export default function UseQueryDemo() {
         <Button size="sm" onClick={() => refetch()}>
           수동 refetch
         </Button>
-        <Typo.caption className="text-slate-500">staleTime 동안 캐시 유지</Typo.caption>
+        <Text.Caption className="text-slate-500">staleTime 동안 캐시 유지</Text.Caption>
       </div>
     </div>
   );
