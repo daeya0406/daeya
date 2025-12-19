@@ -73,10 +73,10 @@ function NotePageContent() {
                     <button
                       key={item.id}
                       onClick={() => setActiveId(item.id)}
-                      className={`border-border bg-bg-primary flex flex-col items-start gap-y-1 rounded-lg border px-3 py-3 text-left transition ${
+                      className={`border-border bg-bg-depth-1 flex flex-col items-start gap-y-1 rounded-lg border px-3 py-3 text-left transition ${
                         isActive
                           ? 'border-primary/80 text-primary'
-                          : 'hover:border-border hover:bg-bg-secondary'
+                          : 'hover:border-border hover:bg-bg-depth-2'
                       }`}
                     >
                       <Text.S14.Bold className={isActive ? 'text-primary' : 'text-foreground'}>

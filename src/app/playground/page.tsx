@@ -76,10 +76,10 @@ function PlaygroundPageContent() {
                     <button
                       key={item.id}
                       onClick={() => setActiveId(item.id)}
-                      className={`border-border bg-bg-primary flex flex-col items-start gap-y-1 rounded-lg border px-3 py-3 text-left transition ${
+                      className={`border-border bg-bg-depth-1 flex flex-col items-start gap-y-1 rounded-lg border px-3 py-3 text-left transition ${
                         isActive
                           ? 'border-primary/80 text-primary'
-                          : 'hover:border-border hover:bg-bg-secondary'
+                          : 'hover:border-border hover:bg-bg-depth-2'
                       }`}
                     >
                       <Text.S14.Bold className={isActive ? 'text-primary' : 'text-foreground'}>
@@ -96,7 +96,7 @@ function PlaygroundPageContent() {
               </div>
             </TabListPanel>
 
-            <div className="border-border bg-bg-primary space-y-4 rounded-xl border p-5 shadow-sm">
+            <div className="border-border bg-bg-depth-1 space-y-4 rounded-xl border p-5 shadow-sm">
               {activeItem ? (
                 <>
                   <div className="flex flex-wrap items-center justify-between gap-2">
@@ -119,12 +119,12 @@ function PlaygroundPageContent() {
                   </div>
 
                   {activeItem.demo && (
-                    <div className="border-border bg-bg-secondary rounded-lg border p-4">
+                    <div className="border-border bg-bg-depth-2 rounded-lg border p-4">
                       {activeItem.demo}
                     </div>
                   )}
 
-                  <div className="border-border bg-bg-tertiary rounded-lg border p-4 text-sm">
+                  <div className="border-border bg-bg-depth-3 rounded-lg border p-4 text-sm">
                     <pre className="text-muted-foreground whitespace-pre-wrap font-mono text-xs">
                       {activeItem.code}
                     </pre>

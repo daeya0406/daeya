@@ -13,7 +13,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <>
         <div className="flex flex-1">
           <DashboardSidebar />
-          <div className="bg-bg-secondary min-w-0 flex-1 px-6 py-8">
+          <div className="bg-bg-depth-2 min-w-0 flex-1 px-6 py-8">
             <main className="mx-auto w-full max-w-6xl">{children}</main>
           </div>
         </div>

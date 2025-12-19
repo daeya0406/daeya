@@ -10,7 +10,7 @@ import {
 } from '@/lib/supabase/api/portfolio';
 import type { TaskStatus } from '@/types/task';
 import { FadeUp } from '@/components/motion/FadeUp';
-const cardClassName = 'rounded-3xl bg-bg-primary shadow-sm ring-1 ring-border';
+const cardClassName = 'rounded-3xl bg-bg-depth-1 shadow-sm ring-1 ring-border';
 function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div className={['flex flex-col gap-1 p-5', cardClassName].join(' ')}>
@@ -54,13 +54,13 @@ export default async function HomePage() {
                   <span className="text-primary border-primary bg-primary-100 rounded-full border px-3 py-1 text-xs font-semibold">
                     React
                   </span>
-                  <span className="bg-bg-secondary text-foreground rounded-full px-3 py-1 text-xs font-semibold">
+                  <span className="bg-bg-depth-2 text-foreground rounded-full px-3 py-1 text-xs font-semibold">
                     Next.js
                   </span>
-                  <span className="bg-bg-secondary text-foreground rounded-full px-3 py-1 text-xs font-semibold">
+                  <span className="bg-bg-depth-2 text-foreground rounded-full px-3 py-1 text-xs font-semibold">
                     TypeScript
                   </span>
-                  <span className="bg-bg-secondary text-foreground rounded-full px-3 py-1 text-xs font-semibold">
+                  <span className="bg-bg-depth-2 text-foreground rounded-full px-3 py-1 text-xs font-semibold">
                     UI Engineering
                   </span>
                 </div>
@@ -127,19 +127,19 @@ export default async function HomePage() {
                 </div>
               </div>
               <div className="mt-6">
-                <div className="bg-bg-secondary h-4 w-full rounded-full">
+                <div className="bg-bg-depth-2 h-4 w-full rounded-full">
                   <div className="bg-primary h-4 w-[25%] rounded-full" />
                 </div>
                 <div className="mt-4 grid gap-3 sm:grid-cols-3">
-                  <div className="bg-bg-secondary rounded-2xl p-4">
+                  <div className="bg-bg-depth-2 rounded-2xl p-4">
                     <Text.Caption className="text-muted-foreground">오늘의 할 일</Text.Caption>
                     <Text.H3 className="text-foreground mt-1">20</Text.H3>
                   </div>
-                  <div className="bg-bg-secondary rounded-2xl p-4">
+                  <div className="bg-bg-depth-2 rounded-2xl p-4">
                     <Text.Caption className="text-muted-foreground">완료</Text.Caption>
                     <Text.H3 className="text-foreground mt-1">5</Text.H3>
                   </div>
-                  <div className="bg-bg-secondary rounded-2xl p-4">
+                  <div className="bg-bg-depth-2 rounded-2xl p-4">
                     <Text.Caption className="text-muted-foreground">다음 작업</Text.Caption>
                     <Text.Body14 className="text-foreground mt-1">Projects 섹션 채우기</Text.Body14>
                   </div>
@@ -163,10 +163,10 @@ export default async function HomePage() {
                   { title: '진행중', items: doing.map((t) => t.title) },
                   { title: '완료', items: done.map((t) => t.title) },
                 ].map((col) => (
-                  <div key={col.title} className="bg-bg-secondary rounded-2xl p-4">
+                  <div key={col.title} className="bg-bg-depth-2 rounded-2xl p-4">
                     <div className="flex items-center justify-between">
                       <Text.S14.Bold className="text-foreground">{col.title}</Text.S14.Bold>
-                      <span className="bg-bg-tertiary text-foreground rounded-full px-2 py-0.5 text-[11px] font-semibold">
+                      <span className="bg-bg-depth-3 text-foreground rounded-full px-2 py-0.5 text-[11px] font-semibold">
                         {col.items.length}
                       </span>
                     </div>
@@ -174,7 +174,7 @@ export default async function HomePage() {
                       {(col.items.length ? col.items : ['(표시할 항목이 없습니다)']).map((item) => (
                         <div
                           key={item}
-                          className="bg-bg-primary text-foreground ring-border/60 rounded-2xl p-3 text-sm shadow-sm ring-1"
+                          className="bg-bg-depth-1 text-foreground ring-border/60 rounded-2xl p-3 text-sm shadow-sm ring-1"
                         >
                           {item}
                         </div>
@@ -205,14 +205,14 @@ export default async function HomePage() {
               </div>
               <div className="ring-border/60 mt-4 overflow-hidden rounded-2xl ring-1">
                 <table className="w-full text-left text-sm">
-                  <thead className="bg-bg-secondary text-muted-foreground">
+                  <thead className="bg-bg-depth-2 text-muted-foreground">
                     <tr>
                       <th className="px-4 py-3 font-semibold">Title</th>
                       <th className="px-4 py-3 font-semibold">Category</th>
                       <th className="px-4 py-3 font-semibold">Date</th>
                     </tr>
                   </thead>
-                  <tbody className="bg-bg-primary text-foreground">
+                  <tbody className="bg-bg-depth-1 text-foreground">
                     {(posts.length ? posts : []).slice(0, 8).map((p) => (
                       <tr key={p.id} className="border-border/70 border-t">
                         <td className="px-4 py-3">
@@ -251,19 +251,19 @@ export default async function HomePage() {
             <div className={['p-6', cardClassName].join(' ')}>
               <Text.H3 className="text-foreground">하이라이트</Text.H3>
               <ul className="text-foreground mt-4 space-y-3 text-sm">
-                <li className="bg-bg-secondary rounded-2xl p-4">
+                <li className="bg-bg-depth-2 rounded-2xl p-4">
                   <Text.S14.Bold>Design Tokens</Text.S14.Bold>
                   <Text.Caption className="text-muted-foreground mt-1">
                     컬러/타이포를 토큰으로 통일해서 유지보수성 확보
                   </Text.Caption>
                 </li>
-                <li className="bg-bg-secondary rounded-2xl p-4">
+                <li className="bg-bg-depth-2 rounded-2xl p-4">
                   <Text.S14.Bold>SSR / Hydration</Text.S14.Bold>
                   <Text.Caption className="text-muted-foreground mt-1">
                     클라이언트 컴포넌트 최소화 + 하이드레이션 이슈 대응
                   </Text.Caption>
                 </li>
-                <li className="bg-bg-secondary rounded-2xl p-4">
+                <li className="bg-bg-depth-2 rounded-2xl p-4">
                   <Text.S14.Bold>UX</Text.S14.Bold>
                   <Text.Caption className="text-muted-foreground mt-1">
                     네비게이션, 아코디언, active 상태 일관성
@@ -279,9 +279,9 @@ export default async function HomePage() {
                 아래 항목은 네가 직접 채우기 좋은 영역으로 남겨놨어요.
               </Text.Body14>
               <div className="text-foreground mt-4 space-y-2 text-sm">
-                <div className="bg-bg-secondary rounded-2xl p-4"> 프로젝트 3개 상세 작성 </div>
-                <div className="bg-bg-secondary rounded-2xl p-4"> 성과/지표 기반 스토리 추가 </div>
-                <div className="bg-bg-secondary rounded-2xl p-4">
+                <div className="bg-bg-depth-2 rounded-2xl p-4"> 프로젝트 3개 상세 작성 </div>
+                <div className="bg-bg-depth-2 rounded-2xl p-4"> 성과/지표 기반 스토리 추가 </div>
+                <div className="bg-bg-depth-2 rounded-2xl p-4">
                   기술 선택 근거(Trade-off) 정리
                 </div>
               </div>

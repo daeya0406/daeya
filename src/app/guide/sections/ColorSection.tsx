@@ -20,10 +20,10 @@ const palette: Record<string, ColorToken[]> = {
     { name: 'point-yellow', value: 'rgb(var(--point-yellow))' },
   ],
   background: [
-    { name: 'bg-primary', value: 'rgb(var(--bg-primary))' },
-    { name: 'bg-secondary', value: 'rgb(var(--bg-secondary))' },
-    { name: 'bg-tertiary', value: 'rgb(var(--bg-tertiary))' },
-    { name: 'bg-inverse', value: 'rgb(var(--bg-inverse))' },
+    { name: 'bg-depth-1', value: 'rgb(var(--bg-depth-1))' },
+    { name: 'bg-depth-2', value: 'rgb(var(--bg-depth-2))' },
+    { name: 'bg-depth-3', value: 'rgb(var(--bg-depth-3))' },
+    { name: 'bg-depth-inverse', value: 'rgb(var(--bg-depth-inverse))' },
   ],
   interaction: [
     { name: 'interaction-inactive', value: 'rgb(var(--interaction-inactive))' },

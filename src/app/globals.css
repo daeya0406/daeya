@@ -26,10 +26,10 @@
   --status-danger: 252 72 72; /* #FC4848 */
 
   /* Background (light) */
-  --bg-primary: var(--white); /* #FFFFFF */
-  --bg-secondary: 241 245 249; /* #F1F5F9 */
-  --bg-tertiary: 226 232 240; /* #E2E8F0 */
-  --bg-inverse: var(--white); /* #FFFFFF */
+  --bg-depth-1: var(--white); /* #FFFFFF */
+  --bg-depth-2: 241 245 249; /* #F1F5F9 */
+  --bg-depth-3: 226 232 240; /* #E2E8F0 */
+  --bg-depth-inverse: var(--white); /* #FFFFFF */
 
   /* Text (light) */
   --text-primary: 30 41 56; /* #1E2938 */
@@ -53,7 +53,7 @@
   --icon-brand: 116 161 251; /* #74A1FB */
 
   /* Semantic */
-  --background: var(--bg-secondary);
+  --background: var(--bg-depth-2);
   --foreground: var(--text-primary);
   --muted: var(--bg-tertiary);
   --muted-foreground: var(--text-default);
@@ -69,10 +69,10 @@
 
 .dark {
   /* Background (dark) */
-  --bg-primary: 15 23 42; /* #0F172A */
-  --bg-secondary: 30 41 59; /* #1E293B */
-  --bg-tertiary: 51 65 85; /* #334155 */
-  --bg-inverse: var(--white); /* #FFFFFF */
+  --bg-depth-1: 15 23 42; /* #0F172A */
+  --bg-depth-2: 30 41 59; /* #1E293B */
+  --bg-depth-3: 51 65 85; /* #334155 */
+  --bg-depth-inverse: var(--white); /* #FFFFFF */
 
   /* Text (dark) */
   --text-primary: 248 250 252; /* #F8FAFC */
@@ -84,7 +84,7 @@
 
   --border-primary: 148 163 184 / 0.5; /* #94A3B8 50% */
 
-  --background: var(--bg-primary);
+  --background: var(--bg-depth-1);
   --foreground: var(--text-primary);
   --muted: var(--bg-secondary);
   --muted-foreground: var(--text-default);
@@ -159,10 +159,15 @@
 
   --color-status-danger: rgb(var(--status-danger));
 
-  --color-bg-primary: rgb(var(--bg-primary));
-  --color-bg-secondary: rgb(var(--bg-secondary));
-  --color-bg-tertiary: rgb(var(--bg-tertiary));
-  --color-bg-inverse: rgb(var(--bg-inverse));
+  --color-bg-primary: rgb(var(--bg-depth-1));
+  --color-bg-secondary: rgb(var(--bg-depth-2));
+  --color-bg-tertiary: rgb(var(--bg-depth-3));
+  --color-bg-inverse: rgb(var(--bg-depth-inverse));
+  /* depth aliases */
+  --color-bg-depth-1: rgb(var(--bg-depth-1));
+  --color-bg-depth-2: rgb(var(--bg-depth-2));
+  --color-bg-depth-3: rgb(var(--bg-depth-3));
+  --color-bg-depth-inverse: rgb(var(--bg-depth-inverse));
 
   --color-text-primary: rgb(var(--text-primary));
   --color-text-secondary: rgb(var(--text-secondary));
@@ -258,7 +263,7 @@
   }
 
   .form-base {
-    @apply border-border text-foreground placeholder:text-foreground/40 focus:ring-primary/40 focus:border-primary/70 bg-bg-primary rounded-md border px-3 py-3 text-sm transition-colors focus:ring-2 disabled:cursor-not-allowed disabled:opacity-50;
+    @apply border-border text-foreground placeholder:text-foreground/40 focus:ring-primary/40 focus:border-primary/70 bg-bg-depth-1 rounded-md border px-3 py-3 text-sm transition-colors focus:ring-2 disabled:cursor-not-allowed disabled:opacity-50;
   }
 
   .line-bottom {

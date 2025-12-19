@@ -37,7 +37,7 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky left-0 top-0 z-50 border-b border-border bg-bg-primary/80 backdrop-blur">
+    <header className="sticky left-0 top-0 z-50 border-b border-border bg-bg-depth-1/80 backdrop-blur">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between gap-4">
           <Link href="/" className="flex items-center gap-2">
@@ -50,7 +50,7 @@ export default function Header() {
 
             <button
               onClick={toggleLayout}
-              className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-md border border-border bg-bg-primary text-foreground transition hover:bg-bg-secondary"
+              className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-md border border-border bg-bg-depth-1 text-foreground transition hover:bg-bg-depth-2"
               title={
                 effectiveMode === 'dashboard' ? '헤더 레이아웃으로 전환' : '대시보드 레이아웃으로 전환'
               }
@@ -60,7 +60,7 @@ export default function Header() {
 
             <button
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-md border border-border bg-bg-primary text-foreground transition hover:bg-bg-secondary"
+              className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-md border border-border bg-bg-depth-1 text-foreground transition hover:bg-bg-depth-2"
             >
               {!mounted ? (
                 <div className="h-5 w-5" />
@@ -108,8 +108,8 @@ function DesktopNav({
               href={item.href ?? (hasChildren ? (item.children?.[0]?.href ?? '#') : '#')}
               className={`group flex items-center gap-1 rounded-md px-3 py-2 transition ${
                 active
-                  ? 'bg-bg-secondary text-foreground'
-                  : 'text-muted-foreground hover:bg-bg-secondary hover:text-foreground'
+                  ? 'bg-bg-depth-2 text-foreground'
+                  : 'text-muted-foreground hover:bg-bg-depth-2 hover:text-foreground'
               }`}
             >
               <span>{item.label}</span>
@@ -132,13 +132,13 @@ function DesktopNav({
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 8 }}
                   transition={{ duration: 0.18, ease: 'easeOut' }}
-                  className="absolute left-0 top-full mt-0 min-w-[180px] rounded-lg border border-border bg-bg-primary/95 p-2 pt-3 shadow-lg backdrop-blur"
+                  className="absolute left-0 top-full mt-0 min-w-[180px] rounded-lg border border-border bg-bg-depth-1/95 p-2 pt-3 shadow-lg backdrop-blur"
                 >
                   {item.children?.map((child) => (
                     <Link
                       key={child.label}
                       href={child.href ?? '#'}
-                      className="flex items-center justify-between rounded-md px-3 py-2 text-sm text-foreground transition hover:bg-bg-secondary"
+                      className="flex items-center justify-between rounded-md px-3 py-2 text-sm text-foreground transition hover:bg-bg-depth-2"
                     >
                       <span>{child.label}</span>
                       {child.badge && (
@@ -171,7 +171,7 @@ function AuthMenu({ userEmail }: { userEmail: string | null }) {
     return (
       <Link
         href="/auth/login"
-        className="rounded-md border border-border px-3 py-2 text-sm font-semibold text-foreground transition hover:bg-bg-secondary"
+        className="rounded-md border border-border px-3 py-2 text-sm font-semibold text-foreground transition hover:bg-bg-depth-2"
       >
         로그인
       </Link>
@@ -183,7 +183,7 @@ function AuthMenu({ userEmail }: { userEmail: string | null }) {
       <DropdownOptionTrigger asChild>
         <ButtonNowrap
           aria-label="프로필 메뉴"
-          className="h-9 w-9 rounded-full border border-border bg-bg-primary text-foreground shadow-sm transition hover:bg-bg-secondary"
+          className="h-9 w-9 rounded-full border border-border bg-bg-depth-1 text-foreground shadow-sm transition hover:bg-bg-depth-2"
         >
           <User className="h-4 w-4" />
         </ButtonNowrap>

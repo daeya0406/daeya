@@ -21,10 +21,10 @@ const palette: Record<string, ColorToken[]> = {
     { name: 'point-yellow', step: 'default', value: '#EAB308' },
   ],
   background: [
-    { name: 'bg-primary', step: 'default', value: '#FFFFFF' },
-    { name: 'bg-secondary', step: 'default', value: '#F1F5F9' },
-    { name: 'bg-tertiary', step: 'default', value: '#E2E8F0' },
-    { name: 'bg-inverse', step: 'default', value: '#FFFFFF' },
+    { name: 'bg-depth-1', step: 'default', value: '#FFFFFF' },
+    { name: 'bg-depth-2', step: 'default', value: '#F1F5F9' },
+    { name: 'bg-depth-3', step: 'default', value: '#E2E8F0' },
+    { name: 'bg-depth-inverse', step: 'default', value: '#FFFFFF' },
   ],
   interaction: [
     { name: 'interaction-inactive', step: 'default', value: '#94A3B8' },
@@ -212,7 +212,7 @@ export default function TokensSection() {
               key={t.label}
               type="button"
               onClick={() => copy(t.snippet, t.label)}
-              className="border-border/70 bg-bg-primary/60 hover:bg-bg-secondary dark:bg-bg-tertiary/40 group rounded-lg border p-4 text-left transition dark:border-slate-800 dark:hover:bg-slate-800/50"
+              className="border-border/70 bg-bg-depth-1/60 hover:bg-bg-depth-2 dark:bg-bg-depth-3/40 group rounded-lg border p-4 text-left transition dark:border-slate-800 dark:hover:bg-slate-800/50"
             >
               <div className="flex items-start justify-between gap-3">
                 <div>
@@ -237,7 +237,7 @@ export default function TokensSection() {
                 key={t.label}
                 type="button"
                 onClick={() => copy(t.snippet, t.label)}
-                className="border-border/70 bg-bg-primary/60 hover:bg-bg-secondary dark:bg-bg-tertiary/40 group rounded-lg border p-4 text-left transition dark:border-slate-800 dark:hover:bg-slate-800/50"
+                className="border-border/70 bg-bg-depth-1/60 hover:bg-bg-depth-2 dark:bg-bg-depth-3/40 group rounded-lg border p-4 text-left transition dark:border-slate-800 dark:hover:bg-slate-800/50"
               >
                 <div className={t.className}>{t.sample}</div>
                 <Text.Caption className="text-muted-foreground group-hover:text-primary mt-2">
