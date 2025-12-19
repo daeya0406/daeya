@@ -12,8 +12,8 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: `
-          bg-primary text-white hover:bg-blue-600
-          dark:hover:bg-blue-500
+          bg-primary text-white hover:bg-primary/90
+          dark:hover:bg-primary/90
         `,
         secondary: `
           bg-slate-200 text-slate-900 hover:bg-slate-300

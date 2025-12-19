@@ -17,7 +17,7 @@ export const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      'flex h-10 items-center justify-between gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-400/40 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700',
+      'flex h-10 items-center justify-between gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-primary/40 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700',
       className
     )}
     {...props}
@@ -73,7 +73,7 @@ export const SelectItem = React.forwardRef<
     className={cn(
       'relative flex w-full cursor-pointer select-none items-center rounded-md px-3 py-2 text-sm outline-none text-slate-700 transition dark:text-slate-200',
       'hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-50',
-      'data-[state=checked]:bg-blue-50 data-[state=checked]:font-semibold data-[state=checked]:text-blue-900 dark:data-[state=checked]:bg-blue-900/40 dark:data-[state=checked]:text-blue-50',
+      'data-[state=checked]:bg-primary-100 data-[state=checked]:font-semibold data-[state=checked]:text-primary dark:data-[state=checked]:bg-primary/20 dark:data-[state=checked]:text-primary-100',
       'data-[disabled]:pointer-events-none data-[disabled]:opacity-40',
       className
     )}

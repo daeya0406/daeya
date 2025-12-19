@@ -17,12 +17,14 @@ import {
   DropdownOptionTrigger,
 } from '@/components/ui/DropdownOption';
 import { ButtonNowrap } from '@/components/ui/Button';
+import { useLayoutMode } from '@/components/providers/LayoutModeProvider';
 
 export default function Header() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const { user } = useSupabaseSession();
+  const { toggle: toggleLayout, effectiveMode } = useLayoutMode();
 
   useEffect(() => {
     queueMicrotask(() => setMounted(true));
@@ -47,6 +49,16 @@ export default function Header() {
 
           <div className="hidden items-center gap-6 text-sm md:flex">
             <DesktopNav items={navItems} isActive={isActive} />
+
+            <button
+              onClick={toggleLayout}
+              className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-md border border-slate-200 bg-white text-slate-700 transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700"
+              title={
+                effectiveMode === 'dashboard' ? '헤더 레이아웃으로 전환' : '대시보드 레이아웃으로 전환'
+              }
+            >
+              <LayoutDashboard className="h-5 w-5" />
+            </button>
 
             <button
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}

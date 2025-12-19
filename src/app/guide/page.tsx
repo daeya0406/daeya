@@ -4,6 +4,7 @@ import { Suspense, useMemo } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Tabs } from '@/components/ui/Tabs';
 import { extractTabsFromNav } from '@/components/common/navigation';
+import { Text } from '@/components/ui/Text';
 
 import { GuideTabContent } from './GuideTabContent';
 
@@ -40,7 +41,12 @@ function GuidePageContent() {
   }
 
   return (
-    <section className="mx-auto max-w-5xl space-y-6 px-2 py-4">
+    <section className="mx-auto max-w-5xl px-4 py-10">
+      <div className="mb-6 space-y-2">
+        <Text.H2>Guide</Text.H2>
+        <Text.Caption>UI / Tokens / Stack 정리</Text.Caption>
+      </div>
+
       <Tabs.Root value={activeTab} defaultValue={defaultKey} onValueChange={onChange}>
         <Tabs.List>
           {tabs.map((tab) => (

@@ -34,20 +34,17 @@ type TextProps<C extends ElementTag = 'p'> = {
 } & Omit<React.ComponentPropsWithoutRef<C>, 'as' | 'ref'> &
   VariantProps<typeof textVariants>;
 
-type TextComponent = (<C extends ElementTag = 'p'>(
-  props: TextProps<C> & { ref?: PolymorphicRef<C> }
-) => React.ReactElement | null) & { displayName?: string };
+type TextComponent = React.ForwardRefExoticComponent<
+  TextProps<ElementTag> & React.RefAttributes<HTMLElement>
+> & {
+  displayName?: string;
+} & Record<string, unknown>;
 
-const TextInner = <C extends ElementTag = 'p'>(
-  { as, className, variant, size, ...props }: TextProps<C>,
-  ref: PolymorphicRef<C>
-) => {
-  const Comp = (as ?? 'p') as ElementTag;
-  return <Comp ref={ref} className={cn(textVariants({ variant, size }), className)} {...props} />;
-};
-
-const Text = React.forwardRef(
-  TextInner as React.ForwardRefRenderFunction<HTMLElement, TextProps<ElementTag>>
+const Text = React.forwardRef<HTMLElement, TextProps<ElementTag>>(
+  ({ as, className, variant, size, ...props }, ref) => {
+    const Comp = (as ?? 'p') as ElementTag;
+    return <Comp ref={ref} className={cn(textVariants({ variant, size }), className)} {...props} />;
+  }
 ) as TextComponent;
 
 Text.displayName = 'Text';
@@ -62,13 +59,13 @@ const createTypo = (defaultTag: ElementTag, defaultClass: string) => {
       className={cn(defaultClass, className)}
       {...props}
     />
-  ));
+  )) as TextComponent;
 
   Comp.displayName = `Typo.${typeof defaultTag === 'string' ? defaultTag : 'Custom'}`;
   return Comp;
 };
 
-export const Typo = {
+const Typo = {
   h1: createTypo('h1', 'typo-h1'),
   h2: createTypo('h2', 'typo-h2'),
   h3: createTypo('h3', 'typo-h3'),
@@ -80,9 +77,44 @@ export const Typo = {
   bodyMd: createTypo('p', 'typo-body-md'),
   bodySm: createTypo('p', 'typo-body-sm'),
   bodyXs: createTypo('p', 'typo-body-xs'),
-  body: createTypo('p', 'typo-body-md'),
+  body: createTypo('p', 'typo-body'),
   caption: createTypo('span', 'typo-caption'),
   overline: createTypo('span', 'typo-overline'),
 };
 
-export { Text, textVariants };
+const TextWithVariants = Text as TextComponent & typeof Typo & Record<string, TextComponent>;
+
+TextWithVariants.H1 = Typo.h1;
+TextWithVariants.H2 = Typo.h2;
+TextWithVariants.H3 = Typo.h3;
+TextWithVariants.H4 = Typo.h4;
+TextWithVariants.H5 = Typo.h5;
+TextWithVariants.H6 = Typo.h6;
+
+TextWithVariants.Body16 = Typo.bodyLg;
+TextWithVariants.Body14 = Typo.bodySm;
+TextWithVariants.Caption = Typo.caption;
+TextWithVariants.Body = Typo.body;
+TextWithVariants.Overline = Typo.overline;
+TextWithVariants.overline = Typo.overline;
+
+const createScale = (sizeClass: string, leading = 'leading-tight') => {
+  const Medium = createTypo('span', `${sizeClass} font-medium ${leading}`) as TextComponent & {
+    Bold?: TextComponent;
+  };
+  const Bold = createTypo('span', `${sizeClass} font-bold ${leading}`);
+  Medium.Bold = Bold;
+  return Medium as TextComponent & { Bold: TextComponent };
+};
+
+TextWithVariants.S11 = createScale('text-[11px]');
+TextWithVariants.S12 = createScale('text-[12px]');
+TextWithVariants.S13 = createScale('text-[13px]');
+TextWithVariants.S14 = createScale('text-[14px]');
+TextWithVariants.S16 = createScale('text-[16px]');
+TextWithVariants.S18 = createScale('text-[18px]');
+TextWithVariants.S20 = createScale('text-[20px]');
+TextWithVariants.S24 = createScale('text-[24px]');
+TextWithVariants.S32 = createScale('text-[32px]');
+
+export { TextWithVariants as Text, Typo, textVariants };

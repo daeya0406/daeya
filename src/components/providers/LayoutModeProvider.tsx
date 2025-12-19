@@ -1,0 +1,74 @@
+'use client';
+
+import * as React from 'react';
+
+export type LayoutMode = 'default' | 'dashboard';
+
+type LayoutModeContextValue = {
+  mode: LayoutMode;
+  setMode: (mode: LayoutMode) => void;
+  toggle: () => void;
+  isDesktop: boolean;
+  effectiveMode: LayoutMode;
+};
+
+const LayoutModeContext = React.createContext<LayoutModeContextValue | null>(null);
+
+function useMediaQuery(query: string) {
+  const [matches, setMatches] = React.useState(false);
+
+  React.useEffect(() => {
+    const mql = window.matchMedia(query);
+    const onChange = () => setMatches(mql.matches);
+    queueMicrotask(onChange);
+    mql.addEventListener('change', onChange);
+    return () => mql.removeEventListener('change', onChange);
+  }, [query]);
+
+  return matches;
+}
+
+const STORAGE_KEY = 'layout_mode';
+
+export function LayoutModeProvider({ children }: { children: React.ReactNode }) {
+  const isDesktop = useMediaQuery('(min-width: 1024px)');
+  const [mode, setModeState] = React.useState<LayoutMode>('dashboard');
+
+  React.useEffect(() => {
+    try {
+      const saved = window.localStorage.getItem(STORAGE_KEY);
+      const next: LayoutMode = saved === 'dashboard' || saved === 'default' ? saved : 'dashboard';
+      queueMicrotask(() => setModeState(next));
+    } catch {
+      queueMicrotask(() => setModeState('dashboard'));
+    }
+  }, []);
+
+  const setMode = React.useCallback((next: LayoutMode) => {
+    setModeState(next);
+    try {
+      window.localStorage.setItem(STORAGE_KEY, next);
+    } catch {
+      // 생략
+    }
+  }, []);
+
+  const toggle = React.useCallback(() => {
+    setMode((prev) => (prev === 'dashboard' ? 'default' : 'dashboard'));
+  }, [setMode]);
+
+  const effectiveMode: LayoutMode = mode === 'dashboard' && isDesktop ? 'dashboard' : 'default';
+
+  const value = React.useMemo<LayoutModeContextValue>(
+    () => ({ mode, setMode, toggle, isDesktop, effectiveMode }),
+    [mode, setMode, toggle, isDesktop, effectiveMode]
+  );
+
+  return <LayoutModeContext.Provider value={value}>{children}</LayoutModeContext.Provider>;
+}
+
+export function useLayoutMode() {
+  const ctx = React.useContext(LayoutModeContext);
+  if (!ctx) throw new Error('useLayoutMode must be used within <LayoutModeProvider>');
+  return ctx;
+}

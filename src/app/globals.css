@@ -4,29 +4,130 @@
 /* 다크모드 variant */
 @custom-variant dark (&:is(.dark *));
 
-/* Light theme */
+/* Tokens (light by default) */
 :root {
-  --background: 248 250 252; /* slate.50 */
-  --foreground: 15 23 42; /* slate.900 */
+  --white: 255 255 255; /* #FFFFFF */
+  --black: 0 0 0; /* #000000 */
 
-  --primary: 59 130 246; /* blue.500 */
-  --primary-foreground: 255 255 255;
+  /* Brand */
+  --brand-primary: 81 137 250; /* #10B981 */
+  --brand-secondary: 14 165 233; /* #0EA5E9 */
+  --brand-tertiary: 29 78 216; /* #1D4ED8 */
 
-  --muted: 241 245 249; /* slate.100 */
-  --muted-foreground: 100 116 139; /* slate.500 */
+  /* Point */
+  --point-purple: 168 85 247; /* #A855F7 */
+  --point-cyan: 6 182 212; /* #06B6D4 */
+  --point-pink: 236 72 153; /* #EC4899 */
+  --point-rose: 244 63 94; /* #F43F5E */
+  --point-orange: 249 115 22; /* #F97316 */
+  --point-yellow: 234 179 8; /* #EAB308 */
 
-  --border: 203 213 225; /* slate.300 */
+  /* Status */
+  --status-danger: 220 38 38; /* #DC2626 */
+
+  /* Background (light) */
+  --bg-primary: var(--white); /* #FFFFFF */
+  --bg-secondary: 248 250 252; /* #F8FAFC */
+  --bg-tertiary: 241 245 249; /* #F1F5F9 */
+  --bg-inverse: 15 23 42; /* #0F172A */
+
+  /* Text (light) */
+  --text-primary: 15 23 42; /* #0F172A */
+  --text-secondary: 51 65 85; /* #334155 */
+  --text-tertiary: 226 232 240; /* #E2E8F0 */
+  --text-default: 100 116 139; /* #64748B */
+  --text-inverse: 255 255 255; /* #FFFFFF */
+  --text-disabled: 148 163 184; /* #94A3B8 */
+
+  /* Interaction */
+  --interaction-inactive: 148 163 184; /* #94A3B8 */
+  --interaction-hover: 14 165 233; /* #0EA5E9 */
+  --interaction-pressed: 29 78 216; /* #1D4ED8 */
+
+  /* Border */
+  --border-primary: 226 232 240; /* #E2E8F0 */
+
+  /* Icon */
+  --icon-primary: 100 116 139; /* #64748B */
+  --icon-inverse: 248 250 252; /* #F8FAFC */
+  --icon-brand: var(--brand-primary);
+
+  /* Semantic */
+  --background: var(--bg-secondary);
+  --foreground: var(--text-primary);
+  --muted: var(--bg-tertiary);
+  --muted-foreground: var(--text-default);
+  --border: var(--border-primary);
+
+  --primary: var(--brand-primary);
+  --primary-foreground: var(--text-inverse);
+
+  /* Kept for existing utility usage */
+  --primary-100: 229 243 255; /* #E5F3FF */
+  --primary-500: var(--brand-primary);
 }
 
-/* Dark theme */
 .dark {
-  --background: 15 23 42;
-  --foreground: 241 245 249;
+  /* Background (dark) */
+  --bg-primary: 15 23 42; /* #0F172A */
+  --bg-secondary: 30 41 59; /* #1E293B */
+  --bg-tertiary: 51 65 85; /* #334155 */
+  --bg-inverse: var(--white); /* #FFFFFF */
 
-  --muted: 30 41 59;
-  --muted-foreground: 148 163 184;
+  /* Text (dark) */
+  --text-primary: 248 250 252; /* #F8FAFC */
+  --text-secondary: 203 213 225; /* #CBD5E1 */
+  --text-tertiary: 226 232 240; /* #E2E8F0 */
+  --text-default: 148 163 184; /* #94A3B8 */
+  --text-inverse: 15 23 42; /* #0F172A */
+  --text-disabled: 100 116 139; /* #64748B */
 
-  --border: 51 65 85;
+  --border-primary: 71 85 105; /* #475569 */
+
+  --background: var(--bg-primary);
+  --foreground: var(--text-primary);
+  --muted: var(--bg-secondary);
+  --muted-foreground: var(--text-default);
+  --border: var(--border-primary);
+
+  --primary-100: 30 58 138; /* #1E3A8A */
+}
+
+.dark {
+  /* Brand */
+  --brand-primary: color-mix(in srgb, rgb(81 137 250) 85%, white 15%);
+  --brand-secondary: color-mix(in srgb, rgb(14 165 233) 85%, white 15%);
+  --brand-tertiary: color-mix(in srgb, rgb(29 78 216) 85%, white 15%);
+
+  /* Points */
+  --point-purple: color-mix(in srgb, rgb(168 85 247) 82%, white 18%);
+  --point-cyan: color-mix(in srgb, rgb(6 182 212) 82%, white 18%);
+  --point-pink: color-mix(in srgb, rgb(236 72 153) 82%, white 18%);
+  --point-rose: color-mix(in srgb, rgb(244 63 94) 82%, white 18%);
+  --point-orange: color-mix(in srgb, rgb(249 115 22) 82%, white 18%);
+  --point-yellow: color-mix(in srgb, rgb(234 179 8) 82%, white 18%);
+
+  /* Status */
+  --status-danger: color-mix(in srgb, rgb(220 38 38) 85%, white 15%);
+
+  /* Interaction */
+  --interaction-inactive: color-mix(in srgb, rgb(148 163 184) 80%, white 20%);
+  --interaction-hover: color-mix(in srgb, rgb(14 165 233) 85%, white 15%);
+  --interaction-pressed: color-mix(in srgb, rgb(29 78 216) 85%, white 15%);
+
+  /* Text */
+  --text-primary: color-mix(in srgb, rgb(248 250 252) 95%, white 5%);
+  --text-secondary: color-mix(in srgb, rgb(203 213 225) 92%, white 8%);
+  --text-tertiary: color-mix(in srgb, rgb(226 232 240) 88%, white 12%);
+  --text-default: color-mix(in srgb, rgb(148 163 184) 90%, white 10%);
+  --text-disabled: color-mix(in srgb, rgb(100 116 139) 90%, white 10%);
+  --text-inverse: 15 23 42;
+
+  /* Border/Icon */
+  --border-primary: color-mix(in srgb, rgb(71 85 105) 85%, white 15%);
+  --icon-primary: color-mix(in srgb, rgb(100 116 139) 85%, white 15%);
+  --icon-inverse: color-mix(in srgb, rgb(248 250 252) 90%, white 10%);
+  --icon-brand: color-mix(in srgb, rgb(81 137 250) 85%, white 15%);
 }
 
 @theme inline {
@@ -35,11 +136,42 @@
 
   --color-primary: rgb(var(--primary));
   --color-primary-foreground: rgb(var(--primary-foreground));
+  --color-primary-100: rgb(var(--primary-100));
+  --color-primary-500: rgb(var(--primary-500));
 
   --color-muted: rgb(var(--muted));
   --color-muted-foreground: rgb(var(--muted-foreground));
 
   --color-border: rgb(var(--border));
+
+  --color-brand-primary: rgb(var(--brand-primary));
+  --color-brand-secondary: rgb(var(--brand-secondary));
+  --color-brand-tertiary: rgb(var(--brand-tertiary));
+
+  --color-point-purple: rgb(var(--point-purple));
+  --color-point-cyan: rgb(var(--point-cyan));
+  --color-point-pink: rgb(var(--point-pink));
+  --color-point-rose: rgb(var(--point-rose));
+  --color-point-orange: rgb(var(--point-orange));
+  --color-point-yellow: rgb(var(--point-yellow));
+
+  --color-status-danger: rgb(var(--status-danger));
+
+  --color-bg-primary: rgb(var(--bg-primary));
+  --color-bg-secondary: rgb(var(--bg-secondary));
+  --color-bg-tertiary: rgb(var(--bg-tertiary));
+  --color-bg-inverse: rgb(var(--bg-inverse));
+
+  --color-text-primary: rgb(var(--text-primary));
+  --color-text-secondary: rgb(var(--text-secondary));
+  --color-text-tertiary: rgb(var(--text-tertiary));
+  --color-text-default: rgb(var(--text-default));
+  --color-text-inverse: rgb(var(--text-inverse));
+  --color-text-disabled: rgb(var(--text-disabled));
+
+  --color-icon-primary: rgb(var(--icon-primary));
+  --color-icon-inverse: rgb(var(--icon-inverse));
+  --color-icon-brand: rgb(var(--icon-brand));
 }
 
 @layer base {
@@ -55,7 +187,7 @@
     background: radial-gradient(
       circle at top right,
       theme(colors.slate.50) 0%,
-      theme(colors.slate.200) 60%,
+      rgb(var(--background)) 60%,
       theme(colors.slate.50) 100%
     );
     color: var(--color-foreground);
@@ -66,9 +198,9 @@
 .dark body {
   background: radial-gradient(
     circle at top right,
-    theme(colors.slate.800) 0%,
-    theme(colors.slate.900) 60%,
-    theme(colors.slate.800) 100%
+    rgb(var(--bg-tertiary)) 0%,
+    rgb(var(--background)) 60%,
+    rgb(var(--bg-tertiary)) 100%
   );
 }
 
@@ -140,26 +272,10 @@
   }
 
   .form-base {
-    @apply border-border text-foreground placeholder:text-foreground/40 focus:ring-primary/40 focus:border-primary/70 rounded-md border bg-blue-50 px-3 py-4 text-sm transition-colors focus:ring-2 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-700;
+    @apply border-border text-foreground placeholder:text-foreground/40 focus:ring-primary/40 focus:border-primary/70 bg-bg-primary rounded-md border px-3 py-3 text-sm transition-colors focus:ring-2 disabled:cursor-not-allowed disabled:opacity-50;
   }
 
   .line-bottom {
     @apply after:bg-primary after:dark:bg-primary after:mb-2 after:mt-4 after:block after:h-1 after:w-6 after:rounded after:content-[''];
   }
-
-  /* .section-content {
-    @apply flex flex-col gap-8;
-  }
-
-  .item-row {
-    @apply flex items-center justify-between py-3;
-  }
-
-  .item-card {
-    @apply border-border bg-background/60 rounded-xl border p-4 shadow-sm transition hover:shadow-md dark:bg-slate-800/50;
-  }
-
-  .item-grid {
-    @apply grid gap-6 sm:grid-cols-2 lg:grid-cols-3;
-  } */
 }
