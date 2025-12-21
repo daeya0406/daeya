@@ -48,7 +48,7 @@ export default function UseReducerDemo() {
   const [text, setText] = useState('');
 
   return (
-    <div className="space-y-4 rounded-lg border border-border bg-bg-depth-1 p-4 shadow-sm">
+    <div className="space-y-4 rounded-lg border border-border bg-depth-1 p-4 shadow-sm">
       <div className="flex items-start justify-between">
         <div>
           <p className="text-sm font-semibold text-foreground">useReducer</p>
@@ -58,7 +58,7 @@ export default function UseReducerDemo() {
       </div>
 
       <div className="grid grid-cols-1 gap-4">
-        <div className="space-y-3 rounded-lg border border-border bg-bg-depth-2 p-3">
+        <div className="space-y-3 rounded-lg border border-border bg-depth-2 p-3">
           <div className="flex items-center gap-2">
             <Button size="sm" variant="outline" onClick={() => dispatch({ type: 'dec' })}>
               -
@@ -76,7 +76,7 @@ export default function UseReducerDemo() {
           </Text.Caption>
         </div>
 
-        <div className="space-y-3 rounded-lg border border-border bg-bg-depth-2 p-3">
+        <div className="space-y-3 rounded-lg border border-border bg-depth-2 p-3">
           <form
             className="flex gap-2"
             onSubmit={(e) => {
@@ -100,7 +100,7 @@ export default function UseReducerDemo() {
               <button
                 key={todo.id}
                 type="button"
-                className="flex w-full items-center justify-between rounded-md border border-border bg-bg-depth-1 px-3 py-2 text-left transition hover:border-primary/50"
+                className="flex w-full items-center justify-between rounded-md border border-border bg-depth-1 px-3 py-2 text-left transition hover:border-primary/50"
                 onClick={() => dispatch({ type: 'toggle', id: todo.id })}
               >
                 <span className={todo.done ? 'line-through text-muted-foreground' : ''}>

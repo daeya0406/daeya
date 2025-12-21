@@ -122,12 +122,12 @@ export function DashboardSidebar() {
   };
 
   const iconButtonClassName =
-    'flex h-9 w-9 items-center justify-center rounded-xl text-icon-primary transition hover:bg-bg-depth-3 hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30';
+    'flex h-9 w-9 items-center justify-center rounded-xl text-icon-primary transition hover:bg-depth-3 hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30';
 
   return (
     <aside
       className={[
-        'border-border bg-bg-depth-1/75 sticky top-0 hidden h-dvh flex-col border-r backdrop-blur lg:flex',
+        'border-border bg-depth-1/75 sticky top-0 hidden h-dvh flex-col border-r backdrop-blur lg:flex',
         collapsed ? 'w-[92px]' : 'w-[280px]',
       ].join(' ')}
     >
@@ -224,7 +224,7 @@ export function DashboardSidebar() {
                     'flex w-full items-center justify-center rounded-xl border border-transparent px-3 py-3 transition',
                     groupActive
                       ? 'bg-primary-100 text-primary'
-                      : 'text-text-default hover:bg-bg-depth-3',
+                      : 'text-text-default hover:bg-depth-3',
                   ].join(' ')}
                 >
                   {groupIcon(group.label)}
@@ -241,7 +241,7 @@ export function DashboardSidebar() {
                     'flex items-center gap-2 rounded-xl px-3 py-2 text-sm transition',
                     groupActive
                       ? 'bg-primary-100 text-primary'
-                      : 'text-text-default hover:bg-bg-depth-3',
+                      : 'text-text-default hover:bg-depth-3',
                   ].join(' ')}
                 >
                   <span
@@ -261,7 +261,7 @@ export function DashboardSidebar() {
               <AccordionItem key={group.label} value={group.label} className="border-none">
                 <AccordionTrigger
                   className={[
-                    'hover:bg-bg-depth-3 rounded-xl px-3 py-2 text-sm hover:no-underline',
+                    'hover:bg-depth-3 rounded-xl px-3 py-2 text-sm hover:no-underline',
                     groupActive ? 'text-text-primary' : 'text-text-default',
                   ].join(' ')}
                 >
@@ -299,7 +299,7 @@ export function DashboardSidebar() {
                             'flex items-center justify-between gap-2 rounded-xl px-3 py-2 text-sm transition',
                             active
                               ? 'bg-primary-100 text-primary'
-                              : 'text-text-default hover:bg-bg-depth-3',
+                              : 'text-text-default hover:bg-depth-3',
                           ].join(' ')}
                         >
                           <span>{child.label}</span>
@@ -321,7 +321,7 @@ export function DashboardSidebar() {
 
       <div className="border-border border-t px-5 py-4">
         <div className="flex items-center gap-3">
-          <div className="bg-bg-depth-3 text-icon-primary flex h-10 w-10 items-center justify-center rounded-full">
+          <div className="bg-depth-3 text-icon-primary flex h-10 w-10 items-center justify-center rounded-full">
             <UserRound className="h-5 w-5" />
           </div>
           {!collapsed && (

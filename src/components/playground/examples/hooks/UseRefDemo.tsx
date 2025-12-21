@@ -30,7 +30,7 @@ export default function UseRefDemo() {
   const syncToView = () => setVisibleCount(silentCountRef.current);
 
   return (
-    <div className="space-y-4 rounded-lg border border-border bg-bg-depth-1 p-4 shadow-sm">
+    <div className="space-y-4 rounded-lg border border-border bg-depth-1 p-4 shadow-sm">
       <div className="flex items-start justify-between">
         <div>
           <p className="text-sm font-semibold text-foreground">useRef</p>
@@ -40,7 +40,7 @@ export default function UseRefDemo() {
       </div>
 
       <div className="grid grid-cols-1 gap-4">
-        <div className="space-y-2 rounded-lg border border-border bg-bg-depth-2 p-3 text-sm">
+        <div className="space-y-2 rounded-lg border border-border bg-depth-2 p-3 text-sm">
           <Text.Body14 className="mb-4">1) DOM 직접 참조</Text.Body14>
           <Input
             ref={inputRef}
@@ -61,7 +61,7 @@ export default function UseRefDemo() {
           </Text.Caption>
         </div>
 
-        <div className="space-y-2 rounded-lg border border-border bg-bg-depth-2 p-3 text-sm">
+        <div className="space-y-2 rounded-lg border border-border bg-depth-2 p-3 text-sm">
           <Text.Body14 className="mb-4">2) 렌더링 없이 값 저장</Text.Body14>
           <div className="flex flex-wrap gap-2">
             <Button size="sm" variant="outline" onClick={addSilent}>

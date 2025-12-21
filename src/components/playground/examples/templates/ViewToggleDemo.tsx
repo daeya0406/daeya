@@ -42,7 +42,7 @@ export default function ViewToggleDemo() {
           {data.map((item) => (
             <div
               key={item.title}
-              className="rounded-lg border border-border bg-bg-depth-1 p-3 shadow-sm"
+              className="rounded-lg border border-border bg-depth-1 p-3 shadow-sm"
             >
               <Text.Body16 className="text-base font-semibold text-foreground">{item.title}</Text.Body16>
               <Text.Caption className="block text-muted-foreground">담당: {item.owner}</Text.Caption>

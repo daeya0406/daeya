@@ -2,7 +2,6 @@ import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
-
 const textVariants = cva('text-foreground', {
   variants: {
     variant: {
@@ -87,7 +86,7 @@ const createToken = (
 };
 
 const createScale = (className: string, label?: string): TextScaleComponent => {
-  const Medium = createToken('span', `${className} font-medium`, label) as TextScaleComponent;
+  const Medium = createToken('span', `${className}`, label) as TextScaleComponent;
   Medium.Bold = createToken('span', `${className} font-bold`, label ? `${label}.Bold` : undefined);
   return Medium;
 };
@@ -105,11 +104,7 @@ TextWithVariants.H6 = createToken('h6', 'text-md font-semibold', 'Text.H6');
 // Body / Caption
 TextWithVariants.Body16 = createToken('p', 'text-lg font-normal', 'Text.Body16');
 TextWithVariants.Body14 = createToken('p', 'text-md font-normal', 'Text.Body14');
-TextWithVariants.Caption = createToken(
-  'span',
-  'text-xs font-medium tracking-[0.01em]',
-  'Text.Caption'
-);
+TextWithVariants.Caption = createToken('span', 'text-xs tracking-[0.01em]', 'Text.Caption');
 TextWithVariants.Overline = createToken(
   'span',
   'text-xs font-semibold uppercase tracking-[0.08em]',

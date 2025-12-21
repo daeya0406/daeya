@@ -76,7 +76,7 @@ export default function StackSection() {
         {stacks.map((group) => (
           <div
             key={group.title}
-            className="rounded-2xl border border-border bg-bg-depth-1 p-6 shadow-sm ring-1 ring-primary/5 backdrop-blur md:p-8"
+            className="rounded-2xl border border-border bg-depth-1 p-6 shadow-sm ring-1 ring-primary/5 backdrop-blur md:p-8"
           >
             <Text.H4 className="text-foreground">{group.title}</Text.H4>
             <ul className="mt-4 space-y-3 text-sm text-text-default">

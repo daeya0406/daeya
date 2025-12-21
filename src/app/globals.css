@@ -62,74 +62,61 @@
   --primary: var(--brand-primary);
   --primary-foreground: var(--text-inverse);
 
-  /* Kept for existing utility usage */
+  /* primary depth */
   --primary-100: var(--brand-secondary); /* #EEF3FF */
   --primary-500: var(--brand-primary); /* #5189FA */
 }
 
 .dark {
   /* Background (dark) */
-  --bg-depth-1: 15 23 42; /* #0F172A */
-  --bg-depth-2: 30 41 59; /* #1E293B */
+  --bg-depth-1: 30 41 59; /* #1E293B */
+  --bg-depth-2: 15 23 42; /* #0F172A */
   --bg-depth-3: 51 65 85; /* #334155 */
   --bg-depth-inverse: var(--white); /* #FFFFFF */
 
-  /* Text (dark) */
+  /* Brand (keep vivid) */
+  --brand-primary: 81 137 250; /* #5189FA */
+  --brand-secondary: 238 243 255; /* #EEF3FF */
+  --brand-tertiary: 49 82 150; /* #315296 */
+
+  /* Point */
+  --point-purple: 168 85 247; /* #A855F7 */
+  --point-cyan: 6 182 212; /* #06B6D4 */
+  --point-pink: 236 72 153; /* #EC4899 */
+  --point-rose: 244 63 94; /* #F43F5E */
+  --point-orange: 249 115 22; /* #F97316 */
+  --point-yellow: 234 179 8; /* #EAB308 */
+
+  /* Status */
+  --status-danger: 252 72 72; /* #FC4848 */
+
+  /* Interaction */
+  --interaction-inactive: 148 163 184; /* #94A3B8 */
+  --interaction-hover: 65 110 200; /* #416EC8 */
+  --interaction-pressed: 59 99 181; /* #3B63B5 */
+
+  /* Text */
   --text-primary: 248 250 252; /* #F8FAFC */
   --text-secondary: 203 213 225; /* #CBD5E1 */
   --text-tertiary: 226 232 240; /* #E2E8F0 */
   --text-default: 148 163 184; /* #94A3B8 */
-  --text-inverse: 15 23 42; /* #0F172A */
+  --text-inverse: 255 255 255; /* #FFFFFF */
   --text-disabled: 100 116 139; /* #64748B */
 
+  /* Border */
   --border-primary: 148 163 184 / 0.5; /* #94A3B8 50% */
 
+  /* Semantic */
   --background: var(--bg-depth-1);
   --foreground: var(--text-primary);
   --muted: var(--bg-secondary);
   --muted-foreground: var(--text-default);
   --border: var(--border-primary);
 
+  /* Primary */
+  --primary: var(--brand-primary);
+  --primary-foreground: 255 255 255; /* #FFFFFF */
   --primary-100: 30 58 138; /* #1E3A8A */
-}
-
-.dark {
-  /* Brand */
-  --brand-primary: color-mix(in srgb, rgb(81 137 250) 85%, white 15%);
-  --brand-secondary: color-mix(in srgb, rgb(238 243 255) 85%, white 15%);
-  --brand-tertiary: color-mix(in srgb, rgb(49 82 150) 85%, white 15%);
-
-  /* Points */
-  --point-purple: color-mix(in srgb, rgb(168 85 247) 82%, white 18%);
-  --point-cyan: color-mix(in srgb, rgb(6 182 212) 82%, white 18%);
-  --point-pink: color-mix(in srgb, rgb(236 72 153) 82%, white 18%);
-  --point-rose: color-mix(in srgb, rgb(244 63 94) 82%, white 18%);
-  --point-orange: color-mix(in srgb, rgb(249 115 22) 82%, white 18%);
-  --point-yellow: color-mix(in srgb, rgb(234 179 8) 82%, white 18%);
-
-  /* Status */
-  --status-danger: color-mix(in srgb, rgb(252 72 72) 85%, white 15%);
-
-  /* Interaction */
-  --interaction-inactive: color-mix(in srgb, rgb(148 163 184) 80%, white 20%);
-  --interaction-hover: color-mix(in srgb, rgb(65 110 200) 85%, white 15%);
-  --interaction-pressed: color-mix(in srgb, rgb(59 99 181) 85%, white 15%);
-
-  /* Text */
-  --text-primary: color-mix(in srgb, rgb(248 250 252) 95%, white 5%);
-  --text-secondary: color-mix(in srgb, rgb(203 213 225) 92%, white 8%);
-  --text-tertiary: color-mix(in srgb, rgb(226 232 240) 88%, white 12%);
-  --text-default: color-mix(in srgb, rgb(148 163 184) 90%, white 10%);
-  --text-disabled: color-mix(in srgb, rgb(100 116 139) 90%, white 10%);
-  --text-inverse: 15 23 42;
-
-  /* Border */
-  --border-primary: 148 163 184; /* #94A3B8
-
-  /* Icon */
-  --icon-primary: color-mix(in srgb, rgb(100 116 139) 85%, white 15%);
-  --icon-inverse: color-mix(in srgb, rgb(248 250 252) 90%, white 10%);
-  --icon-brand: color-mix(in srgb, rgb(81 137 250) 85%, white 15%);
 }
 
 @theme inline {
@@ -159,15 +146,11 @@
 
   --color-status-danger: rgb(var(--status-danger));
 
-  --color-bg-primary: rgb(var(--bg-depth-1));
-  --color-bg-secondary: rgb(var(--bg-depth-2));
-  --color-bg-tertiary: rgb(var(--bg-depth-3));
-  --color-bg-inverse: rgb(var(--bg-depth-inverse));
   /* depth aliases */
-  --color-bg-depth-1: rgb(var(--bg-depth-1));
-  --color-bg-depth-2: rgb(var(--bg-depth-2));
-  --color-bg-depth-3: rgb(var(--bg-depth-3));
-  --color-bg-depth-inverse: rgb(var(--bg-depth-inverse));
+  --color-depth-1: rgb(var(--bg-depth-1));
+  --color-depth-2: rgb(var(--bg-depth-2));
+  --color-depth-3: rgb(var(--bg-depth-3));
+  --color-depth-inverse: rgb(var(--bg-depth-inverse));
 
   --color-text-primary: rgb(var(--text-primary));
   --color-text-secondary: rgb(var(--text-secondary));
@@ -255,15 +238,15 @@
 
   /* Custom */
   .section-card {
-    @apply rounded-2xl bg-bg-depth-1/90 p-6 shadow-lg md:p-12;
+    @apply bg-depth-1/90 rounded-2xl p-6 shadow-lg md:p-12;
   }
 
   .section-component {
-    @apply rounded-lg border border-border bg-bg-depth-1 p-3 text-sm shadow-sm;
+    @apply border-border bg-depth-1 rounded-lg border p-3 text-sm shadow-sm;
   }
 
   .form-base {
-    @apply border-border text-foreground placeholder:text-foreground/40 focus:ring-primary/40 focus:border-primary/70 bg-bg-depth-1 rounded-md border px-3 py-3 text-sm transition-colors focus:ring-2 disabled:cursor-not-allowed disabled:opacity-50;
+    @apply border-border text-foreground placeholder:text-foreground/40 focus:ring-primary/40 focus:border-primary/70 bg-depth-1 rounded-md border px-3 py-3 text-sm transition-colors focus:ring-2 disabled:cursor-not-allowed disabled:opacity-50;
   }
 
   .line-bottom {

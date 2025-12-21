@@ -23,11 +23,11 @@ export default function ZustandCounterDemo() {
     <div className="flex flex-wrap items-center gap-3">
       <button
         onClick={reset}
-        className="rounded-lg border border-border bg-bg-depth-1 px-3 py-2 text-sm shadow-sm transition hover:border-primary/60"
+        className="rounded-lg border border-border bg-depth-1 px-3 py-2 text-sm shadow-sm transition hover:border-primary/60"
       >
         Reset
       </button>
-      <div className="rounded-lg border border-border bg-bg-depth-1 px-3 py-2 text-sm shadow-sm">
+      <div className="rounded-lg border border-border bg-depth-1 px-3 py-2 text-sm shadow-sm">
         Count: {count}
       </div>
       <button

@@ -5,7 +5,7 @@ export const nextItems: PlaygroundItem[] = [
   {
     id: 'structure',
     title: 'Next.js 디렉토리 구조',
-    tags: ['Next', 'Structure'],
+    tags: ['Structure'],
     description: '프로젝트 구조 - 라우팅/레이아웃/도메인 분리',
     categories: ['nextjs'],
     demo: (
@@ -36,7 +36,7 @@ export const nextItems: PlaygroundItem[] = [
   {
     id: 'layer-separation',
     title: '레이어 분리(응집도 생각)',
-    tags: ['Next', 'Architecture'],
+    tags: ['Architecture'],
     description: '컴포넌트는 UI, 도메인은 로직, 인프라는 IO',
     categories: ['nextjs'],
     demo: (
@@ -103,7 +103,7 @@ function ProfilePage() {
   {
     id: 'server-client-components',
     title: '서버/클라이언트 컴포넌트 차이',
-    tags: ['Next', 'Server/Client'],
+    tags: ['Server/Client'],
     description: '서버/클라이언트 컴포넌트 경계 이해',
     categories: ['nextjs'],
     demo: (
@@ -122,7 +122,7 @@ export default function Button(...) { ... }`,
   {
     id: 'rendering-modes',
     title: 'SSR / CSR / SSG / ISR 비교',
-    tags: ['Next', 'Rendering'],
+    tags: ['Rendering'],
     description: 'Next 렌더링 모드 비교',
     categories: ['nextjs'],
     demo: (
@@ -142,7 +142,7 @@ export const dynamic = "force-static"; // SSG`,
   {
     id: 'server-actions',
     title: '서버 액션',
-    tags: ['Next', 'Server Actions'],
+    tags: ['Server Actions'],
     description: '폼/뮤테이션을 서버 함수로 처리',
     categories: ['nextjs'],
     demo: (
@@ -163,7 +163,7 @@ export async function createTodo(formData: FormData) {
   {
     id: 'fetch-cache',
     title: 'fetch 캐싱',
-    tags: ['Next', 'Cache'],
+    tags: ['Cache'],
     description: 'Next fetch 캐시/재검증 전략',
     categories: ['nextjs'],
     demo: (
@@ -182,7 +182,7 @@ await fetch(url, { cache: 'no-store' });`,
   {
     id: 'routing',
     title: '라우팅 구조 정리',
-    tags: ['Next', 'Routing'],
+    tags: ['Routing'],
     description: 'app router 기본 구조',
     categories: ['nextjs'],
     demo: (

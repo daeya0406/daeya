@@ -15,10 +15,10 @@ const buttonVariants = cva(
           bg-primary text-primary-foreground hover:bg-primary/90
         `,
         secondary: `
-          bg-bg-depth-3 text-foreground hover:bg-bg-depth-2
+          bg-depth-3 text-foreground hover:bg-depth-2
         `,
         outline: `
-          border border-border text-foreground hover:bg-bg-depth-2
+          border border-border text-foreground bg-white hover:border-primary/30 hover:text-primary
         `,
       },
       size: {
@@ -49,12 +49,7 @@ export function ButtonNowrap({
   size = 'icon',
   ...props
 }: ButtonProps) {
-  return (
-    <button
-      className={cn(buttonVariants({ variant, size }), className)}
-      {...props}
-    />
-  );
+  return <button className={cn(buttonVariants({ variant, size }), className)} {...props} />;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(

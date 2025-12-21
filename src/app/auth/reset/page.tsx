@@ -81,7 +81,7 @@ export default function ResetPasswordPage() {
 
   return (
     <section className="mx-auto flex min-h-[70vh] max-w-md flex-col justify-center px-4 py-10">
-      <div className="rounded-2xl border border-border bg-bg-depth-1/80 p-6 shadow-md backdrop-blur">
+      <div className="rounded-2xl border border-border bg-depth-1/80 p-6 shadow-md backdrop-blur">
         <Text.H3 className="font-bold text-center mb-8">비밀번호 재설정</Text.H3>
 
         {tokenState === 'invalid' && (
@@ -133,7 +133,7 @@ export default function ResetPasswordPage() {
         </Form>
       </div>
 
-      <div className="mt-6 space-y-2 rounded-lg border border-dashed border-border bg-bg-depth-2 p-4 text-xs text-muted-foreground">
+      <div className="mt-6 space-y-2 rounded-lg border border-dashed border-border bg-depth-2 p-4 text-xs text-muted-foreground">
         <p className="font-semibold text-foreground">설명 & 가이드</p>
         <ul className="list-disc space-y-1 pl-4">
           <li>이 페이지는 Supabase 재설정 링크의 `access_token`과 `refresh_token`을 사용해 세션을 설정합니다.</li>

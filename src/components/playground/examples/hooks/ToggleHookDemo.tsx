@@ -22,7 +22,7 @@ export default function ToggleHookDemo() {
   const { value, toggle } = useToggle(false);
 
   return (
-    <div className="flex items-center justify-between rounded-lg border border-border bg-bg-depth-1 p-3">
+    <div className="flex items-center justify-between rounded-lg border border-border bg-depth-1 p-3">
       <div className="space-y-1">
         <p className="text-sm font-semibold text-foreground">useToggle</p>
         <Text.Caption>boolean 상태를 간결하게 토글</Text.Caption>

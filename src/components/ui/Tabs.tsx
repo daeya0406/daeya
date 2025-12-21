@@ -80,7 +80,7 @@ function TabsRoot({ value, defaultValue, onValueChange, children }: TabsRootProp
 
 export function TabsList({ children }: { children: React.ReactNode }) {
   return (
-    <nav className="border-border text-foreground relative overflow-y-hidden border-b">
+    <nav className="border-border text-foreground relative mb-4 overflow-y-hidden border-b">
       <div className="flex w-max gap-6 px-1">{children}</div>
     </nav>
   );

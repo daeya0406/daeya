@@ -12,7 +12,7 @@ type DateTextProps = {
 
 export function DateText({ value, format = 'YYYY-MM-DD', showRelative = false, label }: DateTextProps) {
   return (
-    <div className="flex items-center gap-2 rounded-md border border-border bg-bg-depth-1/70 px-3 py-2 text-sm shadow-sm">
+    <div className="flex items-center gap-2 rounded-md border border-border bg-depth-1/70 px-3 py-2 text-sm shadow-sm">
       {label && (
         <Text.Caption className="font-semibold text-foreground" as="span">
           {label}

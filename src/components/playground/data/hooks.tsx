@@ -11,7 +11,7 @@ export const hookItems: PlaygroundItem[] = [
   {
     id: 'use-state-basic',
     title: 'useState',
-    tags: ['Hooks', 'State'],
+    tags: ['State'],
     description: '컨트롤드 인풋 + 목록 추가, 무거운 초기값은 lazy initializer로 1회만',
     categories: ['hooks'],
     demo: <UseStateDemo />,
@@ -37,7 +37,7 @@ return (
   {
     id: 'use-reducer',
     title: 'useReducer',
-    tags: ['Hooks', 'Reducer'],
+    tags: ['Reducer'],
     description: 'state + action을 한곳에서 관리, dispatch로 명령 전달',
     categories: ['hooks'],
     demo: <UseReducerDemo />,
@@ -84,7 +84,7 @@ dispatch({ type: 'toggle', id: 1 });`,
   {
     id: 'use-effect-deps',
     title: 'useEffect',
-    tags: ['Hooks', 'Effect'],
+    tags: ['Effect'],
     description: '렌더마다 / 마운트 1회 / deps 변경 시 / 타이머 cleanup 흐름 비교',
     categories: ['hooks'],
     demo: <UseEffectDependencyDemo />,
@@ -117,7 +117,7 @@ useEffect(() => {
   {
     id: 'use-memo',
     title: 'useMemo',
-    tags: ['Hooks', 'Memoization'],
+    tags: ['Memoization'],
     description: '값이 변할 때만 무거운 계산 재실행, 나머지 렌더는 캐시 사용',
     categories: ['hooks'],
     demo: <UseMemoDemo />,
@@ -134,7 +134,7 @@ const hardSum = useMemo(() => {
   {
     id: 'use-ref',
     title: 'useRef',
-    tags: ['Hooks', 'Ref'],
+    tags: ['Ref'],
     description: 'DOM 직접 참조 / 렌더링 없이 값 저장',
     categories: ['hooks'],
     demo: <UseRefDemo />,

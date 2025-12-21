@@ -21,10 +21,10 @@ const palette: Record<string, ColorToken[]> = {
     { name: 'point-yellow', step: 'default', value: '#EAB308' },
   ],
   background: [
-    { name: 'bg-depth-1', step: 'default', value: '#FFFFFF' },
-    { name: 'bg-depth-2', step: 'default', value: '#F1F5F9' },
-    { name: 'bg-depth-3', step: 'default', value: '#E2E8F0' },
-    { name: 'bg-depth-inverse', step: 'default', value: '#FFFFFF' },
+    { name: 'depth-1', step: 'default', value: '#FFFFFF' },
+    { name: 'depth-2', step: 'default', value: '#F1F5F9' },
+    { name: 'depth-3', step: 'default', value: '#E2E8F0' },
+    { name: 'depth-inverse', step: 'default', value: '#FFFFFF' },
   ],
   interaction: [
     { name: 'interaction-inactive', step: 'default', value: '#94A3B8' },
@@ -53,7 +53,7 @@ type TypeToken = { label: string; className: string; snippet: string; sample: st
 const typeScale: TypeToken[] = [
   {
     label: 'Text.S11',
-    className: 'text-[11px] font-medium leading-normal',
+    className: 'text-[11px] leading-normal',
     sample: '내용입니다.',
     snippet: '<Text.S11></Text.S11>',
   },
@@ -65,7 +65,7 @@ const typeScale: TypeToken[] = [
   },
   {
     label: 'Text.S12',
-    className: 'text-[12px] font-medium leading-normal',
+    className: 'text-[12px] leading-normal',
     sample: '내용입니다.',
     snippet: '<Text.S12></Text.S12>',
   },
@@ -77,7 +77,7 @@ const typeScale: TypeToken[] = [
   },
   {
     label: 'Text.S13',
-    className: 'text-[13px] font-medium leading-normal',
+    className: 'text-[13px] leading-normal',
     sample: '내용입니다.',
     snippet: '<Text.S13></Text.S13>',
   },
@@ -89,7 +89,7 @@ const typeScale: TypeToken[] = [
   },
   {
     label: 'Text.S14',
-    className: 'text-[14px] font-medium leading-normal',
+    className: 'text-[14px] leading-normal',
     sample: '내용입니다.',
     snippet: '<Text.S14></Text.S14>',
   },
@@ -101,7 +101,7 @@ const typeScale: TypeToken[] = [
   },
   {
     label: 'Text.S16',
-    className: 'text-[16px] font-medium leading-normal',
+    className: 'text-[16px] leading-normal',
     sample: '내용입니다.',
     snippet: '<Text.S16></Text.S16>',
   },
@@ -113,7 +113,7 @@ const typeScale: TypeToken[] = [
   },
   {
     label: 'Text.S20',
-    className: 'text-[20px] font-medium leading-normal',
+    className: 'text-[20px] leading-normal',
     sample: '내용입니다.',
     snippet: '<Text.S20></Text.S20>',
   },
@@ -125,7 +125,7 @@ const typeScale: TypeToken[] = [
   },
   {
     label: 'Text.S24',
-    className: 'text-[24px] font-medium leading-normal',
+    className: 'text-[24px] leading-normal',
     sample: '내용입니다.',
     snippet: '<Text.S24></Text.S24>',
   },
@@ -140,13 +140,13 @@ const typeScale: TypeToken[] = [
 const bodyScale: TypeToken[] = [
   {
     label: 'Text.Body14',
-    className: 'text-[14px] font-medium leading-[180%]',
+    className: 'text-[14px] leading-[180%]',
     sample: '내용입니다.',
     snippet: '<Text.Body14></Text.Body14>',
   },
   {
     label: 'Text.Body16',
-    className: 'text-[16px] font-medium leading-[180%]',
+    className: 'text-[16px] leading-[180%]',
     sample: '내용입니다.',
     snippet: '<Text.Body16></Text.Body16>',
   },
@@ -212,7 +212,7 @@ export default function TokensSection() {
               key={t.label}
               type="button"
               onClick={() => copy(t.snippet, t.label)}
-              className="border-border/70 bg-bg-depth-1/60 hover:bg-bg-depth-2 group rounded-lg border p-4 text-left transition"
+              className="border-border/70 bg-depth-1/60 hover:bg-depth-2 group rounded-lg border p-4 text-left transition"
             >
               <div className="flex items-start justify-between gap-3">
                 <div>
@@ -233,12 +233,12 @@ export default function TokensSection() {
           <Text.H6 className="mb-2">Body presets</Text.H6>
           <div className="grid gap-3 sm:grid-cols-2">
             {bodyScale.map((t) => (
-            <button
-              key={t.label}
-              type="button"
-              onClick={() => copy(t.snippet, t.label)}
-              className="border-border/70 bg-bg-depth-1/60 hover:bg-bg-depth-2 group rounded-lg border p-4 text-left transition"
-            >
+              <button
+                key={t.label}
+                type="button"
+                onClick={() => copy(t.snippet, t.label)}
+                className="border-border/70 bg-depth-1/60 hover:bg-depth-2 group rounded-lg border p-4 text-left transition"
+              >
                 <div className={t.className}>{t.sample}</div>
                 <Text.Caption className="text-muted-foreground group-hover:text-primary mt-2">
                   {t.label}

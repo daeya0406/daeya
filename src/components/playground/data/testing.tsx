@@ -13,7 +13,7 @@ export const testingItems: PlaygroundItem[] = [
   {
     id: 'testing-3',
     title: '객체 리스트 CRUD 버튼 렌더링',
-    tags: ['Testing', 'React'],
+    tags: ['React'],
     description: 'React',
     categories: ['testing'],
     demo: <TestGroundDemo3 />,
@@ -56,7 +56,7 @@ const [users, setUsers] = useState(initialUsers);
   {
     id: 'testing-2',
     title: '객체 리스트 CRUD',
-    tags: ['Testing', 'JS'],
+    tags: ['JS'],
     description: 'JS',
     categories: ['testing'],
     demo: <TestGroundDemo2 />,
@@ -81,7 +81,7 @@ const sorted = users.filter((user) => user.age >= 25);`,
   {
     id: 'testing-1',
     title: '객체 리스트 메서드',
-    tags: ['Testing', 'JS'],
+    tags: ['JS'],
     description: '연습',
     categories: ['testing'],
     demo: <TestGroundDemo1 />,

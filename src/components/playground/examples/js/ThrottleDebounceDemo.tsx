@@ -47,7 +47,7 @@ export default function ThrottleDebounceDemo() {
         onChange={(e) => handleChange(e.target.value)}
         placeholder="타이핑해보세요"
       />
-      <div className="grid gap-2 rounded-lg border border-border bg-bg-depth-1 p-3 text-sm">
+      <div className="grid gap-2 rounded-lg border border-border bg-depth-1 p-3 text-sm">
         <div className="flex justify-between">
           <span className="text-muted-foreground">Debounced</span>
           <span className="font-mono text-primary">{debounced}</span>

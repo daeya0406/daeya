@@ -45,7 +45,7 @@ return <List data={data} />;`,
   {
     id: 'fetch-template',
     title: 'fetch',
-    tags: ['Template', 'Fetch'],
+    tags: ['Fetch'],
     description: 'fetch + 상태 분기 기본 예제',
     categories: ['templates'],
     demo: (
@@ -102,15 +102,10 @@ export default function Demo() {
   {
     id: 'axios-template',
     title: 'axios',
-    tags: ['Template', 'Axios'],
+    tags: ['Axios'],
     description: 'axios로 리스트 fetch 예제',
     categories: ['templates'],
-    demo: (
-      <InfoBlock
-        title="axios 패턴"
-        points={['axios.get + useEffect', '간단한 목록 렌더링']}
-      />
-    ),
+    demo: <InfoBlock title="axios 패턴" points={['axios.get + useEffect', '간단한 목록 렌더링']} />,
     code: `import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -152,7 +147,7 @@ export default function Demo() {
   {
     id: 'eslint-prettier',
     title: 'ESLint + Prettier 세팅',
-    tags: ['Template', 'Lint'],
+    tags: ['Lint'],
     description: '코드 품질/포매팅 템플릿',
     categories: ['templates'],
     demo: (
@@ -172,7 +167,7 @@ export default function Demo() {
   {
     id: 'tailwind-ui',
     title: 'Tailwind UI 템플릿',
-    tags: ['Template', 'Tailwind'],
+    tags: ['Tailwind'],
     description: '레이아웃/카드/폼 베이스 템플릿',
     categories: ['templates'],
     demo: (
@@ -190,7 +185,7 @@ export default function Demo() {
   {
     id: 'query-template',
     title: 'React Query 템플릿',
-    tags: ['Template', 'Query'],
+    tags: ['Query'],
     description: 'queryKey + enabled + staleTime 기본 패턴',
     categories: ['templates'],
     demo: (
@@ -217,7 +212,7 @@ return <PostList posts={data} />;`,
   {
     id: 'zustand-template',
     title: 'Zustand 템플릿',
-    tags: ['Template', 'State'],
+    tags: ['State'],
     description: '경량 전역 상태 예제',
     categories: ['templates'],
     demo: (

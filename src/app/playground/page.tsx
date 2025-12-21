@@ -69,34 +69,35 @@ function PlaygroundPageContent() {
         <Tabs.Content key={activeTab} value={activeTab}>
           <div className="grid gap-6 pt-6 lg:grid-cols-[260px_minmax(0,1fr)] lg:items-start">
             <TabListPanel>
-              <div className="flex flex-col gap-2">
+              <Text.H6 className="mb-3">목록</Text.H6>
+              <div className="flex flex-col gap-1.5">
                 {filteredItems.map((item) => {
                   const isActive = activeId === item.id;
                   return (
                     <button
                       key={item.id}
                       onClick={() => setActiveId(item.id)}
-                      className={`border-border bg-bg-depth-1 flex flex-col items-start gap-y-1 rounded-lg border px-3 py-3 text-left transition ${
-                        isActive
-                          ? 'border-primary/80 text-primary'
-                          : 'hover:border-border hover:bg-bg-depth-2'
+                      className={`border-border bg-depth-1 flex items-center justify-between gap-x-2 rounded-lg border px-3 py-4 text-left transition ${
+                        isActive ? 'border-primary/80 text-primary' : 'hover:border-primary/30'
                       }`}
                     >
-                      <Text.S14.Bold className={isActive ? 'text-primary' : 'text-foreground'}>
+                      <Text.S13
+                        className={`semibold truncate ${isActive ? 'text-primary' : 'text-foreground'}`}
+                      >
                         {item.title}
-                      </Text.S14.Bold>
-                      <Text.Caption
-                        className={isActive ? 'text-primary/80' : 'text-muted-foreground'}
+                      </Text.S13>
+                      <Text.S11
+                        className={`truncate opacity-60 ${isActive ? 'text-primary/80' : 'text-muted-foreground'}`}
                       >
                         {item.tags.join(' • ')}
-                      </Text.Caption>
+                      </Text.S11>
                     </button>
                   );
                 })}
               </div>
             </TabListPanel>
 
-            <div className="border-border bg-bg-depth-1 space-y-4 rounded-xl border p-5 shadow-sm">
+            <div className="border-border bg-depth-1 space-y-4 rounded-xl border p-5 shadow-sm">
               {activeItem ? (
                 <>
                   <div className="flex flex-wrap items-center justify-between gap-2">
@@ -119,12 +120,12 @@ function PlaygroundPageContent() {
                   </div>
 
                   {activeItem.demo && (
-                    <div className="border-border bg-bg-depth-2 rounded-lg border p-4">
+                    <div className="border-border bg-depth-2 rounded-lg border p-4">
                       {activeItem.demo}
                     </div>
                   )}
 
-                  <div className="border-border bg-bg-depth-3 rounded-lg border p-4 text-sm">
+                  <div className="border-border bg-depth-2 rounded-lg border p-4 text-sm">
                     <pre className="text-muted-foreground whitespace-pre-wrap font-mono text-xs">
                       {activeItem.code}
                     </pre>

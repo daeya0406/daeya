@@ -24,11 +24,11 @@ export default function DataBoundaryDemo() {
         </Button>
       </div>
 
-      <div className="rounded-lg border border-border bg-bg-depth-1 p-3 text-sm">
+      <div className="rounded-lg border border-border bg-depth-1 p-3 text-sm">
         {state === 'loading' && (
           <div className="space-y-2">
-            <div className="h-3 w-2/3 animate-pulse rounded bg-bg-depth-3" />
-            <div className="h-3 w-1/2 animate-pulse rounded bg-bg-depth-3" />
+            <div className="h-3 w-2/3 animate-pulse rounded bg-depth-3" />
+            <div className="h-3 w-1/2 animate-pulse rounded bg-depth-3" />
           </div>
         )}
         {state === 'error' && (

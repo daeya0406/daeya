@@ -43,7 +43,7 @@ export default function ResponsiveTableDemo() {
         {data.map((item) => (
           <div
             key={item.title}
-            className="rounded-lg border border-border bg-bg-depth-1 p-3 text-sm shadow-sm"
+            className="rounded-lg border border-border bg-depth-1 p-3 text-sm shadow-sm"
           >
             <p className="text-base font-semibold text-foreground">{item.title}</p>
             <p className="text-muted-foreground">담당: {item.owner}</p>

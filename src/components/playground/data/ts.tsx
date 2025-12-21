@@ -6,7 +6,7 @@ export const tsItems: PlaygroundItem[] = [
   {
     id: 'type-narrowing',
     title: '유니온 + 타입 좁히기',
-    tags: ['TS', 'Narrowing'],
+    tags: ['Narrowing'],
     description: 'discriminated union으로 안전하게 분기',
     categories: ['ts'],
     demo: <TypeNarrowingDemo />,
@@ -26,7 +26,7 @@ function area(shape: Shape) {
   {
     id: 'generics',
     title: '제네릭 실전',
-    tags: ['TS', 'Generics'],
+    tags: ['Generics'],
     description: '재사용 가능한 함수/컴포넌트 타입',
     categories: ['ts'],
     demo: (
@@ -47,7 +47,7 @@ function area(shape: Shape) {
   {
     id: 'keyof-mapping',
     title: 'keyof',
-    tags: ['TS', 'keyof'],
+    tags: ['keyof'],
     description: '객체 키를 타입으로 추출(안전한 분기/레코드 구성)',
     categories: ['ts'],
     demo: (
@@ -81,7 +81,7 @@ function getUser(scene: Scene) {
   {
     id: 'typeof-inference',
     title: 'typeof',
-    tags: ['TS', 'typeof'],
+    tags: ['typeof'],
     description: '값에서 타입 추출(런타임 값 모양을 타입으로 재사용)',
     categories: ['ts'],
     demo: (
@@ -112,7 +112,7 @@ type Response = typeof response; // { data: { id: number; name: string }[] }`,
   {
     id: 'utility-types',
     title: '유틸리티 타입 사용처',
-    tags: ['TS', 'Utility'],
+    tags: ['Utility'],
     description: 'Partial/Pick/Record 등 활용',
     categories: ['ts'],
     demo: (
@@ -132,7 +132,7 @@ type StatusMap = Record<'idle'|'loading'|'error', boolean>;`,
   {
     id: 'polymorphic',
     title: '폴리모픽 컴포넌트',
-    tags: ['TS', 'Polymorphic'],
+    tags: ['Polymorphic'],
     description: 'as prop으로 태그 전환',
     categories: ['ts'],
     demo: (
@@ -150,7 +150,7 @@ type StatusMap = Record<'idle'|'loading'|'error', boolean>;`,
   {
     id: 'api-types',
     title: 'API Response 타입 아키텍처',
-    tags: ['TS', 'API'],
+    tags: ['API'],
     description: '클라이언트/서버 공용 타입 관리',
     categories: ['ts'],
     demo: (

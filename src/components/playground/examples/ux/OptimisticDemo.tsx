@@ -25,7 +25,7 @@ export default function UxOptimisticDemo() {
   return (
     <div className="space-y-2">
       <Text.Body14 className="text-muted-foreground">Optimistic UI: 먼저 UI 반영 → 실패 시 롤백</Text.Body14>
-      <div className="flex items-center gap-3 rounded-lg border border-border bg-bg-depth-1 p-3 text-sm">
+      <div className="flex items-center gap-3 rounded-lg border border-border bg-depth-1 p-3 text-sm">
         <Button size="sm" onClick={toggleLike} disabled={status === 'saving'}>
           좋아요 +1
         </Button>

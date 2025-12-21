@@ -17,7 +17,7 @@ const TableHeader = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <thead
     ref={ref}
-    className={cn('bg-bg-depth-2 text-foreground', className)}
+    className={cn('bg-depth-2 text-foreground', className)}
     {...props}
   />
 ));
@@ -35,7 +35,7 @@ const TableFooter = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <tfoot
     ref={ref}
-    className={cn('bg-bg-depth-2 font-medium text-foreground', className)}
+    className={cn('bg-depth-2 font-medium text-foreground', className)}
     {...props}
   />
 ));
@@ -45,7 +45,7 @@ const TableRow = React.forwardRef<HTMLTableRowElement, React.HTMLAttributes<HTML
   ({ className, ...props }, ref) => (
     <tr
       ref={ref}
-      className={cn('border-b border-border/60 transition hover:bg-bg-depth-2', className)}
+      className={cn('border-b border-border/60 transition hover:bg-depth-2', className)}
       {...props}
     />
   )
@@ -59,7 +59,7 @@ const TableHead = React.forwardRef<
   <th
     ref={ref}
     className={cn(
-      'bg-bg-depth-3 px-3 py-2 text-left align-middle font-medium text-muted-foreground',
+      'bg-depth-3 px-3 py-2 text-left align-middle font-medium text-muted-foreground',
       className
     )}
     {...props}
@@ -73,7 +73,7 @@ const TableCell = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <td
     ref={ref}
-    className={cn('bg-bg-depth-2 px-3 py-2 align-middle text-foreground', className)}
+    className={cn('bg-depth-2 px-3 py-2 align-middle text-foreground', className)}
     {...props}
   />
 ));
@@ -93,7 +93,7 @@ TableCaption.displayName = 'TableCaption';
 
 function TableEmpty({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex items-center justify-center rounded-lg border border-dashed border-border bg-bg-depth-2 px-4 py-6 text-sm text-muted-foreground">
+    <div className="flex items-center justify-center rounded-lg border border-dashed border-border bg-depth-2 px-4 py-6 text-sm text-muted-foreground">
       {children}
     </div>
   );
@@ -101,10 +101,10 @@ function TableEmpty({ children }: { children: React.ReactNode }) {
 
 function TableLoading() {
   return (
-    <div className="space-y-2 rounded-lg border border-border bg-bg-depth-2 p-4">
-      <div className="h-3 w-2/3 animate-pulse rounded bg-bg-depth-3" />
-      <div className="h-3 w-1/2 animate-pulse rounded bg-bg-depth-3" />
-      <div className="h-3 w-3/4 animate-pulse rounded bg-bg-depth-3" />
+    <div className="space-y-2 rounded-lg border border-border bg-depth-2 p-4">
+      <div className="h-3 w-2/3 animate-pulse rounded bg-depth-3" />
+      <div className="h-3 w-1/2 animate-pulse rounded bg-depth-3" />
+      <div className="h-3 w-3/4 animate-pulse rounded bg-depth-3" />
     </div>
   );
 }

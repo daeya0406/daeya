@@ -41,7 +41,7 @@ export default function UseEffectDependencyDemo() {
 
   return (
     <div className="space-y-4">
-      <div className="rounded-lg border border-border bg-bg-depth-1 p-4 shadow-sm">
+      <div className="rounded-lg border border-border bg-depth-1 p-4 shadow-sm">
         <div className="flex items-start justify-between">
           <div>
             <p className="text-sm font-semibold text-foreground">useEffect 의존성 배열</p>
@@ -63,7 +63,7 @@ export default function UseEffectDependencyDemo() {
               placeholder="타이핑 해보세요"
             />
           </div>
-          <div className="space-y-2 rounded-lg border border-border bg-bg-depth-2 p-3">
+          <div className="space-y-2 rounded-lg border border-border bg-depth-2 p-3">
             <div className="flex items-center gap-2 text-sm text-foreground">
               <Badge variant="default">[count]</Badge>
               <span>count 변경 effect 실행: {countHits}회</span>
@@ -79,7 +79,7 @@ export default function UseEffectDependencyDemo() {
         </div>
       </div>
 
-      <div className="rounded-lg border border-border bg-bg-depth-1 p-4 shadow-sm">
+      <div className="rounded-lg border border-border bg-depth-1 p-4 shadow-sm">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm font-semibold text-foreground">[running] 의존성 + setInterval</p>

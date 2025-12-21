@@ -6,7 +6,7 @@ export const uiItems: PlaygroundItem[] = [
   {
     id: 'ui-basic',
     title: '컴포넌트 구성 형태',
-    tags: ['UI', 'Components'],
+    tags: ['Components'],
     description: '컴포넌트 만들 때 Props, children, 이벤트, 상태 4개 중 필요한 것만 섞으면 끝',
     categories: ['ui'],
     code: `// 0. 기본 컴포넌트 껍데기

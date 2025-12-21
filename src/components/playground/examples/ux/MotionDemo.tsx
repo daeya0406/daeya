@@ -11,7 +11,7 @@ export default function MotionDemo() {
   return (
     <div className="space-y-3">
       <Text.Body14 className="text-muted-foreground">Fade + Slide 기본 모션 예제 (마이크로 인터랙션)</Text.Body14>
-      <div className="h-32 overflow-hidden rounded-lg border border-border bg-bg-depth-1 p-4">
+      <div className="h-32 overflow-hidden rounded-lg border border-border bg-depth-1 p-4">
         <AnimatePresence>
           {open && (
             <motion.div

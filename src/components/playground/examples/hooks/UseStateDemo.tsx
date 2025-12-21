@@ -24,7 +24,7 @@ export default function UseStateDemo() {
   };
 
   return (
-    <div className="space-y-4 rounded-lg border border-border bg-bg-depth-1 p-4 shadow-sm">
+    <div className="space-y-4 rounded-lg border border-border bg-depth-1 p-4 shadow-sm">
       <div className="flex items-start justify-between">
         <div>
           <p className="text-sm font-semibold text-foreground">useState</p>
@@ -58,7 +58,7 @@ export default function UseStateDemo() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-2 rounded-lg border border-border bg-bg-depth-2 p-3">
+        <div className="flex flex-col gap-2 rounded-lg border border-border bg-depth-2 p-3">
           <div className="flex items-center justify-between">
             <Text.Body14>lazy Initializer</Text.Body14>
             <Badge variant="default">useState(() =&gt; ...)</Badge>

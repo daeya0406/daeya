@@ -25,7 +25,7 @@ export function Calendar({ value, onChange, className }: CalendarProps) {
   return (
     <div
       className={cn(
-        'w-full min-w-[280px] max-w-sm overflow-hidden rounded-xl border border-border bg-bg-depth-1/90 p-3 shadow-lg backdrop-blur',
+        'w-full min-w-[280px] max-w-sm overflow-hidden rounded-xl border border-border bg-depth-1/90 p-3 shadow-lg backdrop-blur',
         className
       )}
     >
@@ -33,7 +33,7 @@ export function Calendar({ value, onChange, className }: CalendarProps) {
         <button
           type="button"
           onClick={() => setCurrent((c) => c.subtract(1, 'month'))}
-          className="flex h-8 w-8 items-center justify-center rounded-md border border-border text-foreground transition hover:bg-bg-depth-2"
+          className="flex h-8 w-8 items-center justify-center rounded-md border border-border text-foreground transition hover:bg-depth-2"
           aria-label="이전 달"
         >
           <ChevronLeft className="h-4 w-4" />
@@ -44,7 +44,7 @@ export function Calendar({ value, onChange, className }: CalendarProps) {
         <button
           type="button"
           onClick={() => setCurrent((c) => c.add(1, 'month'))}
-          className="flex h-8 w-8 items-center justify-center rounded-md border border-border text-foreground transition hover:bg-bg-depth-2"
+          className="flex h-8 w-8 items-center justify-center rounded-md border border-border text-foreground transition hover:bg-depth-2"
           aria-label="다음 달"
         >
           <ChevronRight className="h-4 w-4" />
@@ -72,7 +72,7 @@ export function Calendar({ value, onChange, className }: CalendarProps) {
               'h-8 rounded-lg border border-transparent transition',
               isSelected
                 ? 'border-primary bg-primary-100 font-semibold text-primary shadow-sm'
-                : 'hover:border-border hover:bg-bg-depth-2',
+                : 'hover:border-border hover:bg-depth-2',
               !inMonth && 'text-muted-foreground'
             )}
           >

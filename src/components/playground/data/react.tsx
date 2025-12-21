@@ -9,7 +9,7 @@ export const reactItems: PlaygroundItem[] = [
   {
     id: 'component-split',
     title: '컴포넌트 분리',
-    tags: ['React', 'Props'],
+    tags: ['Props'],
     description: '컴포넌트 분리 & props 전달 기본 패턴',
     categories: ['react'],
     demo: <ComponentSplitDemo />,
@@ -29,7 +29,7 @@ return profiles.map((p) => <ProfileCard key={p.name} profile={p} />);`,
   {
     id: 'use-query',
     title: 'React Query 기본 패턴',
-    tags: ['React', 'Query'],
+    tags: ['Query'],
     description: 'queryKey + 조건부 enabled + staleTime 구성',
     categories: ['react'],
     demo: <UseQueryDemo />,
@@ -47,7 +47,7 @@ return <PostList posts={data} />;`,
   {
     id: 'compoundpattern',
     title: '컴파운드 패턴(탭 예시)',
-    tags: ['React', 'Compound'],
+    tags: ['Compound'],
     description: 'Context 흐름에 맞춰 Card.Root/Badge를 읽는 법 정리',
     categories: ['react'],
     demo: <CompoundPatternDemo />,
@@ -89,7 +89,7 @@ export const Card = { Root: CardRoot, Badge: CardBadge };
   {
     id: 'memo-usecallback',
     title: 'memo / useCallback 렌더 비교',
-    tags: ['React', 'Performance'],
+    tags: ['Performance'],
     description: 'props 안정화로 자식 렌더 줄이기',
     categories: ['react'],
     demo: (
@@ -109,7 +109,7 @@ const onClick = useCallback(() => doSomething(), [deps]);
   {
     id: 'react-memo',
     title: 'React.memo + useMemo',
-    tags: ['React', 'Memo'],
+    tags: ['Memo'],
     description: '불필요 렌더를 줄이는 기본 예시',
     categories: ['react'],
     demo: <ReactMemoDemo />,
@@ -123,7 +123,7 @@ const onClick = useCallback(() => doSomething(), [deps]);
   {
     id: 'suspense-boundary',
     title: 'Suspense / Error Boundary',
-    tags: ['React', 'Boundary'],
+    tags: ['Boundary'],
     description: '비동기/에러 경계 패턴',
     categories: ['react'],
     demo: (

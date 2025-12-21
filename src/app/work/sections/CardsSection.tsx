@@ -151,16 +151,16 @@ export default function CardsSection() {
         )}
       </div>
 
-      <div className="rounded-2xl border border-border bg-bg-depth-1/80 p-4 shadow-sm">
+      <div className="rounded-2xl border border-border bg-depth-1/80 p-4 shadow-sm">
         {loading && (
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
             {Array.from({ length: 10 }).map((_, idx) => (
               <div
                 key={idx}
-                className="rounded-lg border border-border bg-bg-depth-2 p-4 shadow-sm"
+                className="rounded-lg border border-border bg-depth-2 p-4 shadow-sm"
               >
-                <div className="mb-2 h-4 w-1/2 animate-pulse rounded bg-bg-depth-3" />
-                <div className="h-3 w-3/4 animate-pulse rounded bg-bg-depth-3" />
+                <div className="mb-2 h-4 w-1/2 animate-pulse rounded bg-depth-3" />
+                <div className="h-3 w-3/4 animate-pulse rounded bg-depth-3" />
               </div>
             ))}
           </div>

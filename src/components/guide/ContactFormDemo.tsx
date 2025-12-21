@@ -44,7 +44,7 @@ export function ContactFormDemo() {
   const onSubmit = (values: ContactFormValues) => mutation.mutate(values);
 
   return (
-    <div className="rounded-xl border border-border bg-bg-depth-1 p-5 shadow-sm">
+    <div className="rounded-xl border border-border bg-depth-1 p-5 shadow-sm">
       <div className="flex flex-wrap items-center justify-between gap-2 pb-5">
         <div>
           <p className="text-sm font-semibold text-foreground">Form (RHF + Zod + React Query)</p>
@@ -59,7 +59,7 @@ export function ContactFormDemo() {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4 rounded-lg border border-border bg-bg-depth-2 p-4"
+            className="space-y-4 rounded-lg border border-border bg-depth-2 p-4"
           >
             <FormField
               control={form.control}
@@ -116,7 +116,7 @@ export function ContactFormDemo() {
           </form>
         </Form>
 
-        <div className="space-y-3 rounded-lg border border-border bg-bg-depth-2 p-4 text-sm shadow-inner">
+        <div className="space-y-3 rounded-lg border border-border bg-depth-2 p-4 text-sm shadow-inner">
           <p className="font-medium text-foreground">패턴 메모</p>
           <ul className="text-muted-foreground space-y-2">
             <li>
@@ -127,11 +127,11 @@ export function ContactFormDemo() {
             <li>React Query mutation으로 비동기 상태와 토스트 처리</li>
             <li>
               입력값은{' '}
-              <code className="rounded bg-bg-depth-3 px-1 text-xs">
+              <code className="rounded bg-depth-3 px-1 text-xs">
                 form.watch()
               </code>{' '}
               or{' '}
-              <code className="rounded bg-bg-depth-3 px-1 text-xs">
+              <code className="rounded bg-depth-3 px-1 text-xs">
                 form.getValues()
               </code>{' '}
               로 접근

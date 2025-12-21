@@ -39,7 +39,7 @@ export default function UseQueryDemo() {
   });
 
   return (
-    <div className="space-y-3 rounded-lg border border-border bg-bg-depth-1 p-4 shadow-sm">
+    <div className="space-y-3 rounded-lg border border-border bg-depth-1 p-4 shadow-sm">
       <div className="flex items-start justify-between">
         <div>
           <p className="text-sm font-semibold text-foreground">useQuery</p>

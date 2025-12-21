@@ -56,7 +56,7 @@ export function DatePicker({
       <button
         type="button"
         onClick={toggleOpen}
-        className="flex min-w-[150px] max-w-[220px] items-center justify-between gap-2 rounded-lg border border-border bg-bg-depth-1 px-3 py-2 text-sm text-foreground shadow-sm transition hover:bg-bg-depth-2"
+        className="flex min-w-[150px] max-w-[220px] items-center justify-between gap-2 rounded-lg border border-border bg-depth-1 px-3 py-2 text-sm text-foreground shadow-sm transition hover:bg-depth-2"
       >
         <div className="flex items-center gap-2">
           <CalendarIcon className="h-4 w-4 text-primary" />

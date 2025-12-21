@@ -16,7 +16,7 @@ export default function BlogPage() {
         {posts.map((post) => (
           <article
             key={post.title}
-            className="rounded-xl border border-border bg-bg-depth-1 p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+            className="rounded-xl border border-border bg-depth-1 p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
           >
             <Text.H4 className="mb-1">{post.title}</Text.H4>
             <Text.Caption className="block text-muted-foreground">{post.date}</Text.Caption>
