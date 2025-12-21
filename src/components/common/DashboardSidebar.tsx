@@ -122,7 +122,7 @@ export function DashboardSidebar() {
   };
 
   const iconButtonClassName =
-    'flex h-9 w-9 items-center justify-center rounded-xl text-icon-primary transition hover:bg-depth-3 hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30';
+    'flex h-9 w-9 items-center justify-center rounded-xl text-icon-primary transition hover:bg-depth-2 hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30';
 
   return (
     <aside
@@ -224,7 +224,7 @@ export function DashboardSidebar() {
                     'flex w-full items-center justify-center rounded-xl border border-transparent px-3 py-3 transition',
                     groupActive
                       ? 'bg-primary-100 text-primary'
-                      : 'text-text-default hover:bg-depth-3',
+                      : 'text-text-default hover:bg-depth-2',
                   ].join(' ')}
                 >
                   {groupIcon(group.label)}
@@ -241,7 +241,7 @@ export function DashboardSidebar() {
                     'flex items-center gap-2 rounded-xl px-3 py-2 text-sm transition',
                     groupActive
                       ? 'bg-primary-100 text-primary'
-                      : 'text-text-default hover:bg-depth-3',
+                      : 'text-text-default hover:bg-depth-2',
                   ].join(' ')}
                 >
                   <span
@@ -261,7 +261,7 @@ export function DashboardSidebar() {
               <AccordionItem key={group.label} value={group.label} className="border-none">
                 <AccordionTrigger
                   className={[
-                    'hover:bg-depth-3 rounded-xl px-3 py-2 text-sm hover:no-underline',
+                    'hover:bg-depth-2 rounded-xl px-3 py-2 text-sm hover:no-underline',
                     groupActive ? 'text-text-primary' : 'text-text-default',
                   ].join(' ')}
                 >
@@ -296,15 +296,15 @@ export function DashboardSidebar() {
                           key={child.label}
                           href={child.href ?? '#'}
                           className={[
-                            'flex items-center justify-between gap-2 rounded-xl px-3 py-2 text-sm transition',
+                            'flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm transition',
                             active
-                              ? 'bg-primary-100 text-primary'
-                              : 'text-text-default hover:bg-depth-3',
+                              ? 'bg-brand-secondary text-primary'
+                              : 'text-text-default hover:bg-depth-2',
                           ].join(' ')}
                         >
                           <span>{child.label}</span>
                           {child.badge ? (
-                            <span className="bg-primary-100 text-primary rounded-full px-2 py-0.5 text-[10px] font-semibold">
+                            <span className="bg-brand-secondary text-primary rounded-full px-2 py-0.5 text-[10px] font-semibold">
                               {child.badge}
                             </span>
                           ) : null}

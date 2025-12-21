@@ -9,6 +9,7 @@ import { extractTabsFromNav } from '@/components/common/navigation';
 import { noteItems } from '@/components/playground/noteData';
 import { useSyncedTab } from '@/hooks/useSyncedTab';
 import { TabListPanel } from '@/components/common/TabListPanel';
+import { cn } from '@/lib/utils';
 
 const tabs = extractTabsFromNav('Note');
 type TabKey = string;
@@ -66,27 +67,39 @@ function NotePageContent() {
         </Tabs.List>
 
         <Tabs.Content key={activeTab} value={activeTab}>
-          <div className="grid gap-6 pt-6 lg:grid-cols-[260px_minmax(0,1fr)] lg:items-start">
-            <TabListPanel>
-              <Text.H6 className="mb-3">목록</Text.H6>
-              <div className="flex flex-col gap-1.5">
+          <div className="grid gap-6 pt-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:items-start">
+            <TabListPanel className="bg-depth-1/70 rounded-xl p-4 shadow-sm">
+              <div className="flex items-center justify-between">
+                <Text.H6>목록</Text.H6>
+                <Text.S11 className="text-muted-foreground">{filteredItems.length}개</Text.S11>
+              </div>
+              <div className="mt-3 flex flex-col gap-2">
                 {filteredItems.map((item) => {
                   const isActive = activeId === item.id;
                   return (
                     <button
                       key={item.id}
                       onClick={() => setActiveId(item.id)}
-                      className={`border-border bg-depth-1 flex items-center justify-between gap-x-2 rounded-lg border px-3 py-4 text-left transition ${
-                        isActive ? 'border-primary/80 text-primary' : 'hover:border-primary/30'
-                      }`}
+                      className={cn(
+                        'bg-depth-2 flex items-center justify-between gap-2 rounded-lg border px-3 py-3 text-left transition',
+                        isActive
+                          ? 'bg-brand-secondary text-primary border-primary/40'
+                          : 'text-foreground hover:border-primary/30 border-transparent'
+                      )}
                     >
                       <Text.S13
-                        className={`semibold truncate ${isActive ? 'text-primary' : 'text-foreground'}`}
+                        className={cn(
+                          'truncate',
+                          isActive ? 'text-primary' : 'text-muted-foreground'
+                        )}
                       >
                         {item.title}
                       </Text.S13>
                       <Text.S11
-                        className={`truncate opacity-60 ${isActive ? 'text-primary/80' : 'text-muted-foreground'}`}
+                        className={cn(
+                          'truncate',
+                          isActive ? 'text-primary/60' : 'text-muted-foreground'
+                        )}
                       >
                         {item.tags.join(' • ')}
                       </Text.S11>
@@ -99,7 +112,7 @@ function NotePageContent() {
             <div className="border-border bg-depth-1 space-y-4 rounded-xl border p-5 shadow-sm">
               {activeItem ? (
                 <>
-                  <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
                     <div className="line-bottom space-y-1">
                       <Text.H5>{activeItem.title}</Text.H5>
                       <Text.S12 className="text-muted-foreground">
@@ -119,13 +132,13 @@ function NotePageContent() {
                   </div>
 
                   {activeItem.demo && (
-                    <div className="border-border bg-depth-2 rounded-lg border p-4">
+                    <div className="border-border bg-depth-2 rounded-lg border p-4 shadow-sm">
                       {activeItem.demo}
                     </div>
                   )}
 
-                  <div className="border-border bg-depth-2 rounded-lg border p-4 text-sm">
-                    <pre className="text-muted-foreground whitespace-pre-wrap font-mono text-xs">
+                  <div className="border-border bg-depth-2 rounded-lg border p-4 text-sm shadow-sm">
+                    <pre className="text-muted-foreground max-h-[520px] overflow-auto whitespace-pre-wrap font-mono text-xs leading-relaxed">
                       {activeItem.code}
                     </pre>
                   </div>

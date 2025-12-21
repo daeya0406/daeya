@@ -27,6 +27,7 @@ export const navItems: NavItem[] = [
       { label: 'Hooks', href: '/note?tab=hooks' },
       { label: 'TS', href: '/note?tab=ts' },
       { label: 'Next.js', href: '/note?tab=nextjs' },
+      { label: 'Troubleshooting', href: '/note?tab=troubleshooting' },
     ],
   },
   {

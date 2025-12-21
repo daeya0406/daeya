@@ -18,7 +18,7 @@ const buttonVariants = cva(
           bg-depth-3 text-foreground hover:bg-depth-2
         `,
         outline: `
-          border border-border text-foreground bg-white hover:border-primary/30 hover:text-primary
+          border border-border text-foreground bg-depth-1 hover:border-primary/30 hover:text-primary
         `,
       },
       size: {
