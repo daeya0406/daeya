@@ -76,18 +76,18 @@ export default function StackSection() {
         {stacks.map((group) => (
           <div
             key={group.title}
-            className="rounded-2xl border border-slate-200/60 bg-white/80 p-6 shadow-sm ring-1 ring-white/40 backdrop-blur md:p-8 dark:border-slate-800/70 dark:bg-slate-900/60 dark:ring-slate-800/50"
+            className="rounded-2xl border border-border bg-bg-depth-1 p-6 shadow-sm ring-1 ring-primary/5 backdrop-blur md:p-8"
           >
-            <Text.H4 className="text-slate-900 dark:text-slate-50">{group.title}</Text.H4>
-            <ul className="mt-4 space-y-3 text-sm text-slate-700 dark:text-slate-200">
+            <Text.H4 className="text-foreground">{group.title}</Text.H4>
+            <ul className="mt-4 space-y-3 text-sm text-text-default">
               {group.items.map((item) => (
                 <li key={item.name} className="flex items-start gap-2">
-                  <span className="mt-[9px] h-1.5 w-1.5 rounded-full bg-blue-500" />
+                  <span className="mt-[9px] h-1.5 w-1.5 rounded-full bg-primary" />
                   <div className="space-y-1">
-                    <span className="font-semibold text-slate-900 dark:text-slate-50">
+                    <span className="font-semibold text-foreground">
                       {item.name}
                     </span>
-                    <div className="leading-relaxed text-slate-600 dark:text-slate-300">
+                    <div className="leading-relaxed text-muted-foreground">
                       {item.desc}
                     </div>
                   </div>

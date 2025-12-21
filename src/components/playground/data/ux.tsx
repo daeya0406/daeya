@@ -24,7 +24,7 @@ export const uxItems: PlaygroundItem[] = [
     description: '레이아웃 점프를 줄이는 Skeleton vs Spinner 비교',
     categories: ['ux'],
     demo: <SkeletonDemo />,
-    code: `<div className="animate-pulse h-4 w-3/4 rounded bg-slate-200" />`,
+    code: `<div className="animate-pulse h-4 w-3/4 rounded bg-bg-depth-3" />`,
   },
   {
     id: 'ux-optimistic',

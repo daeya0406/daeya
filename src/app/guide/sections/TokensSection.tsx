@@ -212,7 +212,7 @@ export default function TokensSection() {
               key={t.label}
               type="button"
               onClick={() => copy(t.snippet, t.label)}
-              className="border-border/70 bg-bg-depth-1/60 hover:bg-bg-depth-2 dark:bg-bg-depth-3/40 group rounded-lg border p-4 text-left transition dark:border-slate-800 dark:hover:bg-slate-800/50"
+              className="border-border/70 bg-bg-depth-1/60 hover:bg-bg-depth-2 group rounded-lg border p-4 text-left transition"
             >
               <div className="flex items-start justify-between gap-3">
                 <div>
@@ -221,7 +221,7 @@ export default function TokensSection() {
                     {t.label}
                   </Text.Caption>
                 </div>
-                <span className="bg-primary-100 text-primary dark:bg-primary/20 dark:text-primary-100 rounded-full px-2 py-0.5 text-[10px] font-semibold">
+                <span className="bg-primary-100 text-primary rounded-full px-2 py-0.5 text-[10px] font-semibold">
                   copy
                 </span>
               </div>
@@ -233,12 +233,12 @@ export default function TokensSection() {
           <Text.H6 className="mb-2">Body presets</Text.H6>
           <div className="grid gap-3 sm:grid-cols-2">
             {bodyScale.map((t) => (
-              <button
-                key={t.label}
-                type="button"
-                onClick={() => copy(t.snippet, t.label)}
-                className="border-border/70 bg-bg-depth-1/60 hover:bg-bg-depth-2 dark:bg-bg-depth-3/40 group rounded-lg border p-4 text-left transition dark:border-slate-800 dark:hover:bg-slate-800/50"
-              >
+            <button
+              key={t.label}
+              type="button"
+              onClick={() => copy(t.snippet, t.label)}
+              className="border-border/70 bg-bg-depth-1/60 hover:bg-bg-depth-2 group rounded-lg border p-4 text-left transition"
+            >
                 <div className={t.className}>{t.sample}</div>
                 <Text.Caption className="text-muted-foreground group-hover:text-primary mt-2">
                   {t.label}

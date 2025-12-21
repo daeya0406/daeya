@@ -228,20 +228,20 @@ function MobileMenu({
     <div className="flex items-center gap-2 md:hidden">
       <button
         onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-        className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-md border border-slate-200 bg-white text-slate-700 transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700"
+        className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-md border border-border bg-bg-depth-1 text-foreground transition hover:bg-bg-depth-2"
       >
         {!mounted ? (
           <div className="h-5 w-5" />
         ) : theme === 'dark' ? (
           <Sun className="h-5 w-5 text-yellow-300" />
         ) : (
-          <Moon className="h-5 w-5 text-slate-700" />
+          <Moon className="h-5 w-5 text-foreground" />
         )}
       </button>
 
       <button
         onClick={() => setOpen((v) => !v)}
-        className="flex h-10 w-10 items-center justify-center rounded-md border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700"
+        className="flex h-10 w-10 items-center justify-center rounded-md border border-border bg-bg-depth-1 text-foreground shadow-sm transition hover:bg-bg-depth-2"
       >
         <span className="sr-only">메뉴 열기</span>
         <svg
@@ -267,7 +267,7 @@ function MobileMenu({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
             transition={{ duration: 0.18, ease: 'easeOut' }}
-            className="absolute left-0 top-full mt-0 w-full border-b border-t border-slate-200 bg-white shadow-lg dark:border-slate-800 dark:bg-slate-900"
+                  className="absolute left-0 top-full mt-0 w-full border-b border-t border-border bg-bg-depth-1 shadow-lg"
           >
             <div className="flex flex-col gap-1 p-2">
               {navItems.map((item) => {
@@ -277,19 +277,19 @@ function MobileMenu({
                 return (
                   <div
                     key={item.label}
-                    className="rounded-lg border border-transparent transition hover:border-slate-200/80 dark:hover:border-slate-800/80"
+                    className="rounded-lg border border-transparent transition hover:border-border/80"
                   >
                     <button
                       type="button"
                       onClick={() => (hasChildren ? toggleExpand(item.label) : setOpen(false))}
                       className={
-                        'flex w-full items-center justify-between rounded-md px-4 py-3 text-left text-slate-800 transition dark:text-slate-100'
+                        'flex w-full items-center justify-between rounded-md px-4 py-3 text-left text-foreground transition'
                       }
                     >
                       <span className="flex items-center gap-2">
                         {item.label}
                         {item.badge && (
-                          <span className="rounded-full bg-blue-100 px-2 text-[10px] font-semibold text-blue-700 dark:bg-blue-900/50 dark:text-blue-200">
+                          <span className="rounded-full bg-primary-100 px-2 text-[10px] font-semibold text-primary">
                             {item.badge}
                           </span>
                         )}
@@ -314,7 +314,7 @@ function MobileMenu({
                             <Link
                               key={child.label}
                               href={child.href ?? '#'}
-                              className="rounded-md px-3 py-2 text-sm text-slate-700 transition hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+                              className="rounded-md px-3 py-2 text-sm text-foreground transition hover:bg-bg-depth-2"
                               onClick={() => setOpen(false)}
                             >
                               {child.label}

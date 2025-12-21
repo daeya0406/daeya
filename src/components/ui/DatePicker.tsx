@@ -56,15 +56,15 @@ export function DatePicker({
       <button
         type="button"
         onClick={toggleOpen}
-        className="flex min-w-[150px] max-w-[220px] items-center justify-between gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 shadow-sm transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700"
+        className="flex min-w-[150px] max-w-[220px] items-center justify-between gap-2 rounded-lg border border-border bg-bg-depth-1 px-3 py-2 text-sm text-foreground shadow-sm transition hover:bg-bg-depth-2"
       >
         <div className="flex items-center gap-2">
-          <CalendarIcon className="h-4 w-4 text-blue-600 dark:text-blue-300" />
-          <span className={!value ? 'text-slate-500 dark:text-slate-400' : ''}>{displayValue}</span>
+          <CalendarIcon className="h-4 w-4 text-primary" />
+          <span className={!value ? 'text-muted-foreground' : ''}>{displayValue}</span>
         </div>
         <ChevronDown
           className={cn(
-            'h-4 w-4 text-slate-500 transition-transform dark:text-slate-300',
+            'h-4 w-4 text-muted-foreground transition-transform',
             open && 'rotate-180'
           )}
         />

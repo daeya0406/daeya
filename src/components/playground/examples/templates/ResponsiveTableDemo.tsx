@@ -43,13 +43,11 @@ export default function ResponsiveTableDemo() {
         {data.map((item) => (
           <div
             key={item.title}
-            className="rounded-lg border border-slate-200/70 bg-white/80 p-3 text-sm shadow-sm dark:border-slate-800 dark:bg-slate-900/60"
+            className="rounded-lg border border-border bg-bg-depth-1 p-3 text-sm shadow-sm"
           >
-            <p className="text-base font-semibold text-slate-900 dark:text-slate-50">
-              {item.title}
-            </p>
-            <p className="text-slate-600 dark:text-slate-300">담당: {item.owner}</p>
-            <p className="text-slate-600 dark:text-slate-300">상태: {item.status}</p>
+            <p className="text-base font-semibold text-foreground">{item.title}</p>
+            <p className="text-muted-foreground">담당: {item.owner}</p>
+            <p className="text-muted-foreground">상태: {item.status}</p>
           </div>
         ))}
       </div>

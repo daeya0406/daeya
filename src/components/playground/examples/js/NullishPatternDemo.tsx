@@ -34,13 +34,13 @@ export default function NullishPatternDemo() {
       </div>
 
       <div className="grid gap-3 md:grid-cols-2">
-        <div className="rounded-lg border border-slate-200/70 bg-white/80 p-3 text-sm dark:border-slate-800 dark:bg-slate-900/60">
+        <div className="rounded-lg border border-border bg-bg-depth-1 p-3 text-sm">
           <Text.Caption className="font-semibold">현재 데이터</Text.Caption>
-          <pre className="mt-2 whitespace-pre-wrap text-xs text-slate-700 dark:text-slate-200">
+          <pre className="mt-2 whitespace-pre-wrap text-xs text-foreground">
             {JSON.stringify(user, null, 2)}
           </pre>
         </div>
-        <div className="space-y-2 rounded-lg border border-slate-200/70 bg-white/80 p-3 text-sm dark:border-slate-800 dark:bg-slate-900/60">
+        <div className="space-y-2 rounded-lg border border-border bg-bg-depth-1 p-3 text-sm">
           <p>
             role (??): <Badge variant="outline">{fallbackRole}</Badge>
           </p>

@@ -22,7 +22,9 @@ import { Text } from '@/components/ui/Text';
 
 export default function LoginPage() {
   return (
-    <Suspense fallback={<div className="py-10 text-center text-sm text-slate-500">Loading...</div>}>
+    <Suspense
+      fallback={<div className="py-10 text-center text-sm text-muted-foreground">Loading...</div>}
+    >
       <LoginPageContent />
     </Suspense>
   );
@@ -57,7 +59,7 @@ function LoginPageContent() {
 
   return (
     <section className="mx-auto flex min-h-[70vh] max-w-md flex-col justify-center px-4 py-10">
-      <div className="rounded-2xl border border-slate-200/70 bg-white/80 p-6 shadow-md backdrop-blur dark:border-slate-700 dark:bg-slate-800">
+      <div className="rounded-2xl border border-border bg-bg-depth-1/80 p-6 shadow-md backdrop-blur">
         <Text.H3 className="mb-8 text-center font-bold">로그인</Text.H3>
 
         <Form {...form}>
@@ -113,20 +115,20 @@ function LoginPageContent() {
         </Form>
 
         <div className="text-muted-foreground mt-5 flex items-center justify-end gap-x-4 text-xs">
-          <Link href="/auth/signup" className="text-blue-600 hover:underline dark:text-blue-400">
+          <Link href="/auth/signup" className="text-primary hover:underline">
             회원가입
           </Link>
           <Link
             href="/auth/forgot"
-            className="text-xs text-blue-600 hover:underline dark:text-blue-400"
+            className="text-xs text-primary hover:underline"
           >
             비밀번호 찾기
           </Link>
         </div>
       </div>
 
-      <div className="mt-6 space-y-2 rounded-lg border border-dashed border-slate-300 bg-slate-100 p-4 text-xs text-slate-700 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300">
-        <p className="font-semibold text-slate-900 dark:text-slate-100">설명 & 가이드</p>
+      <div className="mt-6 space-y-2 rounded-lg border border-dashed border-border bg-bg-depth-2 p-4 text-xs text-muted-foreground">
+        <p className="font-semibold text-foreground">설명 & 가이드</p>
         <ul className="list-disc space-y-1 pl-4">
           <li>RHF + Zod로 입력값 타입/검증을 한 번에 관리.</li>
           <li>React Query mutation으로 Supabase Auth 호출과 로딩/에러를 처리.</li>

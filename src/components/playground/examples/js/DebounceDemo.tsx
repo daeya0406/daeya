@@ -20,8 +20,8 @@ export default function DebounceDemo() {
         onChange={(e) => setValue(e.target.value)}
         placeholder="입력 후 잠시 기다려 보세요"
       />
-      <Text.Caption className="block text-slate-600 dark:text-slate-300">
-        Debounced: <span className="font-semibold text-blue-600 dark:text-blue-300">{debounced}</span>
+      <Text.Caption className="block text-muted-foreground dark:text-muted-foreground">
+        Debounced: <span className="font-semibold text-primary dark:text-primary">{debounced}</span>
       </Text.Caption>
     </div>
   );

@@ -25,7 +25,7 @@ export function Calendar({ value, onChange, className }: CalendarProps) {
   return (
     <div
       className={cn(
-        'w-full min-w-[280px] max-w-sm overflow-hidden rounded-xl border border-slate-200/70 bg-white/90 p-3 shadow-lg backdrop-blur dark:border-slate-800 dark:bg-slate-900/80',
+        'w-full min-w-[280px] max-w-sm overflow-hidden rounded-xl border border-border bg-bg-depth-1/90 p-3 shadow-lg backdrop-blur',
         className
       )}
     >
@@ -33,25 +33,25 @@ export function Calendar({ value, onChange, className }: CalendarProps) {
         <button
           type="button"
           onClick={() => setCurrent((c) => c.subtract(1, 'month'))}
-          className="flex h-8 w-8 items-center justify-center rounded-md border border-slate-200 text-slate-700 transition hover:bg-slate-100 dark:border-slate-700 dark:text-slate-100 dark:hover:bg-slate-800"
+          className="flex h-8 w-8 items-center justify-center rounded-md border border-border text-foreground transition hover:bg-bg-depth-2"
           aria-label="이전 달"
         >
           <ChevronLeft className="h-4 w-4" />
         </button>
-        <div className="text-sm font-semibold text-slate-900 dark:text-slate-50">
+        <div className="text-sm font-semibold text-foreground">
           {current.format('YYYY년 MM월')}
         </div>
         <button
           type="button"
           onClick={() => setCurrent((c) => c.add(1, 'month'))}
-          className="flex h-8 w-8 items-center justify-center rounded-md border border-slate-200 text-slate-700 transition hover:bg-slate-100 dark:border-slate-700 dark:text-slate-100 dark:hover:bg-slate-800"
+          className="flex h-8 w-8 items-center justify-center rounded-md border border-border text-foreground transition hover:bg-bg-depth-2"
           aria-label="다음 달"
         >
           <ChevronRight className="h-4 w-4" />
         </button>
       </div>
 
-      <div className="mt-2 grid grid-cols-7 gap-1 text-center text-[11px] text-slate-500 dark:text-slate-400">
+      <div className="mt-2 grid grid-cols-7 gap-1 text-center text-[11px] text-muted-foreground">
         {['일', '월', '화', '수', '목', '금', '토'].map((d) => (
           <span key={d} className="py-1 font-semibold">
             {d}
@@ -68,16 +68,16 @@ export function Calendar({ value, onChange, className }: CalendarProps) {
               key={day.format('YYYY-MM-DD')}
               type="button"
               onClick={() => onChange?.(day.toDate())}
-              className={cn(
-                'h-8 rounded-lg border border-transparent transition',
-                isSelected
-                  ? 'border-blue-500 bg-blue-50 font-semibold text-blue-900 shadow-sm dark:border-blue-400 dark:bg-blue-900/40 dark:text-blue-50'
-                  : 'hover:border-slate-200 hover:bg-slate-100 dark:hover:border-slate-700 dark:hover:bg-slate-800',
-                !inMonth && 'text-slate-400 dark:text-slate-600'
-              )}
-            >
-              {day.date()}
-            </button>
+            className={cn(
+              'h-8 rounded-lg border border-transparent transition',
+              isSelected
+                ? 'border-primary bg-primary-100 font-semibold text-primary shadow-sm'
+                : 'hover:border-border hover:bg-bg-depth-2',
+              !inMonth && 'text-muted-foreground'
+            )}
+          >
+            {day.date()}
+          </button>
           );
         })}
       </div>

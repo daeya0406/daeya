@@ -16,7 +16,7 @@ export default function DropdownDemo() {
       <DropdownOption>
         <DropdownOptionTrigger asChild>
           <Button variant="outline" className="w-10 px-0">
-            <EllipsisVertical className="text-slate-500" />
+            <EllipsisVertical className="text-muted-foreground" />
           </Button>
         </DropdownOptionTrigger>
         <DropdownOptionContent align="start" sideOffset={4}>

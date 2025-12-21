@@ -34,10 +34,10 @@ export default function PromisePatternDemo() {
 
   return (
     <div className="section-component">
-      <Text.Body14 className="font-semibold text-slate-900 dark:text-slate-50">
+      <Text.Body14 className="font-semibold text-foreground dark:text-foreground">
         Promise 패턴
       </Text.Body14>
-      <div className="mt-2 space-y-1 font-mono text-xs text-slate-700 dark:text-slate-200">
+      <div className="mt-2 space-y-1 font-mono text-xs text-foreground dark:text-muted-foreground">
         {logs.map((line, idx) => (
           <div key={idx}>{line}</div>
         ))}

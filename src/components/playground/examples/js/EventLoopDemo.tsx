@@ -15,13 +15,13 @@ export default function EventLoopDemo() {
 
   return (
     <div className="section-component">
-      <Text.Body14 className="font-semibold text-slate-900 dark:text-slate-50">
+      <Text.Body14 className="font-semibold text-foreground dark:text-foreground">
         이벤트 루프 순서
       </Text.Body14>
-      <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+      <p className="mt-1 text-xs text-muted-foreground dark:text-muted-foreground">
         실행 흐름을 바로 찍어봤습니다.
       </p>
-      <pre className="mt-2 whitespace-pre-wrap font-mono text-xs text-slate-700 dark:text-slate-200">
+      <pre className="mt-2 whitespace-pre-wrap font-mono text-xs text-foreground dark:text-muted-foreground">
         {logs.join('\n')}
       </pre>
     </div>

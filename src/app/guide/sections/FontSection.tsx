@@ -73,7 +73,7 @@ export default function FontSection() {
             <button
               key={t.label}
               onClick={() => copy(t.snippet, t.label)}
-              className="border-border group flex flex-col items-start rounded-lg border bg-white/80 p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:bg-slate-800/40"
+              className="border-border group flex flex-col items-start rounded-lg border bg-bg-depth-1 p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
             >
               <div className="text-foreground">{t.render}</div>
               <div className="text-muted-foreground group-hover:text-primary text-xs">
@@ -95,7 +95,7 @@ export default function FontSection() {
               <button
                 key={t.label}
                 onClick={() => copy(t.snippet, t.label)}
-                className="border-border group flex flex-col items-start rounded-lg border bg-white/80 p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:bg-slate-800/40"
+                className="border-border group flex flex-col items-start rounded-lg border bg-bg-depth-1 p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
               >
                 <div className="text-foreground">{t.render}</div>
                 <div className="text-muted-foreground group-hover:text-primary text-xs">

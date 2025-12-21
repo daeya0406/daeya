@@ -26,7 +26,7 @@ export default function CardList({
       {cards.map((card) => (
         <div
           key={card.id}
-          className="group flex flex-col rounded-md border border-slate-200/70 bg-white/80 p-4 text-left transition hover:border-slate-300 hover:shadow-sm dark:border-slate-800 dark:bg-slate-900/60 dark:hover:border-slate-700"
+          className="group flex flex-col rounded-md border border-border bg-bg-depth-1 p-4 text-left transition hover:border-primary/50 hover:shadow-sm"
         >
           <div className="flex items-start justify-between gap-3">
             <button onClick={() => onSelect(card.id)} className="text-left">

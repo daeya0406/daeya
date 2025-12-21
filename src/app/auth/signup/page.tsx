@@ -22,7 +22,9 @@ import { supabase } from '@/lib/supabase';
 
 export default function SignUpPage() {
   return (
-    <Suspense fallback={<div className="py-10 text-center text-sm text-slate-500">Loading...</div>}>
+    <Suspense
+      fallback={<div className="py-10 text-center text-sm text-muted-foreground">Loading...</div>}
+    >
       <SignUpPageContent />
     </Suspense>
   );
@@ -63,7 +65,7 @@ function SignUpPageContent() {
 
   return (
     <section className="mx-auto flex min-h-[70vh] max-w-md flex-col justify-center px-4 py-10">
-      <div className="rounded-2xl border border-slate-200/70 bg-white/80 p-6 shadow-md backdrop-blur dark:border-slate-700 dark:bg-slate-800">
+      <div className="rounded-2xl border border-border bg-bg-depth-1/80 p-6 shadow-md backdrop-blur">
         <Text.H3 className="mb-8 text-center font-bold">회원가입</Text.H3>
 
         <Form {...form}>
@@ -139,14 +141,14 @@ function SignUpPageContent() {
 
         <div className="text-muted-foreground mt-5 flex items-center justify-between text-xs">
           <span>이미 계정이 있나요?</span>
-          <Link href="/auth/login" className="text-blue-600 hover:underline dark:text-blue-400">
+          <Link href="/auth/login" className="text-primary hover:underline">
             로그인 페이지
           </Link>
         </div>
       </div>
 
-      <div className="mt-6 space-y-2 rounded-lg border border-dashed border-slate-300 bg-slate-100 p-4 text-xs text-slate-700 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300">
-        <p className="font-semibold text-slate-900 dark:text-slate-100">설명 & 가이드</p>
+      <div className="mt-6 space-y-2 rounded-lg border border-dashed border-border bg-bg-depth-2 p-4 text-xs text-muted-foreground">
+        <p className="font-semibold text-foreground">설명 & 가이드</p>
         <ul className="list-disc space-y-1 pl-4">
           <li>비밀번호/확인 필드 일치 여부를 Zod refine으로 체크합니다.</li>
           <li>가입 후 이메일 인증 메일이 발송되며, redirect는 `/auth/reset`으로 설정했습니다.</li>

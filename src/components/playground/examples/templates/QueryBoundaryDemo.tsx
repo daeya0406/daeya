@@ -23,11 +23,11 @@ export default function QueryBoundaryDemo() {
           초기화
         </Button>
       </div>
-      <div className="rounded-lg border border-slate-200/70 bg-white/80 p-3 text-sm dark:border-slate-800 dark:bg-slate-900/50">
-        {state === 'idle' && <p className="text-slate-500">클릭해서 데이터를 불러오세요.</p>}
-        {state === 'loading' && <p className="animate-pulse text-slate-500">로딩 중...</p>}
-        {state === 'error' && <p className="text-red-500">에러 발생. 다시 시도하세요.</p>}
-        {state === 'success' && <p className="text-emerald-600">데이터 로드 완료!</p>}
+      <div className="rounded-lg border border-border bg-bg-depth-1 p-3 text-sm">
+        {state === 'idle' && <p className="text-muted-foreground">클릭해서 데이터를 불러오세요.</p>}
+        {state === 'loading' && <p className="animate-pulse text-muted-foreground">로딩 중...</p>}
+        {state === 'error' && <p className="text-[rgb(var(--status-danger))]">에러 발생. 다시 시도하세요.</p>}
+        {state === 'success' && <p className="text-primary">데이터 로드 완료!</p>}
       </div>
     </div>
   );

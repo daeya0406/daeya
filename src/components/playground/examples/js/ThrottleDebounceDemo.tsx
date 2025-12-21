@@ -41,22 +41,20 @@ export default function ThrottleDebounceDemo() {
 
   return (
     <div className="space-y-3">
-      <Text.Caption className="block text-slate-500 dark:text-slate-300">
-        Debounce vs Throttle (400ms)
-      </Text.Caption>
+      <Text.Caption className="block text-muted-foreground">Debounce vs Throttle (400ms)</Text.Caption>
       <Input
         value={text}
         onChange={(e) => handleChange(e.target.value)}
         placeholder="타이핑해보세요"
       />
-      <div className="grid gap-2 rounded-lg border border-slate-200/70 bg-white/80 p-3 text-sm dark:border-slate-800 dark:bg-slate-900/60">
+      <div className="grid gap-2 rounded-lg border border-border bg-bg-depth-1 p-3 text-sm">
         <div className="flex justify-between">
-          <span className="text-slate-600 dark:text-slate-300">Debounced</span>
-          <span className="font-mono text-blue-600 dark:text-blue-300">{debounced}</span>
+          <span className="text-muted-foreground">Debounced</span>
+          <span className="font-mono text-primary">{debounced}</span>
         </div>
         <div className="flex justify-between">
-          <span className="text-slate-600 dark:text-slate-300">Throttled</span>
-          <span className="font-mono text-blue-600 dark:text-blue-300">{throttled}</span>
+          <span className="text-muted-foreground">Throttled</span>
+          <span className="font-mono text-primary">{throttled}</span>
         </div>
       </div>
       <Button size="sm" variant="outline" onClick={reset}>

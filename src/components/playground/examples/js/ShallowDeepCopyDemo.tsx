@@ -37,7 +37,7 @@ export default function ShallowDeepCopyDemo() {
         ]}
       />
 
-      <div className="grid gap-3 rounded-lg border border-slate-200/70 bg-white/80 p-3 text-sm md:grid-cols-3 dark:border-slate-800 dark:bg-slate-900/60">
+      <div className="grid gap-3 rounded-lg border border-border bg-bg-depth-1 p-3 text-sm md:grid-cols-3">
         {[
           { title: '원본', data: original },
           { title: '복사본(shallow)', data: shallow },
@@ -45,10 +45,10 @@ export default function ShallowDeepCopyDemo() {
         ].map((item) => (
           <div
             key={item.title}
-            className="space-y-3 rounded-md border border-slate-200/60 p-2 dark:border-slate-700"
+            className="space-y-3 rounded-md border border-border/70 bg-bg-depth-2 p-2"
           >
             <Text.Caption className="block">{item.title}</Text.Caption>
-            <div className="text-xs text-slate-700 dark:text-slate-200">
+            <div className="text-xs text-foreground">
               <div className="flex flex-wrap gap-1">
                 tags:
                 {item.data.tags.map((t, index) => (

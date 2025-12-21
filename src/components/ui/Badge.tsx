@@ -8,8 +8,8 @@ type BadgeProps = React.HTMLAttributes<HTMLSpanElement> & {
 };
 
 const variantClass = {
-  default: 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-200',
-  outline: 'border border-blue-300 text-blue-700 dark:border-blue-700 dark:text-blue-200',
+  default: 'bg-primary-100 text-primary',
+  outline: 'border border-primary text-primary',
 };
 
 export function Badge({ className, variant = 'default', ...props }: BadgeProps) {

@@ -17,14 +17,14 @@ export const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      'flex h-10 items-center justify-between gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-primary/40 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700',
+      'flex h-10 items-center justify-between gap-2 rounded-lg border border-border bg-bg-depth-1 px-3 py-2 text-sm text-foreground shadow-sm transition hover:bg-bg-depth-2 focus:outline-none focus:ring-2 focus:ring-primary/40',
       className
     )}
     {...props}
   >
     {children}
     <SelectPrimitive.Icon asChild>
-      <ChevronDown className="h-4 w-4 text-slate-500 dark:text-slate-300" />
+      <ChevronDown className="h-4 w-4 text-muted-foreground" />
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>
 ));
@@ -39,7 +39,7 @@ export const SelectContent = React.forwardRef<
     <SelectPrimitive.Content
       ref={ref}
       className={cn(
-        'z-50 min-w-[10rem] overflow-hidden rounded-lg border border-slate-200 bg-white/95 text-slate-800 shadow-lg backdrop-blur dark:border-slate-700 dark:bg-slate-900/95 dark:text-slate-50',
+        'z-50 min-w-[10rem] overflow-hidden rounded-lg border border-border bg-bg-depth-1/95 text-foreground shadow-lg backdrop-blur',
         // 애니메이션
         'data-[state=open]:animate-in data-[state=closed]:animate-out',
         'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
@@ -71,9 +71,9 @@ export const SelectItem = React.forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      'relative flex w-full cursor-pointer select-none items-center rounded-md px-3 py-2 text-sm outline-none text-slate-700 transition dark:text-slate-200',
-      'hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-50',
-      'data-[state=checked]:bg-primary-100 data-[state=checked]:font-semibold data-[state=checked]:text-primary dark:data-[state=checked]:bg-primary/20 dark:data-[state=checked]:text-primary-100',
+      'relative flex w-full cursor-pointer select-none items-center rounded-md px-3 py-2 text-sm outline-none text-foreground transition',
+      'hover:bg-bg-depth-2 hover:text-foreground',
+      'data-[state=checked]:bg-primary-100 data-[state=checked]:font-semibold data-[state=checked]:text-primary',
       'data-[disabled]:pointer-events-none data-[disabled]:opacity-40',
       className
     )}

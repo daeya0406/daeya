@@ -161,7 +161,7 @@ export default function UISection() {
           <DropdownOption>
             <DropdownOptionTrigger asChild>
               <Button variant="outline" className="w-[40px] px-0">
-                <EllipsisVertical className="text-slate-500" />
+                <EllipsisVertical className="text-muted-foreground" />
               </Button>
             </DropdownOptionTrigger>
 

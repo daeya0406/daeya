@@ -1,8 +1,8 @@
 export default function Footer() {
   return (
-    <footer className="bg-slate-800 border-t border-slate-700 mt-auto">
+    <footer className="bg-bg-depth-1 border-t border-border mt-auto">
       <div className="container mx-auto px-4 py-6">
-        <p className="text-center text-slate-400 text-sm">
+        <p className="text-center text-muted-foreground text-sm">
           © {new Date().getFullYear()} Daeya Portfolio. All rights reserved.
         </p>
       </div>

@@ -41,12 +41,10 @@ export default function UseEffectDependencyDemo() {
 
   return (
     <div className="space-y-4">
-      <div className="rounded-lg border border-slate-200/70 bg-white/80 p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/60">
+      <div className="rounded-lg border border-border bg-bg-depth-1 p-4 shadow-sm">
         <div className="flex items-start justify-between">
           <div>
-            <p className="text-sm font-semibold text-slate-900 dark:text-slate-50">
-              useEffect 의존성 배열
-            </p>
+            <p className="text-sm font-semibold text-foreground">useEffect 의존성 배열</p>
             <Text.Caption>의존성 배열 없음 / [count] / [input] 비교</Text.Caption>
           </div>
         </div>
@@ -65,28 +63,26 @@ export default function UseEffectDependencyDemo() {
               placeholder="타이핑 해보세요"
             />
           </div>
-          <div className="space-y-2 rounded-lg border border-slate-200/70 bg-slate-50/70 p-3 dark:border-slate-800 dark:bg-slate-800/60">
-            <div className="flex items-center gap-2 text-sm text-slate-800 dark:text-slate-100">
+          <div className="space-y-2 rounded-lg border border-border bg-bg-depth-2 p-3">
+            <div className="flex items-center gap-2 text-sm text-foreground">
               <Badge variant="default">[count]</Badge>
               <span>count 변경 effect 실행: {countHits}회</span>
             </div>
-            <div className="flex items-center gap-2 text-sm text-slate-800 dark:text-slate-100">
+            <div className="flex items-center gap-2 text-sm text-foreground">
               <Badge variant="default">[input]</Badge>
               <span>input 변경 effect 실행: {textHits}회</span>
             </div>
-            <Text.Caption className="text-slate-500">
+            <Text.Caption className="text-muted-foreground">
               의존성 배열 없는 부분은 모든 렌더마다 실행 → 콘솔에서 확인 가능
             </Text.Caption>
           </div>
         </div>
       </div>
 
-      <div className="rounded-lg border border-slate-200/70 bg-white/80 p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/60">
+      <div className="rounded-lg border border-border bg-bg-depth-1 p-4 shadow-sm">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-sm font-semibold text-slate-900 dark:text-slate-50">
-              [running] 의존성 + setInterval
-            </p>
+            <p className="text-sm font-semibold text-foreground">[running] 의존성 + setInterval</p>
             <Text.Caption>마운트 1회 등록, 버튼으로 토글</Text.Caption>
           </div>
           <Badge variant={running ? 'default' : 'outline'}>{running ? 'running' : 'stopped'}</Badge>

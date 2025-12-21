@@ -48,17 +48,17 @@ export default function UseReducerDemo() {
   const [text, setText] = useState('');
 
   return (
-    <div className="space-y-4 rounded-lg border border-slate-200/70 bg-white/80 p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/60">
+    <div className="space-y-4 rounded-lg border border-border bg-bg-depth-1 p-4 shadow-sm">
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-sm font-semibold text-slate-900 dark:text-slate-50">useReducer</p>
+          <p className="text-sm font-semibold text-foreground">useReducer</p>
           <Text.Caption>state + action을 한곳에서 관리, dispatch로 명령 전달</Text.Caption>
         </div>
         <Badge variant="outline">dispatch</Badge>
       </div>
 
       <div className="grid grid-cols-1 gap-4">
-        <div className="space-y-3 rounded-lg border border-slate-200/70 bg-slate-50/70 p-3 dark:border-slate-800 dark:bg-slate-800/60">
+        <div className="space-y-3 rounded-lg border border-border bg-bg-depth-2 p-3">
           <div className="flex items-center gap-2">
             <Button size="sm" variant="outline" onClick={() => dispatch({ type: 'dec' })}>
               -
@@ -69,16 +69,14 @@ export default function UseReducerDemo() {
             <Button size="sm" onClick={() => dispatch({ type: 'reset' })}>
               reset
             </Button>
-            <Text.Body14 className="ml-auto text-slate-700 dark:text-slate-100">
-              count: {state.count}
-            </Text.Body14>
+            <Text.Body14 className="ml-auto text-foreground">count: {state.count}</Text.Body14>
           </div>
-          <Text.Caption className="text-slate-500">
+          <Text.Caption className="text-muted-foreground">
             액션 객체에 따라 reducer가 상태를 계산. 로직이 한곳에 모여 테스트/확장이 쉬움
           </Text.Caption>
         </div>
 
-        <div className="space-y-3 rounded-lg border border-slate-200/70 bg-slate-50/70 p-3 dark:border-slate-800 dark:bg-slate-800/60">
+        <div className="space-y-3 rounded-lg border border-border bg-bg-depth-2 p-3">
           <form
             className="flex gap-2"
             onSubmit={(e) => {
@@ -96,16 +94,16 @@ export default function UseReducerDemo() {
               추가
             </Button>
           </form>
-          <div className="space-y-1 text-sm text-slate-800 dark:text-slate-100">
-            {state.todos.length === 0 && <p className="text-slate-500">아직 없음</p>}
+          <div className="space-y-1 text-sm text-foreground">
+            {state.todos.length === 0 && <p className="text-muted-foreground">아직 없음</p>}
             {state.todos.map((todo) => (
               <button
                 key={todo.id}
                 type="button"
-                className="flex w-full items-center justify-between rounded-md border border-slate-200/70 bg-white/80 px-3 py-2 text-left hover:border-slate-300 dark:border-slate-800 dark:bg-slate-900/60"
+                className="flex w-full items-center justify-between rounded-md border border-border bg-bg-depth-1 px-3 py-2 text-left transition hover:border-primary/50"
                 onClick={() => dispatch({ type: 'toggle', id: todo.id })}
               >
-                <span className={todo.done ? 'line-through text-slate-400' : ''}>
+                <span className={todo.done ? 'line-through text-muted-foreground' : ''}>
                   {todo.text}
                 </span>
                 <Badge variant={todo.done ? 'secondary' : 'outline'}>
@@ -114,7 +112,7 @@ export default function UseReducerDemo() {
               </button>
             ))}
           </div>
-          <Text.Caption className="text-slate-500">
+          <Text.Caption className="text-muted-foreground">
             dispatch({`{ type: 'toggle', id }`}) 한 번으로 상태 계산/렌더까지 처리
           </Text.Caption>
         </div>

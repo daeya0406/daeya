@@ -15,7 +15,7 @@ const ExpensiveChild = React.memo(function ExpensiveChild({ value }: { value: nu
   }, [value]);
 
   return (
-    <Text.Caption className="text-slate-600 dark:text-slate-300">
+    <Text.Caption className="text-muted-foreground dark:text-muted-foreground">
       memoized 결과: {computed}
     </Text.Caption>
   );

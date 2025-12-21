@@ -35,8 +35,8 @@ export default function ImmutabilityDemo() {
 function DemoCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="section-component">
-      <Text.Body14 className="font-semibold text-slate-900 dark:text-slate-50">{title}</Text.Body14>
-      <div className="mt-2 space-y-1 font-mono text-xs text-slate-700 dark:text-slate-200">
+      <Text.Body14 className="font-semibold text-foreground dark:text-foreground">{title}</Text.Body14>
+      <div className="mt-2 space-y-1 font-mono text-xs text-foreground dark:text-muted-foreground">
         {children}
       </div>
     </div>
@@ -46,7 +46,7 @@ function DemoCard({ title, children }: { title: string; children: React.ReactNod
 function CodeLine({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-start gap-2">
-      <span className="text-slate-500">{label}:</span>
+      <span className="text-muted-foreground">{label}:</span>
       <span className="break-all">{value}</span>
     </div>
   );

@@ -47,7 +47,7 @@ export function CardFormDialog({
 
         <div className="mt-4 space-y-3">
           <div className="space-y-1">
-            <Text.Caption className="block text-slate-600 dark:text-slate-300">제목</Text.Caption>
+            <Text.Caption className="block text-muted-foreground">제목</Text.Caption>
             <Input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -56,7 +56,7 @@ export function CardFormDialog({
             />
           </div>
           <div className="space-y-1">
-            <Text.Caption className="block text-slate-600 dark:text-slate-300">설명</Text.Caption>
+            <Text.Caption className="block text-muted-foreground">설명</Text.Caption>
             <Textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}

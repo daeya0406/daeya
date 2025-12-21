@@ -37,7 +37,7 @@ export default function TryCatchDemo() {
         </Button>
       </div>
       {message && (
-        <div className="rounded-md border border-slate-200/70 bg-slate-50 p-3 text-sm dark:border-slate-700 dark:bg-slate-700/60">
+        <div className="rounded-md border border-border bg-bg-depth-2 p-3 text-sm">
           {message}
         </div>
       )}

@@ -64,7 +64,7 @@ export default function TableFilterDemo() {
       </div>
 
       {filtered.length === 0 ? (
-        <p className="text-sm text-slate-500">조건에 맞는 데이터가 없습니다.</p>
+        <p className="text-sm text-muted-foreground">조건에 맞는 데이터가 없습니다.</p>
       ) : (
         <Table>
           <TableHeader>
@@ -79,7 +79,7 @@ export default function TableFilterDemo() {
               <TableRow key={item.title}>
                 <TableCell>{item.title}</TableCell>
                 <TableCell className="capitalize">{item.status}</TableCell>
-                <TableCell className="text-xs text-slate-500">{item.date}</TableCell>
+                <TableCell className="text-xs text-muted-foreground">{item.date}</TableCell>
               </TableRow>
             ))}
           </TableBody>

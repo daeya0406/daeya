@@ -21,10 +21,10 @@ export function Pagination({ page, pageSize, total, onPageChange }: Props) {
   for (let p = start; p <= end; p++) pages.push(p);
 
   return (
-    <div className="flex items-center justify-between gap-3 rounded-lg border border-slate-200/70 bg-white/80 px-3 py-2 text-sm shadow-sm dark:border-slate-800 dark:bg-slate-900/60">
+    <div className="flex items-center justify-between gap-3 rounded-lg border border-border bg-bg-depth-1 px-3 py-2 text-sm shadow-sm">
       <button
         className={cn(
-          'rounded-md px-3 py-1 font-medium text-slate-700 transition hover:bg-slate-100 disabled:opacity-50 dark:text-slate-100 dark:hover:bg-slate-800',
+          'rounded-md px-3 py-1 font-medium text-foreground transition hover:bg-bg-depth-2 disabled:opacity-50',
           page === 1 && 'pointer-events-none'
         )}
         onClick={() => onPageChange(Math.max(1, page - 1))}
@@ -42,8 +42,8 @@ export function Pagination({ page, pageSize, total, onPageChange }: Props) {
             className={cn(
               'min-w-[28px] rounded-md px-2 py-1 text-sm font-semibold transition',
               p === page
-                ? 'text-primary border border-blue-200 bg-blue-50'
-                : 'text-slate-700 hover:bg-slate-100 dark:text-slate-100 dark:hover:bg-slate-800'
+                ? 'text-primary border border-primary/40 bg-primary-100'
+                : 'text-foreground hover:bg-bg-depth-2'
             )}
             aria-current={p === page ? 'page' : undefined}
           >
@@ -54,7 +54,7 @@ export function Pagination({ page, pageSize, total, onPageChange }: Props) {
 
       <button
         className={cn(
-          'rounded-md px-3 py-1 font-medium text-slate-700 transition hover:bg-slate-100 disabled:opacity-50 dark:text-slate-100 dark:hover:bg-slate-800',
+          'rounded-md px-3 py-1 font-medium text-foreground transition hover:bg-bg-depth-2 disabled:opacity-50',
           page === totalPages && 'pointer-events-none'
         )}
         onClick={() => onPageChange(Math.min(totalPages, page + 1))}

@@ -19,10 +19,10 @@ export default function ClosureDemo() {
 
   return (
     <div className="section-component">
-      <pre className="mt-2 whitespace-pre-wrap font-mono text-xs text-slate-700 dark:text-slate-200">
+      <pre className="mt-2 whitespace-pre-wrap font-mono text-xs text-foreground dark:text-muted-foreground">
         {logs.join('\n')}
       </pre>
-      <p className="mt-3 text-xs text-slate-500 dark:text-slate-400">
+      <p className="mt-3 text-xs text-muted-foreground dark:text-muted-foreground">
         함수 스코프에 남는 count를 각각 캡처해서 독립적인 상태를 유지함
       </p>
     </div>

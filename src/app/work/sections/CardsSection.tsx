@@ -140,7 +140,7 @@ export default function CardsSection() {
       <div className="flex items-start justify-between gap-3">
         <div>
           <Text.H3>Cards</Text.H3>
-          <Text.Caption className="block text-slate-500 dark:text-slate-300">
+          <Text.Caption className="block text-muted-foreground">
             카드 목록과 모달을 Work 탭에서 바로 확인하세요.
           </Text.Caption>
         </div>
@@ -151,16 +151,16 @@ export default function CardsSection() {
         )}
       </div>
 
-      <div className="rounded-2xl border border-slate-200/70 bg-white/80 p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/50">
+      <div className="rounded-2xl border border-border bg-bg-depth-1/80 p-4 shadow-sm">
         {loading && (
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
             {Array.from({ length: 10 }).map((_, idx) => (
               <div
                 key={idx}
-                className="rounded-lg border border-slate-200/70 bg-slate-50 p-4 shadow-sm dark:border-slate-800 dark:bg-slate-800/60"
+                className="rounded-lg border border-border bg-bg-depth-2 p-4 shadow-sm"
               >
-                <div className="mb-2 h-4 w-1/2 animate-pulse rounded bg-slate-200 dark:bg-slate-700" />
-                <div className="h-3 w-3/4 animate-pulse rounded bg-slate-200 dark:bg-slate-700" />
+                <div className="mb-2 h-4 w-1/2 animate-pulse rounded bg-bg-depth-3" />
+                <div className="h-3 w-3/4 animate-pulse rounded bg-bg-depth-3" />
               </div>
             ))}
           </div>

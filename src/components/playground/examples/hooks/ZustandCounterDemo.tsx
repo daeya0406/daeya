@@ -23,16 +23,16 @@ export default function ZustandCounterDemo() {
     <div className="flex flex-wrap items-center gap-3">
       <button
         onClick={reset}
-        className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm shadow-sm hover:border-slate-300 dark:border-slate-700 dark:bg-slate-800"
+        className="rounded-lg border border-border bg-bg-depth-1 px-3 py-2 text-sm shadow-sm transition hover:border-primary/60"
       >
         Reset
       </button>
-      <div className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm shadow-sm dark:border-slate-700 dark:bg-slate-800">
+      <div className="rounded-lg border border-border bg-bg-depth-1 px-3 py-2 text-sm shadow-sm">
         Count: {count}
       </div>
       <button
         onClick={increase}
-        className="rounded-lg border border-blue-200 bg-blue-50 px-3 py-2 text-sm text-blue-700 shadow-sm hover:border-blue-300 dark:border-blue-600/50 dark:bg-blue-900/30 dark:text-blue-200"
+        className="rounded-lg border border-primary/30 bg-primary/10 px-3 py-2 text-sm text-primary shadow-sm transition hover:border-primary/60"
       >
         +1
       </button>

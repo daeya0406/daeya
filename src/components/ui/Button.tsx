@@ -12,16 +12,13 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: `
-          bg-primary text-white hover:bg-primary/90
-          dark:hover:bg-primary/90
+          bg-primary text-primary-foreground hover:bg-primary/90
         `,
         secondary: `
-          bg-slate-200 text-slate-900 hover:bg-slate-300
-          dark:bg-slate-700 dark:text-white dark:hover:bg-slate-600
+          bg-bg-depth-3 text-foreground hover:bg-bg-depth-2
         `,
         outline: `
-          border border-slate-300 text-slate-800 hover:bg-slate-100
-          dark:border-slate-600 dark:text-slate-200 dark:hover:bg-slate-700/40
+          border border-border text-foreground hover:bg-bg-depth-2
         `,
       },
       size: {

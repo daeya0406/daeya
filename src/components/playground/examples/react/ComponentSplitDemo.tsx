@@ -12,10 +12,10 @@ type Profile = {
 function ProfileCard({ profile }: { profile: Profile }) {
   return (
     <div className="section-component">
-      <Text.Body16 className="font-semibold text-slate-900 dark:text-slate-50">
+      <Text.Body16 className="font-semibold text-foreground dark:text-foreground">
         {profile.name}
       </Text.Body16>
-      <Text.Caption className="text-slate-600 dark:text-slate-300">{profile.role}</Text.Caption>
+      <Text.Caption className="text-muted-foreground dark:text-muted-foreground">{profile.role}</Text.Caption>
       <div className="mt-2 flex flex-wrap gap-2">
         {profile.tags.map((tag) => (
           <Badge key={tag} variant="outline">

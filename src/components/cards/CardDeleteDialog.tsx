@@ -26,7 +26,7 @@ export function CardDeleteDialog({
           <Text.H4 as="span">카드 삭제</Text.H4>
         </DialogTitle>
         <DialogDescription asChild>
-          <Text.Body14 as="span" className="text-slate-700 dark:text-slate-200">
+          <Text.Body14 as="span" className="text-foreground">
             {title ? `${title} 카드를 삭제할까요?` : '카드를 삭제할까요?'}
           </Text.Body14>
         </DialogDescription>

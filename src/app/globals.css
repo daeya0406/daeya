@@ -193,9 +193,9 @@
   body {
     background: radial-gradient(
       circle at top right,
-      theme(colors.slate.50) 0%,
+      rgb(var(--bg-depth-2)) 0%,
       rgb(var(--background)) 60%,
-      theme(colors.slate.50) 100%
+      rgb(var(--bg-depth-3)) 100%
     );
     color: var(--color-foreground);
     font-family: 'Pretendard', sans-serif;
@@ -205,9 +205,9 @@
 .dark body {
   background: radial-gradient(
     circle at top right,
-    rgb(var(--bg-tertiary)) 0%,
+    rgb(var(--bg-depth-2)) 0%,
     rgb(var(--background)) 60%,
-    rgb(var(--bg-tertiary)) 100%
+    rgb(var(--bg-depth-3)) 100%
   );
 }
 
@@ -255,11 +255,11 @@
 
   /* Custom */
   .section-card {
-    @apply rounded-2xl bg-white/60 p-6 shadow-lg md:p-12 dark:bg-slate-800/40;
+    @apply rounded-2xl bg-bg-depth-1/90 p-6 shadow-lg md:p-12;
   }
 
   .section-component {
-    @apply rounded-lg border border-slate-200/70 bg-white/80 p-3 text-sm shadow-sm dark:border-slate-800 dark:bg-slate-700/40;
+    @apply rounded-lg border border-border bg-bg-depth-1 p-3 text-sm shadow-sm;
   }
 
   .form-base {

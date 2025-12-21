@@ -39,25 +39,25 @@ export default function UseQueryDemo() {
   });
 
   return (
-    <div className="space-y-3 rounded-lg border border-slate-200/70 bg-white/80 p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/60">
+    <div className="space-y-3 rounded-lg border border-border bg-bg-depth-1 p-4 shadow-sm">
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-sm font-semibold text-slate-900 dark:text-slate-50">useQuery</p>
+          <p className="text-sm font-semibold text-foreground">useQuery</p>
           <Text.Caption>queryKey / select / staleTime 예시</Text.Caption>
         </div>
         <Badge variant={isFetching ? 'default' : 'outline'}>{isFetching ? 'fetching' : 'idle'}</Badge>
       </div>
 
-      {isPending && <Text.Caption className="text-slate-500">로딩 중...</Text.Caption>}
-      {error && <Text.Caption className="text-rose-500">에러: {error.message}</Text.Caption>}
+      {isPending && <Text.Caption className="text-muted-foreground">로딩 중...</Text.Caption>}
+      {error && <Text.Caption className="text-[rgb(var(--status-danger))]">에러: {error.message}</Text.Caption>}
 
       {data && (
         <div className="space-y-1 text-sm">
-          <p className="font-medium text-slate-900 dark:text-slate-100">총 {data.total}건</p>
-          <p className="text-slate-600 dark:text-slate-300">
+          <p className="font-medium text-foreground">총 {data.total}건</p>
+          <p className="text-muted-foreground">
             완료: {data.done.map((todo) => todo.title).join(', ') || '없음'}
           </p>
-          <p className="text-slate-600 dark:text-slate-300">
+          <p className="text-muted-foreground">
             대기: {data.pending.map((todo) => todo.title).join(', ') || '없음'}
           </p>
         </div>
@@ -67,7 +67,7 @@ export default function UseQueryDemo() {
         <Button size="sm" onClick={() => refetch()}>
           수동 refetch
         </Button>
-        <Text.Caption className="text-slate-500">staleTime 동안 캐시 유지</Text.Caption>
+        <Text.Caption className="text-muted-foreground">staleTime 동안 캐시 유지</Text.Caption>
       </div>
     </div>
   );

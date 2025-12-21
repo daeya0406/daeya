@@ -3,13 +3,13 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 
-const textVariants = cva('text-slate-900 dark:text-slate-100', {
+const textVariants = cva('text-foreground', {
   variants: {
     variant: {
       muted: 'text-muted-foreground',
       success: 'text-emerald-600 dark:text-emerald-400',
       danger: 'text-red-600 dark:text-red-400',
-      primary: 'text-blue-600 dark:text-blue-400',
+      primary: 'text-primary',
       strong: 'font-semibold',
       default: '',
     },

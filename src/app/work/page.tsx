@@ -15,7 +15,9 @@ type TabKey = string;
 
 export default function WorkPage() {
   return (
-    <Suspense fallback={<div className="py-10 text-center text-sm text-slate-500">Loading...</div>}>
+    <Suspense
+      fallback={<div className="py-10 text-center text-sm text-muted-foreground">Loading...</div>}
+    >
       <WorkPageContent />
     </Suspense>
   );

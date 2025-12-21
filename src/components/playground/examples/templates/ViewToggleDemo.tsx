@@ -42,14 +42,10 @@ export default function ViewToggleDemo() {
           {data.map((item) => (
             <div
               key={item.title}
-              className="rounded-lg border border-slate-200/70 bg-white/80 p-3 shadow-sm dark:border-slate-800 dark:bg-slate-900/60"
+              className="rounded-lg border border-border bg-bg-depth-1 p-3 shadow-sm"
             >
-              <Text.Body16 className="text-base font-semibold text-slate-900 dark:text-slate-50">
-                {item.title}
-              </Text.Body16>
-              <Text.Caption className="block text-slate-600 dark:text-slate-300">
-                담당: {item.owner}
-              </Text.Caption>
+              <Text.Body16 className="text-base font-semibold text-foreground">{item.title}</Text.Body16>
+              <Text.Caption className="block text-muted-foreground">담당: {item.owner}</Text.Caption>
               <Badge className="mt-1" variant="outline">
                 {item.status}
               </Badge>

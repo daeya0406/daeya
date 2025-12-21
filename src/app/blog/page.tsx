@@ -16,13 +16,11 @@ export default function BlogPage() {
         {posts.map((post) => (
           <article
             key={post.title}
-            className="rounded-xl border border-slate-200/70 bg-white/80 p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-slate-800 dark:bg-slate-900/60"
+            className="rounded-xl border border-border bg-bg-depth-1 p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
           >
             <Text.H4 className="mb-1">{post.title}</Text.H4>
-            <Text.Caption className="block text-slate-500 dark:text-slate-300">
-              {post.date}
-            </Text.Caption>
-            <p className="mt-1 text-sm text-slate-700 dark:text-slate-200">{post.summary}</p>
+            <Text.Caption className="block text-muted-foreground">{post.date}</Text.Caption>
+            <p className="mt-1 text-sm text-foreground">{post.summary}</p>
           </article>
         ))}
       </div>
