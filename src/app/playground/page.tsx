@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, useEffect, useMemo, useState } from 'react';
+import { Suspense, useMemo, useState } from 'react';
 import { Text } from '@/components/ui/Text';
 import { Button } from '@/components/ui/Button';
 import { toast } from 'sonner';
@@ -33,21 +33,13 @@ function PlaygroundPageContent() {
   );
 
   const [activeId, setActiveId] = useState<string | undefined>(filteredItems[0]?.id);
+  const currentActiveId = useMemo(() => {
+    if (!filteredItems.length) return undefined;
+    if (activeId && filteredItems.some((i) => i.id === activeId)) return activeId;
+    return filteredItems[0]?.id;
+  }, [activeId, filteredItems]);
 
-  // keep selection in sync with filtered list
-  useEffect(() => {
-    if (filteredItems.length === 0) {
-      setActiveId(undefined);
-      return;
-    }
-
-    setActiveId((prev) => {
-      if (prev && filteredItems.some((i) => i.id === prev)) return prev;
-      return filteredItems[0]?.id;
-    });
-  }, [filteredItems]);
-
-  const activeItem = filteredItems.find((item) => item.id === activeId);
+  const activeItem = filteredItems.find((item) => item.id === currentActiveId);
 
   if (!tabs.length) return null;
 
@@ -133,12 +125,10 @@ function PlaygroundPageContent() {
                   </div>
 
                   {activeItem.demo && (
-                    <div className="border-border bg-depth-2 rounded-lg border p-4 shadow-sm">
-                      {activeItem.demo}
-                    </div>
+                    <div className="bg-depth-2 rounded-lg p-4">{activeItem.demo}</div>
                   )}
 
-                  <div className="border-border bg-depth-2 rounded-lg border p-4 text-sm shadow-sm">
+                  <div className="bg-depth-1 border-border rounded-lg border border-t px-4 py-5 text-sm">
                     <pre className="text-muted-foreground max-h-[520px] overflow-auto whitespace-pre-wrap font-mono text-xs leading-relaxed">
                       {activeItem.code}
                     </pre>

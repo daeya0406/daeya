@@ -34,73 +34,6 @@ export const nextItems: PlaygroundItem[] = [
 └ types/                // 전역 타입 선언`,
   },
   {
-    id: 'layer-separation',
-    title: '레이어 분리(응집도 생각)',
-    tags: ['Architecture'],
-    description: '컴포넌트는 UI, 도메인은 로직, 인프라는 IO',
-    categories: ['nextjs'],
-    demo: (
-      <InfoBlock
-        title="분리 패턴"
-        points={[
-          'Presentation: 컴포넌트는 상태+렌더만, 데이터 로드는 훅/서비스로',
-          'Domain: 토큰 검증/권한 체크 등 비즈니스 규칙은 순수 함수로',
-          'Infra: localStorage, fetch, router.push 같은 IO는 한곳에 모으기',
-        ]}
-      />
-    ),
-    code: `// ❌ 안티 패턴: 모든 계층이 뒤섞임
-"use client";
-
-function ProfilePage() {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    // 1. Infrastructure (localStorage)
-    const token = localStorage.getItem('accessToken');
-
-    // 2. Domain Logic (토큰 검증)
-    if (!token || isTokenExpired(token)) {
-      router.push('/login');
-      return;
-    }
-    // 3. Infrastructure (fetch)
-    fetch('/api/user', {
-      headers: { Authorization: \`Bearer \${token}\` }
-    })
-    // 4. Presentation Logic
-    .then(res => res.json())
-    .then(data => setUser(data));
-  }, []);
-
-  return <div>{user?.name}</div>;
-}
-
-
-// ✅ 개선된 패턴: 역할별로 분리
-
-// infra (io.ts)
-export const getToken = () => localStorage.getItem('accessToken');
-export const fetchMe = (token: string) => fetch('/api/user', { headers: { Authorization: \`Bearer \${token}\` }});
-
-// domain (auth.ts)
-export const isValidToken = (token: string) => !isExpired(token);
-
-// hook (useUser.ts)
-export function useUser() {
-  const token = getToken();
-  const enabled = token && isValidToken(token);
-  return useQuery(['me'], () => fetchMe(token!), { enabled });
-}
-
-// presentation
-function ProfilePage() {
-  const { data: user } = useUser();
-  if (!user) return <Spinner />;
-  return <div>{user.name}</div>;
-}`,
-  },
-  {
     id: 'server-client-components',
     title: '서버/클라이언트 컴포넌트 차이',
     tags: ['Server/Client'],
@@ -161,6 +94,46 @@ export async function createTodo(formData: FormData) {
 }`,
   },
   {
+    id: 'suspense-error-boundary',
+    title: 'ErrorBoundary + Suspense 조합',
+    tags: ['Suspense', 'ErrorBoundary'],
+    description:
+      '데이터 로딩은 Suspense fallback, 에러는 ErrorBoundary fallback으로 분리해 UX 유지',
+    categories: ['nextjs'],
+    demo: (
+      <InfoBlock
+        title="패턴"
+        points={[
+          'ErrorBoundary는 render/error에서 던진 에러 처리 → 에러 UI/복구 액션',
+          'Suspense는 pending 상태만 처리 → 데이터 로딩 skeleton/스피너',
+          'Next App Router에서도 클라이언트 컴포넌트 내부에 조합 가능',
+        ]}
+      />
+    ),
+    code: `import { Suspense } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
+
+function ErrorFallback() {
+  return <div>문제가 발생했습니다. 새로고침하거나 다시 시도하세요.</div>;
+}
+
+function Loading() {
+  return <div>로딩 중...</div>;
+}
+
+export default function Page() {
+  return (
+    <ErrorBoundary fallback={<ErrorFallback />}>
+      <Suspense fallback={<Loading />}>
+        <PostList />
+      </Suspense>
+    </ErrorBoundary>
+  );
+}
+
+// PostList 내부에서 useQuery(Suspense 모드)나 fetcher가 throw하면 ErrorBoundary가 처리`,
+  },
+  {
     id: 'fetch-cache',
     title: 'fetch 캐싱',
     tags: ['Cache'],
@@ -198,5 +171,28 @@ await fetch(url, { cache: 'no-store' });`,
     code: `app/blog/[slug]/page.tsx
 app/(marketing)/page.tsx
 app/api/todos/route.ts`,
+  },
+  {
+    id: 'middleware-role-redirect',
+    title: 'Middleware',
+    tags: ['auth'],
+    description:
+      '쿠키에 저장된 role을 읽어서 /admin 경로 접근 시 권한 없는 사용자를 리다이렉트하는 패턴. matcher로 필요한 경로에만 적용할 것.',
+    categories: ['nextjs'],
+    code: `import { NextRequest, NextResponse } from 'next/server';
+
+export function middleware(request: NextRequest) {
+  const role = request.cookies.get('role')?.value;
+
+  if (request.nextUrl.pathname.startsWith('/admin')) {
+    if (role !== 'ADMIN') {
+      return NextResponse.redirect(new URL('/', request.url));
+    }
+  }
+
+  return NextResponse.next();
+}
+
+// middleware.ts에 저장하고, 필요시 config.matcher로 범위를 좁힙니다.`,
   },
 ];

@@ -209,6 +209,7 @@ if (isPending) return <Skeleton />;
 if (error) return <Error />;
 return <PostList posts={data} />;`,
   },
+
   {
     id: 'zustand-template',
     title: 'Zustand 템플릿',
@@ -225,9 +226,40 @@ return <PostList posts={data} />;`,
         ]}
       />
     ),
-    code: `const useStore = create((set) => ({
+    code: `import { create } from 'zustand';
+
+type CounterStore = {
+  count: number;
+  inc: () => void;
+};
+
+const useCounterStore = create<CounterStore>((set) => ({
   count: 0,
-  inc: () => set((s) => ({ count: s.count + 1 })),
-}));`,
+  inc: () =>
+    set((s) => ({
+      count: s.count + 1,
+    })),
+}));
+
+function CounterView() {
+  // count만 구독 → count 변경 시에만 리렌더
+  const count = useCounterStore((state) => state.count);
+  return <h2>현재 카운트: {count}</h2>;
+}
+
+function CounterButton() {
+  // action만 구독 → count 변경과 무관
+  const inc = useCounterStore((state) => state.inc);
+  return <button onClick={inc}>+1 증가</button>;
+}
+
+export default function App() {
+  return (
+    <div>
+      <CounterView />
+      <CounterButton />
+    </div>
+  );
+}`,
   },
 ];

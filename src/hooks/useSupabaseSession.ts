@@ -1,12 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import type { User, Session } from '@supabase/supabase-js';
+import type { User } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabase';
 
 type AuthState = {
   user: User | null;
-  session: Session | null;
   role: string;
   loading: boolean;
 };
@@ -14,7 +13,6 @@ type AuthState = {
 export function useSupabaseSession() {
   const [state, setState] = useState<AuthState>({
     user: null,
-    session: null,
     role: 'user',
     loading: true,
   });
@@ -22,22 +20,24 @@ export function useSupabaseSession() {
   useEffect(() => {
     let mounted = true;
 
+    // 초기 세션 로딩
     const loadSession = async () => {
       const { data } = await supabase.auth.getSession();
       const session = data.session ?? null;
       const user = session?.user ?? null;
       const role = await fetchRole(user?.id);
       if (!mounted) return;
-      setState({ user, session, role, loading: false });
+      setState({ user, role, loading: false });
     };
 
     loadSession();
 
+    // 로그인 반응
     const { data: listener } = supabase.auth.onAuthStateChange(async (_event, session) => {
       const user = session?.user ?? null;
       const role = await fetchRole(user?.id);
       if (!mounted) return;
-      setState({ user, session: session ?? null, role, loading: false });
+      setState({ user, role, loading: false });
     });
 
     return () => {
