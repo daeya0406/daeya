@@ -6,7 +6,7 @@ export type LayoutMode = 'default' | 'dashboard';
 
 type LayoutModeContextValue = {
   mode: LayoutMode;
-  setMode: (mode: LayoutMode) => void;
+  setMode: React.Dispatch<React.SetStateAction<LayoutMode>>;
   toggle: () => void;
   isDesktop: boolean;
   effectiveMode: LayoutMode;
@@ -44,13 +44,16 @@ export function LayoutModeProvider({ children }: { children: React.ReactNode }) 
     }
   }, []);
 
-  const setMode = React.useCallback((next: LayoutMode) => {
-    setModeState(next);
-    try {
-      window.localStorage.setItem(STORAGE_KEY, next);
-    } catch {
-      // 생략
-    }
+  const setMode = React.useCallback((next: React.SetStateAction<LayoutMode>) => {
+    setModeState((prev) => {
+      const resolved = typeof next === 'function' ? (next as (p: LayoutMode) => LayoutMode)(prev) : next;
+      try {
+        window.localStorage.setItem(STORAGE_KEY, resolved);
+      } catch {
+        // ignore
+      }
+      return resolved;
+    });
   }, []);
 
   const toggle = React.useCallback(() => {
