@@ -9,6 +9,7 @@ import { extractTabsFromNav } from '@/components/common/navigation';
 import { playgroundItems } from '@/components/playground/playgroundData';
 import { useSyncedTab } from '@/hooks/useSyncedTab';
 import { TabListPanel } from '@/components/common/TabListPanel';
+import { CodeBlock } from '@/components/common/CodeBlock';
 import { cn } from '@/lib/utils';
 
 const tabs = extractTabsFromNav('Playground');
@@ -128,11 +129,7 @@ function PlaygroundPageContent() {
                     <div className="bg-depth-2 rounded-lg p-4">{activeItem.demo}</div>
                   )}
 
-                  <div className="bg-depth-1 border-border rounded-lg border border-t px-4 py-5 text-sm">
-                    <pre className="text-muted-foreground max-h-[520px] overflow-auto whitespace-pre-wrap font-mono text-xs leading-relaxed">
-                      {activeItem.code}
-                    </pre>
-                  </div>
+                  <CodeBlock code={activeItem.code} />
                 </>
               ) : (
                 <Text.Caption>이 탭에는 준비된 항목이 없습니다.</Text.Caption>

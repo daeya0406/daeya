@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { Text } from '@/components/ui/Text';
 import CardList from '@/components/cards/CardList';
 import type { Card } from '@/types/card';
@@ -140,7 +140,7 @@ export default function CardsSection() {
       <div className="flex items-start justify-between gap-3">
         <div>
           <Text.H3>Cards</Text.H3>
-          <Text.Caption className="block text-muted-foreground">
+          <Text.Caption className="text-muted-foreground block">
             카드 목록과 모달을 Work 탭에서 바로 확인하세요.
           </Text.Caption>
         </div>
@@ -151,16 +151,13 @@ export default function CardsSection() {
         )}
       </div>
 
-      <div className="rounded-2xl border border-border bg-depth-1/80 p-4 shadow-sm">
+      <div className="border-border bg-depth-1/80 rounded-2xl border p-4 shadow-sm">
         {loading && (
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
             {Array.from({ length: 10 }).map((_, idx) => (
-              <div
-                key={idx}
-                className="rounded-lg border border-border bg-depth-2 p-4 shadow-sm"
-              >
-                <div className="mb-2 h-4 w-1/2 animate-pulse rounded bg-depth-3" />
-                <div className="h-3 w-3/4 animate-pulse rounded bg-depth-3" />
+              <div key={idx} className="border-border bg-depth-2 rounded-lg border p-4 shadow-sm">
+                <div className="bg-depth-3 mb-2 h-4 w-1/2 animate-pulse rounded" />
+                <div className="bg-depth-3 h-3 w-3/4 animate-pulse rounded" />
               </div>
             ))}
           </div>

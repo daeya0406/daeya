@@ -153,6 +153,49 @@ export default function Page() {
 await fetch(url, { cache: 'no-store' });`,
   },
   {
+    id: 'search-params-parse',
+    title: 'searchParams',
+    tags: ['Routing'],
+    description: 'page/sort 같은 쿼리를 안전하게 파싱해 기본값과 검증을 한 번에 처리',
+    categories: ['nextjs'],
+    demo: (
+      <InfoBlock
+        title="parse 함수로 분리"
+        points={[
+          'URLSearchParams를 받아 숫자 변환 + 기본값 지정',
+          '검증/범위 체크를 parse 함수에서 처리',
+          '페이지 컴포넌트는 결과만 받아 사용',
+        ]}
+      />
+    ),
+    code: `// lib/utils/url.ts
+export function parsePageSort(searchParams: URLSearchParams) {
+  const pageRaw = Number(searchParams.get('page'));
+  const page = Number.isFinite(pageRaw) && pageRaw > 0 ? pageRaw : 1;
+  const sort = searchParams.get('sort') ?? 'latest';
+  return { page, sort };
+}
+
+// app/posts/page.tsx
+type Props = { searchParams: Record<string, string | string[] | undefined> };
+
+export default function PostsPage({ searchParams }: Props) {
+  const params = new URLSearchParams(
+    Object.entries(searchParams).flatMap(([k, v]) =>
+      Array.isArray(v) ? v.map((vv) => [k, vv]) : [[k, v ?? '']]
+    )
+  );
+  const { page, sort } = parsePageSort(params);
+
+  return (
+    <div>
+      <p>페이지: {page}</p>
+      <p>정렬: {sort}</p>
+    </div>
+  );
+}`,
+  },
+  {
     id: 'routing',
     title: '라우팅 구조 정리',
     tags: ['Routing'],
