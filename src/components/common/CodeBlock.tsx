@@ -16,6 +16,7 @@ const prismTheme = {
   operator: { color: '#b560ff' },
   builtin: { color: '#A855F7' },
   function: { color: '#5e7aff' },
+  'attr-name': { color: '#57a312' },
   tag: { color: '#ff7823' },
   punctuation: { color: '#cb9f00' },
 };
