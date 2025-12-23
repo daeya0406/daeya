@@ -5,9 +5,11 @@ import { Github, Mail, ArrowUpRight } from 'lucide-react';
 import { getPublicExperiences } from '@/lib/supabase/api/portfolio';
 import type { Experience } from '@/types/experience';
 
+type ExperienceWithEndDate = Experience & { end_date?: string | null };
+
 export default async function AboutPage() {
   const experiencesRes = await Promise.allSettled([getPublicExperiences()]);
-  const experiences: Experience[] =
+  const experiences: ExperienceWithEndDate[] =
     experiencesRes[0]?.status === 'fulfilled' ? experiencesRes[0].value : [];
 
   return (
