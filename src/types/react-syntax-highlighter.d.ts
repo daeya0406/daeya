@@ -5,6 +5,13 @@ declare module 'react-syntax-highlighter' {
   export default SyntaxHighlighter;
 }
 
+declare module 'react-syntax-highlighter/*' {
+  const value: any;
+  export default value;
+  export const Prism: any;
+  export const Light: any;
+}
+
 declare module 'react-syntax-highlighter/dist/cjs/styles/prism' {
   export const duotoneLight: any;
   export const duotoneDark: any;
