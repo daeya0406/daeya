@@ -1,10 +1,13 @@
 import '@/app/globals.css';
-import { ReactQueryProvider } from '@/components/providers/ReactQueryProvider';
-import { ThemeProvider } from 'next-themes';
-import Script from 'next/script';
 import { Analytics } from '@vercel/analytics/next';
-import { LayoutModeProvider } from '@/components/providers/LayoutModeProvider';
+import { cookies } from 'next/headers';
+import Script from 'next/script';
+import type { ReactNode } from 'react';
+
 import { AppShell } from '@/components/common/AppShell';
+import { LayoutModeProvider } from '@/components/providers/LayoutModeProvider';
+import { ReactQueryProvider } from '@/components/providers/ReactQueryProvider';
+import { ThemeProvider, type Theme } from '@/components/providers/ThemeProvider';
 export const metadata = {
   title: 'Daeya Portfolio',
   description: '프론트엔드 개발자 김정대 포트폴리오',
@@ -13,9 +16,18 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: ReactNode }) {
+  const cookieStore = await cookies();
+  const cookieTheme = cookieStore.get('theme')?.value;
+  const initialTheme: Theme = cookieTheme === 'dark' ? 'dark' : 'light';
+
   return (
-    <html lang="ko" suppressHydrationWarning>
+    <html
+      lang="ko"
+      suppressHydrationWarning
+      data-theme={initialTheme}
+      className={initialTheme === 'dark' ? 'dark' : undefined}
+    >
       <body className="flex min-h-screen flex-col transition-colors">
         {/* GA 추가 Start */}
         <Script
@@ -46,7 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
         {/* GA 추가 End */}
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+        <ThemeProvider initialTheme={initialTheme}>
           <LayoutModeProvider>
             <ReactQueryProvider>
               <AppShell>{children}</AppShell>

@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useTheme } from 'next-themes';
 import { Sun, Moon, ChevronDown, User, LogOut, LayoutDashboard } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -18,6 +17,7 @@ import {
 } from '@/components/ui/DropdownOption';
 import { ButtonNowrap } from '@/components/ui/Button';
 import { useLayoutMode } from '@/components/providers/LayoutModeProvider';
+import { useTheme, type Theme } from '@/components/providers/ThemeProvider';
 
 export default function Header() {
   const { theme, setTheme } = useTheme();
@@ -41,7 +41,13 @@ export default function Header() {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between gap-4">
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/logo.png" alt="Daeya Logo" width={32} height={17} />
+            <Image
+              src="/logo.png"
+              alt="Daeya Logo"
+              width={32}
+              height={17}
+              style={{ width: 'auto', height: 'auto' }}
+            />
             <span className="text-lg font-bold text-foreground">Daeya Portfolio</span>
           </Link>
 
@@ -211,8 +217,8 @@ function MobileMenu({
   setTheme,
 }: {
   mounted: boolean;
-  theme?: string;
-  setTheme: (theme: string) => void;
+  theme: Theme;
+  setTheme: (theme: Theme) => void;
 }) {
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});

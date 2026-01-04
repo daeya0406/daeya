@@ -15,7 +15,10 @@ type LayoutModeContextValue = {
 const LayoutModeContext = React.createContext<LayoutModeContextValue | null>(null);
 
 function useMediaQuery(query: string) {
-  const [matches, setMatches] = React.useState(false);
+  const [matches, setMatches] = React.useState<boolean>(() => {
+    // 서버/초기 렌더에서는 데스크톱으로 간주해 SSR 마크업과 클라이언트 초기 렌더를 맞추기
+    return true;
+  });
 
   React.useEffect(() => {
     const mql = window.matchMedia(query);
@@ -46,7 +49,8 @@ export function LayoutModeProvider({ children }: { children: React.ReactNode }) 
 
   const setMode = React.useCallback((next: React.SetStateAction<LayoutMode>) => {
     setModeState((prev) => {
-      const resolved = typeof next === 'function' ? (next as (p: LayoutMode) => LayoutMode)(prev) : next;
+      const resolved =
+        typeof next === 'function' ? (next as (p: LayoutMode) => LayoutMode)(prev) : next;
       try {
         window.localStorage.setItem(STORAGE_KEY, resolved);
       } catch {

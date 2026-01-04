@@ -40,7 +40,7 @@ export default async function HomePage() {
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex items-start gap-4">
               <div className="bg-primary-100 text-primary flex h-12 w-12 items-center justify-center rounded-2xl">
-                <Image src="/logo.png" alt="Daeya" width={32} height={18} />
+                <Image src="/logo.png" alt="Daeya" width={32} height={18} style={{ width: 'auto', height: 'auto' }} />
               </div>
               <div className="min-w-0">
                 <Text.H2 as="h1" className="text-foreground">

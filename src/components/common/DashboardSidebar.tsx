@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { navItems } from '@/components/common/navigation';
 import { Text } from '@/components/ui/Text';
-import { useTheme } from 'next-themes';
 import {
   Accordion,
   AccordionContent,
@@ -26,6 +25,7 @@ import {
 import { useEffect, useMemo, useState } from 'react';
 import { useLayoutMode } from '@/components/providers/LayoutModeProvider';
 import { useSupabaseSession } from '@/hooks/useSupabaseSession';
+import { useTheme } from '@/components/providers/ThemeProvider';
 
 function isActiveHref(pathname: string, searchParams: URLSearchParams, href?: string) {
   if (!href) return false;
@@ -140,7 +140,13 @@ export function DashboardSidebar() {
       >
         {!collapsed && (
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/logo.png" alt="Daeya Logo" width={26} height={14} />
+            <Image
+              src="/logo.png"
+              alt="Daeya Logo"
+              width={26}
+              height={14}
+              style={{ width: 'auto', height: 'auto' }}
+            />
             <span className="text-text-primary text-lg font-bold">Daeya</span>
           </Link>
         )}
