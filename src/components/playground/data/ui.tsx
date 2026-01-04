@@ -9,18 +9,18 @@ export const uiItems: PlaygroundItem[] = [
     tags: ['Components'],
     description: '컴포넌트 만들 때 Props, children, 이벤트, 상태 4개 중 필요한 것만 섞으면 끝',
     categories: ['ui'],
-    code: `// 0. 기본 컴포넌트 껍데기
-
-type Props = {};
+    codes: [
+      {
+        label: '01.basic',
+        code: `type Props = {};
 
 export function ComponentName({}: Props) {
   return <div>ComponentName</div>;
-}
-
-
-// 1. Props 있는 컴포넌트 기본형 : 텍스트, 숫자, boolean 등 간단한 데이터 받기
-
-type Props = {
+}`,
+      },
+      {
+        label: '02,props-basic',
+        code: `type Props = {
   label: string;
   count?: number;
   active?: boolean;
@@ -32,23 +32,21 @@ export function ComponentName({ label, count = 0, active = false }: Props) {
       {label} – {count}
     </div>
   );
-}
-
-
-// 2. children 받는 컴포넌트 기본형
-
-type Props = {
+}`,
+      },
+      {
+        label: '03.children',
+        code: `type Props = {
   children: React.ReactNode;
 };
 
 export default function ComponentName({ children }: Props) {
   return <div className="wrapper">{children}</div>;
-}
-
-
-// 3. 이벤트 받는 컴포넌트 기본형 - (onClick, onChange 등)
-
-type Props = {
+}`,
+      },
+      {
+        label: '04.event',
+        code: `type Props = {
   onClick?: () => void;
   label: string;
 };
@@ -59,12 +57,11 @@ export function Button({ onClick, label }: Props) {
       {label}
     </button>
   );
-}
-
-
-// 4. Compound Pattern 껍데기
-
-export const Component = ({ children }: { children: React.ReactNode }) => {
+}`,
+      },
+      {
+        label: '05.compound',
+        code: `export const Component = ({ children }: { children: React.ReactNode }) => {
   return <div className="component">{children}</div>;
 };
 
@@ -80,12 +77,11 @@ export { Component }; // default 없을 때 따로 내보내는 방식도 참고
 <Component>
   <Component.Item>One</Component.Item>
   <Component.Item>Two</Component.Item>
-</Component>
-
-
-// 5. 폴리모픽(as) 컴포넌트 껍데기
-
-import { ElementType, ComponentProps } from "react";
+</Component>`,
+      },
+      {
+        label: '06.polymorphic',
+        code: `import { ElementType, ComponentProps } from "react";
 
 type Props<T extends ElementType> = {
   as?: T;
@@ -99,12 +95,11 @@ export function Text<T extends ElementType = "span">({
 }: Props<T>) {
   const Component = as || "span";
   return <Component {...rest}>{children}</Component>;
-}
-
-
-// 6) 상태가 있는 컴포넌트 기본형
-
-"use client";
+}`,
+      },
+      {
+        label: '07.stateful',
+        code: `"use client";
 
 import { useState } from "react";
 
@@ -119,12 +114,11 @@ export function ComponentName({}: Props) {
       <p>Value: {value}</p>
     </div>
   );
-}
-
-
-7) 비동기 + useEffect + fetch 기본 템플릿
-
-"use client";
+}`,
+      },
+      {
+        label: '08.async-fetch',
+        code: `"use client";
 
 import { useEffect, useState } from "react";
 
@@ -143,9 +137,9 @@ export default function ComponentName() {
 
   if (loading) return <div>Loading...</div>;
   return <pre>{JSON.stringify(data, null, 2)}</pre>;
-}
-
-`,
+}`,
+      },
+    ],
   },
   {
     id: 'responsive-table',

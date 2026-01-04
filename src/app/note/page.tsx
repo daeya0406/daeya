@@ -41,6 +41,15 @@ function NotePageContent() {
   }, [activeId, filteredItems]);
 
   const activeItem = filteredItems.find((item) => item.id === currentActiveId);
+  const codeBlocks =
+    activeItem &&
+    (activeItem.codes
+      ? activeItem.codes.map((entry) =>
+          typeof entry === 'string' ? { label: undefined, code: entry } : entry
+        )
+      : activeItem.code
+        ? [{ label: undefined, code: activeItem.code }]
+        : []);
 
   if (!tabs.length) return null;
 
@@ -113,23 +122,32 @@ function NotePageContent() {
                         {activeItem.description}
                       </Text.S12>
                     </div>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => {
-                        navigator.clipboard.writeText(activeItem.code);
-                        toast.success('코드가 복사되었습니다.');
-                      }}
-                    >
-                      코드 복사
-                    </Button>
                   </div>
 
                   {activeItem.demo && (
                     <div className="bg-depth-2 rounded-lg p-4">{activeItem.demo}</div>
                   )}
 
-                  <CodeBlock code={activeItem.code} />
+                  {codeBlocks?.map((block, idx) => (
+                    <div key={idx} className="space-y-2 rounded-lg border border-border p-3">
+                      <div className="flex items-center justify-between gap-3">
+                        <Text.S12 className="text-muted-foreground">
+                          {block.label ?? `코드 ${idx + 1}`}
+                        </Text.S12>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => {
+                            navigator.clipboard.writeText(block.code);
+                            toast.success(`${block.label ?? `코드 ${idx + 1}`}이(가) 복사되었습니다.`);
+                          }}
+                        >
+                          복사
+                        </Button>
+                      </div>
+                      <CodeBlock code={block.code} />
+                    </div>
+                  ))}
                 </>
               ) : (
                 <Text.Caption>이 탭에는 준비된 항목이 없습니다.</Text.Caption>

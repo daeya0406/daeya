@@ -5,7 +5,8 @@ export type PlaygroundItem = {
   title: string;
   tags: string[];
   description: string;
-  code: string;
+  code?: string;
+  codes?: Array<{ label?: string; code: string } | string>;
   categories: string[];
   demo?: React.ReactNode;
 };

@@ -168,16 +168,19 @@ await fetch(url, { cache: 'no-store' });`,
         ]}
       />
     ),
-    code: `// lib/utils/url.ts
-export function parsePageSort(searchParams: URLSearchParams) {
+    codes: [
+      {
+        label: 'lib/utils/url.ts',
+        code: `export function parsePageSort(searchParams: URLSearchParams) {
   const pageRaw = Number(searchParams.get('page'));
   const page = Number.isFinite(pageRaw) && pageRaw > 0 ? pageRaw : 1;
   const sort = searchParams.get('sort') ?? 'latest';
   return { page, sort };
-}
-
-// app/posts/page.tsx
-type Props = { searchParams: Record<string, string | string[] | undefined> };
+}`,
+      },
+      {
+        label: 'app/posts/page.tsx',
+        code: `type Props = { searchParams: Record<string, string | string[] | undefined> };
 
 export default function PostsPage({ searchParams }: Props) {
   const params = new URLSearchParams(
@@ -194,6 +197,8 @@ export default function PostsPage({ searchParams }: Props) {
     </div>
   );
 }`,
+      },
+    ],
   },
   {
     id: 'routing',
@@ -237,5 +242,97 @@ export function middleware(request: NextRequest) {
 }
 
 // middleware.ts에 저장하고, 필요시 config.matcher로 범위를 좁힙니다.`,
+  },
+  {
+    id: 'theme-provider-cookie-hydration',
+    title: '테마 쿠키 + 하이드레이션',
+    tags: ['Theme', 'Hydration'],
+    description: 'SSR에서 쿠키로 테마를 읽고 클라이언트에서 토글/쿠키 동기화하는 패턴',
+    categories: ['nextjs'],
+    demo: (
+      <InfoBlock
+        title="패턴 요약"
+        points={[
+          '서버: layout.tsx에서 cookies()로 theme 쿠키 읽어 초기 테마 결정',
+          '<html>에 data-theme/class로 초기 값 주입 → 첫 페인트 일치',
+          '클라이언트: ThemeProvider가 state + cookie + documentElement 동기화',
+          '토글 버튼은 useTheme() 훅으로 theme/setTheme/toggleTheme 사용',
+        ]}
+      />
+    ),
+    codes: [
+      {
+        label: 'app/layout.tsx',
+        code: `// app/layout.tsx
+import { cookies } from 'next/headers';
+import { ThemeProvider, type Theme } from '@/components/providers/ThemeProvider';
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const cookieStore = await cookies();
+  const cookieTheme = cookieStore.get('theme')?.value;
+  const initialTheme: Theme = cookieTheme === 'dark' ? 'dark' : 'light';
+
+  return (
+    <html data-theme={initialTheme} className={initialTheme === 'dark' ? 'dark' : undefined}>
+      <body>
+        <ThemeProvider initialTheme={initialTheme}>{children}</ThemeProvider>
+      </body>
+    </html>
+  );
+}
+      `,
+      },
+      {
+        label: 'components/providers/ThemeProvider.tsx',
+        code: `// components/providers/ThemeProvider.tsx
+'use client';
+import type { ReactNode } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
+
+export type Theme = 'light' | 'dark';
+
+const ThemeContext = createContext<{
+  theme: Theme;
+  setTheme: (t: Theme) => void;
+  toggleTheme: () => void;
+} | null>(null);
+
+type ThemeProviderProps = { initialTheme: Theme; children: ReactNode };
+
+export function ThemeProvider({ initialTheme, children }: ThemeProviderProps) {
+  const [theme, setTheme] = useState<Theme>(initialTheme);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.dataset.theme = theme;
+    root.classList.toggle('dark', theme === 'dark');
+    document.cookie = 'theme=' + theme + '; path=/; max-age=31536000';
+  }, [theme]);
+
+  const toggleTheme = () => setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
+
+  return <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>{children}</ThemeContext.Provider>;
+}
+
+export function useTheme() {
+  const ctx = useContext(ThemeContext);
+  if (!ctx) throw new Error('useTheme은 ThemeProvider 내부에서만 사용');
+  return ctx;
+}
+      `,
+      },
+      {
+        label: 'components/widgets/ThemeToggleButton.tsx',
+        code: `// components/widgets/ThemeToggleButton.tsx
+'use client';
+import { useTheme } from '@/components/providers/ThemeProvider';
+
+export function ThemeToggleButton() {
+  const { theme, toggleTheme } = useTheme();
+  return <button onClick={toggleTheme}>{theme === 'light' ? '다크모드' : '기본모드'}</button>;
+}
+`,
+      },
+    ],
   },
 ];
