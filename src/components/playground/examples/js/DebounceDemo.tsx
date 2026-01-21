@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { Input } from '@/components/ui/Input';
-import { Text } from '@/components/ui/Text';
 
 export default function DebounceDemo() {
   const [value, setValue] = useState('');
@@ -20,9 +19,9 @@ export default function DebounceDemo() {
         onChange={(e) => setValue(e.target.value)}
         placeholder="입력 후 잠시 기다려 보세요"
       />
-      <Text.Caption className="block text-muted-foreground dark:text-muted-foreground">
+      <span className="text-xs tracking-[0.01em] block text-muted-foreground dark:text-muted-foreground">
         Debounced: <span className="font-semibold text-primary dark:text-primary">{debounced}</span>
-      </Text.Caption>
+      </span>
     </div>
   );
 }

@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
-import { Text } from '@/components/ui/Text';
 
 export default function UseEffectDependencyDemo() {
   const [count, setCount] = useState(0);
@@ -45,7 +44,9 @@ export default function UseEffectDependencyDemo() {
         <div className="flex items-start justify-between">
           <div>
             <p className="text-sm font-semibold text-foreground">useEffect 의존성 배열</p>
-            <Text.Caption>의존성 배열 없음 / [count] / [input] 비교</Text.Caption>
+            <span className="text-xs tracking-[0.01em]">
+              의존성 배열 없음 / [count] / [input] 비교
+            </span>
           </div>
         </div>
 
@@ -55,7 +56,7 @@ export default function UseEffectDependencyDemo() {
               <Button size="sm" onClick={() => setCount((c) => c + 1)}>
                 count +1
               </Button>
-              <Text.Body14>count: {count}</Text.Body14>
+              <p className="text-md font-normal">count: {count}</p>
             </div>
             <Input
               value={text}
@@ -72,9 +73,9 @@ export default function UseEffectDependencyDemo() {
               <Badge variant="default">[input]</Badge>
               <span>input 변경 effect 실행: {textHits}회</span>
             </div>
-            <Text.Caption className="text-muted-foreground">
+            <span className="text-xs tracking-[0.01em] text-muted-foreground">
               의존성 배열 없는 부분은 모든 렌더마다 실행 → 콘솔에서 확인 가능
-            </Text.Caption>
+            </span>
           </div>
         </div>
       </div>
@@ -83,13 +84,15 @@ export default function UseEffectDependencyDemo() {
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm font-semibold text-foreground">[running] 의존성 + setInterval</p>
-            <Text.Caption>마운트 1회 등록, 버튼으로 토글</Text.Caption>
+            <span className="text-xs tracking-[0.01em]">
+              마운트 1회 등록, 버튼으로 토글
+            </span>
           </div>
           <Badge variant={running ? 'default' : 'outline'}>{running ? 'running' : 'stopped'}</Badge>
         </div>
 
         <div className="mt-3 flex items-center gap-3">
-          <Text.Body14>경과: {seconds}s</Text.Body14>
+          <p className="text-md font-normal">경과: {seconds}s</p>
           <Button
             size="sm"
             variant="outline"

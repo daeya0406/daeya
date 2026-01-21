@@ -1,175 +1,356 @@
-import { Text } from '@/components/ui/Text';
+'use client';
+
+import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { CopyTextButton } from '@/components/common/CopyTextButton';
-import { Github, Mail, ArrowUpRight } from 'lucide-react';
-import { getPublicExperiences } from '@/lib/supabase/api/portfolio';
-import type { Experience } from '@/types/experience';
+import {
+  Github,
+  Mail,
+  ArrowUpRight,
+  Award,
+  Code2,
+  Users,
+  Zap,
+  ChevronDown,
+  ChevronUp,
+} from 'lucide-react';
+import { CAREER_TIMELINE } from '@/entities/career/model/career';
+import { Button } from '@/components/ui/Button';
+import { PROFILE } from '@/entities/profile/model/profile';
+import {
+  ABOUT_INTERESTS,
+  ABOUT_LINKS,
+  ABOUT_PRINCIPLES,
+  ABOUT_STRENGTHS,
+} from '@/entities/about/model/about';
 
-type ExperienceWithEndDate = Experience & { end_date?: string | null };
+const cardClassName = 'bg-depth-1 ring-border/50 rounded-3xl shadow-sm ring-1';
 
-export default async function AboutPage() {
-  const experiencesRes = await Promise.allSettled([getPublicExperiences()]);
-  const experiences: ExperienceWithEndDate[] =
-    experiencesRes[0]?.status === 'fulfilled' ? experiencesRes[0].value : [];
+const INITIAL_CAREER_COUNT = 5;
+
+export default function AboutPage() {
+  const [showAllCareers, setShowAllCareers] = useState(false);
+
+  const careerKeys = useMemo(
+    () =>
+      CAREER_TIMELINE.flatMap((group) =>
+        group.entries.map(
+          (entry) => `${group.year}-${entry.client}-${entry.project}-${entry.period}`
+        )
+      ),
+    []
+  );
+
+  const visibleCareerKeys = useMemo(() => {
+    if (showAllCareers) return new Set(careerKeys);
+    return new Set(careerKeys.slice(0, INITIAL_CAREER_COUNT));
+  }, [careerKeys, showAllCareers]);
+
+  const strengthIconMap = {
+    code: Code2,
+    zap: Zap,
+    users: Users,
+    award: Award,
+  };
 
   return (
-    <div className="space-y-8">
-      <section className="bg-depth-1 ring-primary/10 rounded-3xl p-8 shadow-sm shadow-black/5 ring-1">
-        <Text.H2 as="h1" className="text-foreground">
-          About
-        </Text.H2>
-        <Text.Body14 className="text-muted-foreground mt-2">
-          아래 내용은 임시 텍스트입니다. 본문/수치/링크만 채우면 바로 제출용으로 쓸 수 있게
-          구성했어요.
-        </Text.Body14>
+    <div className="mx-auto max-w-5xl space-y-12">
+      <section className={['overflow-hidden p-0', cardClassName].join(' ')}>
+        <div className="grid lg:grid-cols-[1.5fr_0.5fr]">
+          {/* 왼쪽 */}
+          <div className="p-8 lg:p-12">
+            <h1 className="text-foreground text-3xl font-bold lg:text-4xl">
+              사용자 경험과 유지보수를 함께 설계하는
+              <br />
+              프론트엔드 개발자 김정대입니다
+            </h1>
+            <p className="text-muted-foreground mt-4 text-base leading-relaxed lg:text-lg">
+              "왜 이렇게 만들었나요?"에 명확하게 답할 수 있는 개발을 지향합니다. 디자인 시스템, 성능
+              최적화, 그리고 팀 생산성 향상에 관심이 많습니다.
+            </p>
 
-        <div className="mt-6 flex flex-wrap gap-2">
-          <CopyTextButton
-            text="you@example.com"
-            toastMessage="이메일을 복사했어요"
-            className="bg-depth-1 text-foreground hover:bg-depth-2 focus-visible:ring-primary/30 inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2"
-          >
-            <Mail className="h-4 w-4" /> Email
-          </CopyTextButton>
-          <Link
-            href="https://github.com/"
-            target="_blank"
-            className="bg-depth-1 text-foreground hover:bg-depth-2 focus-visible:ring-primary/30 inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2"
-          >
-            <Github className="h-4 w-4" /> GitHub <ArrowUpRight className="h-4 w-4" />
-          </Link>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <CopyTextButton
+                text={PROFILE.email}
+                toastMessage="이메일을 복사했어요"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition"
+              >
+                <Mail className="h-4 w-4" /> 이메일 보내기
+              </CopyTextButton>
+              <Link
+                href={PROFILE.links.github}
+                target="_blank"
+                className="bg-depth-2 hover:bg-depth-3 text-foreground inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition"
+              >
+                <Github className="h-4 w-4" /> GitHub
+              </Link>
+              <Link
+                href="/portfolio"
+                className="bg-depth-2 hover:bg-depth-3 text-foreground inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition"
+              >
+                프로젝트 보기 <ArrowUpRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
+
+          {/* 오른쪽 */}
+          <div className="bg-primary-100 flex flex-col justify-center space-y-6 p-8 lg:p-12">
+            <div>
+              <div className="text-muted-foreground text-sm font-medium">
+                {PROFILE.career.total.label}
+              </div>
+              <div className="text-foreground mt-1 text-xl font-bold">
+                {PROFILE.career.total.description}
+              </div>
+            </div>
+            <div>
+              <div className="text-muted-foreground text-sm font-medium">
+                {PROFILE.career.frontend.label}
+              </div>
+              <div className="text-foreground mt-1 text-xl font-bold">
+                {PROFILE.career.frontend.value ?? PROFILE.career.frontend.fallback ?? '-'}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="grid gap-6 lg:grid-cols-12">
-        <div className="space-y-6 lg:col-span-7">
-          <div className="bg-depth-1 ring-primary/10 rounded-3xl p-8 shadow-sm shadow-black/5 ring-1">
-            <Text.H3 className="text-foreground">요약</Text.H3>
-            <ul className="text-text-default mt-4 space-y-3 text-sm">
-              <li className="bg-depth-2 rounded-2xl p-4">
-                <Text.S14.Bold>문제 정의 → 해결 → 회고</Text.S14.Bold>
-                <Text.Caption className="text-muted-foreground mt-1">
-                  기능 구현보다 “왜/어떻게”를 문서로 남기는 스타일입니다.
-                </Text.Caption>
-              </li>
-              <li className="bg-depth-2 rounded-2xl p-4">
-                <Text.S14.Bold>UI Engineering</Text.S14.Bold>
-                <Text.Caption className="text-muted-foreground mt-1">
-                  토큰/타이포/컴포넌트 API를 정리해서 팀 생산성을 높입니다.
-                </Text.Caption>
-              </li>
-              <li className="bg-depth-2 rounded-2xl p-4">
-                <Text.S14.Bold>성능/접근성</Text.S14.Bold>
-                <Text.Caption className="text-muted-foreground mt-1">
-                  CLS/LCP, 키보드 네비게이션 같은 기본기를 챙깁니다.
-                </Text.Caption>
-              </li>
-            </ul>
-          </div>
+      <section className={['p-8 lg:p-12', cardClassName].join(' ')}>
+        <h2 className="text-foreground mb-8 text-2xl font-bold">장점</h2>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {ABOUT_STRENGTHS.map((strength) => {
+            const Icon = strengthIconMap[strength.icon as keyof typeof strengthIconMap] ?? Code2;
 
-          <div className="bg-depth-1 ring-primary/10 rounded-3xl p-8 shadow-sm shadow-black/5 ring-1">
-            <Text.H3 className="text-foreground">경험</Text.H3>
-            <div className="mt-4 space-y-3">
-              {(experiences.length
-                ? experiences.map((e) => ({
-                    title: `${e.company}${e.team ? ` / ${e.team}` : ''}`,
-                    period: `${e.start_date} – ${e.end_date ?? '현재'}`,
-                    desc: e.summary ?? '(요약을 채워주세요)',
-                    role: e.role,
-                    highlights: e.highlights ?? [],
-                    skills: e.skills ?? [],
-                  }))
-                : [
-                    {
-                      title: '회사/프로젝트 A',
-                      period: 'YYYY.MM – YYYY.MM',
-                      desc: '프로젝트 설명과 담당 업무(핵심 2~3개)',
-                      role: 'Frontend',
-                      highlights: ['성과/지표 1', '성과/지표 2'],
-                      skills: ['React', 'Next.js'],
-                    },
-                  ]
-              ).map((x) => (
-                <div key={x.title} className="bg-depth-2 rounded-2xl p-5">
-                  <div className="flex items-baseline justify-between gap-4">
-                    <Text.S16.Bold className="text-foreground">{x.title}</Text.S16.Bold>
-                    <Text.Caption className="text-muted-foreground">{x.period}</Text.Caption>
-                  </div>
-                  <Text.Body14 className="text-foreground mt-2">{x.desc}</Text.Body14>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    <span className="text-primary bg-primary-100 rounded-full px-3 py-1 text-xs font-semibold">
-                      {x.role}
-                    </span>
-                    {x.skills.slice(0, 6).map((s) => (
-                      <span
-                        key={s}
-                        className="bg-depth-2 text-muted-foreground ring-primary/10 rounded-full px-3 py-1 text-xs font-semibold ring-1"
-                      >
-                        {s}
-                      </span>
-                    ))}
-                  </div>
-                  {x.highlights.length ? (
-                    <ul className="text-foreground mt-4 list-disc space-y-1 pl-5 text-sm">
-                      {x.highlights.slice(0, 5).map((h) => (
-                        <li key={h}>{h}</li>
-                      ))}
-                    </ul>
-                  ) : null}
+            return (
+              <div key={strength.title} className="space-y-3">
+                <div className="bg-primary/10 text-primary inline-flex rounded-xl p-3">
+                  <Icon className="h-6 w-6" />
                 </div>
-              ))}
+                <h3 className="text-foreground text-lg font-semibold">{strength.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  {strength.description}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="grid gap-6 lg:grid-cols-2">
+        <div className={['p-8 lg:p-10', cardClassName].join(' ')}>
+          <h2 className="text-foreground mb-6 text-2xl font-bold">기술 스택</h2>
+
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-foreground mb-3 flex items-center gap-2 text-sm font-semibold">
+                <span className="bg-primary h-2 w-2 rounded-full" />
+                주력 기술
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {['JavaScript', 'React', 'TypeScript', 'Next.js'].map((tech) => (
+                  <span
+                    key={tech}
+                    className="bg-primary/10 text-primary rounded-full px-4 py-2 text-sm font-semibold"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-foreground mb-3 flex items-center gap-2 text-sm font-semibold">
+                <span className="bg-depth-3 h-2 w-2 rounded-full" />
+                능숙 (프로젝트 경험 있음)
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  ,
+                  'Web Accessibility',
+                  'Tailwind CSS',
+                  'Design Systems',
+                  'Zustand',
+                  'Storybook',
+
+                  'Framer Motion',
+                ].map((tech) => (
+                  <span
+                    key={tech}
+                    className="bg-depth-2 text-foreground rounded-full px-4 py-2 text-sm font-medium"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-foreground mb-3 flex items-center gap-2 text-sm font-semibold">
+                <span className="bg-depth-3 h-2 w-2 rounded-full" />
+                계속해서 학습 중
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {['React Query', 'Supabase', 'Zod', 'Radix', 'Core JS'].map((tech) => (
+                  <span
+                    key={tech}
+                    className="bg-depth-2 text-muted-foreground rounded-full px-4 py-2 text-sm font-medium"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="space-y-6 lg:col-span-5">
-          <div className="bg-depth-1 ring-primary/10 rounded-3xl p-8 shadow-sm shadow-black/5 ring-1">
-            <Text.H3 className="text-foreground">스킬</Text.H3>
-            <Text.Caption className="text-muted-foreground mt-2">
-              보유 스택을 “주력/경험/관심”으로 나누면 면접에서 설명하기 좋아요.
-            </Text.Caption>
+        <div className={['p-8 lg:p-10', cardClassName].join(' ')}>
+          <h2 className="text-foreground mb-6 text-2xl font-bold">작업 기준</h2>
 
-            <div className="mt-5 space-y-4">
-              {[
-                { label: '주력', items: ['React', 'Next.js', 'TypeScript', 'Tailwind'] },
-                { label: '경험', items: ['React Query', 'Supabase', 'Storybook', 'Zod'] },
-                { label: '관심', items: ['Design System', 'Accessibility', 'Performance'] },
-              ].map((g) => (
-                <div key={g.label}>
-                  <Text.S14.Bold className="text-foreground">{g.label}</Text.S14.Bold>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {g.items.map((item) => (
-                      <span
-                        key={item}
-                        className="bg-depth-2 text-muted-foreground rounded-full px-3 py-1 text-xs font-semibold"
-                      >
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
+          <ul className="space-y-4">
+            {ABOUT_PRINCIPLES.map((principle) => (
+              <li key={principle.title} className="bg-depth-2 rounded-2xl p-5">
+                <h3 className="text-foreground font-semibold">{principle.title}</h3>
+                <p className="text-muted-foreground mt-2 text-sm">{principle.description}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="grid gap-6 sm:grid-cols-2">
+        <div className={['p-8', cardClassName].join(' ')}>
+          <h2 className="text-foreground mb-4 text-xl font-bold">관심사</h2>
+          <ul className="space-y-2 text-sm">
+            {ABOUT_INTERESTS.map((interest) => (
+              <li key={interest} className="text-muted-foreground flex gap-2">
+                <span className="bg-primary mt-2 h-1 w-1 flex-shrink-0 rounded-full" />
+                {interest}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className={['p-8', cardClassName].join(' ')}>
+          <h2 className="text-foreground mb-4 text-xl font-bold">더 알아보기</h2>
+          <div className="space-y-2">
+            {ABOUT_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="bg-depth-2 hover:bg-depth-3 text-foreground flex items-center justify-between rounded-xl px-4 py-3 text-sm font-semibold transition"
+              >
+                {link.label}
+                <ArrowUpRight className="h-4 w-4" />
+              </Link>
+            ))}
           </div>
+        </div>
+      </section>
 
-          <div className="bg-depth-1 ring-primary/10 rounded-3xl p-8 shadow-sm shadow-black/5 ring-1">
-            <Text.H3 className="text-foreground">링크</Text.H3>
-            <div className="mt-4 space-y-2">
-              {[
-                { label: '프로젝트', href: '/portfolio' },
-                { label: '노트', href: '/note' },
-                { label: '가이드', href: '/guide' },
-              ].map((l) => (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  className="bg-depth-2 text-foreground hover:bg-depth-3 flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-semibold transition"
-                >
-                  {l.label}
-                  <ArrowUpRight className="h-4 w-4" />
-                </Link>
-              ))}
-            </div>
+      <section className={['p-8 lg:p-12', cardClassName].join(' ')}>
+        <h2 className="text-foreground mb-8 text-2xl font-bold">경험</h2>
+        <div className="space-y-8">
+          {CAREER_TIMELINE.map((group) => {
+            const entries = group.entries
+              .map((entry) => ({
+                entry,
+                key: `${group.year}-${entry.client}-${entry.project}-${entry.period}`,
+              }))
+              .filter(({ key }) => visibleCareerKeys.has(key));
+
+            if (entries.length === 0) return null;
+
+            return (
+              <div key={group.year} className="space-y-4">
+                <div className="text-primary text-sm font-semibold">{group.year}</div>
+                <div className="grid gap-4">
+                  {entries.map(({ entry, key }) => (
+                    <div key={key} className="bg-depth-2 rounded-2xl p-5">
+                      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+                        <div className="space-y-1">
+                          <div className="text-foreground text-base font-semibold">
+                            {entry.client}
+                          </div>
+                          <div className="text-muted-foreground text-sm">{entry.project}</div>
+                          {entry.role && (
+                            <div className="text-primary text-xs font-semibold">{entry.role}</div>
+                          )}
+                        </div>
+                        <div className="text-muted-foreground text-xs">{entry.period}</div>
+                      </div>
+
+                      {entry.summary && (
+                        <p className="text-muted-foreground mt-3 text-sm leading-relaxed">
+                          {entry.summary}
+                        </p>
+                      )}
+
+                      {entry.highlights && entry.highlights.length > 0 && (
+                        <ul className="mt-3 space-y-2">
+                          {entry.highlights.map((highlight) => (
+                            <li key={highlight} className="text-foreground flex gap-3 text-sm">
+                              <span className="bg-primary mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full" />
+                              <span>{highlight}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+
+                      {entry.skills && entry.skills.length > 0 && (
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          {entry.skills.map((skill) => (
+                            <span
+                              key={skill}
+                              className="bg-depth-3 text-foreground rounded-full px-3 py-1 text-xs font-medium"
+                            >
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {careerKeys.length > INITIAL_CAREER_COUNT && (
+          <div className="mt-6 flex justify-center">
+            <Button variant="outline" size="sm" onClick={() => setShowAllCareers((prev) => !prev)}>
+              {showAllCareers ? (
+                <>
+                  <ChevronUp className="h-4 w-4" />
+                </>
+              ) : (
+                <>
+                  <ChevronDown className="h-4 w-4" />
+                </>
+              )}
+            </Button>
+          </div>
+        )}
+      </section>
+
+      <section className={['p-8 lg:p-12', cardClassName].join(' ')}>
+        <div className="text-center">
+          <h2 className="text-foreground text-2xl font-bold">함께 일하고 싶으신가요?</h2>
+          <p className="text-muted-foreground mt-2">기대 이상의 결과물로 보답하겠습니다.</p>
+          <div className="mt-6 flex flex-wrap justify-center gap-3">
+            <CopyTextButton
+              text={PROFILE.email}
+              toastMessage="이메일을 복사했어요"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold transition"
+            >
+              <Mail className="h-4 w-4" /> 이메일 보내기
+            </CopyTextButton>
+            <Link
+              href="/portfolio"
+              className="bg-depth-2 hover:bg-depth-3 text-foreground inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold transition"
+            >
+              프로젝트 보기 <ArrowUpRight className="h-4 w-4" />
+            </Link>
           </div>
         </div>
       </section>

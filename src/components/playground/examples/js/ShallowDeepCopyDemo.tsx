@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { Text } from '@/components/ui/Text';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { InfoBlock } from '../InfoBlock';
@@ -47,7 +46,7 @@ export default function ShallowDeepCopyDemo() {
             key={item.title}
             className="space-y-3 rounded-md border border-border/70 bg-depth-2 p-2"
           >
-            <Text.Caption className="block">{item.title}</Text.Caption>
+            <span className="text-xs tracking-[0.01em] block">{item.title}</span>
             <div className="text-xs text-foreground">
               <div className="flex flex-wrap gap-1">
                 tags:

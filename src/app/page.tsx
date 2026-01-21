@@ -1,11 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Text } from '@/components/ui/Text';
+import { Badge } from '@/components/ui/Badge';
 import { CopyTextButton } from '@/components/common/CopyTextButton';
 import { ArrowUpRight, Github, Mail, FileText, ExternalLink, ImageOff } from 'lucide-react';
 import { getPublicExperiences, getPublicStudyPosts } from '@/lib/supabase/api/portfolio';
 import { FadeUp } from '@/components/motion/FadeUp';
 import { FEATURED_PROJECTS } from '@/entities/project/model/projects';
+import { HOME_HERO } from '@/entities/home/model/home';
+import { PROFILE } from '@/entities/profile/model/profile';
 
 const cardClassName = 'rounded-3xl bg-depth-1 shadow-sm ring-1 ring-border';
 
@@ -40,29 +42,16 @@ function ProjectCard({ project }: { project: (typeof FEATURED_PROJECTS)[0] }) {
         {/* 프로젝트 정보 */}
         <div className="space-y-4">
           <div>
-            <Text.H3 className="text-foreground mb-2">{project.title}</Text.H3>
-            <Text.Body14 className="text-muted-foreground">{project.summary}</Text.Body14>
-          </div>
-
-          {/* 핵심 지표 */}
-          <div className="bg-depth-2 grid grid-cols-2 gap-3 rounded-2xl p-4">
-            {project.metrics.map((metric) => (
-              <div key={metric.label}>
-                <Text.Caption className="text-muted-foreground">{metric.label}</Text.Caption>
-                <Text.S14.Bold className="text-primary mt-1">{metric.value}</Text.S14.Bold>
-              </div>
-            ))}
+            <h3 className="text-foreground mb-2 text-xl font-semibold">{project.title}</h3>
+            <p className="text-md text-muted-foreground font-normal">{project.summary}</p>
           </div>
 
           {/* 기술 스택 */}
           <div className="flex flex-wrap gap-2">
             {project.tags.map((tag) => (
-              <span
-                key={tag}
-                className="bg-depth-2 text-foreground rounded-full px-3 py-1 text-xs font-medium"
-              >
+              <Badge key={tag} variant="subtle" size="md">
                 {tag}
-              </span>
+              </Badge>
             ))}
           </div>
         </div>
@@ -97,33 +86,24 @@ export default async function HomePage() {
                 />
               </div>
               <div className="min-w-0 flex-1">
-                <Text.H2 as="h1" className="text-foreground text-3xl lg:text-4xl">
-                  안녕하세요, 프론트엔드 개발자 Daeya입니다
-                </Text.H2>
-                <Text.Body14 className="text-muted-foreground mt-4 text-base lg:text-lg">
-                  사용자 경험과 개발자 경험을 모두 중요하게 생각합니다.
-                  <br />
-                  디자인 시스템 구축, 성능 최적화, 그리고 유지보수 가능한 코드 작성에 관심이
-                  많습니다.
-                </Text.Body14>
+                <h1 className="text-foreground text-3xl font-bold lg:text-4xl">
+                  {HOME_HERO.headline}
+                </h1>
+                <p className="text-md text-muted-foreground mt-4 text-base font-normal lg:text-lg">
+                  {HOME_HERO.subheadline.split('\n').map((line, index) => (
+                    <span key={`${line}-${index}`} className="block">
+                      {line}
+                    </span>
+                  ))}
+                </p>
 
                 {/* 핵심 스킬 */}
                 <div className="mt-6 flex flex-wrap gap-2">
-                  <span className="text-primary border-primary bg-primary-100 rounded-full border px-4 py-2 text-sm font-semibold">
-                    React
-                  </span>
-                  <span className="text-primary border-primary bg-primary-100 rounded-full border px-4 py-2 text-sm font-semibold">
-                    Next.js
-                  </span>
-                  <span className="bg-depth-2 text-foreground rounded-full px-4 py-2 text-sm font-semibold">
-                    TypeScript
-                  </span>
-                  <span className="bg-depth-2 text-foreground rounded-full px-4 py-2 text-sm font-semibold">
-                    Design Systems
-                  </span>
-                  <span className="bg-depth-2 text-foreground rounded-full px-4 py-2 text-sm font-semibold">
-                    Performance
-                  </span>
+                  {HOME_HERO.badges.map((badge, index) => (
+                    <Badge key={badge} variant={index < 2 ? 'outline' : 'subtle'} size="lg">
+                      {badge}
+                    </Badge>
+                  ))}
                 </div>
 
                 {/* CTA 버튼들 */}
@@ -141,21 +121,21 @@ export default async function HomePage() {
                     소개 <ArrowUpRight className="h-4 w-4" />
                   </Link>
                   <CopyTextButton
-                    text="you@example.com"
+                    text={PROFILE.email}
                     toastMessage="이메일을 복사했어요"
                     className="text-foreground hover:bg-muted inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold transition"
                   >
                     <Mail className="h-4 w-4" /> 이메일
                   </CopyTextButton>
                   <Link
-                    href="https://github.com/"
+                    href={PROFILE.links.github}
                     target="_blank"
                     className="text-foreground hover:bg-muted inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold transition"
                   >
                     <Github className="h-4 w-4" /> GitHub
                   </Link>
                   <Link
-                    href="/resume.pdf"
+                    href={PROFILE.links.resume}
                     className="text-foreground hover:bg-muted inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold transition"
                   >
                     <FileText className="h-4 w-4" /> 이력서
@@ -170,23 +150,28 @@ export default async function HomePage() {
       {/* Quick Stats */}
       <FadeUp delay={0.1}>
         <div className="grid gap-4 sm:grid-cols-3">
-          <div className={['p-6', cardClassName].join(' ')}>
-            <Text.Caption className="text-muted-foreground">총 경력</Text.Caption>
-            <Text.H2 className="text-foreground mt-2">
-              {experiences.length > 0 ? `${experiences.length}년+` : '3년+'}
-            </Text.H2>
-            <Text.Body14 className="text-muted-foreground mt-1">프론트엔드 개발</Text.Body14>
-          </div>
-          <div className={['p-6', cardClassName].join(' ')}>
-            <Text.Caption className="text-muted-foreground">완료 프로젝트</Text.Caption>
-            <Text.H2 className="text-foreground mt-2">15+</Text.H2>
-            <Text.Body14 className="text-muted-foreground mt-1">서비스 런칭 및 운영</Text.Body14>
-          </div>
-          <div className={['p-6', cardClassName].join(' ')}>
-            <Text.Caption className="text-muted-foreground">학습 기록</Text.Caption>
-            <Text.H2 className="text-foreground mt-2">{posts.length}</Text.H2>
-            <Text.Body14 className="text-muted-foreground mt-1">기술 아티클 & 정리</Text.Body14>
-          </div>
+          {Object.values(PROFILE.career).map((stat) => {
+            const value =
+              stat.value
+                ? stat.value
+                : stat.id === 'experience'
+                ? experiences.length > 0
+                  ? `${experiences.length}년+`
+                  : (stat.fallback ?? '')
+                : stat.id === 'study'
+                  ? `${posts.length}`
+                  : (stat.fallback ?? '');
+
+            return (
+              <div key={stat.id} className={['p-6', cardClassName].join(' ')}>
+                <span className="text-muted-foreground text-xs tracking-[0.01em]">
+                  {stat.label}
+                </span>
+                <h2 className="text-foreground mt-2 text-2xl font-bold">{value}</h2>
+                <p className="text-md text-muted-foreground mt-1 font-normal">{stat.description}</p>
+              </div>
+            );
+          })}
         </div>
       </FadeUp>
 
@@ -195,10 +180,10 @@ export default async function HomePage() {
         <FadeUp delay={0.15}>
           <div className="flex items-end justify-between">
             <div>
-              <Text.H2 className="text-foreground">주요 프로젝트</Text.H2>
-              <Text.Body14 className="text-muted-foreground mt-2">
-                실제 성과와 기술적 도전이 담긴 프로젝트들입니다
-              </Text.Body14>
+              <h2 className="text-foreground text-2xl font-bold">주요 프로젝트</h2>
+              <p className="text-md text-muted-foreground mt-2 font-normal">
+                경험을 쌓기위해 진행한 프로젝트들입니다.
+              </p>
             </div>
             <Link
               href="/portfolio"
@@ -233,10 +218,10 @@ export default async function HomePage() {
           <section className={['p-8', cardClassName].join(' ')}>
             <div className="mb-6 flex items-end justify-between">
               <div>
-                <Text.H3 className="text-foreground">최근 학습 기록</Text.H3>
-                <Text.Body14 className="text-muted-foreground mt-1">
+                <h3 className="text-foreground text-xl font-semibold">최근 학습 기록</h3>
+                <p className="text-md text-muted-foreground mt-1 font-normal">
                   새롭게 배우고 정리한 내용들
-                </Text.Body14>
+                </p>
               </div>
               <Link
                 href="/note"
@@ -266,20 +251,20 @@ export default async function HomePage() {
                         <div className="text-foreground font-semibold">{post.title}</div>
                       )}
                       {post.summary && (
-                        <Text.Caption className="text-muted-foreground mt-1">
+                        <span className="text-muted-foreground mt-1 text-xs tracking-[0.01em]">
                           {post.summary}
-                        </Text.Caption>
+                        </span>
                       )}
                     </div>
                     <div className="flex flex-shrink-0 items-center gap-3">
                       {post.category && (
-                        <span className="bg-depth-3 text-foreground rounded-full px-3 py-1 text-xs font-medium">
+                        <Badge variant="subtle" size="md">
                           {post.category}
-                        </span>
+                        </Badge>
                       )}
-                      <Text.Caption className="text-muted-foreground whitespace-nowrap">
+                      <span className="text-muted-foreground whitespace-nowrap text-xs tracking-[0.01em]">
                         {post.published_at}
-                      </Text.Caption>
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -292,7 +277,7 @@ export default async function HomePage() {
       {/* 강점 섹션 */}
       <FadeUp delay={0.5}>
         <section className={['p-8', cardClassName].join(' ')}>
-          <Text.H3 className="text-foreground mb-6">개발 철학</Text.H3>
+          <h3 className="text-foreground mb-6 text-xl font-semibold">개발 철학</h3>
           <div className="grid gap-4 sm:grid-cols-3">
             <div className="bg-depth-2 rounded-2xl p-6">
               <div className="bg-primary/10 text-primary mb-4 inline-flex rounded-xl p-3">
@@ -305,10 +290,12 @@ export default async function HomePage() {
                   />
                 </svg>
               </div>
-              <Text.S14.Bold className="text-foreground">일관성 있는 설계</Text.S14.Bold>
-              <Text.Caption className="text-muted-foreground mt-2">
+              <span className="text-md text-foreground font-bold leading-[17px]">
+                일관성 있는 설계
+              </span>
+              <span className="text-muted-foreground mt-2 text-xs tracking-[0.01em]">
                 디자인 토큰과 컴포넌트 체계를 통해 확장 가능한 시스템을 만듭니다
-              </Text.Caption>
+              </span>
             </div>
 
             <div className="bg-depth-2 rounded-2xl p-6">
@@ -322,10 +309,10 @@ export default async function HomePage() {
                   />
                 </svg>
               </div>
-              <Text.S14.Bold className="text-foreground">성능 최적화</Text.S14.Bold>
-              <Text.Caption className="text-muted-foreground mt-2">
+              <span className="text-md text-foreground font-bold leading-[17px]">성능 최적화</span>
+              <span className="text-muted-foreground mt-2 text-xs tracking-[0.01em]">
                 번들 사이즈, 렌더링 성능, Core Web Vitals를 항상 고려합니다
-              </Text.Caption>
+              </span>
             </div>
 
             <div className="bg-depth-2 rounded-2xl p-6">
@@ -339,10 +326,10 @@ export default async function HomePage() {
                   />
                 </svg>
               </div>
-              <Text.S14.Bold className="text-foreground">협업 중심</Text.S14.Bold>
-              <Text.Caption className="text-muted-foreground mt-2">
+              <span className="text-md text-foreground font-bold leading-[17px]">협업 중심</span>
+              <span className="text-muted-foreground mt-2 text-xs tracking-[0.01em]">
                 디자이너, 백엔드와의 원활한 소통을 위한 문서화에 신경씁니다
-              </Text.Caption>
+              </span>
             </div>
           </div>
         </section>

@@ -145,7 +145,7 @@ type StatusMap = Record<'idle'|'loading'|'error', boolean>;`,
         ]}
       />
     ),
-    code: `<Text as="span" variant="caption">내용</Text>`,
+    code: `<PolymorphicBox as="span" className="text-xs">내용</PolymorphicBox>`,
   },
   {
     id: 'api-types',

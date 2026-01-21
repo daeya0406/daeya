@@ -29,7 +29,6 @@ export type Project = {
   metrics: ProjectMetric[];
   role?: string;
   period?: string;
-  team?: string;
   highlights?: string[];
   links: ProjectLinks;
   featured?: boolean;
@@ -42,13 +41,13 @@ export const PROJECTS: Project[] = [
     title: 'Rolling Paper',
     summary: '서로 메시지를 남길 수 있는 온라인 롤링페이퍼 제작 서비스',
     image: '/images/projects/rolling.png',
-    role: '팀장 / 프론트엔드',
-    period: '2023.09 - 2023.10',
-    team: 'FE 3',
+    role: '프론트엔드',
+    period: '2025.09 - 2025.10',
+    featured: true,
     tags: ['React', 'Vite', 'React Router', 'SCSS'],
     metrics: [
-      { label: '핵심 기능', value: '롤링페이지 생성' },
-      { label: '운영 기능', value: '무한스크롤/관리자 모드' },
+      { label: '공통', value: 'CRUD 기반 API 호출 작업' },
+      { label: '역할', value: 'Git-branch 전략 등 프로젝트 설계' },
     ],
     highlights: [
       '반응형 UI와 접근성 고려한 컴포넌트 설계',
@@ -86,12 +85,12 @@ export const PROJECTS: Project[] = [
     summary: '인증/신청 플로우를 갖춘 웹 애플리케이션 구축 프로젝트',
     image: '/images/projects/the-julge.png',
     role: '프론트엔드',
-    period: '2023.11 - 2023.12',
-    team: 'FE 3',
+    period: '2025.11 - 2025.12',
+    featured: true,
     tags: ['Next.js', 'React', 'TypeScript', 'Tailwind', 'React Hook Form', 'Zod'],
     metrics: [
-      { label: '핵심 플로우', value: '인증/신청' },
-      { label: '품질 도구', value: 'ESLint/Prettier/Husky' },
+      { label: '공통', value: 'Next.js 기반 프로젝트 구조 적응' },
+      { label: '역할', value: 'CRUD 기반 작업, 작업 전 필요한 부분 세팅' },
     ],
     highlights: [
       '공통 UI 컴포넌트 구축과 폼 검증 패턴 정리',
@@ -124,11 +123,11 @@ export const PROJECTS: Project[] = [
   {
     id: 'activity-bite',
     title: '체험 한입',
-    summary: '체험 탐색·예약·관리 플로우를 제공하는 FSD 기반 프론트엔드',
+    summary: '체험 탐색·예약·관리 플로우를 제공하는 FSD 기반 Next.js 프로젝트',
     image: '/images/projects/activity-bite2.png',
     role: '프론트엔드',
-    period: '2023.11 - 2023.12',
-    team: 'FE 3',
+    period: '2025.12 - 2026.01',
+    featured: true,
     tags: ['Next.js', 'TypeScript', 'Tailwind', 'FSD', 'DDD-lite'],
     metrics: [
       { label: '아키텍처', value: 'FSD + DDD-lite' },
@@ -181,8 +180,8 @@ lite DDD :
         },
       ],
       outcomes: [
-        { label: '아키텍처', value: 'FSD + DDD-lite' },
-        { label: '워크플로우', value: 'Husky/commitlint' },
+        { label: '공통', value: 'FSD + DDD-lite 구조로 작업' },
+        { label: '역할', value: '테마 상태관리 및 Modal, 개별 페이지 작업' },
       ],
       learnings: ['TODO: 구조화/아키텍처 관점의 인사이트를 적어주세요.'],
     },

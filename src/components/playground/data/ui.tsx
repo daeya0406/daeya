@@ -88,7 +88,7 @@ type Props<T extends ElementType> = {
   children: React.ReactNode;
 } & ComponentProps<T>;
 
-export function Text<T extends ElementType = "span">({
+export function PolymorphicBox<T extends ElementType = "span">({
   as,
   children,
   ...rest

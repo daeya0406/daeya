@@ -2,7 +2,6 @@
 
 import { toast } from 'sonner';
 import ColorChip from '@/components/guide/ColorChip';
-import { Text } from '@/components/ui/Text';
 
 type ColorToken = { name: string; step: string; value: string };
 
@@ -52,103 +51,103 @@ type TypeToken = { label: string; className: string; snippet: string; sample: st
 
 const typeScale: TypeToken[] = [
   {
-    label: 'Text.S11',
-    className: 'text-[11px] leading-normal',
+    label: 'text-2xs',
+    className: 'text-2xs',
     sample: '내용입니다.',
-    snippet: '<Text.S11></Text.S11>',
+    snippet: '<span className="text-2xs">내용입니다.</span>',
   },
   {
-    label: 'Text.S11.Bold',
-    className: 'text-[11px] font-bold leading-normal',
+    label: 'text-2xs font-bold',
+    className: 'text-2xs font-bold',
     sample: '내용입니다.',
-    snippet: '<Text.S11.Bold></Text.S11.Bold>',
+    snippet: '<span className="text-2xs font-bold">내용입니다.</span>',
   },
   {
-    label: 'Text.S12',
-    className: 'text-[12px] leading-normal',
+    label: 'text-xs',
+    className: 'text-xs',
     sample: '내용입니다.',
-    snippet: '<Text.S12></Text.S12>',
+    snippet: '<span className="text-xs">내용입니다.</span>',
   },
   {
-    label: 'Text.S12.Bold',
-    className: 'text-[12px] font-bold leading-normal',
+    label: 'text-xs font-bold',
+    className: 'text-xs font-bold',
     sample: '내용입니다.',
-    snippet: '<Text.S12.Bold></Text.S12.Bold>',
+    snippet: '<span className="text-xs font-bold">내용입니다.</span>',
   },
   {
-    label: 'Text.S13',
-    className: 'text-[13px] leading-normal',
+    label: 'text-sm',
+    className: 'text-sm',
     sample: '내용입니다.',
-    snippet: '<Text.S13></Text.S13>',
+    snippet: '<span className="text-sm">내용입니다.</span>',
   },
   {
-    label: 'Text.S13.Bold',
-    className: 'text-[13px] font-bold leading-normal',
+    label: 'text-sm font-bold',
+    className: 'text-sm font-bold',
     sample: '내용입니다.',
-    snippet: '<Text.S13.Bold></Text.S13.Bold>',
+    snippet: '<span className="text-sm font-bold">내용입니다.</span>',
   },
   {
-    label: 'Text.S14',
-    className: 'text-[14px] leading-normal',
+    label: 'text-md',
+    className: 'text-md',
     sample: '내용입니다.',
-    snippet: '<Text.S14></Text.S14>',
+    snippet: '<span className="text-md">내용입니다.</span>',
   },
   {
-    label: 'Text.S14.Bold',
-    className: 'text-[14px] font-bold leading-normal',
+    label: 'text-md font-bold',
+    className: 'text-md font-bold',
     sample: '내용입니다.',
-    snippet: '<Text.S14.Bold></Text.S14.Bold>',
+    snippet: '<span className="text-md font-bold">내용입니다.</span>',
   },
   {
-    label: 'Text.S16',
-    className: 'text-[16px] leading-normal',
+    label: 'text-lg',
+    className: 'text-lg',
     sample: '내용입니다.',
-    snippet: '<Text.S16></Text.S16>',
+    snippet: '<span className="text-lg">내용입니다.</span>',
   },
   {
-    label: 'Text.S16.Bold',
-    className: 'text-[16px] font-bold leading-normal',
+    label: 'text-lg font-bold',
+    className: 'text-lg font-bold',
     sample: '내용입니다.',
-    snippet: '<Text.S16.Bold></Text.S16.Bold>',
+    snippet: '<span className="text-lg font-bold">내용입니다.</span>',
   },
   {
-    label: 'Text.S20',
-    className: 'text-[20px] leading-normal',
+    label: 'text-xl',
+    className: 'text-xl',
     sample: '내용입니다.',
-    snippet: '<Text.S20></Text.S20>',
+    snippet: '<span className="text-xl">내용입니다.</span>',
   },
   {
-    label: 'Text.S20.Bold',
-    className: 'text-[20px] font-bold leading-normal',
+    label: 'text-xl font-bold',
+    className: 'text-xl font-bold',
     sample: '내용입니다.',
-    snippet: '<Text.S20.Bold></Text.S20.Bold>',
+    snippet: '<span className="text-xl font-bold">내용입니다.</span>',
   },
   {
-    label: 'Text.S24',
-    className: 'text-[24px] leading-normal',
+    label: 'text-2xl',
+    className: 'text-2xl',
     sample: '내용입니다.',
-    snippet: '<Text.S24></Text.S24>',
+    snippet: '<span className="text-2xl">내용입니다.</span>',
   },
   {
-    label: 'Text.S24.Bold',
-    className: 'text-[24px] font-bold leading-normal',
+    label: 'text-2xl font-bold',
+    className: 'text-2xl font-bold',
     sample: '내용입니다.',
-    snippet: '<Text.S24.Bold></Text.S24.Bold>',
+    snippet: '<span className="text-2xl font-bold">내용입니다.</span>',
   },
 ];
 
 const bodyScale: TypeToken[] = [
   {
-    label: 'Text.Body14',
-    className: 'text-[14px] leading-[180%]',
+    label: 'text-md leading-[180%]',
+    className: 'text-md leading-[180%]',
     sample: '내용입니다.',
-    snippet: '<Text.Body14></Text.Body14>',
+    snippet: '<p className="text-md leading-[180%]">내용입니다.</p>',
   },
   {
-    label: 'Text.Body16',
-    className: 'text-[16px] leading-[180%]',
+    label: 'text-lg leading-[180%]',
+    className: 'text-lg leading-[180%]',
     sample: '내용입니다.',
-    snippet: '<Text.Body16></Text.Body16>',
+    snippet: '<p className="text-lg leading-[180%]">내용입니다.</p>',
   },
 ];
 
@@ -161,27 +160,27 @@ export default function TokensSection() {
   return (
     <div className="space-y-10">
       <div className="line-bottom space-y-2">
-        <Text.H3 className="text-primary">Design Tokens</Text.H3>
-        <Text.Caption>
+        <h3 className="text-xl font-semibold text-primary">Design Tokens</h3>
+        <span className="text-xs tracking-[0.01em]">
           새 팔레트/타이포 토큰. 컬러칩은 클릭 시 text/bg 클래스 복사, 타이포 카드는{' '}
-          <span className="font-mono">&lt;Text.*&gt;</span> 예시 복사
-        </Text.Caption>
+          <span className="font-mono">className</span> 예시 복사
+        </span>
       </div>
 
       <section className="space-y-4">
         <div className="space-y-1">
-          <Text.H5>Colors</Text.H5>
-          <Text.Caption className="block">
+          <h5 className="text-lg font-semibold">Colors</h5>
+          <span className="text-xs tracking-[0.01em] block">
             다크모드에서는 semantic 토큰(background/foreground/muted/border/primary) 값이 자동 전환
-          </Text.Caption>
+          </span>
         </div>
 
         <div className="space-y-8">
           {Object.entries(palette).map(([group, tokens]) => (
             <div key={group} className="space-y-2">
-              <Text.S14.Bold className="text-foreground capitalize" as="span">
+              <span className="text-md leading-[17px] font-bold text-foreground capitalize">
                 {group}
-              </Text.S14.Bold>
+              </span>
               <div className="flex flex-wrap gap-3">
                 {tokens.map((t) => (
                   <ColorChip
@@ -199,11 +198,11 @@ export default function TokensSection() {
 
       <section className="space-y-4">
         <div className="space-y-1">
-          <Text.H5>Typography</Text.H5>
-          <Text.Caption className="block">
+          <h5 className="text-lg font-semibold">Typography</h5>
+          <span className="text-xs tracking-[0.01em] block">
             토큰 이름(예: 14_M)은 스펙 기준 라벨이고, 클릭하면 해당{' '}
-            <span className="font-mono">&lt;Text.*&gt;</span> 사용 예시가 복사됩니다.
-          </Text.Caption>
+            <span className="font-mono">className</span> 사용 예시가 복사됩니다.
+          </span>
         </div>
 
         <div className="grid gap-3 sm:grid-cols-2">
@@ -217,9 +216,9 @@ export default function TokensSection() {
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <div className={t.className}>{t.sample}</div>
-                  <Text.Caption className="text-muted-foreground group-hover:text-primary mt-2">
+                  <span className="text-xs tracking-[0.01em] text-muted-foreground group-hover:text-primary mt-2">
                     {t.label}
-                  </Text.Caption>
+                  </span>
                 </div>
                 <span className="bg-primary-100 text-primary rounded-full px-2 py-0.5 text-[10px] font-semibold">
                   copy
@@ -230,7 +229,7 @@ export default function TokensSection() {
         </div>
 
         <div className="pt-2">
-          <Text.H6 className="mb-2">Body presets</Text.H6>
+          <h6 className="text-md font-semibold mb-2">Body presets</h6>
           <div className="grid gap-3 sm:grid-cols-2">
             {bodyScale.map((t) => (
               <button
@@ -240,9 +239,9 @@ export default function TokensSection() {
                 className="border-border/70 bg-depth-1/60 hover:bg-depth-2 group rounded-lg border p-4 text-left transition"
               >
                 <div className={t.className}>{t.sample}</div>
-                <Text.Caption className="text-muted-foreground group-hover:text-primary mt-2">
+                <span className="text-xs tracking-[0.01em] text-muted-foreground group-hover:text-primary mt-2">
                   {t.label}
-                </Text.Caption>
+                </span>
               </button>
             ))}
           </div>

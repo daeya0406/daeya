@@ -9,8 +9,8 @@ import { useZodForm } from '@/hooks/useZodForm';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/Form';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
-import { Text } from '@/components/ui/Text';
 import { supabase } from '@/lib/supabase';
+import { PROFILE } from '@/entities/profile/model/profile';
 
 export default function ForgotPage() {
   const router = useRouter();
@@ -39,7 +39,7 @@ export default function ForgotPage() {
   return (
     <section className="mx-auto flex min-h-[70vh] max-w-md flex-col justify-center px-4 py-10">
       <div className="rounded-2xl border border-border bg-depth-1/80 p-6 shadow-md backdrop-blur">
-        <Text.H3 className="font-bold text-center mb-8">비밀번호 찾기</Text.H3>
+        <h3 className="text-xl font-semibold font-bold text-center mb-8">비밀번호 찾기</h3>
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -47,17 +47,28 @@ export default function ForgotPage() {
               control={form.control}
               name="email"
               render={({ field }) => (
-                <FormItem className='flex flex-col'>
+                <FormItem className="flex flex-col">
                   <FormLabel>이메일</FormLabel>
                   <FormControl>
-                    <Input type="email" placeholder="you@example.com" autoComplete="email" {...field} />
+                    <Input
+                      type="email"
+                      placeholder={PROFILE.email}
+                      autoComplete="email"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
 
-            <Button type="submit" size="lg" className="w-full" isLoading={mutation.isPending} disabled={!form.formState.isValid}>
+            <Button
+              type="submit"
+              size="lg"
+              className="w-full"
+              isLoading={mutation.isPending}
+              disabled={!form.formState.isValid}
+            >
               재설정 링크 보내기
             </Button>
           </form>

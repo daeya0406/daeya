@@ -1,7 +1,6 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { Text } from '@/components/ui/Text';
 import { Input } from '@/components/ui/Input';
 
 const hardSumCarculate = (number: number) => {
@@ -28,7 +27,7 @@ export default function UseMemoDemo() {
   return (
     <div className="space-y-2">
       <div className="section-component space-y-2">
-        <Text.H6>어려운 계산기</Text.H6>
+        <h6 className="text-md font-semibold">어려운 계산기</h6>
         <Input
           type="number"
           value={hardNumber}
@@ -37,7 +36,7 @@ export default function UseMemoDemo() {
         + 10000 = {hardSum}
       </div>
       <div className="section-component space-y-2">
-        <Text.H6>쉬운 계산기</Text.H6>
+        <h6 className="text-md font-semibold">쉬운 계산기</h6>
         <Input
           type="number"
           value={easyNumber}

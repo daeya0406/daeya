@@ -43,7 +43,6 @@ import {
   DropdownOptionItem,
 } from '@/components/ui/DropdownOption';
 import { ContactFormDemo } from '@/components/guide/ContactFormDemo';
-import { Text } from '@/components/ui/Text';
 import { DateText } from '@/components/ui/DateText';
 import { DatePicker } from '@/components/ui/DatePicker';
 import {
@@ -76,14 +75,16 @@ export default function UISection() {
   return (
     <>
       <div className="line-bottom mb-8 space-y-2">
-        <Text.H3 className="text-primary">UI Components</Text.H3>
-        <Text.Caption className="block">프로젝트에서 UI 컴포넌트입니다.</Text.Caption>
+        <h3 className="text-xl font-semibold text-primary">UI Components</h3>
+        <span className="text-xs tracking-[0.01em] block">
+          프로젝트에서 UI 컴포넌트입니다.
+        </span>
       </div>
 
       <div className="flex flex-col gap-10">
         {/* Button */}
         <div className="flex flex-col gap-3">
-          <Text.Body14>Button Variants</Text.Body14>
+          <p className="text-md font-normal">Button Variants</p>
           <div className="flex flex-wrap gap-3">
             <Button>Default</Button>
             <Button variant="secondary">보조 버튼</Button>
@@ -95,20 +96,20 @@ export default function UISection() {
 
         {/* Input */}
         <div className="flex flex-col gap-3">
-          <Text.Body14>Input</Text.Body14>
+          <p className="text-md font-normal">Input</p>
           <Input placeholder="이메일을 입력하세요" className="max-w-sm" />
         </div>
 
         {/* Textarea */}
         <div className="flex flex-col gap-3">
-          <Text.Body14>Textarea</Text.Body14>
+          <p className="text-md font-normal">Textarea</p>
           <Textarea placeholder="메시지를 입력하세요..." className="max-w-sm" />
         </div>
 
         {/* Select */}
         <div className="flex flex-col gap-3">
           <div className="flex items-center gap-2">
-            <Text.Body14>Select</Text.Body14>
+            <p className="text-md font-normal">Select</p>
             <Badge variant="outline">Radix</Badge>
           </div>
           <Select>
@@ -126,7 +127,7 @@ export default function UISection() {
         {/* DatePicker */}
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-2">
-            <Text.Body14>Date Picker</Text.Body14>
+            <p className="text-md font-normal">Date Picker</p>
             <Badge variant="outline">dayjs</Badge>
           </div>
           <div className="flex flex-wrap items-start gap-3">
@@ -138,7 +139,7 @@ export default function UISection() {
         {/* Dialog */}
         <div className="flex flex-col gap-3">
           <div className="flex items-center gap-2">
-            <Text.Body14>Dialog</Text.Body14>
+            <p className="text-md font-normal">Dialog</p>
             <Badge variant="outline">Modal</Badge>
           </div>
           <Dialog>
@@ -157,7 +158,7 @@ export default function UISection() {
 
         {/* Dropdown Menu */}
         <div className="flex flex-col gap-3">
-          <Text.Body14>Dropdown Menu</Text.Body14>
+          <p className="text-md font-normal">Dropdown Menu</p>
           <DropdownOption>
             <DropdownOptionTrigger asChild>
               <Button variant="outline" className="w-[40px] px-0">
@@ -176,7 +177,7 @@ export default function UISection() {
         {/* Icon */}
         <div className="flex flex-col gap-3">
           <div className="flex items-center gap-2">
-            <Text.Body14>Icons</Text.Body14>
+            <p className="text-md font-normal">Icons</p>
             <Badge variant="outline">Lucide</Badge>
           </div>
           <Dialog>
@@ -215,7 +216,7 @@ export default function UISection() {
         {/* Table */}
         <div className="flex flex-col gap-3">
           <div className="flex items-center gap-2">
-            <Text.Body14>Table</Text.Body14>
+            <p className="text-md font-normal">Table</p>
             <Badge variant="outline">컴파운드 패턴</Badge>
           </div>
           <Table>
@@ -250,7 +251,7 @@ export default function UISection() {
         {/* 테이블 데이터 없을 때 */}
         <div className="flex flex-col gap-3">
           <div className="flex items-center gap-2">
-            <Text.Body14>Table</Text.Body14>
+            <p className="text-md font-normal">Table</p>
             <Badge variant="outline">데이터 없을 때</Badge>
           </div>
           <TableEmpty>데이터가 없습니다.</TableEmpty>
@@ -259,7 +260,7 @@ export default function UISection() {
         {/* Form + Validation + Query */}
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-2">
-            <Text.Body14>Form</Text.Body14>
+            <p className="text-md font-normal">Form</p>
             <Badge variant="outline">React Hook Form + Zod + React Query</Badge>
           </div>
           <ContactFormDemo />

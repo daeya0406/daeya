@@ -1,5 +1,3 @@
-import { Text } from '@/components/ui/Text';
-
 export default function ThisBindingDemo() {
   const logs: string[] = [];
 
@@ -23,9 +21,9 @@ export default function ThisBindingDemo() {
 
   return (
     <div className="section-component">
-      <Text.Body14 className="font-semibold text-foreground dark:text-foreground">
+      <p className="text-md font-normal font-semibold text-foreground dark:text-foreground">
         this 바인딩 예시
-      </Text.Body14>
+      </p>
       <div className="mt-2 space-y-1 font-mono text-xs text-foreground dark:text-muted-foreground">
         {logs.map((line, i) => (
           <div key={i}>{line}</div>

@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/ToggleGroup';
 import { Badge } from '@/components/ui/Badge';
-import { Text } from '@/components/ui/Text';
 import {
   Table,
   TableBody,
@@ -44,8 +43,12 @@ export default function ViewToggleDemo() {
               key={item.title}
               className="rounded-lg border border-border bg-depth-1 p-3 shadow-sm"
             >
-              <Text.Body16 className="text-base font-semibold text-foreground">{item.title}</Text.Body16>
-              <Text.Caption className="block text-muted-foreground">담당: {item.owner}</Text.Caption>
+              <p className="text-lg font-normal text-base font-semibold text-foreground">
+                {item.title}
+              </p>
+              <span className="text-xs tracking-[0.01em] block text-muted-foreground">
+                담당: {item.owner}
+              </span>
               <Badge className="mt-1" variant="outline">
                 {item.status}
               </Badge>

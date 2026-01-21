@@ -3,7 +3,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
-import { Text } from '@/components/ui/Text';
 
 type Todo = {
   id: number;
@@ -43,13 +42,21 @@ export default function UseQueryDemo() {
       <div className="flex items-start justify-between">
         <div>
           <p className="text-sm font-semibold text-foreground">useQuery</p>
-          <Text.Caption>queryKey / select / staleTime 예시</Text.Caption>
+          <span className="text-xs tracking-[0.01em]">
+            queryKey / select / staleTime 예시
+          </span>
         </div>
         <Badge variant={isFetching ? 'default' : 'outline'}>{isFetching ? 'fetching' : 'idle'}</Badge>
       </div>
 
-      {isPending && <Text.Caption className="text-muted-foreground">로딩 중...</Text.Caption>}
-      {error && <Text.Caption className="text-[rgb(var(--status-danger))]">에러: {error.message}</Text.Caption>}
+      {isPending && (
+        <span className="text-xs tracking-[0.01em] text-muted-foreground">로딩 중...</span>
+      )}
+      {error && (
+        <span className="text-xs tracking-[0.01em] text-[rgb(var(--status-danger))]">
+          에러: {error.message}
+        </span>
+      )}
 
       {data && (
         <div className="space-y-1 text-sm">
@@ -67,7 +74,9 @@ export default function UseQueryDemo() {
         <Button size="sm" onClick={() => refetch()}>
           수동 refetch
         </Button>
-        <Text.Caption className="text-muted-foreground">staleTime 동안 캐시 유지</Text.Caption>
+        <span className="text-xs tracking-[0.01em] text-muted-foreground">
+          staleTime 동안 캐시 유지
+        </span>
       </div>
     </div>
   );

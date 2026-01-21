@@ -1,7 +1,5 @@
 'use client';
 
-import { Text } from '@/components/ui/Text';
-
 type StackGroup = {
   title: string;
   items: { name: string; desc: string }[];
@@ -66,10 +64,10 @@ export default function StackSection() {
   return (
     <div className="space-y-6">
       <div className="line-bottom mb-8 space-y-2">
-        <Text.H3 className="text-primary">Stack</Text.H3>
-        <Text.Caption className="block">
+        <h3 className="text-xl font-semibold text-primary">Stack</h3>
+        <span className="text-xs tracking-[0.01em] block">
           프로젝트에서 사용하는 프레임워크·라이브러리·패턴 리스트입니다.
-        </Text.Caption>
+        </span>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
@@ -78,7 +76,7 @@ export default function StackSection() {
             key={group.title}
             className="rounded-2xl border border-border bg-depth-1 p-6 shadow-sm ring-1 ring-primary/5 backdrop-blur md:p-8"
           >
-            <Text.H4 className="text-foreground">{group.title}</Text.H4>
+            <h4 className="text-2lg font-bold text-foreground">{group.title}</h4>
             <ul className="mt-4 space-y-3 text-sm text-text-default">
               {group.items.map((item) => (
                 <li key={item.name} className="flex items-start gap-2">

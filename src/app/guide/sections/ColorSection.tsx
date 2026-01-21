@@ -1,7 +1,6 @@
 'use client';
 
 import ColorChip from '@/components/guide/ColorChip';
-import { Text } from '@/components/ui/Text';
 
 type ColorToken = { name: string; value: string };
 
@@ -51,16 +50,16 @@ export default function ColorSection() {
   return (
     <div className="space-y-8">
       <div className="line-bottom space-y-1">
-        <Text.H3 className="text-primary">Color Tokens</Text.H3>
-        <Text.Caption className="text-muted-foreground">
+        <h3 className="text-xl font-semibold text-primary">Color Tokens</h3>
+        <span className="text-xs tracking-[0.01em] text-muted-foreground">
           globals.css 토큰 기반 팔레트. 칩을 클릭하면 text-/bg- 클래스가 복사됩니다.
-        </Text.Caption>
+        </span>
       </div>
 
       <div className="flex flex-col gap-6">
         {Object.entries(palette).map(([group, tokens]) => (
           <div key={group} className="space-y-2">
-            <Text.S14 className="text-foreground capitalize">{group}</Text.S14>
+            <span className="text-md leading-[17px] text-foreground capitalize">{group}</span>
             <div className="flex flex-wrap gap-3">
               {tokens.map((t) => (
                 <ColorChip key={t.name} name={t.name} step="default" hex={t.value} />

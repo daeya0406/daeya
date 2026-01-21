@@ -4,7 +4,6 @@ import { Suspense, useMemo } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Tabs } from '@/components/ui/Tabs';
 import { extractTabsFromNav } from '@/components/common/navigation';
-import { Text } from '@/components/ui/Text';
 
 import { GuideTabContent } from './GuideTabContent';
 
@@ -45,8 +44,8 @@ function GuidePageContent() {
   return (
     <section className="mx-auto max-w-5xl px-4 py-10">
       <div className="mb-6 space-y-2">
-        <Text.H2>Guide</Text.H2>
-        <Text.Caption>UI / Tokens / Stack 정리</Text.Caption>
+        <h2 className="text-2xl font-bold">Guide</h2>
+        <span className="text-xs tracking-[0.01em]">UI / Tokens / Stack 정리</span>
       </div>
 
       <Tabs.Root value={activeTab} defaultValue={defaultKey} onValueChange={onChange}>

@@ -12,7 +12,7 @@ import {
   Code2,
 } from 'lucide-react';
 import { FadeUp } from '@/components/motion/FadeUp';
-import { Text } from '@/components/ui/Text';
+import { Badge } from '@/components/ui/Badge';
 import { PROJECTS } from '@/entities/project/model/projects';
 
 const cardClassName = 'rounded-3xl bg-depth-1 shadow-sm ring-1 ring-border';
@@ -95,13 +95,15 @@ export default async function PortfolioCaseStudyPage({
             <div className="p-8 lg:p-12">
               <div className="space-y-6">
                 <div>
-                  <Text.Overline className="text-primary">Case Study</Text.Overline>
-                  <Text.H2 className="text-foreground mt-2 text-3xl lg:text-4xl">
+                  <span className="text-primary text-xs font-semibold uppercase tracking-[0.08em]">
+                    Case Study
+                  </span>
+                  <h2 className="text-foreground mt-2 text-2xl text-3xl font-bold lg:text-4xl">
                     {project.title}
-                  </Text.H2>
-                  <Text.Body16 className="text-muted-foreground mt-4 text-lg leading-relaxed">
+                  </h2>
+                  <p className="text-muted-foreground mt-4 text-lg font-normal leading-relaxed">
                     {caseStudy.overview || project.summary}
-                  </Text.Body16>
+                  </p>
                 </div>
 
                 <div className="flex flex-wrap gap-6">
@@ -109,8 +111,12 @@ export default async function PortfolioCaseStudyPage({
                     <div className="flex items-center gap-1">
                       <Code2 className="text-primary h-5 w-5" />
                       <div className="flex items-center gap-2">
-                        <Text.Caption className="text-muted-foreground">Role</Text.Caption>
-                        <Text.S14.Bold className="text-foreground">{project.role}</Text.S14.Bold>
+                        <span className="text-muted-foreground text-xs tracking-[0.01em]">
+                          Role
+                        </span>
+                        <span className="text-md text-foreground font-bold leading-[17px]">
+                          {project.role}
+                        </span>
                       </div>
                     </div>
                   )}
@@ -118,17 +124,12 @@ export default async function PortfolioCaseStudyPage({
                     <div className="flex items-center gap-1">
                       <Calendar className="text-primary h-5 w-5" />
                       <div className="flex items-center gap-2">
-                        <Text.Caption className="text-muted-foreground">Period</Text.Caption>
-                        <Text.S14.Bold className="text-foreground">{project.period}</Text.S14.Bold>
-                      </div>
-                    </div>
-                  )}
-                  {project.team && (
-                    <div className="flex items-center gap-1">
-                      <Users className="text-primary h-5 w-5" />
-                      <div className="flex items-center gap-2">
-                        <Text.Caption className="text-muted-foreground">Team</Text.Caption>
-                        <Text.S14.Bold className="text-foreground">{project.team}</Text.S14.Bold>
+                        <span className="text-muted-foreground text-xs tracking-[0.01em]">
+                          Period
+                        </span>
+                        <span className="text-md text-foreground font-bold leading-[17px]">
+                          {project.period}
+                        </span>
                       </div>
                     </div>
                   )}
@@ -136,12 +137,9 @@ export default async function PortfolioCaseStudyPage({
 
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="bg-depth-2 text-foreground rounded-full px-4 py-2 text-sm font-medium"
-                    >
+                    <Badge key={tag} variant="subtle" size="lg">
                       {tag}
-                    </span>
+                    </Badge>
                   ))}
                 </div>
 
@@ -174,16 +172,16 @@ export default async function PortfolioCaseStudyPage({
       {(caseStudy.responsibilities || caseStudy.features) && (
         <FadeUp delay={0.15}>
           <section className={['p-8 lg:p-12', cardClassName].join(' ')}>
-            <Text.H2 className="text-foreground mb-6">주요 작업</Text.H2>
+            <h2 className="text-foreground mb-6 text-2xl font-bold">주요 작업</h2>
             <div className="grid gap-8 lg:grid-cols-2">
               {caseStudy.responsibilities && caseStudy.responsibilities.length > 0 && (
                 <div>
-                  <Text.H3 className="text-foreground mb-4">담당한 역할</Text.H3>
+                  <h3 className="text-foreground mb-4 text-xl font-semibold">담당한 역할</h3>
                   <ul className="space-y-3">
                     {caseStudy.responsibilities.map((item) => (
                       <li key={item} className="flex gap-3">
                         <span className="bg-primary mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full" />
-                        <Text.Body14 className="text-muted-foreground">{item}</Text.Body14>
+                        <p className="text-md text-muted-foreground font-normal">{item}</p>
                       </li>
                     ))}
                   </ul>
@@ -191,12 +189,12 @@ export default async function PortfolioCaseStudyPage({
               )}
               {caseStudy.features && caseStudy.features.length > 0 && (
                 <div>
-                  <Text.H3 className="text-foreground mb-4">구현한 기능</Text.H3>
+                  <h3 className="text-foreground mb-4 text-xl font-semibold">구현한 기능</h3>
                   <ul className="space-y-3">
                     {caseStudy.features.map((item) => (
                       <li key={item} className="flex gap-3">
                         <span className="bg-primary mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full" />
-                        <Text.Body14 className="text-muted-foreground">{item}</Text.Body14>
+                        <p className="text-md text-muted-foreground font-normal">{item}</p>
                       </li>
                     ))}
                   </ul>
@@ -211,10 +209,10 @@ export default async function PortfolioCaseStudyPage({
         <FadeUp delay={0.2}>
           <section className="space-y-8">
             <div className="text-center">
-              <Text.H2 className="text-foreground">기술적 시도와 문제 해결</Text.H2>
-              <Text.Body14 className="text-muted-foreground mt-2">
+              <h2 className="text-foreground text-2xl font-bold">기술적 시도와 문제 해결</h2>
+              <p className="text-md text-muted-foreground mt-2 font-normal">
                 프로젝트에서 해본 기술적 시도와 문제 해결 과정입니다
-              </Text.Body14>
+              </p>
             </div>
 
             <div className="space-y-6">
@@ -226,10 +224,10 @@ export default async function PortfolioCaseStudyPage({
                         {idx + 1}
                       </div>
                       <div className="flex-1">
-                        <Text.H3 className="text-foreground">{challenge.title}</Text.H3>
-                        <Text.Body14 className="text-muted-foreground mt-3 leading-relaxed">
+                        <h3 className="text-foreground text-xl font-semibold">{challenge.title}</h3>
+                        <p className="text-md text-muted-foreground mt-3 font-normal leading-relaxed">
                           {challenge.detail}
-                        </Text.Body14>
+                        </p>
                       </div>
                     </div>
 
@@ -237,9 +235,9 @@ export default async function PortfolioCaseStudyPage({
                     {challenge.code && (
                       <div className="bg-depth-2 mt-6 overflow-hidden rounded-2xl">
                         <div className="border-border/50 border-b px-4 py-2">
-                          <Text.Caption className="text-muted-foreground">
+                          <span className="text-muted-foreground text-xs tracking-[0.01em]">
                             Code Example
-                          </Text.Caption>
+                          </span>
                         </div>
                         <pre className="text-foreground overflow-x-auto p-4 text-sm">
                           <code>{challenge.code}</code>
@@ -257,12 +255,12 @@ export default async function PortfolioCaseStudyPage({
       {caseStudy.architecture && caseStudy.architecture.length > 0 && (
         <FadeUp delay={0.25}>
           <section className={['p-8 lg:p-12', cardClassName].join(' ')}>
-            <Text.H2 className="text-foreground mb-6">아키텍처 & 기술 선택</Text.H2>
+            <h2 className="text-foreground mb-6 text-2xl font-bold">아키텍처 & 기술 선택</h2>
             <ul className="space-y-3">
               {caseStudy.architecture.map((item) => (
                 <li key={item} className="flex gap-3">
                   <span className="bg-primary mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full" />
-                  <Text.Body14 className="text-muted-foreground">{item}</Text.Body14>
+                  <p className="text-md text-muted-foreground font-normal">{item}</p>
                 </li>
               ))}
             </ul>
@@ -273,11 +271,11 @@ export default async function PortfolioCaseStudyPage({
       {caseStudy.learnings && caseStudy.learnings.length > 0 && (
         <FadeUp delay={0.3}>
           <section className={['p-8 lg:p-12', cardClassName].join(' ')}>
-            <Text.H2 className="text-foreground mb-6">배운 점</Text.H2>
+            <h2 className="text-foreground mb-6 text-2xl font-bold">배운 점</h2>
             <div className="space-y-4">
               {caseStudy.learnings.map((learning) => (
                 <div key={learning} className="bg-depth-2 rounded-2xl p-6">
-                  <Text.Body14 className="text-foreground leading-relaxed">{learning}</Text.Body14>
+                  <p className="text-md text-foreground font-normal leading-relaxed">{learning}</p>
                 </div>
               ))}
             </div>
@@ -289,10 +287,10 @@ export default async function PortfolioCaseStudyPage({
         <section className={['p-8 lg:p-12', cardClassName].join(' ')}>
           <div className="flex flex-col items-center gap-6 text-center">
             <div>
-              <Text.H3 className="text-foreground">더 많은 프로젝트 살펴보기</Text.H3>
-              <Text.Body14 className="text-muted-foreground mt-2">
+              <h3 className="text-foreground text-xl font-semibold">더 많은 프로젝트 살펴보기</h3>
+              <p className="text-md text-muted-foreground mt-2 font-normal">
                 다른 프로젝트에서 어떤 문제를 해결했는지 확인해보세요
-              </Text.Body14>
+              </p>
             </div>
             <Link
               href="/portfolio"

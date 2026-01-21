@@ -4,7 +4,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { navItems } from '@/components/common/navigation';
-import { Text } from '@/components/ui/Text';
 import {
   Accordion,
   AccordionContent,
@@ -108,14 +107,16 @@ export function DashboardSidebar() {
     switch (label.toLowerCase()) {
       case 'about':
         return <UserRound className="h-4 w-4" />;
+      case 'portfolio':
+        return <Briefcase className="h-4 w-4" />;
       case 'guide':
         return <BookOpen className="h-4 w-4" />;
       case 'note':
         return <NotebookPen className="h-4 w-4" />;
       case 'playground':
         return <FlaskConical className="h-4 w-4" />;
-      case 'work':
-        return <Briefcase className="h-4 w-4" />;
+      // case 'work':
+      //   return <Briefcase className="h-4 w-4" />;
       default:
         return <UserRound className="h-4 w-4" />;
     }
@@ -332,12 +333,12 @@ export function DashboardSidebar() {
           </div>
           {!collapsed && (
             <div className="min-w-0">
-              <Text.S14 as="p" className="text-text-primary truncate">
+              <p className="text-md text-text-primary truncate leading-[17px]">
                 {user?.email ? user.email.split('@')[0] : 'Guest'}
-              </Text.S14>
-              <Text.Caption as="p" className="text-text-default truncate">
+              </p>
+              <p className="text-text-default truncate text-xs tracking-[0.01em]">
                 {role ? `role: ${role}` : 'not signed in'}
-              </Text.Caption>
+              </p>
             </div>
           )}
         </div>

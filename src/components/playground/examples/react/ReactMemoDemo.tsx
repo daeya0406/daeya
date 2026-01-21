@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useMemo, useState } from 'react';
-import { Text } from '@/components/ui/Text';
 import { Button } from '@/components/ui/Button';
 
 const ExpensiveChild = React.memo(function ExpensiveChild({ value }: { value: number }) {
@@ -15,9 +14,9 @@ const ExpensiveChild = React.memo(function ExpensiveChild({ value }: { value: nu
   }, [value]);
 
   return (
-    <Text.Caption className="text-muted-foreground dark:text-muted-foreground">
+    <span className="text-xs tracking-[0.01em] text-muted-foreground dark:text-muted-foreground">
       memoized 결과: {computed}
-    </Text.Caption>
+    </span>
   );
 });
 

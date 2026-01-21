@@ -3,7 +3,6 @@
 import { useMemo, useState } from 'react';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/ToggleGroup';
 import { Badge } from '@/components/ui/Badge';
-import { Text } from '@/components/ui/Text';
 
 type Shape =
   | { kind: 'circle'; radius: number }
@@ -42,9 +41,9 @@ export default function TypeNarrowingDemo() {
         <ToggleGroupItem value="rect">Rect</ToggleGroupItem>
         <ToggleGroupItem value="square">Square</ToggleGroupItem>
       </ToggleGroup>
-      <Text.Caption className="block">
+      <span className="text-xs tracking-[0.01em] block">
         Area: <Badge variant="outline">{areaVal.toFixed(2)}</Badge>
-      </Text.Caption>
+      </span>
     </div>
   );
 }

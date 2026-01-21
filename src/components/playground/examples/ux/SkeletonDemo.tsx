@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Text } from '@/components/ui/Text';
 
 export default function SkeletonDemo() {
   const [loading, setLoading] = useState(true);
@@ -13,10 +12,12 @@ export default function SkeletonDemo() {
 
   return (
     <div className="space-y-3">
-      <Text.Body14 className="text-muted-foreground">로딩 시 Skeleton(자리 유지) vs Spinner(레이아웃 점프)</Text.Body14>
+      <p className="text-md font-normal text-muted-foreground">
+        로딩 시 Skeleton(자리 유지) vs Spinner(레이아웃 점프)
+      </p>
       <div className="grid gap-3 md:grid-cols-2">
         <div className="rounded-lg border border-border bg-depth-1 p-3 text-sm">
-          <Text.Caption className="text-muted-foreground">Skeleton</Text.Caption>
+          <span className="text-xs tracking-[0.01em] text-muted-foreground">Skeleton</span>
           {loading ? (
             <div className="mt-2 space-y-2">
               <div className="h-4 w-3/4 animate-pulse rounded bg-depth-3" />
@@ -29,7 +30,7 @@ export default function SkeletonDemo() {
         </div>
 
         <div className="rounded-lg border border-border bg-depth-1 p-3 text-sm">
-          <Text.Caption className="text-muted-foreground">Spinner</Text.Caption>
+          <span className="text-xs tracking-[0.01em] text-muted-foreground">Spinner</span>
           {loading ? (
             <div className="mt-4 flex items-center gap-2 text-muted-foreground">
               <span className="h-4 w-4 animate-spin rounded-full border-2 border-border border-t-transparent" />

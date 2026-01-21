@@ -1,201 +1,162 @@
 'use client';
 
-import type { ReactNode } from 'react';
 import { toast } from 'sonner';
-import { Text } from '@/components/ui/Text';
 
 type Scale = {
   label: string;
   size: string;
   snippet: string;
-  render: ReactNode;
+  className: string;
 };
 
 const headingTokens: Scale[] = [
   {
-    label: 'Text.H1',
+    label: 'text-3xl font-bold',
     size: '32px / 38px',
-    render: <Text.H1>Pretendard</Text.H1>,
-    snippet: '<Text.H1></Text.H1>',
+    className: 'text-3xl font-bold',
+    snippet: '<span className="text-3xl font-bold">Pretendard</span>',
   },
   {
-    label: 'Text.H2',
+    label: 'text-2xl font-bold',
     size: '24px / 28px',
-    render: <Text.H2>Pretendard</Text.H2>,
-    snippet: '<Text.H2></Text.H2>',
+    className: 'text-2xl font-bold',
+    snippet: '<span className="text-2xl font-bold">Pretendard</span>',
   },
   {
-    label: 'Text.H3',
+    label: 'text-xl font-semibold',
     size: '20px / 24px',
-    render: <Text.H3>Pretendard</Text.H3>,
-    snippet: '<Text.H3></Text.H3>',
+    className: 'text-xl font-semibold',
+    snippet: '<span className="text-xl font-semibold">Pretendard</span>',
   },
   {
-    label: 'Text.H4',
+    label: 'text-2lg font-bold',
     size: '18px / 21px',
-    render: <Text.H4>Pretendard</Text.H4>,
-    snippet: '<Text.H4></Text.H4>',
+    className: 'text-2lg font-bold',
+    snippet: '<span className="text-2lg font-bold">Pretendard</span>',
   },
   {
-    label: 'Text.H5',
+    label: 'text-lg font-semibold',
     size: '16px / 19px',
-    render: <Text.H5>Pretendard</Text.H5>,
-    snippet: '<Text.H5></Text.H5>',
+    className: 'text-lg font-semibold',
+    snippet: '<span className="text-lg font-semibold">Pretendard</span>',
   },
   {
-    label: 'Text.H6',
+    label: 'text-md font-semibold',
     size: '14px / 17px',
-    render: <Text.H6>Pretendard</Text.H6>,
-    snippet: '<Text.H6></Text.H6>',
+    className: 'text-md font-semibold',
+    snippet: '<span className="text-md font-semibold">Pretendard</span>',
   },
 ];
 
 const tokens: Scale[] = [
   {
-    label: 'Text.H1',
-    size: '32px / 38px',
-    render: <Text.H1>Pretendard</Text.H1>,
-    snippet: '<Text.H1></Text.H1>',
-  },
-  {
-    label: 'Text.H2',
+    label: 'text-2xl font-bold',
     size: '24px / 28px',
-    render: <Text.H2>Pretendard</Text.H2>,
-    snippet: '<Text.H2></Text.H2>',
+    className: 'text-2xl font-bold',
+    snippet: '<span className="text-2xl font-bold">Pretendard</span>',
   },
   {
-    label: 'Text.H3',
+    label: 'text-2xl',
+    size: '24px / 28px',
+    className: 'text-2xl',
+    snippet: '<span className="text-2xl">Pretendard</span>',
+  },
+  {
+    label: 'text-xl font-bold',
     size: '20px / 24px',
-    render: <Text.H3>Pretendard</Text.H3>,
-    snippet: '<Text.H3></Text.H3>',
+    className: 'text-xl font-bold',
+    snippet: '<span className="text-xl font-bold">Pretendard</span>',
   },
   {
-    label: 'Text.H4',
-    size: '18px / 21px',
-    render: <Text.H4>Pretendard</Text.H4>,
-    snippet: '<Text.H4></Text.H4>',
+    label: 'text-xl',
+    size: '20px / 24px',
+    className: 'text-xl',
+    snippet: '<span className="text-xl">Pretendard</span>',
   },
   {
-    label: 'Text.H5',
+    label: 'text-lg font-bold',
     size: '16px / 19px',
-    render: <Text.H5>Pretendard</Text.H5>,
-    snippet: '<Text.H5></Text.H5>',
+    className: 'text-lg font-bold',
+    snippet: '<span className="text-lg font-bold">Pretendard</span>',
   },
   {
-    label: 'Text.H6',
+    label: 'text-lg',
+    size: '16px / 19px',
+    className: 'text-lg',
+    snippet: '<span className="text-lg">Pretendard</span>',
+  },
+  {
+    label: 'text-md font-bold',
     size: '14px / 17px',
-    render: <Text.H6>Pretendard</Text.H6>,
-    snippet: '<Text.H6></Text.H6>',
+    className: 'text-md font-bold',
+    snippet: '<span className="text-md font-bold">Pretendard</span>',
+  },
+  {
+    label: 'text-md',
+    size: '14px / 17px',
+    className: 'text-md',
+    snippet: '<span className="text-md">Pretendard</span>',
+  },
+  {
+    label: 'text-sm font-bold',
+    size: '13px / 16px',
+    className: 'text-sm font-bold',
+    snippet: '<span className="text-sm font-bold">Pretendard</span>',
+  },
+  {
+    label: 'text-sm',
+    size: '13px / 16px',
+    className: 'text-sm',
+    snippet: '<span className="text-sm">Pretendard</span>',
+  },
+  {
+    label: 'text-xs font-bold',
+    size: '12px / 14px',
+    className: 'text-xs font-bold',
+    snippet: '<span className="text-xs font-bold">Pretendard</span>',
+  },
+  {
+    label: 'text-xs',
+    size: '12px / 14px',
+    className: 'text-xs',
+    snippet: '<span className="text-xs">Pretendard</span>',
+  },
+  {
+    label: 'text-2xs font-bold',
+    size: '11px / 14px',
+    className: 'text-2xs font-bold',
+    snippet: '<span className="text-2xs font-bold">Pretendard</span>',
+  },
+  {
+    label: 'text-2xs',
+    size: '11px / 14px',
+    className: 'text-2xs',
+    snippet: '<span className="text-2xs">Pretendard</span>',
   },
 
   {
-    label: 'Text.S24.Bold',
-    size: '24px / 28px',
-    render: <Text.S24.Bold>Pretendard</Text.S24.Bold>,
-    snippet: '<Text.S24.Bold></Text.S24.Bold>',
-  },
-  {
-    label: 'Text.S24',
-    size: '24px / 28px',
-    render: <Text.S24>Pretendard</Text.S24>,
-    snippet: '<Text.S24></Text.S24>',
-  },
-  {
-    label: 'Text.S20.Bold',
-    size: '20px / 24px',
-    render: <Text.S20.Bold>Pretendard</Text.S20.Bold>,
-    snippet: '<Text.S20.Bold></Text.S20.Bold>',
-  },
-  {
-    label: 'Text.S20',
-    size: '20px / 24px',
-    render: <Text.S20>Pretendard</Text.S20>,
-    snippet: '<Text.S20></Text.S20>',
-  },
-  {
-    label: 'Text.S16.Bold',
-    size: '16px / 19px',
-    render: <Text.S16.Bold>Pretendard</Text.S16.Bold>,
-    snippet: '<Text.S16.Bold></Text.S16.Bold>',
-  },
-  {
-    label: 'Text.S16',
-    size: '16px / 19px',
-    render: <Text.S16>Pretendard</Text.S16>,
-    snippet: '<Text.S16></Text.S16>',
-  },
-  {
-    label: 'Text.S14.Bold',
-    size: '14px / 17px',
-    render: <Text.S14.Bold>Pretendard</Text.S14.Bold>,
-    snippet: '<Text.S14.Bold></Text.S14.Bold>',
-  },
-  {
-    label: 'Text.S14',
-    size: '14px / 17px',
-    render: <Text.S14>Pretendard</Text.S14>,
-    snippet: '<Text.S14></Text.S14>',
-  },
-  {
-    label: 'Text.S13.Bold',
-    size: '13px / 16px',
-    render: <Text.S13.Bold>Pretendard</Text.S13.Bold>,
-    snippet: '<Text.S13.Bold></Text.S13.Bold>',
-  },
-  {
-    label: 'Text.S13',
-    size: '13px / 16px',
-    render: <Text.S13>Pretendard</Text.S13>,
-    snippet: '<Text.S13></Text.S13>',
-  },
-  {
-    label: 'Text.S12.Bold',
-    size: '12px / 14px',
-    render: <Text.S12.Bold>Pretendard</Text.S12.Bold>,
-    snippet: '<Text.S12.Bold></Text.S12.Bold>',
-  },
-  {
-    label: 'Text.S12',
-    size: '12px / 14px',
-    render: <Text.S12>Pretendard</Text.S12>,
-    snippet: '<Text.S12></Text.S12>',
-  },
-  {
-    label: 'Text.S11.Bold',
-    size: '11px / 14px',
-    render: <Text.S11.Bold>Pretendard</Text.S11.Bold>,
-    snippet: '<Text.S11.Bold></Text.S11.Bold>',
-  },
-  {
-    label: 'Text.S11',
-    size: '11px / 14px',
-    render: <Text.S11>Pretendard</Text.S11>,
-    snippet: '<Text.S11></Text.S11>',
-  },
-
-  {
-    label: 'Text.Body16',
+    label: 'text-lg font-normal',
     size: '16px / auto',
-    render: <Text.Body16>Pretendard</Text.Body16>,
-    snippet: '<Text.Body16></Text.Body16>',
+    className: 'text-lg font-normal',
+    snippet: '<p className="text-lg font-normal">Pretendard</p>',
   },
   {
-    label: 'Text.Body14',
+    label: 'text-md font-normal',
     size: '14px / auto',
-    render: <Text.Body14>Pretendard</Text.Body14>,
-    snippet: '<Text.Body14></Text.Body14>',
+    className: 'text-md font-normal',
+    snippet: '<p className="text-md font-normal">Pretendard</p>',
   },
   {
-    label: 'Text.Caption',
+    label: 'text-xs tracking-[0.01em]',
     size: '12px / 14px',
-    render: <Text.Caption>Pretendard</Text.Caption>,
-    snippet: '<Text.Caption></Text.Caption>',
+    className: 'text-xs tracking-[0.01em]',
+    snippet: '<span className="text-xs tracking-[0.01em]">Pretendard</span>',
   },
   {
-    label: 'Text.Overline',
+    label: 'text-xs font-semibold uppercase tracking-[0.08em]',
     size: '12px / 14px',
-    render: <Text.Overline>Pretendard</Text.Overline>,
-    snippet: '<Text.Overline></Text.Overline>',
+    className: 'text-xs font-semibold uppercase tracking-[0.08em]',
+    snippet: '<span className="text-xs font-semibold uppercase tracking-[0.08em]">Pretendard</span>',
   },
 ];
 
@@ -208,16 +169,14 @@ export default function FontSection() {
   return (
     <div className="space-y-6">
       <div className="line-bottom space-y-1">
-        <Text.H3 className="text-primary">Font Tokens</Text.H3>
-        <Text.Caption className="text-muted-foreground">
+        <h3 className="text-xl font-semibold text-primary">Font Tokens</h3>
+        <span className="text-xs tracking-[0.01em] text-muted-foreground">
           Pretendard 스케일(토큰 기준). 카드 클릭 시 컴포넌트 스니펫이 복사됩니다.
-        </Text.Caption>
+        </span>
       </div>
 
       <div className="space-y-4">
-        <Text.S14.Bold as="p" className="text-foreground">
-          Headings
-        </Text.S14.Bold>
+        <p className="text-md leading-[17px] font-bold text-foreground">Headings</p>
         <div className="grid gap-3 sm:grid-cols-2">
           {headingTokens.map((t) => (
             <button
@@ -225,7 +184,9 @@ export default function FontSection() {
               onClick={() => copy(t.snippet, t.label)}
               className="border-border bg-depth-1 group flex flex-col items-start rounded-lg border p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
             >
-              <div className="text-foreground">{t.render}</div>
+              <div className="text-foreground">
+                <span className={t.className}>Pretendard</span>
+              </div>
               <div className="text-muted-foreground group-hover:text-primary text-xs">
                 {t.label} · {t.size}
               </div>
@@ -235,24 +196,22 @@ export default function FontSection() {
       </div>
 
       <div className="space-y-4">
-        <Text.S14.Bold as="p" className="text-foreground">
-          Scale & Body
-        </Text.S14.Bold>
+        <p className="text-md leading-[17px] font-bold text-foreground">Scale & Body</p>
         <div className="grid gap-3 sm:grid-cols-2">
-          {tokens
-            .filter((t) => !t.label.startsWith('Text.H'))
-            .map((t) => (
-              <button
-                key={t.label}
-                onClick={() => copy(t.snippet, t.label)}
-                className="border-border bg-depth-1 group flex flex-col items-start rounded-lg border p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
-              >
-                <div className="text-foreground">{t.render}</div>
-                <div className="text-muted-foreground group-hover:text-primary text-xs">
-                  {t.label} · {t.size}
-                </div>
-              </button>
-            ))}
+          {tokens.map((t) => (
+            <button
+              key={t.label}
+              onClick={() => copy(t.snippet, t.label)}
+              className="border-border bg-depth-1 group flex flex-col items-start rounded-lg border p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+            >
+              <div className="text-foreground">
+                <span className={t.className}>Pretendard</span>
+              </div>
+              <div className="text-muted-foreground group-hover:text-primary text-xs">
+                {t.label} · {t.size}
+              </div>
+            </button>
+          ))}
         </div>
       </div>
     </div>

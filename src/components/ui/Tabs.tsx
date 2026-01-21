@@ -1,144 +1,55 @@
 'use client';
 
-import { createContext, useContext, useMemo, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import * as React from 'react';
+import * as TabsPrimitive from '@radix-ui/react-tabs';
+import { cn } from '@/lib/utils';
 
-interface Tab<K extends string> {
-  key: K;
-  label: string;
-}
+const TabsRoot = TabsPrimitive.Root;
 
-interface TabsProps<K extends string> {
-  tabs: readonly Tab<K>[];
-  active: K;
-  onChange: (key: K) => void;
-}
+const TabsList = React.forwardRef<
+  React.ElementRef<typeof TabsPrimitive.List>,
+  React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>
+>(({ className, ...props }, ref) => (
+  <TabsPrimitive.List
+    ref={ref}
+    className={cn(
+      'border-border text-foreground relative mb-4 flex w-max gap-6 overflow-x-auto overflow-y-hidden border-b px-1',
+      className
+    )}
+    {...props}
+  />
+));
+TabsList.displayName = 'TabsList';
 
-export function TabsNav<K extends string>({ tabs, active, onChange }: TabsProps<K>) {
-  return (
-    <nav className="border-border text-foreground relative overflow-x-auto overflow-y-hidden border-b">
-      <div className="flex w-max gap-6 px-1">
-        {tabs.map((tab) => (
-          <button
-            key={tab.key}
-            onClick={() => onChange(tab.key)}
-            className={`text-md relative min-w-20 pb-3 font-semibold outline-none ${
-              active === tab.key ? 'text-primary' : 'text-foreground/60 hover:text-foreground'
-            }`}
-          >
-            {tab.label}
-            {active === tab.key && (
-              <motion.div
-                layoutId="underline"
-                className="bg-primary absolute bottom-0 left-0 h-0.5 w-full"
-              />
-            )}
-          </button>
-        ))}
-      </div>
-    </nav>
-  );
-}
+const TabsTrigger = React.forwardRef<
+  React.ElementRef<typeof TabsPrimitive.Trigger>,
+  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
+>(({ className, ...props }, ref) => (
+  <TabsPrimitive.Trigger
+    ref={ref}
+    className={cn(
+      "text-md text-foreground/60 hover:text-foreground data-[state=active]:text-primary data-[state=active]:after:bg-primary relative min-w-20 pb-3 font-semibold outline-none transition-colors data-[state=active]:after:absolute data-[state=active]:after:bottom-0 data-[state=active]:after:left-0 data-[state=active]:after:h-0.5 data-[state=active]:after:w-full data-[state=active]:after:content-['']",
+      className
+    )}
+    {...props}
+  />
+));
+TabsTrigger.displayName = 'TabsTrigger';
 
-type TabsContextType = {
-  value: string;
-  setValue: (value: string) => void;
-};
-
-const TabsContext = createContext<TabsContextType | null>(null);
-
-function useTabsCtx() {
-  const ctx = useContext(TabsContext);
-  if (!ctx) throw new Error('Tabs components must be used within <TabsRoot>');
-  return ctx;
-}
-
-type TabsRootProps = {
-  value?: string;
-  defaultValue: string;
-  onValueChange?: (value: string) => void;
-  children: React.ReactNode;
-};
-
-function TabsRoot({ value, defaultValue, onValueChange, children }: TabsRootProps) {
-  const [internal, setInternal] = useState(defaultValue);
-  const current = value ?? internal;
-
-  const api = useMemo(
-    () => ({
-      value: current,
-      setValue: (val: string) => {
-        setInternal(val);
-        onValueChange?.(val);
-      },
-    }),
-    [current, onValueChange]
-  );
-
-  return <TabsContext.Provider value={api}>{children}</TabsContext.Provider>;
-}
-
-export function TabsList({ children }: { children: React.ReactNode }) {
-  return (
-    <nav className="border-border text-foreground relative mb-4 overflow-y-hidden border-b">
-      <div className="flex w-max gap-6 px-1">{children}</div>
-    </nav>
-  );
-}
-
-type TabsTriggerProps = {
-  value: string;
-  children: React.ReactNode;
-};
-
-function TabsTrigger({ value, children }: TabsTriggerProps) {
-  const { value: active, setValue } = useTabsCtx();
-
-  const isActive = active === value;
-  return (
-    <button
-      onClick={() => setValue(value)}
-      className={`text-md relative min-w-20 pb-3 font-semibold outline-none ${
-        isActive ? 'text-primary' : 'text-foreground/60 hover:text-foreground'
-      }`}
-    >
-      {children}
-      {isActive && (
-        <motion.div
-          layoutId="underline"
-          className="bg-primary absolute bottom-0 left-0 h-0.5 w-full"
-        />
-      )}
-    </button>
-  );
-}
-
-type TabsContentProps = {
-  value: string;
-  children: React.ReactNode;
-};
-
-function TabsContent({ value, children }: TabsContentProps) {
-  const { value: active } = useTabsCtx();
-  const isActive = active === value;
-
-  return (
-    <AnimatePresence mode="wait">
-      {isActive && (
-        <motion.div
-          key={value}
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 8 }}
-          transition={{ duration: 0.2, ease: 'easeOut' }}
-          className="w-full"
-        >
-          {children}
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-}
+const TabsContent = React.forwardRef<
+  React.ElementRef<typeof TabsPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>
+>(({ className, ...props }, ref) => (
+  <TabsPrimitive.Content
+    ref={ref}
+    className={cn(
+      'w-full data-[state=active]:animate-in data-[state=active]:fade-in data-[state=active]:slide-in-from-bottom-2',
+      className
+    )}
+    {...props}
+  />
+));
+TabsContent.displayName = 'TabsContent';
 
 export const Tabs = {
   Root: TabsRoot,

@@ -1,26 +1,15 @@
 'use client';
 
 import * as React from 'react';
+import type { VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
+import { badgeVariants } from '@/components/ui/Badge.styles';
 
-type BadgeProps = React.HTMLAttributes<HTMLSpanElement> & {
-  variant?: 'default' | 'outline';
-};
+type BadgeProps = React.HTMLAttributes<HTMLSpanElement> &
+  VariantProps<typeof badgeVariants>;
 
-const variantClass = {
-  default: 'bg-primary-100 text-primary',
-  outline: 'border border-primary text-primary',
-};
-
-export function Badge({ className, variant = 'default', ...props }: BadgeProps) {
+export function Badge({ className, variant, size, ...props }: BadgeProps) {
   return (
-    <span
-      className={cn(
-        'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold',
-        variantClass[variant],
-        className
-      )}
-      {...props}
-    />
+    <span className={cn(badgeVariants({ variant, size }), className)} {...props} />
   );
 }

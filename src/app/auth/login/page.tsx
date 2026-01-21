@@ -18,7 +18,7 @@ import {
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { supabase } from '@/lib/supabase';
-import { Text } from '@/components/ui/Text';
+import { PROFILE } from '@/entities/profile/model/profile';
 
 export default function LoginPage() {
   return (
@@ -60,7 +60,7 @@ function LoginPageContent() {
   return (
     <section className="mx-auto flex min-h-[70vh] max-w-md flex-col justify-center px-4 py-10">
       <div className="rounded-2xl border border-border bg-depth-1/80 p-6 shadow-md backdrop-blur">
-        <Text.H3 className="mb-8 text-center font-bold">로그인</Text.H3>
+        <h3 className="text-xl font-semibold mb-8 text-center font-bold">로그인</h3>
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -73,7 +73,7 @@ function LoginPageContent() {
                   <FormControl>
                     <Input
                       type="email"
-                      placeholder="you@example.com"
+                      placeholder={PROFILE.email}
                       autoComplete="email"
                       {...field}
                     />

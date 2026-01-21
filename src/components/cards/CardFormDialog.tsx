@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/Dialog';
-import { Text } from '@/components/ui/Text';
 import { Input } from '@/components/ui/Input';
 import { Textarea } from '@/components/ui/Textarea';
 import { Button } from '@/components/ui/Button';
@@ -47,7 +46,7 @@ export function CardFormDialog({
 
         <div className="mt-4 space-y-3">
           <div className="space-y-1">
-            <Text.Caption className="block text-muted-foreground">제목</Text.Caption>
+            <span className="text-xs tracking-[0.01em] block text-muted-foreground">제목</span>
             <Input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -56,7 +55,7 @@ export function CardFormDialog({
             />
           </div>
           <div className="space-y-1">
-            <Text.Caption className="block text-muted-foreground">설명</Text.Caption>
+            <span className="text-xs tracking-[0.01em] block text-muted-foreground">설명</span>
             <Textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}

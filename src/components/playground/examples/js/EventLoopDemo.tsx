@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef } from 'react';
-import { Text } from '@/components/ui/Text';
 
 export default function EventLoopDemo() {
   const [logs, setLogs] = useState<string[]>(['sync']);
@@ -15,9 +14,9 @@ export default function EventLoopDemo() {
 
   return (
     <div className="section-component">
-      <Text.Body14 className="font-semibold text-foreground dark:text-foreground">
+      <p className="text-md font-normal font-semibold text-foreground dark:text-foreground">
         이벤트 루프 순서
-      </Text.Body14>
+      </p>
       <p className="mt-1 text-xs text-muted-foreground dark:text-muted-foreground">
         실행 흐름을 바로 찍어봤습니다.
       </p>

@@ -4,7 +4,6 @@ import { useCallback, useState } from 'react';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { Switch } from '@/components/ui/Switch';
-import { Text } from '@/components/ui/Text';
 
 function useToggle(initial = false) {
   const [value, setValue] = useState(initial);
@@ -25,7 +24,7 @@ export default function ToggleHookDemo() {
     <div className="flex items-center justify-between rounded-lg border border-border bg-depth-1 p-3">
       <div className="space-y-1">
         <p className="text-sm font-semibold text-foreground">useToggle</p>
-        <Text.Caption>boolean 상태를 간결하게 토글</Text.Caption>
+        <span className="text-xs tracking-[0.01em]">boolean 상태를 간결하게 토글</span>
         <Badge variant={value ? 'default' : 'outline'}>{value ? 'ON' : 'OFF'}</Badge>
       </div>
       <div className="flex items-center gap-3">

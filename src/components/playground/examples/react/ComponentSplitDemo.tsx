@@ -1,6 +1,4 @@
 'use client';
-
-import { Text } from '@/components/ui/Text';
 import { Badge } from '@/components/ui/Badge';
 
 type Profile = {
@@ -12,10 +10,12 @@ type Profile = {
 function ProfileCard({ profile }: { profile: Profile }) {
   return (
     <div className="section-component">
-      <Text.Body16 className="font-semibold text-foreground dark:text-foreground">
+      <p className="text-lg font-normal font-semibold text-foreground dark:text-foreground">
         {profile.name}
-      </Text.Body16>
-      <Text.Caption className="text-muted-foreground dark:text-muted-foreground">{profile.role}</Text.Caption>
+      </p>
+      <span className="text-xs tracking-[0.01em] text-muted-foreground dark:text-muted-foreground">
+        {profile.role}
+      </span>
       <div className="mt-2 flex flex-wrap gap-2">
         {profile.tags.map((tag) => (
           <Badge key={tag} variant="outline">

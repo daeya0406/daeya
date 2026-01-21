@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
-import { Text } from '@/components/ui/Text';
 
 export default function NullishPatternDemo() {
   const scenarios = {
@@ -35,7 +34,7 @@ export default function NullishPatternDemo() {
 
       <div className="grid gap-3 md:grid-cols-2">
         <div className="border-border bg-depth-1 rounded-lg border p-3 text-sm">
-          <Text.Caption className="font-semibold">현재 데이터</Text.Caption>
+          <span className="text-xs tracking-[0.01em] font-semibold">현재 데이터</span>
           <pre className="text-foreground mt-2 whitespace-pre-wrap text-xs">
             {JSON.stringify(user, null, 2)}
           </pre>

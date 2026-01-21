@@ -2,7 +2,6 @@
 
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/Dialog';
 import { Button } from '@/components/ui/Button';
-import { Text } from '@/components/ui/Text';
 
 type CardDeleteDialogProps = {
   open: boolean;
@@ -23,12 +22,12 @@ export function CardDeleteDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogTitle>
-          <Text.H4 as="span">카드 삭제</Text.H4>
+          <span className="text-2lg font-bold">카드 삭제</span>
         </DialogTitle>
         <DialogDescription asChild>
-          <Text.Body14 as="span" className="text-foreground">
+          <span className="text-md font-normal text-foreground">
             {title ? `${title} 카드를 삭제할까요?` : '카드를 삭제할까요?'}
-          </Text.Body14>
+          </span>
         </DialogDescription>
         <div className="mt-4 flex justify-end gap-2">
           <Button variant="outline" onClick={() => onOpenChange(false)} disabled={isLoading}>

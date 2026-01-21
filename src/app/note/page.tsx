@@ -1,7 +1,6 @@
 'use client';
 
 import { Suspense, useMemo, useState } from 'react';
-import { Text } from '@/components/ui/Text';
 import { Button } from '@/components/ui/Button';
 import { toast } from 'sonner';
 import { Tabs } from '@/components/ui/Tabs';
@@ -56,8 +55,10 @@ function NotePageContent() {
   return (
     <section className="mx-auto max-w-6xl px-4 py-10">
       <div className="mb-6 space-y-2">
-        <Text.H2>Note</Text.H2>
-        <Text.Caption>JS / React / Hooks / TS / Next.js 개념 메모</Text.Caption>
+        <h2 className="text-2xl font-bold">Note</h2>
+        <span className="text-xs tracking-[0.01em]">
+          JS / React / Hooks / TS / Next.js 개념 메모
+        </span>
       </div>
 
       <Tabs.Root value={activeTab} defaultValue={defaultTab} onValueChange={onChangeTab}>
@@ -73,8 +74,10 @@ function NotePageContent() {
           <div className="grid gap-6 pt-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:items-start">
             <TabListPanel className="bg-depth-1/70 rounded-xl p-4 shadow-sm">
               <div className="flex items-center justify-between">
-                <Text.H6>목록</Text.H6>
-                <Text.S11 className="text-muted-foreground">{filteredItems.length}개</Text.S11>
+                <h6 className="text-md font-semibold">목록</h6>
+                <span className="text-[11px] leading-[14px] text-muted-foreground">
+                  {filteredItems.length}개
+                </span>
               </div>
               <div className="mt-3 flex flex-col gap-2">
                 {filteredItems.map((item) => {
@@ -90,22 +93,22 @@ function NotePageContent() {
                           : 'text-foreground hover:border-primary/30 border-transparent'
                       )}
                     >
-                      <Text.S13
+                      <span
                         className={cn(
-                          'truncate',
+                          'truncate text-sm leading-[16px]',
                           isActive ? 'text-primary' : 'text-muted-foreground'
                         )}
                       >
                         {item.title}
-                      </Text.S13>
-                      <Text.S11
+                      </span>
+                      <span
                         className={cn(
-                          'truncate',
+                          'truncate text-[11px] leading-[14px]',
                           isActive ? 'text-primary/60' : 'text-muted-foreground'
                         )}
                       >
                         {item.tags.join(' • ')}
-                      </Text.S11>
+                      </span>
                     </button>
                   );
                 })}
@@ -116,13 +119,13 @@ function NotePageContent() {
               {activeItem ? (
                 <>
                   <div className="flex flex-wrap items-center justify-between gap-3">
-                    <div className="line-bottom space-y-1">
-                      <Text.H5>{activeItem.title}</Text.H5>
-                      <Text.S12 className="text-muted-foreground">
-                        {activeItem.description}
-                      </Text.S12>
-                    </div>
+                  <div className="line-bottom space-y-1">
+                    <h5 className="text-lg font-semibold">{activeItem.title}</h5>
+                    <span className="text-xs leading-[14px] text-muted-foreground">
+                      {activeItem.description}
+                    </span>
                   </div>
+                </div>
 
                   {activeItem.demo && (
                     <div className="bg-depth-2 rounded-lg p-4">{activeItem.demo}</div>
@@ -131,9 +134,9 @@ function NotePageContent() {
                   {codeBlocks?.map((block, idx) => (
                     <div key={idx} className="space-y-2 rounded-lg border border-border p-3">
                       <div className="flex items-center justify-between gap-3">
-                        <Text.S12 className="text-muted-foreground">
+                        <span className="text-xs leading-[14px] text-muted-foreground">
                           {block.label ?? `코드 ${idx + 1}`}
-                        </Text.S12>
+                        </span>
                         <Button
                           variant="outline"
                           size="sm"
@@ -150,7 +153,9 @@ function NotePageContent() {
                   ))}
                 </>
               ) : (
-                <Text.Caption>이 탭에는 준비된 항목이 없습니다.</Text.Caption>
+                <span className="text-xs tracking-[0.01em]">
+                  이 탭에는 준비된 항목이 없습니다.
+                </span>
               )}
             </div>
           </div>

@@ -1,7 +1,6 @@
 'use client';
 
 import { useCallback, useRef, useState } from 'react';
-import { Text } from '@/components/ui/Text';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 
@@ -41,7 +40,9 @@ export default function ThrottleDebounceDemo() {
 
   return (
     <div className="space-y-3">
-      <Text.Caption className="block text-muted-foreground">Debounce vs Throttle (400ms)</Text.Caption>
+      <span className="text-xs tracking-[0.01em] block text-muted-foreground">
+        Debounce vs Throttle (400ms)
+      </span>
       <Input
         value={text}
         onChange={(e) => handleChange(e.target.value)}

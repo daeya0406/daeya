@@ -8,6 +8,7 @@ export type NavItem = {
 export const navItems: NavItem[] = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
+  { label: 'Portfolio', href: '/portfolio' },
   {
     label: 'Guide',
     href: '/guide',
@@ -41,15 +42,15 @@ export const navItems: NavItem[] = [
       { label: 'Testing', href: '/playground?tab=testing', badge: 'New' },
     ],
   },
-  {
-    label: 'Work',
-    children: [
-      { label: 'Portfolio', href: '/work?tab=portfolio', badge: 'Soon' },
-      { label: 'Blog', href: '/work?tab=blog', badge: 'Soon' },
-      { label: 'Dashboard', href: '/work?tab=dashboard', badge: 'Private' },
-      { label: 'Cards', href: '/work?tab=cards' },
-    ],
-  },
+  // {
+  //   label: 'Work',
+  //   children: [
+  //     { label: 'Portfolio', href: '/work?tab=portfolio', badge: 'Soon' },
+  //     { label: 'Blog', href: '/work?tab=blog', badge: 'Soon' },
+  //     { label: 'Dashboard', href: '/work?tab=dashboard', badge: 'Private' },
+  //     { label: 'Cards', href: '/work?tab=cards' },
+  //   ],
+  // },
 ];
 
 export function findNavItem(label: string) {

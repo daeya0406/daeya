@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { Text } from '@/components/ui/Text';
 import { Button } from '@/components/ui/Button';
 export default function TestGroundDemo3() {
   const initialUsers = [
@@ -15,7 +14,7 @@ export default function TestGroundDemo3() {
   return (
     <div>
       <section className="section-component space-y-2">
-        <Text.H6>렌더링 화면</Text.H6>
+        <h6 className="text-md font-semibold">렌더링 화면</h6>
         <p>
           {users.map((u) => (
             <span key={u.id}>{u.name}</span>

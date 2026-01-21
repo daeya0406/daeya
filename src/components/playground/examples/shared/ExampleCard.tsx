@@ -1,5 +1,4 @@
 import { cn } from '@/lib/utils';
-import { Text } from '@/components/ui/Text';
 
 type ExampleCardProps = {
   title: string;
@@ -10,7 +9,9 @@ type ExampleCardProps = {
 export function ExampleCard({ title, children, className }: ExampleCardProps) {
   return (
     <div className={cn('section-component', className)}>
-      <Text.S12 className="text-primary dark:text-foreground font-semibold">{title}</Text.S12>
+      <span className="text-xs leading-[14px] text-primary dark:text-foreground font-semibold">
+        {title}
+      </span>
       <div className="text-foreground dark:text-muted-foreground mt-2 space-y-1 font-mono text-xs">
         {children}
       </div>

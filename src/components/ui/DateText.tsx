@@ -1,7 +1,6 @@
 'use client';
 
 import { formatDate, fromNow } from '@/lib/date';
-import { Text } from './Text';
 
 type DateTextProps = {
   value: string | number | Date;
@@ -14,9 +13,7 @@ export function DateText({ value, format = 'YYYY-MM-DD', showRelative = false, l
   return (
     <div className="flex items-center gap-2 rounded-md border border-border bg-depth-1/70 px-3 py-2 text-sm shadow-sm">
       {label && (
-        <Text.Caption className="font-semibold text-foreground" as="span">
-          {label}
-        </Text.Caption>
+        <span className="text-xs tracking-[0.01em] font-semibold text-foreground">{label}</span>
       )}
       <span className="font-medium text-foreground">{formatDate(value, format)}</span>
       {showRelative && <span className="text-xs text-muted-foreground">({fromNow(value)})</span>}

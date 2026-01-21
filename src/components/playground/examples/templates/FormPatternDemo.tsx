@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
+import { PROFILE } from '@/entities/profile/model/profile';
 
 export default function FormPatternDemo() {
   const [email, setEmail] = useState('');
@@ -25,7 +26,7 @@ export default function FormPatternDemo() {
       <Input
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        placeholder="you@example.com"
+        placeholder={PROFILE.email}
       />
       {error && <p className="text-xs text-red-500">{error}</p>}
       {success && <p className="text-xs text-emerald-600">{success}</p>}

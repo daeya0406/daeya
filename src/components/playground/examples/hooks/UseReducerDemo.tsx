@@ -4,7 +4,6 @@ import { useReducer, useState } from 'react';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
-import { Text } from '@/components/ui/Text';
 
 type Todo = { id: number; text: string; done: boolean };
 type State = { count: number; todos: Todo[] };
@@ -50,7 +49,9 @@ export default function UseReducerDemo() {
       <div className="flex items-start justify-between">
         <div>
           <p className="text-foreground text-sm font-semibold">useReducer</p>
-          <Text.Caption>state + action을 한곳에서 관리, dispatch로 명령 전달</Text.Caption>
+          <span className="text-xs tracking-[0.01em]">
+            state + action을 한곳에서 관리, dispatch로 명령 전달
+          </span>
         </div>
         <Badge variant="outline">dispatch</Badge>
       </div>
@@ -67,11 +68,11 @@ export default function UseReducerDemo() {
             <Button size="sm" onClick={() => dispatch({ type: 'reset' })}>
               reset
             </Button>
-            <Text.Body14 className="text-foreground ml-auto">count: {state.count}</Text.Body14>
+            <p className="text-md font-normal text-foreground ml-auto">count: {state.count}</p>
           </div>
-          <Text.Caption className="text-muted-foreground">
+          <span className="text-xs tracking-[0.01em] text-muted-foreground">
             액션 객체에 따라 reducer가 상태를 계산. 로직이 한곳에 모여 테스트/확장이 쉬움
-          </Text.Caption>
+          </span>
         </div>
 
         <div className="border-border bg-depth-2 space-y-3 rounded-lg border p-3">
@@ -110,9 +111,9 @@ export default function UseReducerDemo() {
               </button>
             ))}
           </div>
-          <Text.Caption className="text-muted-foreground">
+          <span className="text-xs tracking-[0.01em] text-muted-foreground">
             dispatch({`{ type: 'toggle', id }`}) 한 번으로 상태 계산/렌더까지 처리
-          </Text.Caption>
+          </span>
         </div>
       </div>
     </div>

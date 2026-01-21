@@ -2,7 +2,6 @@
 
 import { useState, useMemo } from 'react';
 import { DatePicker } from '@/components/ui/DatePicker';
-import { Text } from '@/components/ui/Text';
 import { Badge } from '@/components/ui/Badge';
 import dayjs from 'dayjs';
 
@@ -16,9 +15,9 @@ export default function DatePickerDemo() {
   return (
     <div className="space-y-3">
       <DatePicker value={date ?? undefined} onChange={(d) => setDate(d)} />
-      <Text.Caption className="block">
+      <span className="text-xs tracking-[0.01em] block">
         선택 날짜: <Badge variant="outline">{display}</Badge>
-      </Text.Caption>
+      </span>
     </div>
   );
 }

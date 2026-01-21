@@ -1,7 +1,6 @@
 'use client';
 
 import { Suspense, useEffect, useState } from 'react';
-import { Text } from '@/components/ui/Text';
 import CardList from '@/components/cards/CardList';
 import type { Card } from '@/types/card';
 import { Button } from '@/components/ui/Button';
@@ -139,10 +138,10 @@ export default function CardsSection() {
     <div className="space-y-3">
       <div className="flex items-start justify-between gap-3">
         <div>
-          <Text.H3>Cards</Text.H3>
-          <Text.Caption className="text-muted-foreground block">
+          <h3 className="text-xl font-semibold">Cards</h3>
+          <span className="text-xs tracking-[0.01em] text-muted-foreground block">
             카드 목록과 모달을 Work 탭에서 바로 확인하세요.
-          </Text.Caption>
+          </span>
         </div>
         {role === 'admin' && (
           <Button size="sm" variant="outline" onClick={() => setCreateOpen(true)}>
@@ -162,7 +161,7 @@ export default function CardsSection() {
             ))}
           </div>
         )}
-        {error && <Text.Caption className="text-red-500">{error}</Text.Caption>}
+        {error && <span className="text-xs tracking-[0.01em] text-red-500">{error}</span>}
         {!loading && !error && (
           <>
             <CardList
@@ -196,9 +195,9 @@ export default function CardsSection() {
           <DialogContent>
             <DialogTitle>{selectedCard.title}</DialogTitle>
             <DialogDescription asChild>
-              <Text.Body14 as="span" className="text-muted-foreground mt-2 text-sm">
+              <span className="text-md font-normal text-muted-foreground mt-2 text-sm">
                 {selectedCard.description}
-              </Text.Body14>
+              </span>
             </DialogDescription>
             {role === 'admin' && (
               <div className="flex justify-end gap-2">
