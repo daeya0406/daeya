@@ -8,7 +8,7 @@ export const ABOUT_STRENGTHS = [
   {
     title: '성능 최적화',
     description:
-      'Core Web Vitals, 번들 사이즈, 렌더링 최적화를 통해 사용자 경험을 개선합니다. 실제로 LCP를 3초 → 1초로 줄인 경험이 있습니다.',
+      '꾸준히 성능 최적화에 관심을 갖고, 실제 성능 지표를 개선해보려고 하고 있습니다. 솔직히 아직은 방대한 API를 활용해본 경험이 적습니다.',
     icon: 'zap',
   },
   {
@@ -18,9 +18,9 @@ export const ABOUT_STRENGTHS = [
     icon: 'users',
   },
   {
-    title: '문제 해결',
+    title: '해결책 제시',
     description:
-      '막히면 공식 문서부터 읽고, 안 되면 직접 코드를 뜯어봅니다. "왜?"를 끝까지 파고듭니다.',
+      '기획-디자인-개발 흐름에 적극적으로 참여합니다. 문제를 발견하고, 더 나은 대안을 제시하려고 노력합니다.',
     icon: 'award',
   },
 ];

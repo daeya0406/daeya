@@ -253,3 +253,23 @@
     @apply after:bg-primary after:dark:bg-primary after:mb-2 after:mt-4 after:block after:h-1 after:w-6 after:rounded after:content-[''];
   }
 }
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-16px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-float {
+  animation: float 8s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float 12s ease-in-out infinite;
+}
