@@ -108,7 +108,7 @@ export default function AboutPage() {
                 {PROFILE.career.frontend.label}
               </div>
               <div className="text-foreground mt-1 text-xl font-bold">
-                {PROFILE.career.frontend.value ?? PROFILE.career.frontend.fallback ?? '-'}
+                {PROFILE.career.frontend.value ?? '-'}
               </div>
             </div>
           </div>
