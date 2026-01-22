@@ -38,6 +38,24 @@ function NotePageContent() {
   const [searchQuery, setSearchQuery] = useState('');
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
 
+  const copyToClipboard = async (value: string) => {
+    if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(value);
+      return true;
+    }
+    if (typeof document === 'undefined') return false;
+    const textarea = document.createElement('textarea');
+    textarea.value = value;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+    const ok = document.execCommand('copy');
+    document.body.removeChild(textarea);
+    return ok;
+  };
+
   const filteredItems = useMemo(() => {
     const tabFiltered = noteItems.filter((item) => item.categories.includes(activeTab));
 
@@ -72,11 +90,16 @@ function NotePageContent() {
         ? [{ label: undefined, code: activeItem.code }]
         : []);
 
-  const handleCopy = (code: string, index: number, label?: string) => {
-    navigator.clipboard.writeText(code);
-    setCopiedIndex(index);
-    toast.success(`${label ?? '코드'}를 복사했습니다`);
-    setTimeout(() => setCopiedIndex(null), 2000);
+  const handleCopy = async (code: string, index: number, label?: string) => {
+    try {
+      const ok = await copyToClipboard(code);
+      if (!ok) throw new Error('clipboard');
+      setCopiedIndex(index);
+      toast.success(`${label ?? '코드'}를 복사했습니다`);
+      setTimeout(() => setCopiedIndex(null), 2000);
+    } catch {
+      toast.error('복사에 실패했습니다');
+    }
   };
 
   if (!tabs.length) return null;

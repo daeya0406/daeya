@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 type Tab = { key: string; label: string };
 
@@ -14,6 +14,7 @@ type UseSyncedTabResult = {
 
 export function useSyncedTab(tabs: Tab[], path: string): UseSyncedTabResult {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const defaultTab = tabs[0]?.key ?? '';
   const pendingScroll = useRef<number | null>(null);
 
@@ -43,12 +44,10 @@ export function useSyncedTab(tabs: Tab[], path: string): UseSyncedTabResult {
       pendingScroll.current = window.scrollY;
     }
     setLocalTab(key);
-    if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search);
-      params.set('tab', key);
-      const href = `${path}?${params.toString()}`;
-      window.history.replaceState(window.history.state, '', href);
-    }
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('tab', key);
+    const href = `${path}?${params.toString()}`;
+    router.replace(href, { scroll: false });
   };
 
   return { activeTab: localTab, defaultTab, tabs, onChangeTab };
