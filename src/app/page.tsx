@@ -152,15 +152,15 @@ export default async function HomePage() {
         <div className="grid gap-4 sm:grid-cols-3">
           {Object.values(PROFILE.career).map((stat) => {
             const value =
-              stat.value
+              'value' in stat && stat.value
                 ? stat.value
                 : stat.id === 'experience'
-                ? experiences.length > 0
-                  ? `${experiences.length}년+`
-                  : (stat.fallback ?? '')
+                  ? experiences.length > 0
+                    ? `${experiences.length}년+`
+                    : ('fallback' in stat ? stat.fallback ?? '' : '')
                 : stat.id === 'study'
                   ? `${posts.length}`
-                  : (stat.fallback ?? '');
+                  : ('fallback' in stat ? stat.fallback ?? '' : '');
 
             return (
               <div key={stat.id} className={['p-6', cardClassName].join(' ')}>
