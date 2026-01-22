@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowUpRight, Github, Mail } from 'lucide-react';
+import { ArrowUpRight, ExternalLink, Github, Mail } from 'lucide-react';
 import { CopyTextButton } from '@/shared/common/CopyTextButton';
 import { HOME_HERO } from '@/entities/home/model/home';
 import { PROFILE } from '@/entities/profile/model/profile';
@@ -9,8 +9,8 @@ import { PROFILE } from '@/entities/profile/model/profile';
 export function HomeHero() {
   return (
     <section className="relative">
-      <div className="bg-primary/10 absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full blur-3xl animate-float" />
-      <div className="bg-primary/5 absolute -bottom-24 right-10 h-72 w-72 rounded-full blur-3xl animate-float-slow" />
+      <div className="bg-primary/10 animate-float absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full blur-3xl" />
+      <div className="bg-primary/5 animate-float-slow absolute -bottom-24 right-10 h-72 w-72 rounded-full blur-3xl" />
 
       <div className="relative mx-auto max-w-4xl text-center">
         <div className="bg-primary/10 text-primary mb-6 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold">
@@ -64,6 +64,14 @@ export function HomeHero() {
             className="text-muted-foreground hover:text-foreground inline-flex items-center gap-2 transition"
           >
             <Github className="h-4 w-4" /> GitHub
+          </Link>
+          <Link
+            href={PROFILE.links.publishingPortfolio}
+            target="_blank"
+            rel="noreferrer"
+            className="text-muted-foreground hover:text-foreground inline-flex items-center gap-2 transition"
+          >
+            <ExternalLink className="h-3.5 w-3.5" /> 퍼블리싱
           </Link>
         </div>
       </div>

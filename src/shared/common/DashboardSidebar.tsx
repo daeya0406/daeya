@@ -144,9 +144,9 @@ export function DashboardSidebar() {
             <Image
               src="/images/logo.png"
               alt="Daeya Logo"
-              width={26}
-              height={14}
-              style={{ width: 'auto', height: 'auto' }}
+              width={29}
+              height={16}
+              style={{ width: '29px', height: '16px' }}
             />
             <span className="text-text-primary text-lg font-bold">Daeya</span>
           </Link>

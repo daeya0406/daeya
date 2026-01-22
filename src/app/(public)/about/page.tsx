@@ -113,6 +113,14 @@ export default function AboutPage() {
                 >
                   프로젝트 <ArrowUpRight className="h-4 w-4" />
                 </Link>
+                <Link
+                  href={PROFILE.links.publishingPortfolio}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-foreground hover:bg-muted border-border inline-flex items-center gap-2 rounded-xl border px-6 py-3 text-sm font-semibold transition"
+                >
+                  퍼블리싱 <ExternalLink className="h-4 w-4" />
+                </Link>
               </div>
             </div>
 

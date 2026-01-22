@@ -6,6 +6,7 @@ export const PROFILE = {
   links: {
     github: 'https://github.com/',
     resume: '/resume.pdf',
+    publishingPortfolio: 'http://daeya.kro.kr/',
   },
   career: {
     total: {
