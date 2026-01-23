@@ -3,7 +3,7 @@
 import { Suspense, useMemo, useState } from 'react';
 import { toast } from 'sonner';
 import { extractTabsFromNav } from '@/shared/common/navigation';
-import { noteItems } from '@/shared/playground/noteData';
+import { noteItems } from '@/app/(public)/(workspace)/note/_components/noteData';
 import { useSyncedTab } from '@/hooks/useSyncedTab';
 import { cn } from '@/lib/utils';
 import { Code2 } from 'lucide-react';

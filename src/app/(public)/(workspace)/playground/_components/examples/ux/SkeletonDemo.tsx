@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 
-export default function SkeletonDemo() {
+export function SkeletonDemo() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -12,28 +12,28 @@ export default function SkeletonDemo() {
 
   return (
     <div className="space-y-3">
-      <p className="text-md font-normal text-muted-foreground">
+      <p className="text-md text-muted-foreground font-normal">
         로딩 시 Skeleton(자리 유지) vs Spinner(레이아웃 점프)
       </p>
       <div className="grid gap-3 md:grid-cols-2">
-        <div className="rounded-lg border border-border bg-depth-1 p-3 text-sm">
-          <span className="text-xs tracking-[0.01em] text-muted-foreground">Skeleton</span>
+        <div className="border-border bg-depth-1 rounded-lg border p-3 text-sm">
+          <span className="text-muted-foreground text-xs tracking-[0.01em]">Skeleton</span>
           {loading ? (
             <div className="mt-2 space-y-2">
-              <div className="h-4 w-3/4 animate-pulse rounded bg-depth-3" />
-              <div className="h-4 w-5/6 animate-pulse rounded bg-depth-3" />
-              <div className="h-4 w-2/3 animate-pulse rounded bg-depth-3" />
+              <div className="bg-depth-3 h-4 w-3/4 animate-pulse rounded" />
+              <div className="bg-depth-3 h-4 w-5/6 animate-pulse rounded" />
+              <div className="bg-depth-3 h-4 w-2/3 animate-pulse rounded" />
             </div>
           ) : (
             <p className="mt-2">레이아웃을 유지해 깜빡임/점프를 줄입니다.</p>
           )}
         </div>
 
-        <div className="rounded-lg border border-border bg-depth-1 p-3 text-sm">
-          <span className="text-xs tracking-[0.01em] text-muted-foreground">Spinner</span>
+        <div className="border-border bg-depth-1 rounded-lg border p-3 text-sm">
+          <span className="text-muted-foreground text-xs tracking-[0.01em]">Spinner</span>
           {loading ? (
-            <div className="mt-4 flex items-center gap-2 text-muted-foreground">
-              <span className="h-4 w-4 animate-spin rounded-full border-2 border-border border-t-transparent" />
+            <div className="text-muted-foreground mt-4 flex items-center gap-2">
+              <span className="border-border h-4 w-4 animate-spin rounded-full border-2 border-t-transparent" />
               <span>로딩 중...</span>
             </div>
           ) : (

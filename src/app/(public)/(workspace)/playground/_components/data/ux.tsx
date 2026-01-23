@@ -1,9 +1,5 @@
 import type { PlaygroundItem } from '@/types/playground';
-import MotionDemo from '../examples/ux/MotionDemo';
-import SkeletonDemo from '../examples/ux/SkeletonDemo';
-import UxOptimisticDemo from '../examples/ux/OptimisticDemo';
-import FocusDemo from '../examples/ux/FocusDemo';
-import ToastDemo from '../examples/ux/ToastDemo';
+import { FocusDemo, MotionDemo, ToastDemo, OptimisticDemo, SkeletonDemo } from '../examples/ux';
 import { InfoBlock } from '../examples/InfoBlock';
 
 export const uxItems: PlaygroundItem[] = [
@@ -32,7 +28,7 @@ export const uxItems: PlaygroundItem[] = [
     tags: ['Optimistic', 'Mutation'],
     description: '클릭 즉시 반영 후 실패 시 롤백하는 패턴',
     categories: ['ux'],
-    demo: <UxOptimisticDemo />,
+    demo: <OptimisticDemo />,
     code: `setState(+1); mutate().catch(() => setState(-1));`,
   },
   {

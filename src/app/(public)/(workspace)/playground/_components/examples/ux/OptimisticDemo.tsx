@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Button } from '@/shared/ui/Button';
 
-export default function UxOptimisticDemo() {
+export function OptimisticDemo() {
   const [likes, setLikes] = useState(12);
   const [status, setStatus] = useState<'idle' | 'saving' | 'error'>('idle');
 
@@ -23,15 +23,15 @@ export default function UxOptimisticDemo() {
 
   return (
     <div className="space-y-2">
-      <p className="text-md font-normal text-muted-foreground">
+      <p className="text-md text-muted-foreground font-normal">
         Optimistic UI: 먼저 UI 반영 → 실패 시 롤백
       </p>
-      <div className="flex items-center gap-3 rounded-lg border border-border bg-depth-1 p-3 text-sm">
+      <div className="border-border bg-depth-1 flex items-center gap-3 rounded-lg border p-3 text-sm">
         <Button size="sm" onClick={toggleLike} disabled={status === 'saving'}>
           좋아요 +1
         </Button>
-        <p className="text-md font-normal text-foreground">{likes} likes</p>
-        <span className="text-xs tracking-[0.01em] text-muted-foreground">
+        <p className="text-md text-foreground font-normal">{likes} likes</p>
+        <span className="text-muted-foreground text-xs tracking-[0.01em]">
           {status === 'saving' && '서버 반영 중...'}
           {status === 'error' && '실패: 롤백됨'}
           {status === 'idle' && '즉시 반영 후 서버 동기화'}

@@ -3,7 +3,7 @@
 import { Suspense, useMemo, useState } from 'react';
 import { toast } from 'sonner';
 import { extractTabsFromNav } from '@/shared/common/navigation';
-import { playgroundItems } from '@/shared/playground/playgroundData';
+import { playgroundItems } from '@/app/(public)/(workspace)/playground/_components/playgroundData';
 import { useSyncedTab } from '@/hooks/useSyncedTab';
 import { cn } from '@/lib/utils';
 import { Code2 } from 'lucide-react';
