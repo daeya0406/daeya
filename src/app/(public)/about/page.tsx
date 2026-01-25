@@ -25,6 +25,7 @@ import {
   ABOUT_PRINCIPLES,
   ABOUT_STRENGTHS,
 } from '@/entities/about/model/about';
+import { DevStandardsSection } from './_components';
 
 const cardClassName = 'bg-depth-1 ring-border/50 rounded-3xl shadow-sm ring-1';
 
@@ -157,43 +158,173 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 강점 - 시각적으로 임팩트 있게 */}
-      <section className={['p-8 lg:p-12', cardClassName].join(' ')}>
-        <div className="mb-10 text-center">
-          <div className="text-primary mb-3 text-sm font-semibold uppercase tracking-wider">
-            What I Bring
+      {/* 기준 */}
+      <DevStandardsSection />
+
+      <div className="space-y-6">
+        {/* 강점 - 시각적으로 임팩트 있게 */}
+        <section className={['p-8 lg:p-12', cardClassName].join(' ')}>
+          <div className="mb-10 text-center">
+            <div className="text-primary mb-3 text-sm font-semibold uppercase tracking-wider">
+              What I Bring
+            </div>
+            <h2 className="text-foreground mb-4 text-3xl font-bold">제가 잘하는 것</h2>
+            <p className="text-muted-foreground mx-auto max-w-2xl">
+              팀에 실질적인 가치를 더할 수 있는 역량들입니다
+            </p>
           </div>
-          <h2 className="text-foreground mb-4 text-3xl font-bold">제가 잘하는 것</h2>
-          <p className="text-muted-foreground mx-auto max-w-2xl">
-            팀에 실질적인 가치를 더할 수 있는 역량들입니다
-          </p>
-        </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {ABOUT_STRENGTHS.map((strength, idx) => {
-            const Icon = strengthIconMap[strength.icon as keyof typeof strengthIconMap] ?? Code2;
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {ABOUT_STRENGTHS.map((strength, idx) => {
+              const Icon = strengthIconMap[strength.icon as keyof typeof strengthIconMap] ?? Code2;
 
-            return (
-              <div
-                key={strength.title}
-                className="border-border/50 to-depth-2 hover:border-primary/50 hover:shadow-primary/5 group relative overflow-hidden rounded-2xl border bg-gradient-to-br from-white p-6 transition-all hover:shadow-lg"
-              >
-                <div className="bg-primary/5 group-hover:bg-primary/10 absolute right-0 top-0 h-24 w-24 -translate-y-8 translate-x-8 rounded-full blur-2xl transition-all" />
+              return (
+                <div
+                  key={strength.title}
+                  className="border-border/50 to-depth-2 hover:border-primary/50 hover:shadow-primary/5 group relative overflow-hidden rounded-2xl border bg-gradient-to-br from-white p-6 transition-all hover:shadow-lg"
+                >
+                  <div className="bg-primary/5 group-hover:bg-primary/10 absolute right-0 top-0 h-24 w-24 -translate-y-8 translate-x-8 rounded-full blur-2xl transition-all" />
 
-                <div className="relative space-y-3">
-                  <div className="bg-primary/10 text-primary inline-flex rounded-xl p-3 transition-transform group-hover:scale-110">
-                    <Icon className="h-6 w-6" />
+                  <div className="relative space-y-3">
+                    <div className="bg-primary/10 text-primary inline-flex rounded-xl p-3 transition-transform group-hover:scale-110">
+                      <Icon className="h-6 w-6" />
+                    </div>
+                    <h3 className="text-foreground text-lg font-bold">{strength.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {strength.description}
+                    </p>
                   </div>
-                  <h3 className="text-foreground text-lg font-bold">{strength.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {strength.description}
-                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* 기술 스택 & 원칙 - 좌우 균형 */}
+        <section className="grid gap-6 lg:grid-cols-2">
+          {/* 기술 스택 */}
+          <div className={['p-8 lg:p-10', cardClassName].join(' ')}>
+            <h2 className="text-foreground mb-8 text-2xl font-bold">기술 스택</h2>
+
+            <div className="space-y-8">
+              <div>
+                <div className="mb-4 flex items-center gap-2">
+                  <div className="bg-primary h-1.5 w-1.5 rounded-full" />
+                  <h3 className="text-foreground text-sm font-bold">주력 기술</h3>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {['JavaScript', 'React', 'TypeScript', 'Next.js'].map((tech) => (
+                    <span
+                      key={tech}
+                      className="bg-primary/10 text-primary ring-primary/20 rounded-full px-4 py-2 text-sm font-semibold ring-1"
+                    >
+                      {tech}
+                    </span>
+                  ))}
                 </div>
               </div>
-            );
-          })}
-        </div>
-      </section>
+
+              <div>
+                <div className="mb-4 flex items-center gap-2">
+                  <div className="bg-depth-3 h-1.5 w-1.5 rounded-full" />
+                  <h3 className="text-foreground text-sm font-bold">능숙</h3>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    'Web Accessibility',
+                    'Tailwind CSS',
+                    'Design Systems',
+                    'Zustand',
+                    'Storybook',
+                    'Framer Motion',
+                  ].map((tech) => (
+                    <span
+                      key={tech}
+                      className="bg-depth-2 text-foreground rounded-full px-4 py-2 text-sm font-medium"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <div className="mb-4 flex items-center gap-2">
+                  <div className="bg-depth-3 h-1.5 w-1.5 rounded-full" />
+                  <h3 className="text-foreground text-sm font-bold">학습 중</h3>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {['React Query', 'Supabase', 'Zod', 'Radix', 'Core JS'].map((tech) => (
+                    <span
+                      key={tech}
+                      className="bg-depth-2 text-muted-foreground rounded-full px-4 py-2 text-sm font-medium"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 작업 원칙 */}
+          <div className={['p-8 lg:p-10', cardClassName].join(' ')}>
+            <h2 className="text-foreground mb-8 text-2xl font-bold">작업 원칙</h2>
+
+            <div className="space-y-4">
+              {ABOUT_PRINCIPLES.map((principle, idx) => (
+                <div
+                  key={principle.title}
+                  className="bg-depth-2 hover:bg-depth-3 group rounded-2xl p-6 transition-all"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="bg-primary/10 text-primary mt-1 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg text-sm font-bold">
+                      {idx + 1}
+                    </div>
+                    <div>
+                      <h3 className="text-foreground mb-2 font-bold">{principle.title}</h3>
+                      <p className="text-muted-foreground text-sm leading-relaxed">
+                        {principle.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 관심사 & 링크 */}
+        <section className="grid gap-6 sm:grid-cols-2">
+          <div className={['p-8', cardClassName].join(' ')}>
+            <h2 className="text-foreground mb-6 text-xl font-bold">관심 영역</h2>
+            <ul className="space-y-3">
+              {ABOUT_INTERESTS.map((interest) => (
+                <li key={interest} className="flex gap-3">
+                  <CheckCircle2 className="text-primary mt-0.5 h-5 w-5 flex-shrink-0" />
+                  <span className="text-muted-foreground text-sm">{interest}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className={['p-8', cardClassName].join(' ')}>
+            <h2 className="text-foreground mb-6 text-xl font-bold">더 알아보기</h2>
+            <div className="space-y-3">
+              {ABOUT_LINKS.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="bg-depth-2 hover:bg-depth-3 text-foreground group flex items-center justify-between rounded-xl px-5 py-4 text-sm font-semibold transition"
+                >
+                  <span>{link.label}</span>
+                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      </div>
 
       {/* 경험 - 성과 중심으로 재구성 */}
       <section className="space-y-8">
@@ -319,131 +450,6 @@ export default function AboutPage() {
             </Button>
           </div>
         )}
-      </section>
-
-      {/* 기술 스택 & 원칙 - 좌우 균형 */}
-      <section className="grid gap-6 lg:grid-cols-2">
-        {/* 기술 스택 */}
-        <div className={['p-8 lg:p-10', cardClassName].join(' ')}>
-          <h2 className="text-foreground mb-8 text-2xl font-bold">기술 스택</h2>
-
-          <div className="space-y-8">
-            <div>
-              <div className="mb-4 flex items-center gap-2">
-                <div className="bg-primary h-1.5 w-1.5 rounded-full" />
-                <h3 className="text-foreground text-sm font-bold">주력 기술</h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {['JavaScript', 'React', 'TypeScript', 'Next.js'].map((tech) => (
-                  <span
-                    key={tech}
-                    className="bg-primary/10 text-primary ring-primary/20 rounded-full px-4 py-2 text-sm font-semibold ring-1"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <div className="mb-4 flex items-center gap-2">
-                <div className="bg-depth-3 h-1.5 w-1.5 rounded-full" />
-                <h3 className="text-foreground text-sm font-bold">능숙</h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {[
-                  'Web Accessibility',
-                  'Tailwind CSS',
-                  'Design Systems',
-                  'Zustand',
-                  'Storybook',
-                  'Framer Motion',
-                ].map((tech) => (
-                  <span
-                    key={tech}
-                    className="bg-depth-2 text-foreground rounded-full px-4 py-2 text-sm font-medium"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <div className="mb-4 flex items-center gap-2">
-                <div className="bg-depth-3 h-1.5 w-1.5 rounded-full" />
-                <h3 className="text-foreground text-sm font-bold">학습 중</h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {['React Query', 'Supabase', 'Zod', 'Radix', 'Core JS'].map((tech) => (
-                  <span
-                    key={tech}
-                    className="bg-depth-2 text-muted-foreground rounded-full px-4 py-2 text-sm font-medium"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* 작업 원칙 */}
-        <div className={['p-8 lg:p-10', cardClassName].join(' ')}>
-          <h2 className="text-foreground mb-8 text-2xl font-bold">작업 원칙</h2>
-
-          <div className="space-y-4">
-            {ABOUT_PRINCIPLES.map((principle, idx) => (
-              <div
-                key={principle.title}
-                className="bg-depth-2 hover:bg-depth-3 group rounded-2xl p-6 transition-all"
-              >
-                <div className="flex items-start gap-3">
-                  <div className="bg-primary/10 text-primary mt-1 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg text-sm font-bold">
-                    {idx + 1}
-                  </div>
-                  <div>
-                    <h3 className="text-foreground mb-2 font-bold">{principle.title}</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
-                      {principle.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 관심사 & 링크 */}
-      <section className="grid gap-6 sm:grid-cols-2">
-        <div className={['p-8', cardClassName].join(' ')}>
-          <h2 className="text-foreground mb-6 text-xl font-bold">관심 영역</h2>
-          <ul className="space-y-3">
-            {ABOUT_INTERESTS.map((interest) => (
-              <li key={interest} className="flex gap-3">
-                <CheckCircle2 className="text-primary mt-0.5 h-5 w-5 flex-shrink-0" />
-                <span className="text-muted-foreground text-sm">{interest}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className={['p-8', cardClassName].join(' ')}>
-          <h2 className="text-foreground mb-6 text-xl font-bold">더 알아보기</h2>
-          <div className="space-y-3">
-            {ABOUT_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="bg-depth-2 hover:bg-depth-3 text-foreground group flex items-center justify-between rounded-xl px-5 py-4 text-sm font-semibold transition"
-              >
-                <span>{link.label}</span>
-                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
-              </Link>
-            ))}
-          </div>
-        </div>
       </section>
 
       {/* CTA - 강력하게 */}
