@@ -1,6 +1,5 @@
 'use client';
 
-
 const users = [
   { id: 1, name: 'A', age: 20 },
   { id: 2, name: 'B', age: 25 },
@@ -19,7 +18,7 @@ const removed = users.filter((user) => user.id !== 2);
 // 정렬
 const sorted = users.filter((user) => user.age >= 25);
 
-export default function TestGroundDemo2() {
+export function TestGroundDemo2() {
   return (
     <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
       <section className="section-component">

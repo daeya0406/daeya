@@ -14,10 +14,8 @@ type WorkspaceListItemProps = {
 
 export function WorkspaceListItem({
   title,
-  description,
   tags,
   active = false,
-  icon,
   onClick,
 }: WorkspaceListItemProps) {
   return (
@@ -27,7 +25,7 @@ export function WorkspaceListItem({
         'group relative w-full overflow-hidden rounded-xl border p-3 text-left transition',
         active
           ? 'border-primary/50 bg-primary/5 shadow-primary/5 shadow-sm'
-          : 'bg-depth-2 hover:border-border hover:bg-depth-3 border-transparent'
+          : 'bg-depth-2 hover:border-primary/20 border-transparent'
       )}
     >
       {active && (
@@ -38,17 +36,12 @@ export function WorkspaceListItem({
         <div className="min-w-0 flex-1">
           <div
             className={cn(
-              'truncate text-sm font-semibold',
+              'group-hover:text-primary truncate text-sm font-semibold transition-colors',
               active ? 'text-primary' : 'text-foreground'
             )}
           >
             {title}
           </div>
-          {description && (
-            <div className="text-muted-foreground mt-1 line-clamp-2 text-xs leading-relaxed">
-              {description}
-            </div>
-          )}
         </div>
       </div>
 

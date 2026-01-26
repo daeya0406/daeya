@@ -58,7 +58,7 @@ export default function AboutPage() {
 
   return (
     <div className="mx-auto max-w-5xl space-y-16 lg:space-y-24">
-      {/* Hero - 임팩트 있게 */}
+      {/* Hero */}
       <section className="relative">
         <div className="bg-primary/5 absolute -top-20 left-0 h-96 w-96 rounded-full blur-3xl" />
 
@@ -162,7 +162,7 @@ export default function AboutPage() {
       <DevStandardsSection />
 
       <div className="space-y-6">
-        {/* 강점 - 시각적으로 임팩트 있게 */}
+        {/* 강점 */}
         <section className={['p-8 lg:p-12', cardClassName].join(' ')}>
           <div className="mb-10 text-center">
             <div className="text-primary mb-3 text-sm font-semibold uppercase tracking-wider">
@@ -200,7 +200,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* 기술 스택 & 원칙 - 좌우 균형 */}
+        {/* 기술 스택 & 원칙 */}
         <section className="grid gap-6 lg:grid-cols-2">
           {/* 기술 스택 */}
           <div className={['p-8 lg:p-10', cardClassName].join(' ')}>
@@ -326,7 +326,7 @@ export default function AboutPage() {
         </section>
       </div>
 
-      {/* 경험 - 성과 중심으로 재구성 */}
+      {/* 경험 */}
       <section className="space-y-8">
         <div className="text-center">
           <div className="text-primary mb-3 text-sm font-semibold uppercase tracking-wider">
@@ -452,7 +452,7 @@ export default function AboutPage() {
         )}
       </section>
 
-      {/* CTA - 강력하게 */}
+      {/* CTA */}
       <section className={['overflow-hidden p-0', cardClassName].join(' ')}>
         <div className="from-primary/5 via-primary/10 to-primary/5 bg-gradient-to-br p-10 text-center lg:p-16">
           <div className="mx-auto max-w-2xl">

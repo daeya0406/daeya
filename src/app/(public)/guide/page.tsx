@@ -13,7 +13,7 @@ type TabKey = string;
 export default function Guide() {
   return (
     <Suspense
-      fallback={<div className="py-10 text-center text-sm text-muted-foreground">Loading...</div>}
+      fallback={<div className="text-muted-foreground py-10 text-center text-sm">Loading...</div>}
     >
       <GuidePageContent />
     </Suspense>
@@ -45,7 +45,7 @@ function GuidePageContent() {
     <section className="mx-auto max-w-5xl px-4 py-10">
       <div className="mb-6 space-y-2">
         <h2 className="text-2xl font-bold">Guide</h2>
-        <span className="text-xs tracking-[0.01em]">UI / Tokens / Stack 정리</span>
+        <span className="text-xs tracking-[0.01em]">해당 포트폴리오 기술스택 정리</span>
       </div>
 
       <Tabs.Root value={activeTab} defaultValue={defaultKey} onValueChange={onChange}>

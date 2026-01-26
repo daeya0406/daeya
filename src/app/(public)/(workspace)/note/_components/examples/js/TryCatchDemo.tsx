@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Button } from '@/shared/ui/Button';
 
-export default function TryCatchDemo() {
+export function TryCatchDemo() {
   const [message, setMessage] = useState<string | null>(null);
 
   const runSafe = () => {

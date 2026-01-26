@@ -1,6 +1,6 @@
 import { CodeLine, ExampleCard } from '../shared/ExampleCard';
 
-export default function ArrayMethodsDemo() {
+export function ArrayMethodsDemo() {
   const nums = [1, 2, 3, 4];
   const doubled = nums.map((n) => n * 2);
   const evens = nums.filter((n) => n % 2 === 0);

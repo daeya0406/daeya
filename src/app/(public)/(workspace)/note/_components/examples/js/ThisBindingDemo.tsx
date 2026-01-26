@@ -1,4 +1,4 @@
-export default function ThisBindingDemo() {
+export function ThisBindingDemo() {
   const logs: string[] = [];
 
   const obj = {

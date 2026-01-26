@@ -1,4 +1,4 @@
-export default function ClosureDemo() {
+export function ClosureDemo() {
   const logs: string[] = [];
 
   const log = (msg: string) => logs.push(msg);

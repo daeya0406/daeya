@@ -1,7 +1,7 @@
 'use client';
 
 
-export default function SsrDemo() {
+export function SsrDemo() {
   return (
     <div className="space-y-2 rounded-lg border border-border bg-depth-1 p-4 text-sm">
       <p className="text-md font-normal font-semibold text-foreground">SSR (서버 렌더)</p>

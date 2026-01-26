@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Button } from '@/shared/ui/Button';
 
-export default function QueryBoundaryDemo() {
+export function QueryBoundaryDemo() {
   const [state, setState] = useState<'idle' | 'loading' | 'error' | 'success'>('idle');
 
   const fetchData = () => {
@@ -23,10 +23,12 @@ export default function QueryBoundaryDemo() {
           초기화
         </Button>
       </div>
-      <div className="rounded-lg border border-border bg-depth-1 p-3 text-sm">
+      <div className="border-border bg-depth-1 rounded-lg border p-3 text-sm">
         {state === 'idle' && <p className="text-muted-foreground">클릭해서 데이터를 불러오세요.</p>}
-        {state === 'loading' && <p className="animate-pulse text-muted-foreground">로딩 중...</p>}
-        {state === 'error' && <p className="text-[rgb(var(--status-danger))]">에러 발생. 다시 시도하세요.</p>}
+        {state === 'loading' && <p className="text-muted-foreground animate-pulse">로딩 중...</p>}
+        {state === 'error' && (
+          <p className="text-[rgb(var(--status-danger))]">에러 발생. 다시 시도하세요.</p>
+        )}
         {state === 'success' && <p className="text-primary">데이터 로드 완료!</p>}
       </div>
     </div>

@@ -6,7 +6,7 @@ const users = [
   { id: 3, name: 'C', age: 30 },
 ];
 
-export default function TestGroundDemo1() {
+export function TestGroundDemo1() {
   return (
     <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
       <section className="section-component">

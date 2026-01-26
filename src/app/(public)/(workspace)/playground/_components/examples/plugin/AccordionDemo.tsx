@@ -7,7 +7,7 @@ import {
   AccordionTrigger,
 } from '@/shared/ui/Accordion';
 
-export default function AccordionDemo() {
+export function AccordionDemo() {
   return (
     <Accordion type="single" collapsible className="section-component w-full">
       <AccordionItem value="a">

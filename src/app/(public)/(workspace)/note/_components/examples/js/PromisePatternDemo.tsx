@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-export default function PromisePatternDemo() {
+export function PromisePatternDemo() {
   const [logs, setLogs] = useState<string[]>([]);
   const ran = useRef(false);
 

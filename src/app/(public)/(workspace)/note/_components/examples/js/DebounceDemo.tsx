@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Input } from '@/shared/ui/Input';
 
-export default function DebounceDemo() {
+export function DebounceDemo() {
   const [value, setValue] = useState('');
   const [debounced, setDebounced] = useState('');
 

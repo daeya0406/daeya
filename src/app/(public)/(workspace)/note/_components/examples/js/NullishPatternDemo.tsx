@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Badge } from '@/shared/ui/Badge';
 import { Button } from '@/shared/ui/Button';
 
-export default function NullishPatternDemo() {
+export function NullishPatternDemo() {
   const scenarios = {
     nullable: { name: 'Daeya', role: null, city: undefined, coupon: 'SPRING' },
     emptyString: { name: '', role: '', city: '', coupon: '' },

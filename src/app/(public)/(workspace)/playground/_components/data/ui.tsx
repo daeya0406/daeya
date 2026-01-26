@@ -1,6 +1,5 @@
 import type { PlaygroundItem } from '@/types/playground';
-import ResponsiveTableDemo from '../examples/templates/ResponsiveTableDemo';
-import ViewToggleDemo from '../examples/templates/ViewToggleDemo';
+import { ResponsiveTableDemo, ViewToggleDemo } from '../examples/templates';
 
 export const uiItems: PlaygroundItem[] = [
   {

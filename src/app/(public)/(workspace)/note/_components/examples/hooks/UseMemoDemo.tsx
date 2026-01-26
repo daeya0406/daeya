@@ -14,7 +14,7 @@ const easySumCarculate = (number: number) => {
   return number + 10;
 };
 
-export default function UseMemoDemo() {
+export function UseMemoDemo() {
   const [hardNumber, setHardNumber] = useState(1);
   const [easyNumber, setEasyNumber] = useState(1);
 

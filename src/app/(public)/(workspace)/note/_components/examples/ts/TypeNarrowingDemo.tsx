@@ -22,7 +22,7 @@ function area(shape: Shape) {
   }
 }
 
-export default function TypeNarrowingDemo() {
+export function TypeNarrowingDemo() {
   const [kind, setKind] = useState<Shape['kind']>('circle');
   const areaVal = useMemo(() => {
     if (kind === 'circle') return area({ kind, radius: 2 });

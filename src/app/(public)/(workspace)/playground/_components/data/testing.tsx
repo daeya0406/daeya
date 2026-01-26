@@ -1,6 +1,4 @@
-import TestGroundDemo1 from '../examples/testing/TestGroundDemo1';
-import TestGroundDemo2 from '../examples/testing/TestGroundDemo2';
-import TestGroundDemo3 from '../examples/testing/TestGroundDemo3';
+import { TestGroundDemo1, TestGroundDemo2, TestGroundDemo3 } from '../examples/testing';
 import type { PlaygroundItem } from '@/types/playground';
 
 const CustomButton = () => {

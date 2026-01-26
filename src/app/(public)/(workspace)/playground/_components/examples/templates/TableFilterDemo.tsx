@@ -1,24 +1,11 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/shared/ui/Select';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/shared/ui/Table';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/ui/Select';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/shared/ui/Table';
 import dayjs from 'dayjs';
 
-export default function TableFilterDemo() {
+export function TableFilterDemo() {
   const data = useMemo(
     () => [
       { title: 'Alpha', status: 'open', date: dayjs('2024-11-30').format('YYYY.MM.DD') },
@@ -64,7 +51,7 @@ export default function TableFilterDemo() {
       </div>
 
       {filtered.length === 0 ? (
-        <p className="text-sm text-muted-foreground">조건에 맞는 데이터가 없습니다.</p>
+        <p className="text-muted-foreground text-sm">조건에 맞는 데이터가 없습니다.</p>
       ) : (
         <Table>
           <TableHeader>
@@ -79,7 +66,7 @@ export default function TableFilterDemo() {
               <TableRow key={item.title}>
                 <TableCell>{item.title}</TableCell>
                 <TableCell className="capitalize">{item.status}</TableCell>
-                <TableCell className="text-xs text-muted-foreground">{item.date}</TableCell>
+                <TableCell className="text-muted-foreground text-xs">{item.date}</TableCell>
               </TableRow>
             ))}
           </TableBody>

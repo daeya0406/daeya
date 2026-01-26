@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Button } from '@/shared/ui/Button';
-export default function TestGroundDemo3() {
+export function TestGroundDemo3() {
   const initialUsers = [
     { id: 1, name: 'A', age: 20 },
     { id: 2, name: 'B', age: 25 },

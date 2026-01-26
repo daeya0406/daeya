@@ -1,14 +1,16 @@
-import ObjectMethodsDemo from '../examples/js/ObjectMethodsDemo';
-import ArrayMethodsDemo from '../examples/js/ArrayMethodsDemo';
-import NullishPatternDemo from '../examples/js/NullishPatternDemo';
-import TryCatchDemo from '../examples/js/TryCatchDemo';
-import ThrottleDebounceDemo from '../examples/js/ThrottleDebounceDemo';
-import ShallowDeepCopyDemo from '../examples/js/ShallowDeepCopyDemo';
-import ClosureDemo from '../examples/js/ClosureDemo';
-import ImmutabilityDemo from '../examples/js/ImmutabilityDemo';
-import EventLoopDemo from '../examples/js/EventLoopDemo';
-import ThisBindingDemo from '../examples/js/ThisBindingDemo';
-import PromisePatternDemo from '../examples/js/PromisePatternDemo';
+import {
+  ArrayMethodsDemo,
+  ClosureDemo,
+  EventLoopDemo,
+  ImmutabilityDemo,
+  NullishPatternDemo,
+  ObjectMethodsDemo,
+  PromisePatternDemo,
+  ShallowDeepCopyDemo,
+  ThisBindingDemo,
+  ThrottleDebounceDemo,
+  TryCatchDemo,
+} from '../examples/js';
 import type { PlaygroundItem } from '@/types/playground';
 
 export const jsItems: PlaygroundItem[] = [

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Button } from '@/shared/ui/Button';
 
-export default function DataBoundaryDemo() {
+export function DataBoundaryDemo() {
   const [state, setState] = useState<'loading' | 'error' | 'empty' | 'success'>('loading');
   const data = state === 'success' ? ['Alpha', 'Beta', 'Gamma'] : [];
 
@@ -24,19 +24,21 @@ export default function DataBoundaryDemo() {
         </Button>
       </div>
 
-      <div className="rounded-lg border border-border bg-depth-1 p-3 text-sm">
+      <div className="border-border bg-depth-1 rounded-lg border p-3 text-sm">
         {state === 'loading' && (
           <div className="space-y-2">
-            <div className="h-3 w-2/3 animate-pulse rounded bg-depth-3" />
-            <div className="h-3 w-1/2 animate-pulse rounded bg-depth-3" />
+            <div className="bg-depth-3 h-3 w-2/3 animate-pulse rounded" />
+            <div className="bg-depth-3 h-3 w-1/2 animate-pulse rounded" />
           </div>
         )}
         {state === 'error' && (
-          <p className="text-[rgb(var(--status-danger))]">에러가 발생했습니다. 다시 시도해주세요.</p>
+          <p className="text-[rgb(var(--status-danger))]">
+            에러가 발생했습니다. 다시 시도해주세요.
+          </p>
         )}
         {state === 'empty' && <p className="text-muted-foreground">데이터가 없습니다.</p>}
         {state === 'success' && (
-          <ul className="list-disc space-y-1 pl-5 text-foreground">
+          <ul className="text-foreground list-disc space-y-1 pl-5">
             {data.map((item) => (
               <li key={item}>{item}</li>
             ))}

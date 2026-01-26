@@ -25,7 +25,7 @@ const fetchTodos = async (): Promise<Todo[]> => {
   ];
 };
 
-export default function UseQueryDemo() {
+export function UseQueryDemo() {
   const { data, isPending, isFetching, refetch, error } = useQuery<Todo[], Error, TodoSummary>({
     queryKey: ['todos', 'demo'],
     queryFn: fetchTodos,
@@ -38,19 +38,19 @@ export default function UseQueryDemo() {
   });
 
   return (
-    <div className="space-y-3 rounded-lg border border-border bg-depth-1 p-4 shadow-sm">
+    <div className="border-border bg-depth-1 space-y-3 rounded-lg border p-4 shadow-sm">
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-sm font-semibold text-foreground">useQuery</p>
-          <span className="text-xs tracking-[0.01em]">
-            queryKey / select / staleTime 예시
-          </span>
+          <p className="text-foreground text-sm font-semibold">useQuery</p>
+          <span className="text-xs tracking-[0.01em]">queryKey / select / staleTime 예시</span>
         </div>
-        <Badge variant={isFetching ? 'default' : 'outline'}>{isFetching ? 'fetching' : 'idle'}</Badge>
+        <Badge variant={isFetching ? 'default' : 'outline'}>
+          {isFetching ? 'fetching' : 'idle'}
+        </Badge>
       </div>
 
       {isPending && (
-        <span className="text-xs tracking-[0.01em] text-muted-foreground">로딩 중...</span>
+        <span className="text-muted-foreground text-xs tracking-[0.01em]">로딩 중...</span>
       )}
       {error && (
         <span className="text-xs tracking-[0.01em] text-[rgb(var(--status-danger))]">
@@ -60,7 +60,7 @@ export default function UseQueryDemo() {
 
       {data && (
         <div className="space-y-1 text-sm">
-          <p className="font-medium text-foreground">총 {data.total}건</p>
+          <p className="text-foreground font-medium">총 {data.total}건</p>
           <p className="text-muted-foreground">
             완료: {data.done.map((todo) => todo.title).join(', ') || '없음'}
           </p>
@@ -74,7 +74,7 @@ export default function UseQueryDemo() {
         <Button size="sm" onClick={() => refetch()}>
           수동 refetch
         </Button>
-        <span className="text-xs tracking-[0.01em] text-muted-foreground">
+        <span className="text-muted-foreground text-xs tracking-[0.01em]">
           staleTime 동안 캐시 유지
         </span>
       </div>

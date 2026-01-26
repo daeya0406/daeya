@@ -40,7 +40,7 @@ function reducer(state: State, action: Action): State {
   }
 }
 
-export default function UseReducerDemo() {
+export function UseReducerDemo() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [text, setText] = useState('');
 
@@ -68,9 +68,9 @@ export default function UseReducerDemo() {
             <Button size="sm" onClick={() => dispatch({ type: 'reset' })}>
               reset
             </Button>
-            <p className="text-md font-normal text-foreground ml-auto">count: {state.count}</p>
+            <p className="text-md text-foreground ml-auto font-normal">count: {state.count}</p>
           </div>
-          <span className="text-xs tracking-[0.01em] text-muted-foreground">
+          <span className="text-muted-foreground text-xs tracking-[0.01em]">
             액션 객체에 따라 reducer가 상태를 계산. 로직이 한곳에 모여 테스트/확장이 쉬움
           </span>
         </div>
@@ -111,7 +111,7 @@ export default function UseReducerDemo() {
               </button>
             ))}
           </div>
-          <span className="text-xs tracking-[0.01em] text-muted-foreground">
+          <span className="text-muted-foreground text-xs tracking-[0.01em]">
             dispatch({`{ type: 'toggle', id }`}) 한 번으로 상태 계산/렌더까지 처리
           </span>
         </div>

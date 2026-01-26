@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 
-export default function EventLoopDemo() {
+export function EventLoopDemo() {
   const [logs, setLogs] = useState<string[]>(['sync']);
   const ran = useRef(false);
 

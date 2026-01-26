@@ -5,7 +5,7 @@ import { Input } from '@/shared/ui/Input';
 import { Button } from '@/shared/ui/Button';
 import { PROFILE } from '@/entities/profile/model/profile';
 
-export default function FormPatternDemo() {
+export function FormPatternDemo() {
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -23,11 +23,7 @@ export default function FormPatternDemo() {
 
   return (
     <form onSubmit={submit} className="flex flex-col space-y-3">
-      <Input
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder={PROFILE.email}
-      />
+      <Input value={email} onChange={(e) => setEmail(e.target.value)} placeholder={PROFILE.email} />
       {error && <p className="text-xs text-red-500">{error}</p>}
       {success && <p className="text-xs text-emerald-600">{success}</p>}
       <Button type="submit">제출</Button>

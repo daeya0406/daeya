@@ -10,7 +10,7 @@ import {
 
 import { EllipsisVertical } from 'lucide-react';
 
-export default function DropdownDemo() {
+export function DropdownDemo() {
   return (
     <div className="space-y-2">
       <DropdownOption>

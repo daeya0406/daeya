@@ -1,6 +1,6 @@
 import { CodeLine, ExampleCard } from '../shared/ExampleCard';
 
-export default function ObjectMethodsDemo() {
+export function ObjectMethodsDemo() {
   const user = { id: 1, name: 'Daeya', active: false };
   const keys = Object.keys(user);
   const entries = Object.entries(user);

@@ -1,15 +1,8 @@
 'use client';
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/shared/ui/Table';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/shared/ui/Table';
 
-export default function ResponsiveTableDemo() {
+export function ResponsiveTableDemo() {
   const data = [
     { title: 'Landing Page', owner: 'Daeya', status: '진행 중' },
     { title: 'Dashboard', owner: 'Team A', status: '완료' },
@@ -43,9 +36,9 @@ export default function ResponsiveTableDemo() {
         {data.map((item) => (
           <div
             key={item.title}
-            className="rounded-lg border border-border bg-depth-1 p-3 text-sm shadow-sm"
+            className="border-border bg-depth-1 rounded-lg border p-3 text-sm shadow-sm"
           >
-            <p className="text-base font-semibold text-foreground">{item.title}</p>
+            <p className="text-foreground text-base font-semibold">{item.title}</p>
             <p className="text-muted-foreground">담당: {item.owner}</p>
             <p className="text-muted-foreground">상태: {item.status}</p>
           </div>

@@ -1,7 +1,4 @@
-import DatePickerDemo from '../examples/plugin/DatePickerDemo';
-import SwitchDemo from '../examples/plugin/SwitchDemo';
-import AccordionDemo from '../examples/plugin/AccordionDemo';
-import DropdownDemo from '../examples/plugin/DropdownDemo';
+import { DatePickerDemo, SwitchDemo, AccordionDemo, DropdownDemo } from '../examples/plugin';
 import type { PlaygroundItem } from '@/types/playground';
 
 export const pluginItems: PlaygroundItem[] = [

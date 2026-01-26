@@ -3,7 +3,7 @@
 import React from 'react';
 import { Tabs } from '@/shared/ui/Tabs';
 
-export default function CompoundPatternDemo() {
+export function CompoundPatternDemo() {
   const tabs = [
     { key: 'one', label: '탭 1', content: '첫 번째 탭 내용' },
     { key: 'two', label: '탭 2', content: '두 번째 탭 내용' },

@@ -9,7 +9,7 @@ const base = {
   tags: ['react'],
 };
 
-export default function ShallowDeepCopyDemo() {
+export function ShallowDeepCopyDemo() {
   const [original] = useState(base);
   const [shallow, setShallow] = useState({ ...base });
   const [deep, setDeep] = useState(structuredClone(base));

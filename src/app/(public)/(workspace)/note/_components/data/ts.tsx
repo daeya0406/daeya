@@ -1,4 +1,4 @@
-import TypeNarrowingDemo from '../examples/ts/TypeNarrowingDemo';
+import { TypeNarrowingDemo } from '../examples/ts';
 import { InfoBlock } from '../examples/InfoBlock';
 import type { PlaygroundItem } from '@/types/playground';
 

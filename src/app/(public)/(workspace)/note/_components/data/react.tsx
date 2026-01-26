@@ -1,7 +1,5 @@
-import ComponentSplitDemo from '../examples/react/ComponentSplitDemo';
-import CompoundPatternDemo from '../examples/react/CompoundPatternDemo';
-import ReactMemoDemo from '../examples/react/ReactMemoDemo';
-import UseQueryDemo from '../examples/hooks/UseQueryDemo';
+import { ComponentSplitDemo, CompoundPatternDemo, ReactMemoDemo } from '../examples/react';
+import { UseQueryDemo } from '../examples/hooks';
 import { InfoBlock } from '../examples/InfoBlock';
 import type { PlaygroundItem } from '@/types/playground';
 

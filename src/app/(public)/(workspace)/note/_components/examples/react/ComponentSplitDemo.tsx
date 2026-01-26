@@ -27,7 +27,7 @@ function ProfileCard({ profile }: { profile: Profile }) {
   );
 }
 
-export default function ComponentSplitDemo() {
+export function ComponentSplitDemo() {
   const profiles: Profile[] = [
     { name: 'Daeya', role: 'Frontend', tags: ['React', 'FE'] },
     { name: 'Jeongdae', role: 'Publisher', tags: ['Figma', 'UI•UX'] },

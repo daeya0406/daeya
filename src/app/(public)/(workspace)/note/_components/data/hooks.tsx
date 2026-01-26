@@ -1,11 +1,13 @@
-import ToggleHookDemo from '../examples/hooks/ToggleHookDemo';
-import UseEffectDependencyDemo from '../examples/hooks/UseEffectDependencyDemo';
-import UseStateDemo from '../examples/hooks/UseStateDemo';
-import UseReducerDemo from '../examples/hooks/UseReducerDemo';
-import UseMemoDemo from '../examples/hooks/UseMemotDemo';
-import UseRefDemo from '../examples/hooks/UseRefDemo';
+import {
+  ToggleHookDemo,
+  UseEffectDependencyDemo,
+  UseStateDemo,
+  UseReducerDemo,
+  UseMemoDemo,
+  UseRefDemo,
+  ZustandCounterDemo,
+} from '../examples/hooks';
 import type { PlaygroundItem } from '@/types/playground';
-import ZustandCounterDemo from '../examples/hooks/ZustandCounterDemo';
 
 export const hookItems: PlaygroundItem[] = [
   {

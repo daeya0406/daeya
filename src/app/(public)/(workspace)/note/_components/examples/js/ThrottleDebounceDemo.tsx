@@ -4,7 +4,7 @@ import { useCallback, useRef, useState } from 'react';
 import { Input } from '@/shared/ui/Input';
 import { Button } from '@/shared/ui/Button';
 
-export default function ThrottleDebounceDemo() {
+export function ThrottleDebounceDemo() {
   const [text, setText] = useState('');
   const [debounced, setDebounced] = useState('');
   const [throttled, setThrottled] = useState('');

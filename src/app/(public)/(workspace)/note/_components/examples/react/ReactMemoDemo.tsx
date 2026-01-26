@@ -20,7 +20,7 @@ const ExpensiveChild = React.memo(function ExpensiveChild({ value }: { value: nu
   );
 });
 
-export default function ReactMemoDemo() {
+export function ReactMemoDemo() {
   const [value, setValue] = useState(1);
   const [count, setCount] = useState(0);
 

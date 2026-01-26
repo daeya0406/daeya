@@ -1,7 +1,7 @@
 'use client';
 
 
-export default function HydrationDemo() {
+export function HydrationDemo() {
   return (
     <div className="space-y-2 rounded-lg border border-border bg-depth-1 p-4 text-sm">
       <p className="text-md font-normal font-semibold text-foreground">Hydration</p>

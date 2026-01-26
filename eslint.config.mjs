@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    "src/app/(public)/(workspace)/note/_components/examples/**",
+    "src/app/(public)/(workspace)/playground/_components/examples/**",
   ]),
 ]);
 

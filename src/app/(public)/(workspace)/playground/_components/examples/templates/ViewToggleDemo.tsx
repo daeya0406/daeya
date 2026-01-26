@@ -3,16 +3,9 @@
 import { useState } from 'react';
 import { ToggleGroup, ToggleGroupItem } from '@/shared/ui/ToggleGroup';
 import { Badge } from '@/shared/ui/Badge';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/shared/ui/Table';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/shared/ui/Table';
 
-export default function ViewToggleDemo() {
+export function ViewToggleDemo() {
   const data = [
     { title: 'Landing Page', owner: 'Daeya', status: '진행 중' },
     { title: 'Dashboard', owner: 'Team A', status: '완료' },
@@ -41,12 +34,12 @@ export default function ViewToggleDemo() {
           {data.map((item) => (
             <div
               key={item.title}
-              className="rounded-lg border border-border bg-depth-1 p-3 shadow-sm"
+              className="border-border bg-depth-1 rounded-lg border p-3 shadow-sm"
             >
-              <p className="text-lg font-normal text-base font-semibold text-foreground">
+              <p className="text-foreground text-base text-lg font-normal font-semibold">
                 {item.title}
               </p>
-              <span className="text-xs tracking-[0.01em] block text-muted-foreground">
+              <span className="text-muted-foreground block text-xs tracking-[0.01em]">
                 담당: {item.owner}
               </span>
               <Badge className="mt-1" variant="outline">

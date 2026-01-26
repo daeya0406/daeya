@@ -17,13 +17,13 @@ function useToggle(initial = false) {
   return { value, toggle, setValue };
 }
 
-export default function ToggleHookDemo() {
+export function ToggleHookDemo() {
   const { value, toggle } = useToggle(false);
 
   return (
-    <div className="flex items-center justify-between rounded-lg border border-border bg-depth-1 p-3">
+    <div className="border-border bg-depth-1 flex items-center justify-between rounded-lg border p-3">
       <div className="space-y-1">
-        <p className="text-sm font-semibold text-foreground">useToggle</p>
+        <p className="text-foreground text-sm font-semibold">useToggle</p>
         <span className="text-xs tracking-[0.01em]">boolean 상태를 간결하게 토글</span>
         <Badge variant={value ? 'default' : 'outline'}>{value ? 'ON' : 'OFF'}</Badge>
       </div>

@@ -1,10 +1,39 @@
-import FormPatternDemo from '../examples/templates/FormPatternDemo';
-import TableFilterDemo from '../examples/templates/TableFilterDemo';
-import DataBoundaryDemo from '../examples/templates/DataBoundaryDemo';
+import {
+  FormPatternDemo,
+  TableFilterDemo,
+  DataBoundaryDemo,
+  InfinityScrollDemo,
+} from '../examples/templates';
 import { InfoBlock } from '../examples/InfoBlock';
 import type { PlaygroundItem } from '@/types/playground';
 
 export const templateItems: PlaygroundItem[] = [
+  {
+    id: 'infinity-scroll',
+    title: '무한스크롤',
+    tags: ['React', 'useRef'],
+    description: '무한 스크롤 구현 패턴',
+    categories: ['templates'],
+    demo: <InfinityScrollDemo />,
+    code: `useEffect(() => {
+    const el = sentinelRef.current; // 찾을 DOM 요소
+    if (!el) return; // 안보이면 early return
+  
+    const observer = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+      if (!entry.isIntersecting) return;
+      if (isLoading || !hasMore) return;
+  
+      setOffset((prev) => prev + limit);
+    });
+  
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [isLoading, hasMore]);
+  
+  {/* sentinel: 해당 div가 화면에 보이는 순간 옵저버 콜백이 실행 */}
+  <div ref={sentinelRef} style={{ height: 1 }} />`,
+  },
   {
     id: 'form-pattern',
     title: 'Form',

@@ -1,6 +1,6 @@
 import { CodeLine, ExampleCard } from '../shared/ExampleCard';
 
-export default function ImmutabilityDemo() {
+export function ImmutabilityDemo() {
   const base = [
     { id: 1, done: false },
     { id: 2, done: true },
