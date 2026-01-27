@@ -8,7 +8,7 @@ export function HomeStats() {
         <div className="text-primary bg-primary/10 mb-2 inline-flex rounded-xl p-3">
           <TrendingUp className="h-6 w-6" />
         </div>
-        <div className="text-foreground text-3xl font-bold">3년+</div>
+        <div className="text-foreground text-3xl font-bold">신입</div>
         <div className="text-muted-foreground mt-1 text-sm">프론트엔드 경력</div>
       </div>
       <div className={['p-6 text-center', cardClassName].join(' ')}>

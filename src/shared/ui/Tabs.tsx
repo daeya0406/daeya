@@ -13,7 +13,7 @@ const TabsList = React.forwardRef<
   <TabsPrimitive.List
     ref={ref}
     className={cn(
-      'border-border text-foreground relative mb-4 flex w-max gap-6 overflow-x-auto overflow-y-hidden border-b px-1',
+      'border-border text-foreground relative mb-4 flex w-full gap-6 overflow-x-auto overflow-y-hidden border-b px-1',
       className
     )}
     {...props}
@@ -43,7 +43,7 @@ const TabsContent = React.forwardRef<
   <TabsPrimitive.Content
     ref={ref}
     className={cn(
-      'w-full data-[state=active]:animate-in data-[state=active]:fade-in data-[state=active]:slide-in-from-bottom-2',
+      'data-[state=active]:animate-in data-[state=active]:fade-in data-[state=active]:slide-in-from-bottom-2 w-full',
       className
     )}
     {...props}

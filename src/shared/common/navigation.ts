@@ -8,6 +8,7 @@ export type NavItem = {
 export const navItems: NavItem[] = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
+  { label: 'Architecture', href: '/architecture' },
   { label: 'Portfolio', href: '/portfolio' },
   {
     label: 'Guide',
@@ -37,7 +38,7 @@ export const navItems: NavItem[] = [
     children: [
       { label: 'Templates', href: '/playground?tab=templates' },
       { label: 'UI', href: '/playground?tab=ui' },
-      { label: 'UX', href: '/playground?tab=ux', badge: 'New' },
+      { label: 'UX', href: '/playground?tab=ux' },
       { label: 'Plugin', href: '/playground?tab=plugin' },
       { label: 'Testing', href: '/playground?tab=testing', badge: 'New' },
     ],

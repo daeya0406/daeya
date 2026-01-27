@@ -138,7 +138,7 @@ export default function AboutPage() {
                   프론트엔드 경력
                 </div>
                 <div className="text-foreground text-4xl font-bold">
-                  {PROFILE.career.frontend.value ?? '3년+'}
+                  {PROFILE.career.frontend.value ?? '신입'}
                 </div>
               </div>
               <div className="border-border/50 border-t pt-6">
