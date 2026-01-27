@@ -14,8 +14,8 @@ import {
   BookOpen,
   Briefcase,
   FlaskConical,
-  LayoutDashboard,
   Layers,
+  Workflow,
   Menu,
   Moon,
   NotebookPen,
@@ -23,7 +23,6 @@ import {
   UserRound,
 } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
-import { useLayoutMode } from '@/shared/providers/LayoutModeProvider';
 import { useSupabaseSession } from '@/hooks/useSupabaseSession';
 import { useTheme } from '@/shared/providers/ThemeProvider';
 
@@ -47,7 +46,6 @@ export function DashboardSidebar() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { theme, setTheme } = useTheme();
-  const { toggle } = useLayoutMode();
   const { user, role } = useSupabaseSession();
   const [mounted, setMounted] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
@@ -110,6 +108,8 @@ export function DashboardSidebar() {
         return <UserRound className="h-4 w-4" />;
       case 'architecture':
         return <Layers className="h-4 w-4" />;
+      case 'frontend':
+        return <Workflow className="h-4 w-4" />;
       case 'portfolio':
         return <Briefcase className="h-4 w-4" />;
       case 'guide':
@@ -157,30 +157,20 @@ export function DashboardSidebar() {
 
         <div className="flex items-center gap-2">
           {!collapsed && (
-            <>
-              <button
-                type="button"
-                onClick={toggle}
-                className={iconButtonClassName}
-                title="헤더 레이아웃으로 전환"
-              >
-                <LayoutDashboard className="h-4.5 w-4.5" />
-              </button>
-              <button
-                type="button"
-                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                className={iconButtonClassName}
-                title="테마 전환"
-              >
-                {!mounted ? (
-                  <div className="h-4.5 w-4.5" />
-                ) : theme === 'dark' ? (
-                  <Sun className="h-4.5 w-4.5" />
-                ) : (
-                  <Moon className="h-4.5 w-4.5" />
-                )}
-              </button>
-            </>
+            <button
+              type="button"
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              className={iconButtonClassName}
+              title="테마 전환"
+            >
+              {!mounted ? (
+                <div className="h-4.5 w-4.5" />
+              ) : theme === 'dark' ? (
+                <Sun className="h-4.5 w-4.5" />
+              ) : (
+                <Moon className="h-4.5 w-4.5" />
+              )}
+            </button>
           )}
 
           <button
@@ -334,16 +324,24 @@ export function DashboardSidebar() {
           <div className="bg-depth-3 text-icon-primary flex h-10 w-10 items-center justify-center rounded-full">
             <UserRound className="h-5 w-5" />
           </div>
-          {!collapsed && (
-            <div className="min-w-0">
-              <p className="text-md text-text-primary truncate leading-[17px]">
-                {user?.email ? user.email.split('@')[0] : 'Guest'}
-              </p>
-              <p className="text-text-default truncate text-xs tracking-[0.01em]">
-                {role ? `role: ${role}` : 'not signed in'}
-              </p>
-            </div>
-          )}
+          {!collapsed &&
+            (user?.email ? (
+              <div className="min-w-0">
+                <p className="text-md text-text-primary truncate leading-[17px]">
+                  {user.email.split('@')[0]}
+                </p>
+                <p className="text-text-default truncate text-xs tracking-[0.01em]">
+                  {role ? `role: ${role}` : 'signed in'}
+                </p>
+              </div>
+            ) : (
+              <Link
+                href="/auth/login"
+                className="text-text-primary hover:bg-depth-2 rounded-md px-3 py-2 text-sm font-semibold transition"
+              >
+                로그인
+              </Link>
+            ))}
         </div>
       </div>
     </aside>

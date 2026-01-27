@@ -1,18 +1,33 @@
+import {
+  BookOpen,
+  Briefcase,
+  FlaskConical,
+  Home,
+  Layers,
+  NotebookPen,
+  UserRound,
+  Workflow,
+} from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
+
 export type NavItem = {
   label: string;
   href?: string;
   badge?: string;
   children?: NavItem[];
+  icon?: LucideIcon;
 };
 
 export const navItems: NavItem[] = [
-  { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
-  { label: 'Architecture', href: '/architecture' },
-  { label: 'Portfolio', href: '/portfolio' },
+  { label: 'Home', href: '/', icon: Home },
+  { label: 'About', href: '/about', icon: UserRound },
+  { label: 'Architecture', href: '/architecture', icon: Layers },
+  { label: 'Frontend', href: '/frontend', icon: Workflow },
+  { label: 'Portfolio', href: '/portfolio', icon: Briefcase },
   {
     label: 'Guide',
     href: '/guide',
+    icon: BookOpen,
     children: [
       { label: 'UI', href: '/guide?tab=ui' },
       { label: 'Font', href: '/guide?tab=font' },
@@ -23,6 +38,7 @@ export const navItems: NavItem[] = [
   {
     label: 'Note',
     href: '/note',
+    icon: NotebookPen,
     children: [
       { label: 'JS', href: '/note?tab=js' },
       { label: 'React', href: '/note?tab=react' },
@@ -35,6 +51,7 @@ export const navItems: NavItem[] = [
   {
     label: 'Playground',
     href: '/playground',
+    icon: FlaskConical,
     children: [
       { label: 'Templates', href: '/playground?tab=templates' },
       { label: 'UI', href: '/playground?tab=ui' },
