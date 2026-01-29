@@ -13,7 +13,7 @@ const LayoutModeContext = React.createContext<LayoutModeContextValue | null>(nul
 
 function useMediaQuery(query: string) {
   const [matches, setMatches] = React.useState<boolean>(() => {
-    // 서버/초기 렌더에서는 데스크톱으로 간주해 SSR 마크업과 클라이언트 초기 렌더를 맞추기
+    // 서버/초기 렌더에서는 데스크톱으로 간주해 SSR 마크업과 클라이언트 초기 렌더 맞추기
     return true;
   });
 

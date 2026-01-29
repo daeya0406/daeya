@@ -245,7 +245,7 @@ const FLOW_DIAGRAMS = [
   },
 ];
 
-export default function FrontendFlowDiagrams() {
+export default function FrontendFlowset() {
   const [selectedFlow, setSelectedFlow] = useState(FLOW_DIAGRAMS[0].id);
 
   const currentFlow = FLOW_DIAGRAMS.find((f) => f.id === selectedFlow);

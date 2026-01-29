@@ -22,7 +22,7 @@ export const navItems: NavItem[] = [
   { label: 'Home', href: '/', icon: Home },
   { label: 'About', href: '/about', icon: UserRound },
   { label: 'Architecture', href: '/architecture', icon: Layers },
-  { label: 'Frontend', href: '/frontend', icon: Workflow },
+  { label: 'FE Flowset', href: '/fe-flowset', icon: Workflow },
   { label: 'Portfolio', href: '/portfolio', icon: Briefcase },
   {
     label: 'Guide',

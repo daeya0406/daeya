@@ -168,8 +168,8 @@ export default function Architecture() {
                   <button
                     key={schema.id}
                     onClick={() => setSelectedSchema(isSelected ? null : schema.id)}
-                    className={`bg-depth-1 border-border hover:border-primary/30 w-full rounded-xl border p-5 text-left shadow-sm transition-all hover:shadow-md ${
-                      isSelected ? `${schema.borderColor} ring-current/20 ring-2` : ''
+                    className={`bg-depth-1 border-border hover:border-primary/30 w-full rounded-xl border p-5 text-left shadow-sm transition-all ${
+                      isSelected ? `${schema.borderColor}` : ''
                     }`}
                   >
                     <div className="flex items-start gap-4">

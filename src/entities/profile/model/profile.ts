@@ -19,7 +19,7 @@ export const PROFILE = {
       id: 'projects',
       label: '프론트엔드 프로젝트',
       description: '프론트엔드',
-      value: '0',
+      value: '신입',
     },
     publishing: { id: 'study', label: '퍼블리싱 프로젝트', description: '퍼블리싱', value: '50+' },
   },
