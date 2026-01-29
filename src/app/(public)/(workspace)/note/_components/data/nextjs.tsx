@@ -1,5 +1,6 @@
 import type { PlaygroundItem } from '@/types/playground';
 import { InfoBlock } from '../examples/InfoBlock';
+import { NotFoundView } from '@/shared/ui/ErrorView/views';
 
 export const nextItems: PlaygroundItem[] = [
   {
@@ -32,6 +33,34 @@ export const nextItems: PlaygroundItem[] = [
 ├ lib/                  // fetcher, auth, utils
 ├ styles/               // 글로벌 스타일, tokens
 └ types/                // 전역 타입 선언`,
+  },
+  {
+    id: 'error-structure',
+    title: 'API 에러 처리 구조',
+    tags: ['Error Handling', 'Fetch Wrapper'],
+    description:
+      'Next.js에서 API 에러와 런타임 에러를 분리하기 위해 fetch wrapper에서 HTTP status를 ErrorCode로 매핑하고, 페이지는 공용 ErrorView를 통해 에러 UI만 렌더링하도록 설계한 구조',
+    categories: ['nextjs'],
+    demo: (
+      <div className="h-30 relative w-full">
+        <NotFoundView />
+      </div>
+    ),
+    code: `app/
+ ├─ error.tsx           // 예상 못한 런타임 에러
+ ├─ not-found.tsx       // 진짜 404 (라우팅)
+ └─ (pages)/...
+shared/
+ ├─ api/
+ │   ├─ fetch.ts        // fetch 래퍼
+ │   ├─ error.ts        // ErrorCode, mapStatusToCode
+ └─ ui/
+     └─ ErrorView/
+         ├─ ErrorView.tsx
+         ├─ views/
+         │   ├─ NotFoundView.tsx
+         │   ├─ ForbiddenView.tsx
+         │   └─ GenericErrorView.tsx`,
   },
   {
     id: 'server-client-components',

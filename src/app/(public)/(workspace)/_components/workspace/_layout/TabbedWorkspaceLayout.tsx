@@ -43,7 +43,7 @@ export function TabbedWorkspaceLayout({
   className,
 }: TabbedWorkspaceLayoutProps) {
   return (
-    <section className={cn('mx-auto max-w-7xl px-4 py-8 lg:py-12', className)}>
+    <section className={cn('mx-auto max-w-7xl', className)}>
       <div className="mb-8 space-y-4">
         <div className="flex items-end justify-between gap-4">
           <div>

@@ -154,7 +154,7 @@ function NotePageContent() {
               title={activeItem.title}
               description={activeItem.description}
               tags={activeItem.tags}
-              badgeLabel="Code Snippet"
+              badgeLabel="Note"
             />
 
             {activeItem.demo && <WorkspaceDemoCard>{activeItem.demo}</WorkspaceDemoCard>}
@@ -175,8 +175,8 @@ function NotePageContent() {
           </div>
         ) : (
           <WorkspaceEmptyState
-            title="항목을 선택하세요"
-            description="왼쪽 목록에서 보고 싶은 코드 스니펫을 클릭하세요"
+            title="항목을 선택해주세요"
+            description="목록에서 클릭해주세요"
             icon={<Code2 className="h-16 w-16" />}
           />
         )

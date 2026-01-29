@@ -13,8 +13,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <>
         <div className="flex flex-1">
           <DashboardSidebar />
-          <div className="bg-depth-2 min-w-0 flex-1 px-6 py-8">
-            <main className="container relative mx-auto min-h-full px-4 py-8">{children}</main>
+          <div className="bg-depth-2 min-w-0 flex-1 px-12 py-16">
+            <main className="container relative mx-auto min-h-full">{children}</main>
           </div>
         </div>
         <Toaster position="bottom-right" richColors />
