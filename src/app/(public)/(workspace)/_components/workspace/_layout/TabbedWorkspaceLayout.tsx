@@ -76,12 +76,12 @@ export function TabbedWorkspaceLayout({
 
         <Tabs.Content key={activeTab} value={activeTab}>
           <div className="flex flex-col gap-6 lg:grid lg:grid-cols-[300px_minmax(0,1fr)] lg:items-start">
-            <aside className="bg-depth-1 border-border top-4 max-h-[calc(100vh)] overflow-y-auto rounded-2xl border p-4 shadow-sm lg:sticky lg:max-h-[calc(100vh-120px)]">
+            <aside className="bg-depth-1 border-border top-4 max-h-[330px] overflow-y-auto rounded-2xl border p-4 shadow-sm lg:sticky lg:max-h-[calc(100vh-40px)]">
               <div className="mb-4 flex items-center justify-between">
                 <h3 className="text-foreground font-semibold">{sidebarTitle}</h3>
                 {typeof sidebarCount === 'number' && (
                   <span className="bg-primary/10 text-primary rounded-full px-2.5 py-1 text-xs font-semibold">
-                    {sidebarCount}
+                    {sidebarCount}개
                   </span>
                 )}
               </div>
