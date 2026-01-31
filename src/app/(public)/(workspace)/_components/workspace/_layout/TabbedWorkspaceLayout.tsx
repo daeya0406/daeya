@@ -18,7 +18,6 @@ type TabbedWorkspaceLayoutProps = {
   defaultTab?: string;
   onChangeTab: (value: string) => void;
   searchSlot?: ReactNode;
-  headerRightSlot?: ReactNode;
   sidebarTitle?: string;
   sidebarCount?: number;
   sidebarSlot: ReactNode;
@@ -35,7 +34,6 @@ export function TabbedWorkspaceLayout({
   defaultTab,
   onChangeTab,
   searchSlot,
-  headerRightSlot,
   sidebarTitle = '목록',
   sidebarCount,
   sidebarSlot,
@@ -50,12 +48,6 @@ export function TabbedWorkspaceLayout({
             <h1 className="text-foreground mb-2 text-3xl font-bold">{title}</h1>
             {description && <p className="text-muted-foreground">{description}</p>}
           </div>
-          {headerRightSlot ??
-            (typeof itemCount === 'number' && (
-              <div className="text-muted-foreground hidden text-sm sm:block">
-                <span className="text-primary font-semibold">{itemCount}</span>개 항목
-              </div>
-            ))}
         </div>
 
         {searchSlot}

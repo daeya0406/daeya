@@ -108,7 +108,7 @@ export function DashboardSidebar() {
         return <UserRound className="h-4 w-4" />;
       case 'architecture':
         return <Layers className="h-4 w-4" />;
-      case 'FE Flowset':
+      case 'fe flowset':
         return <Workflow className="h-4 w-4" />;
       case 'portfolio':
         return <Briefcase className="h-4 w-4" />;

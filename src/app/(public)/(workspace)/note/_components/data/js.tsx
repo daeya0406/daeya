@@ -34,12 +34,91 @@ Object.fromEntries(Object.entries(user));`,
     description: 'map / filter / reduce / find / every',
     categories: ['js'],
     demo: <ArrayMethodsDemo />,
-    code: `const nums = [1,2,3,4];
+    codes: [
+      {
+        label: '01. basic',
+        code: `const nums = [1,2,3,4];
 nums.map((n) => n * 2);          // [2,4,6,8]
 nums.filter((n) => n % 2 === 0); // [2,4]
 nums.reduce((acc, n) => acc + n, 0); // 10
 nums.find((n) => n % 2 === 0);   // 2
 nums.every((n) => n > 0);        // true`,
+      },
+      {
+        label: '02. map',
+        code: `// 기본 구조
+Array.map((현재값) => {
+  return 변환된값;
+});
+
+// 단위 붙이기
+const prices = [1000, 2000, 3000];
+const priceText = prices.map(price => price + '원');
+
+// React에서 상태값 가공
+setList(list.map(item => ({
+  ...item,
+  isActive: true
+})));`,
+      },
+      {
+        label: '03. filter',
+        code: `// 기본 구조
+Array.filter((현재값) => {
+  return true 또는 false;
+});
+
+// 특정 조건만 남기기
+const nums = [1, 2, 3, 4, 5];
+const evenNums = nums.filter(n => n % 2 === 0);
+
+// 활성 데이터만 추출
+const list = [
+  { id: 1, isActive: true },
+  { id: 2, isActive: false },
+  { id: 3, isActive: true },
+];
+const activeList = list.filter(item => item.isActive);
+
+// 검색 결과 필터링
+const products = [
+  { name: 'apple' },
+  { name: 'banana' },
+  { name: 'grape' },
+];
+const result = products.filter(item =>
+  item.name.includes('a')
+);
+
+// 권한에 따른 메뉴 노출
+const menus = [
+  { name: '관리자', role: 'admin' },
+  { name: '마이페이지', role: 'user' },
+];
+const userMenus = menus.filter(menu => menu.role !== 'admin');
+`,
+      },
+      {
+        label: '04. reduce',
+        code: `// 기본 구조
+Array.reduce((누적값, 현재값) => {
+  return 계산;
+}, 초기값)
+
+// 마스킹 처리
+const phone = '01012345678';
+phone.slice(0, 3) + '****' + phone.slice(-4);
+
+// 확장자 분리
+const file = 'image.profile.png';
+const ext = file.slice(file.lastIndexOf('.') + 1);
+
+// 입력 제한
+if (value.length > 100) {
+  setValue(value.slice(0, 100));
+}`,
+      },
+    ],
   },
   {
     id: 'nullish-pattern',
