@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
+import { Icon } from '@/shared/ui/Icons';
 import { FadeUp } from '@/shared/motion/FadeUp';
 import { FEATURED_PROJECTS } from '@/entities/project/model/projects';
 import { ProjectCard } from './ProjectCard';
@@ -43,7 +43,7 @@ export function HomeProjects() {
               className="text-primary hover:text-primary/80 inline-flex items-center gap-2 text-base font-semibold transition"
             >
               전체 프로젝트 보기 ({FEATURED_PROJECTS.length}개)
-              <ArrowUpRight className="h-5 w-5" />
+              <Icon name="arrowUpRight" size={20} />
             </Link>
           </div>
         </FadeUp>

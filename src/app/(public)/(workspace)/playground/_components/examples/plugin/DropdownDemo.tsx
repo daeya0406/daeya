@@ -8,7 +8,7 @@ import {
   DropdownOptionItem,
 } from '@/shared/ui/DropdownOption';
 
-import { EllipsisVertical } from 'lucide-react';
+import { Icon } from '@/shared/ui/Icons';
 
 export function DropdownDemo() {
   return (
@@ -16,7 +16,7 @@ export function DropdownDemo() {
       <DropdownOption>
         <DropdownOptionTrigger asChild>
           <Button variant="outline" className="w-10 px-0">
-            <EllipsisVertical className="text-muted-foreground" />
+            <Icon name="ellipsisVertical" className="text-muted-foreground" />
           </Button>
         </DropdownOptionTrigger>
         <DropdownOptionContent align="start" sideOffset={4}>

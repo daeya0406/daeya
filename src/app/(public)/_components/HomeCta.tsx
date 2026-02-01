@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Mail, FileText } from 'lucide-react';
+import { Icon } from '@/shared/ui/Icons';
 import { FadeUp } from '@/shared/motion/FadeUp';
 import { CopyTextButton } from '@/shared/common/CopyTextButton';
 import { PROFILE } from '@/entities/profile/model/profile';
@@ -21,13 +21,13 @@ export function HomeCta() {
             toastMessage="이메일을 복사했어요"
             className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-primary/20 inline-flex items-center gap-2 rounded-xl px-8 py-4 text-base font-semibold shadow-lg transition"
           >
-            <Mail className="h-5 w-5" /> 이메일 보내기
+            <Icon name="mail" size={20} /> 이메일 보내기
           </CopyTextButton>
           <Link
             href={PROFILE.links.resume}
             className="text-foreground hover:bg-muted border-border inline-flex items-center gap-2 rounded-xl border bg-white/50 px-8 py-4 text-base font-semibold backdrop-blur-sm transition"
           >
-            <FileText className="h-5 w-5" /> 이력서 다운로드
+            <Icon name="fileText" size={20} /> 이력서 다운로드
           </Link>
         </div>
       </section>

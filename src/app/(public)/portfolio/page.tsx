@@ -1,6 +1,8 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowUpRight, ExternalLink, Github, FileText, ImageOff } from 'lucide-react';
+import { Icon } from '@/shared/ui/Icons';
 import { Badge } from '@/shared/ui/Badge';
 import { Button } from '@/shared/ui/Button';
 import { FadeUp } from '@/shared/motion/FadeUp';
@@ -24,7 +26,7 @@ function ProjectCard({ project }: { project: (typeof PROJECTS)[0] }) {
           />
         ) : (
           <div className="text-muted-foreground absolute inset-0 flex flex-col items-center justify-center gap-2 text-sm">
-            <ImageOff className="h-8 w-8 opacity-70" />
+            <Icon name="imageOff" size={32} className="opacity-70" />
             <span>No image</span>
           </div>
         )}
@@ -79,21 +81,21 @@ function ProjectCard({ project }: { project: (typeof PROJECTS)[0] }) {
           {project.links.caseStudy && (
             <Button asChild size="sm" className="rounded-xl">
               <Link href={project.links.caseStudy}>
-                상세 보기 <ArrowUpRight className="h-3.5 w-3.5" />
+                상세 보기 <Icon name="arrowUpRight" size={14} />
               </Link>
             </Button>
           )}
           {project.links.github && (
             <Button asChild variant="outline" size="sm" className="rounded-xl">
               <Link href={project.links.github} target="_blank">
-                <Github className="h-3.5 w-3.5" /> GitHub
+                <Icon name="github" size={14} /> GitHub
               </Link>
             </Button>
           )}
           {project.links.live && (
             <Button asChild variant="outline" size="sm" className="rounded-xl">
               <Link href={project.links.live} target="_blank">
-                <ExternalLink className="h-3.5 w-3.5" /> Live
+                <Icon name="externalLink" size={14} /> Live
               </Link>
             </Button>
           )}
@@ -112,7 +114,7 @@ export default function PortfolioPage() {
             <span className="text-primary text-xs font-semibold uppercase tracking-[0.08em]">
               Portfolio
             </span>
-            <h2 className="text-foreground mt-3 text-2xl text-3xl font-bold lg:text-4xl">
+            <h2 className="text-foreground mt-3 text-2xl font-bold sm:text-3xl lg:text-4xl">
               프로젝트 포트폴리오
             </h2>
             <p className="text-muted-foreground mt-4 text-lg font-normal">
@@ -183,9 +185,7 @@ export default function PortfolioPage() {
         <section className={['p-8 lg:p-12', cardClassName].join(' ')}>
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div>
-              <h3 className="text-foreground text-xl font-semibold">
-                {PORTFOLIO_CTA.title}
-              </h3>
+              <h3 className="text-foreground text-xl font-semibold">{PORTFOLIO_CTA.title}</h3>
               <p className="text-md text-muted-foreground mt-2 font-normal">
                 {PORTFOLIO_CTA.description}
               </p>
@@ -195,13 +195,13 @@ export default function PortfolioPage() {
                 href={PROFILE.links.resume}
                 className="bg-primary hover:bg-primary/90 text-primary-foreground inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold transition"
               >
-                <FileText className="h-4 w-4" /> 이력서
+                <Icon name="fileText" /> 이력서
               </Link>
               <Link
                 href="/about"
                 className="text-foreground hover:bg-muted inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold transition"
               >
-                소개 <ArrowUpRight className="h-4 w-4" />
+                소개 <Icon name="arrowUpRight" />
               </Link>
             </div>
           </div>

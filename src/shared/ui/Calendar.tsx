@@ -2,8 +2,8 @@
 
 import * as React from 'react';
 import dayjs from 'dayjs';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Icon } from '@/shared/ui/Icons';
 
 type CalendarProps = {
   value?: Date;
@@ -30,12 +30,11 @@ export function Calendar({ value, onChange, className }: CalendarProps) {
 
   const selected = value ? dayjs(value) : null;
   const isSameDay = (a: dayjs.Dayjs, b: dayjs.Dayjs | null) => !!b && a.isSame(b, 'day');
+
   const focusDay = React.useCallback((day: dayjs.Dayjs) => {
     const key = day.format('YYYY-MM-DD');
     requestAnimationFrame(() => {
-      const el = gridRef.current?.querySelector<HTMLButtonElement>(
-        `[data-date="${key}"]`
-      );
+      const el = gridRef.current?.querySelector<HTMLButtonElement>(`[data-date="${key}"]`);
       el?.focus();
     });
   }, []);
@@ -53,20 +52,20 @@ export function Calendar({ value, onChange, className }: CalendarProps) {
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>, day: dayjs.Dayjs) => {
     const key = e.key;
-    if (
-      key !== 'ArrowRight' &&
-      key !== 'ArrowLeft' &&
-      key !== 'ArrowUp' &&
-      key !== 'ArrowDown' &&
-      key !== 'PageUp' &&
-      key !== 'PageDown' &&
-      key !== 'Home' &&
-      key !== 'End' &&
-      key !== 'Enter' &&
-      key !== ' '
-    ) {
-      return;
-    }
+    const navKeys = [
+      'ArrowRight',
+      'ArrowLeft',
+      'ArrowUp',
+      'ArrowDown',
+      'PageUp',
+      'PageDown',
+      'Home',
+      'End',
+      'Enter',
+      ' ',
+    ];
+
+    if (!navKeys.includes(key)) return;
 
     e.preventDefault();
 
@@ -97,7 +96,7 @@ export function Calendar({ value, onChange, className }: CalendarProps) {
   return (
     <div
       className={cn(
-        'w-full min-w-[280px] max-w-sm overflow-hidden rounded-xl border border-border bg-depth-1/90 p-3 shadow-lg backdrop-blur',
+        'border-border bg-depth-1/90 w-full min-w-[280px] max-w-sm overflow-hidden rounded-xl border p-3 shadow-lg backdrop-blur',
         className
       )}
       role="dialog"
@@ -107,26 +106,24 @@ export function Calendar({ value, onChange, className }: CalendarProps) {
         <button
           type="button"
           onClick={() => changeMonth(-1)}
-          className="flex h-8 w-8 items-center justify-center rounded-md border border-border text-foreground transition hover:bg-depth-2"
+          className="border-border text-foreground hover:bg-depth-2 flex h-8 w-8 items-center justify-center rounded-md border transition"
           aria-label="이전 달"
         >
-          <ChevronLeft className="h-4 w-4" />
+          <Icon name="chevronLeft" size={16} />
         </button>
-        <div className="text-sm font-semibold text-foreground">
-          {current.format('YYYY년 MM월')}
-        </div>
+        <div className="text-foreground text-sm font-semibold">{current.format('YYYY년 MM월')}</div>
         <button
           type="button"
           onClick={() => changeMonth(1)}
-          className="flex h-8 w-8 items-center justify-center rounded-md border border-border text-foreground transition hover:bg-depth-2"
+          className="border-border text-foreground hover:bg-depth-2 flex h-8 w-8 items-center justify-center rounded-md border transition"
           aria-label="다음 달"
         >
-          <ChevronRight className="h-4 w-4" />
+          <Icon name="chevronRight" size={16} />
         </button>
       </div>
 
       <div
-        className="mt-2 grid grid-cols-7 gap-1 text-center text-[11px] text-muted-foreground"
+        className="text-muted-foreground mt-2 grid grid-cols-7 gap-1 text-center text-[11px]"
         role="row"
       >
         {['일', '월', '화', '수', '목', '금', '토'].map((d) => (
@@ -156,7 +153,7 @@ export function Calendar({ value, onChange, className }: CalendarProps) {
               className={cn(
                 'h-8 rounded-lg border border-transparent transition',
                 isSelected
-                  ? 'border-primary bg-primary-100 font-semibold text-primary shadow-sm'
+                  ? 'border-primary bg-primary-100 text-primary font-semibold shadow-sm'
                   : 'hover:border-border hover:bg-depth-2',
                 !inMonth && 'text-muted-foreground'
               )}

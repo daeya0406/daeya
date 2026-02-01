@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
+import { Icon } from '@/shared/ui/Icons';
 import { FadeUp } from '@/shared/motion/FadeUp';
 import { cardClassName } from './constants';
 
@@ -35,7 +35,7 @@ export function HomeWhy() {
               href="/about"
               className="text-primary mt-8 inline-flex items-center gap-2 font-semibold transition hover:gap-3"
             >
-              더 자세히 알아보기 <ArrowUpRight className="h-5 w-5" />
+              더 자세히 알아보기 <Icon name="arrowUpRight" size={20} />
             </Link>
           </div>
 

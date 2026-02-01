@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Icon } from '@/shared/ui/Icons';
 
 type Props = {
   page: number;
@@ -21,17 +21,17 @@ export function Pagination({ page, pageSize, total, onPageChange }: Props) {
   for (let p = start; p <= end; p++) pages.push(p);
 
   return (
-    <div className="flex items-center justify-between gap-3 rounded-lg border border-border bg-depth-1 px-3 py-2 text-sm shadow-sm">
+    <div className="border-border bg-depth-1 flex items-center justify-between gap-3 rounded-lg border px-3 py-2 text-sm shadow-sm">
       <button
         className={cn(
-          'rounded-md px-3 py-1 font-medium text-foreground transition hover:bg-depth-2 disabled:opacity-50',
+          'text-foreground hover:bg-depth-2 rounded-md px-3 py-1 font-medium transition disabled:opacity-50',
           page === 1 && 'pointer-events-none'
         )}
         onClick={() => onPageChange(Math.max(1, page - 1))}
         disabled={page === 1}
         aria-label="이전 페이지"
       >
-        <ChevronLeft className="h-5 w-5" />
+        <Icon name="chevronLeft" size={20} />
       </button>
 
       <div className="flex items-center">
@@ -42,7 +42,7 @@ export function Pagination({ page, pageSize, total, onPageChange }: Props) {
             className={cn(
               'min-w-[28px] rounded-md px-2 py-1 text-sm font-semibold transition',
               p === page
-                ? 'text-primary border border-primary/40 bg-primary-100'
+                ? 'text-primary border-primary/40 bg-primary-100 border'
                 : 'text-foreground hover:bg-depth-2'
             )}
             aria-current={p === page ? 'page' : undefined}
@@ -54,14 +54,14 @@ export function Pagination({ page, pageSize, total, onPageChange }: Props) {
 
       <button
         className={cn(
-          'rounded-md px-3 py-1 font-medium text-foreground transition hover:bg-depth-2 disabled:opacity-50',
+          'text-foreground hover:bg-depth-2 rounded-md px-3 py-1 font-medium transition disabled:opacity-50',
           page === totalPages && 'pointer-events-none'
         )}
         onClick={() => onPageChange(Math.min(totalPages, page + 1))}
         disabled={page === totalPages}
         aria-label="다음 페이지"
       >
-        <ChevronRight className="h-5 w-5" />
+        <Icon name="chevronRight" size={20} />
       </button>
     </div>
   );

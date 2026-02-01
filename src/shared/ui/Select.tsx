@@ -2,8 +2,8 @@
 
 import * as React from 'react';
 import * as SelectPrimitive from '@radix-ui/react-select';
-import { Check, ChevronDown, ChevronUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Icon } from '@/shared/ui/Icons';
 
 export const Select = SelectPrimitive.Root;
 export const SelectGroup = SelectPrimitive.Group;
@@ -24,7 +24,7 @@ export const SelectTrigger = React.forwardRef<
   >
     {children}
     <SelectPrimitive.Icon asChild>
-      <ChevronDown className="h-4 w-4 text-muted-foreground" />
+      <Icon name="chevronDown" size={16} className="text-muted-foreground" />
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>
 ));
@@ -40,7 +40,6 @@ export const SelectContent = React.forwardRef<
       ref={ref}
       className={cn(
         'z-50 min-w-[10rem] overflow-hidden rounded-lg border border-border bg-depth-1/95 text-foreground shadow-lg backdrop-blur',
-        // 애니메이션
         'data-[state=open]:animate-in data-[state=closed]:animate-out',
         'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
         'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
@@ -50,13 +49,13 @@ export const SelectContent = React.forwardRef<
       {...props}
     >
       <SelectPrimitive.ScrollUpButton className="text-foreground/60 flex items-center justify-center p-2">
-        <ChevronUp className="h-4 w-4" />
+        <Icon name="chevronUp" size={16} />
       </SelectPrimitive.ScrollUpButton>
 
       <SelectPrimitive.Viewport className="p-1">{children}</SelectPrimitive.Viewport>
 
       <SelectPrimitive.ScrollDownButton className="text-foreground/60 flex items-center justify-center p-2">
-        <ChevronDown className="h-4 w-4" />
+        <Icon name="chevronDown" size={16} />
       </SelectPrimitive.ScrollDownButton>
     </SelectPrimitive.Content>
   </SelectPrimitive.Portal>
@@ -82,7 +81,7 @@ export const SelectItem = React.forwardRef<
     <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
 
     <SelectPrimitive.ItemIndicator className="absolute right-2 flex items-center">
-      <Check className="h-4 w-4" />
+      <Icon name="check" size={16} />
     </SelectPrimitive.ItemIndicator>
   </SelectPrimitive.Item>
 ));

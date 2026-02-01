@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowUpRight, ExternalLink, Github, Mail } from 'lucide-react';
+import { Icon } from '@/shared/ui/Icons';
 import { CopyTextButton } from '@/shared/common/CopyTextButton';
 import { HOME_HERO } from '@/entities/home/model/home';
 import { PROFILE } from '@/entities/profile/model/profile';
@@ -40,7 +40,11 @@ export function HomeHero() {
             className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-primary/20 group inline-flex items-center gap-2 rounded-xl px-8 py-4 text-base font-semibold shadow-lg transition"
           >
             프로젝트 보기
-            <ArrowUpRight className="h-5 w-5 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
+            <Icon
+              name="arrowUpRight"
+              size={20}
+              className="transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"
+            />
           </Link>
           <Link
             href="/about"
@@ -56,14 +60,14 @@ export function HomeHero() {
             toastMessage="이메일을 복사했어요"
             className="text-muted-foreground hover:text-foreground inline-flex items-center gap-2 transition"
           >
-            <Mail className="h-4 w-4" /> {PROFILE.email}
+            <Icon name="mail" /> {PROFILE.email}
           </CopyTextButton>
           <Link
             href={PROFILE.links.github}
             target="_blank"
             className="text-muted-foreground hover:text-foreground inline-flex items-center gap-2 transition"
           >
-            <Github className="h-4 w-4" /> GitHub
+            <Icon name="github" /> GitHub
           </Link>
           <Link
             href={PROFILE.links.publishingPortfolio}
@@ -71,7 +75,7 @@ export function HomeHero() {
             rel="noreferrer"
             className="text-muted-foreground hover:text-foreground inline-flex items-center gap-2 transition"
           >
-            <ExternalLink className="h-3.5 w-3.5" /> 퍼블리싱
+            <Icon name="externalLink" /> 퍼블리싱
           </Link>
         </div>
       </div>

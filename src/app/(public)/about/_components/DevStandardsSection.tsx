@@ -1,14 +1,27 @@
 'use client';
 
 import { useState } from 'react';
-import { ChevronRight, Code2, GitBranch, Shield, Zap, Palette, Layers } from 'lucide-react';
+import { Icon, IconName } from '@/shared/ui/Icons';
 
 const cardClassName = 'bg-depth-1 ring-border/50 rounded-3xl shadow-sm ring-1';
 
-const DEV_STANDARDS = [
+interface StandardItem {
+  title: string;
+  description: string;
+}
+
+interface DevStandard {
+  category: string;
+  icon: IconName;
+  color: string;
+  bgColor: string;
+  items: StandardItem[];
+}
+
+const DEV_STANDARDS: DevStandard[] = [
   {
     category: 'Git & Collaboration',
-    icon: GitBranch,
+    icon: 'gitBranch',
     color: 'text-orange-600',
     bgColor: 'bg-orange-600/10',
     items: [
@@ -26,7 +39,7 @@ const DEV_STANDARDS = [
   },
   {
     category: 'Architecture & Routing',
-    icon: Layers,
+    icon: 'layers',
     color: 'text-purple-600',
     bgColor: 'bg-purple-600/10',
     items: [
@@ -44,7 +57,7 @@ const DEV_STANDARDS = [
   },
   {
     category: 'Error & API Handling',
-    icon: Shield,
+    icon: 'shield',
     color: 'text-red-600',
     bgColor: 'bg-red-600/10',
     items: [
@@ -70,7 +83,7 @@ const DEV_STANDARDS = [
   },
   {
     category: 'State & Data Management',
-    icon: Code2,
+    icon: 'code2',
     color: 'text-blue-600',
     bgColor: 'bg-blue-600/10',
     items: [
@@ -95,7 +108,7 @@ const DEV_STANDARDS = [
   },
   {
     category: 'UI & Accessibility',
-    icon: Palette,
+    icon: 'palette',
     color: 'text-green-600',
     bgColor: 'bg-green-600/10',
     items: [
@@ -131,7 +144,7 @@ const DEV_STANDARDS = [
   },
   {
     category: 'Component Design',
-    icon: Layers,
+    icon: 'layers',
     color: 'text-indigo-600',
     bgColor: 'bg-indigo-600/10',
     items: [
@@ -153,7 +166,7 @@ const DEV_STANDARDS = [
   },
   {
     category: 'Performance & Testing',
-    icon: Zap,
+    icon: 'zap',
     color: 'text-yellow-600',
     bgColor: 'bg-yellow-600/10',
     items: [
@@ -181,11 +194,8 @@ export function DevStandardsSection() {
   const toggleCategory = (category: string) => {
     setExpandedCategories((prev) => {
       const newSet = new Set(prev);
-      if (newSet.has(category)) {
-        newSet.delete(category);
-      } else {
-        newSet.add(category);
-      }
+      if (newSet.has(category)) newSet.delete(category);
+      else newSet.add(category);
       return newSet;
     });
   };
@@ -193,11 +203,9 @@ export function DevStandardsSection() {
   const isAllExpanded = expandedCategories.size === DEV_STANDARDS.length;
 
   const toggleAll = () => {
-    if (isAllExpanded) {
-      setExpandedCategories(new Set());
-    } else {
-      setExpandedCategories(new Set(DEV_STANDARDS.map((s) => s.category)));
-    }
+    setExpandedCategories(
+      isAllExpanded ? new Set() : new Set(DEV_STANDARDS.map((s) => s.category))
+    );
   };
 
   return (
@@ -223,7 +231,6 @@ export function DevStandardsSection() {
 
       <div className="grid gap-4 lg:grid-cols-2 lg:items-start">
         {DEV_STANDARDS.map((standard) => {
-          const Icon = standard.icon;
           const isExpanded = expandedCategories.has(standard.category);
 
           return (
@@ -238,7 +245,7 @@ export function DevStandardsSection() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className={`${standard.bgColor} ${standard.color} rounded-xl p-2.5`}>
-                      <Icon className="h-5 w-5" />
+                      <Icon name={standard.icon} size={20} />
                     </div>
                     <div>
                       <h3 className="text-foreground text-lg font-bold">{standard.category}</h3>
@@ -249,9 +256,11 @@ export function DevStandardsSection() {
                   </div>
 
                   <div
-                    className={`${standard.color} transition-transform ${isExpanded ? 'rotate-90' : ''}`}
+                    className={`${standard.color} transition-transform ${
+                      isExpanded ? 'rotate-90' : ''
+                    }`}
                   >
-                    <ChevronRight className="h-5 w-5" />
+                    <Icon name="chevronRight" size={20} />
                   </div>
                 </div>
               </button>
@@ -284,7 +293,7 @@ export function DevStandardsSection() {
 
       <div className={['p-6 text-center', cardClassName].join(' ')}>
         <p className="text-muted-foreground text-sm">
-          이 기준들은 프로젝트 특성과 팀 상황에 따라 유연하게 적용됩니다.{' '}
+          이 기준들은 프로젝트 특성과 팀 상황에 따라 유연하게 적용됩니다.
           <br className="hidden sm:block" />
           <span className="text-foreground font-medium">측정 가능한 개선</span>과{' '}
           <span className="text-foreground font-medium">팀 생산성 향상</span>을 우선으로 합니다.

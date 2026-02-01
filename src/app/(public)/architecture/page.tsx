@@ -2,26 +2,29 @@
 
 import { useState } from 'react';
 import { Tabs } from '@/shared/ui/Tabs';
-import {
-  Layers,
-  Database,
-  Cpu,
-  FileText,
-  GitBranch,
-  Server,
-  Monitor,
-  Zap,
-  CheckCircle2,
-  XCircle,
-  ArrowDown,
-  Info,
-} from 'lucide-react';
+import { Icon } from '@/shared/ui/Icons';
+import type { IconName } from '@/shared/ui/Icons';
 
-const STATE_SCHEMAS = [
+interface StateSchema {
+  id: string;
+  name: string;
+  icon: IconName;
+  color: string;
+  borderColor: string;
+  textColor: string;
+  bgLight: string;
+  description: string;
+  examples: string[];
+  tools: string[];
+  antiPatterns: string[];
+  goodPractices: string[];
+}
+
+const STATE_SCHEMAS: StateSchema[] = [
   {
     id: 'ui',
     name: 'UI 상태',
-    icon: Monitor,
+    icon: 'monitor',
     color: 'bg-blue-500',
     borderColor: 'border-blue-500',
     textColor: 'text-blue-600',
@@ -35,7 +38,7 @@ const STATE_SCHEMAS = [
   {
     id: 'server',
     name: '서버 상태',
-    icon: Server,
+    icon: 'server',
     color: 'bg-green-500',
     borderColor: 'border-green-500',
     textColor: 'text-green-600',
@@ -49,7 +52,7 @@ const STATE_SCHEMAS = [
   {
     id: 'domain',
     name: '클라이언트 도메인 상태',
-    icon: Database,
+    icon: 'database',
     color: 'bg-purple-500',
     borderColor: 'border-purple-500',
     textColor: 'text-purple-600',
@@ -63,7 +66,7 @@ const STATE_SCHEMAS = [
   {
     id: 'form',
     name: '폼/입력 상태',
-    icon: FileText,
+    icon: 'fileText',
     color: 'bg-orange-500',
     borderColor: 'border-orange-500',
     textColor: 'text-orange-600',
@@ -77,7 +80,7 @@ const STATE_SCHEMAS = [
   {
     id: 'control',
     name: '제어 상태 (컨트롤 플로우)',
-    icon: GitBranch,
+    icon: 'gitBranch',
     color: 'bg-red-500',
     borderColor: 'border-red-500',
     textColor: 'text-red-600',
@@ -135,7 +138,7 @@ export default function Architecture() {
       <div className="bg-depth-1/80 rounded-2xl p-6 shadow-md backdrop-blur-sm md:p-10">
         <div className="space-y-3">
           <div className="bg-primary/10 text-primary inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold">
-            <Layers className="h-4 w-4" />
+            <Icon name="layers" />
             프론트엔드 상태 아키텍처
           </div>
           <h1 className="text-foreground text-2xl font-bold leading-tight sm:text-3xl">
@@ -161,7 +164,6 @@ export default function Architecture() {
             {/* 좌측 리스트 */}
             <div className="space-y-3">
               {STATE_SCHEMAS.map((schema) => {
-                const Icon = schema.icon;
                 const isSelected = selectedSchema === schema.id;
 
                 return (
@@ -174,7 +176,7 @@ export default function Architecture() {
                   >
                     <div className="flex items-start gap-4">
                       <div className={`${schema.color} rounded-lg p-2.5 text-white shadow-sm`}>
-                        <Icon className="h-5 w-5" />
+                        <Icon name={schema.icon} size={20} />
                       </div>
                       <div className="flex-1">
                         <h3 className="text-foreground mb-1 text-base font-semibold">
@@ -204,7 +206,7 @@ export default function Architecture() {
                 <div className="bg-depth-1 border-border space-y-4 rounded-xl border p-5 shadow-sm">
                   <div className="flex items-center gap-3">
                     <div className={`${selectedState.color} rounded-lg p-2.5 text-white shadow-sm`}>
-                      {selectedState.icon && <selectedState.icon className="h-5 w-5" />}
+                      <Icon name={selectedState.icon} size={20} />
                     </div>
                     <div>
                       <h2 className="text-foreground text-lg font-semibold">
@@ -217,7 +219,7 @@ export default function Architecture() {
                   {/* 실제 예시 */}
                   <div>
                     <h3 className="text-foreground mb-2 flex items-center gap-2 text-xs font-semibold">
-                      <Info className="h-3.5 w-3.5" />
+                      <Icon name="info" size={14} />
                       실제 예시
                     </h3>
                     <div className="space-y-2">
@@ -237,7 +239,7 @@ export default function Architecture() {
                   {/* 추천 도구 */}
                   <div>
                     <h3 className="text-foreground mb-2 flex items-center gap-2 text-xs font-semibold">
-                      <Zap className="h-3.5 w-3.5" />
+                      <Icon name="zap" size={14} />
                       추천 도구
                     </h3>
                     <div className="flex flex-wrap gap-2">
@@ -255,13 +257,13 @@ export default function Architecture() {
                   {/* Good Practices */}
                   <div>
                     <h3 className="text-foreground mb-2 flex items-center gap-2 text-xs font-semibold">
-                      <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
+                      <Icon name="checkCircle2" size={14} className="text-emerald-600" />
                       Good Practices
                     </h3>
                     <ul className="space-y-1.5">
                       {selectedState.goodPractices.map((practice) => (
                         <li key={practice} className="text-muted-foreground flex gap-2 text-xs">
-                          <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-emerald-600" />
+                          <Icon name="checkCircle2" size={14} className="mt-0.5 flex-shrink-0 text-emerald-600" />
                           {practice}
                         </li>
                       ))}
@@ -271,13 +273,13 @@ export default function Architecture() {
                   {/* Anti-patterns */}
                   <div>
                     <h3 className="text-foreground mb-2 flex items-center gap-2 text-xs font-semibold">
-                      <XCircle className="h-3.5 w-3.5 text-[rgb(var(--status-danger))]" />
+                      <Icon name="xCircle" size={14} className="text-[rgb(var(--status-danger))]" />
                       Anti-patterns
                     </h3>
                     <ul className="space-y-1.5">
                       {selectedState.antiPatterns.map((pattern) => (
                         <li key={pattern} className="text-muted-foreground flex gap-2 text-xs">
-                          <XCircle className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-[rgb(var(--status-danger))]" />
+                          <Icon name="xCircle" size={14} className="mt-0.5 flex-shrink-0 text-[rgb(var(--status-danger))]" />
                           {pattern}
                         </li>
                       ))}
@@ -287,7 +289,7 @@ export default function Architecture() {
               ) : (
                 <div className="bg-depth-2/50 border-border flex h-full min-h-[300px] items-center justify-center rounded-xl border border-dashed p-8 text-center">
                   <div className="space-y-2">
-                    <Layers className="text-muted-foreground mx-auto h-10 w-10" />
+                    <Icon name="layers" size={40} className="text-muted-foreground mx-auto" />
                     <p className="text-muted-foreground text-xs">
                       왼쪽에서 상태 스키마를 선택하면
                       <br />
@@ -338,13 +340,13 @@ export default function Architecture() {
             {/* User Action */}
             <div className="text-center">
               <div className="bg-primary text-primary-foreground mb-3 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold">
-                <Cpu className="h-4 w-4" />
+                <Icon name="cpu" />
                 사용자 액션
               </div>
               <p className="text-muted-foreground text-xs">버튼 클릭, 입력, 스크롤 등</p>
             </div>
 
-            <ArrowDown className="text-muted-foreground mx-auto h-6 w-6" />
+            <Icon name="arrowDown" size={24} className="text-muted-foreground mx-auto" />
 
             {/* 상태 업데이트 결정 */}
             <div className="space-y-4">
@@ -371,12 +373,12 @@ export default function Architecture() {
               </div>
             </div>
 
-            <ArrowDown className="text-muted-foreground mx-auto h-6 w-6" />
+            <Icon name="arrowDown" size={24} className="text-muted-foreground mx-auto" />
 
             {/* 리렌더 최적화 */}
             <div className="text-center">
               <div className="bg-primary mb-3 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-white">
-                <Zap className="h-4 w-4 text-white" />
+                <Icon name="zap" className="text-white" />
                 리렌더 최적화
               </div>
               <div className="text-muted-foreground mx-auto space-y-1.5 text-left text-xs">

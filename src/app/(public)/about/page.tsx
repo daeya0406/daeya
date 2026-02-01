@@ -3,19 +3,7 @@
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { CopyTextButton } from '@/shared/common/CopyTextButton';
-import {
-  Github,
-  Mail,
-  ArrowUpRight,
-  Award,
-  Code2,
-  Users,
-  Zap,
-  ChevronDown,
-  ChevronUp,
-  CheckCircle2,
-  ExternalLink,
-} from 'lucide-react';
+import { Icon } from '@/shared/ui/Icons';
 import { CAREER_TIMELINE } from '@/entities/career/model/career';
 import { Button } from '@/shared/ui/Button';
 import { PROFILE } from '@/entities/profile/model/profile';
@@ -49,12 +37,12 @@ export default function AboutPage() {
     return new Set(careerKeys.slice(0, INITIAL_CAREER_COUNT));
   }, [careerKeys, showAllCareers]);
 
-  const strengthIconMap = {
-    code: Code2,
-    zap: Zap,
-    users: Users,
-    award: Award,
-  };
+ const strengthIconMap = {
+  code: 'code2',
+  zap: 'zap',
+  users: 'users',
+  award: 'award',
+} as const;
 
   return (
     <div className="mx-auto max-w-5xl space-y-16 lg:space-y-24">
@@ -99,20 +87,20 @@ export default function AboutPage() {
                   toastMessage="이메일을 복사했어요"
                   className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-primary/20 inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold shadow-lg transition"
                 >
-                  <Mail className="h-4 w-4" /> 이메일 보내기
+                  <Icon name="mail" /> 이메일 보내기
                 </CopyTextButton>
                 <Link
                   href={PROFILE.links.github}
                   target="_blank"
                   className="text-foreground hover:bg-muted border-border inline-flex items-center gap-2 rounded-xl border px-6 py-3 text-sm font-semibold transition"
                 >
-                  <Github className="h-4 w-4" /> GitHub
+                  <Icon name="github" /> GitHub
                 </Link>
                 <Link
                   href="/portfolio"
                   className="text-foreground hover:bg-muted border-border inline-flex items-center gap-2 rounded-xl border px-6 py-3 text-sm font-semibold transition"
                 >
-                  프로젝트 <ArrowUpRight className="h-4 w-4" />
+                  프로젝트 <Icon name="arrowUpRight" />
                 </Link>
                 <Link
                   href={PROFILE.links.publishingPortfolio}
@@ -120,7 +108,7 @@ export default function AboutPage() {
                   rel="noreferrer"
                   className="text-foreground hover:bg-muted border-border inline-flex items-center gap-2 rounded-xl border px-6 py-3 text-sm font-semibold transition"
                 >
-                  퍼블리싱 <ExternalLink className="h-4 w-4" />
+                  퍼블리싱 <Icon name="externalLink" />
                 </Link>
               </div>
             </div>
@@ -144,11 +132,11 @@ export default function AboutPage() {
               <div className="border-border/50 border-t pt-6">
                 <div className="text-muted-foreground text-sm">
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="text-primary h-4 w-4" />
+                    <Icon name="checkCircle2" className="text-primary" />
                     코드잇 프론트엔드 부트캠프 수료
                   </div>
                   <div className="mt-2 flex items-center gap-2">
-                    <CheckCircle2 className="text-primary h-4 w-4" />
+                    <Icon name="checkCircle2" className="text-primary" />
                     기획, 디자인 협업 경험 다수
                   </div>
                 </div>
@@ -176,7 +164,7 @@ export default function AboutPage() {
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {ABOUT_STRENGTHS.map((strength, idx) => {
-              const Icon = strengthIconMap[strength.icon as keyof typeof strengthIconMap] ?? Code2;
+              const iconName = strengthIconMap[strength.icon as keyof typeof strengthIconMap] ?? 'code2';
 
               return (
                 <div
@@ -187,7 +175,7 @@ export default function AboutPage() {
 
                   <div className="relative space-y-3">
                     <div className="bg-primary/10 text-primary inline-flex rounded-xl p-3 transition-transform group-hover:scale-110">
-                      <Icon className="h-6 w-6" />
+                      <Icon name={iconName} className="h-6 w-6" />
                     </div>
                     <h3 className="text-foreground text-lg font-bold">{strength.title}</h3>
                     <p className="text-muted-foreground text-sm leading-relaxed">
@@ -301,7 +289,7 @@ export default function AboutPage() {
             <ul className="space-y-3">
               {ABOUT_INTERESTS.map((interest) => (
                 <li key={interest} className="flex gap-3">
-                  <CheckCircle2 className="text-primary mt-0.5 h-5 w-5 flex-shrink-0" />
+                  <Icon name="checkCircle2" size={20} className="text-primary mt-0.5 flex-shrink-0"/>
                   <span className="text-muted-foreground text-sm">{interest}</span>
                 </li>
               ))}
@@ -318,7 +306,7 @@ export default function AboutPage() {
                   className="bg-depth-2 hover:bg-depth-3 text-foreground group flex items-center justify-between rounded-xl px-5 py-4 text-sm font-semibold transition"
                 >
                   <span>{link.label}</span>
-                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
+                  <Icon name="arrowUpRight" className="transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
                 </Link>
               ))}
             </div>
@@ -368,7 +356,7 @@ export default function AboutPage() {
                         <div className="flex-1 space-y-2">
                           <div className="flex items-start gap-3">
                             <div className="bg-primary/10 text-primary mt-1 rounded-lg p-2">
-                              <Code2 className="h-4 w-4" />
+                              <Icon name="code2" />
                             </div>
                             <div>
                               <h3 className="text-foreground text-xl font-bold">{entry.client}</h3>
@@ -399,7 +387,7 @@ export default function AboutPage() {
                           </div>
                           {entry.highlights.map((highlight) => (
                             <div key={highlight} className="flex gap-3">
-                              <CheckCircle2 className="text-primary mt-0.5 h-5 w-5 flex-shrink-0" />
+                              <Icon name="checkCircle2" size={20} className="text-primary mt-0.5 flex-shrink-0"/>
                               <span className="text-foreground text-sm leading-relaxed">
                                 {highlight}
                               </span>
@@ -439,12 +427,12 @@ export default function AboutPage() {
               {showAllCareers ? (
                 <>
                   접기{' '}
-                  <ChevronUp className="ml-2 h-4 w-4 transition-transform group-hover:-translate-y-1" />
+                  <Icon name="chevronUp" className="ml-2 h-4 w-4 transition-transform group-hover:-translate-y-1" />
                 </>
               ) : (
                 <>
                   경력사항 {careerKeys.length - INITIAL_CAREER_COUNT}개 더 보기{' '}
-                  <ChevronDown className="ml-2 h-4 w-4 transition-transform group-hover:translate-y-1" />
+                  <Icon name="chevronDown" className="ml-2 h-4 w-4 transition-transform group-hover:translate-y-1" />
                 </>
               )}
             </Button>
@@ -469,14 +457,14 @@ export default function AboutPage() {
                 toastMessage="이메일을 복사했어요"
                 className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-primary/20 group inline-flex items-center gap-2 rounded-xl px-8 py-4 text-base font-semibold shadow-lg transition"
               >
-                <Mail className="h-5 w-5" /> 이메일 보내기
+                <Icon name="mail" size={20} /> 이메일 보내기
               </CopyTextButton>
               <Link
                 href="/portfolio"
                 className="text-foreground border-border group inline-flex items-center gap-2 rounded-xl border-2 bg-white/50 px-8 py-4 text-base font-semibold backdrop-blur-sm transition hover:bg-white/80"
               >
                 프로젝트 보기{' '}
-                <ArrowUpRight className="h-5 w-5 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
+                <Icon name="arrowUpRight" size={20} className="transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
               </Link>
             </div>
 
@@ -486,14 +474,14 @@ export default function AboutPage() {
                 target="_blank"
                 className="text-muted-foreground hover:text-foreground inline-flex items-center gap-2 transition"
               >
-                <Github className="h-4 w-4" /> GitHub
-                <ExternalLink className="h-3 w-3" />
+                <Icon name="github" /> GitHub
+                <Icon name="externalLink" size={12} />
               </Link>
               <Link
                 href={PROFILE.links.resume}
                 className="text-muted-foreground hover:text-foreground inline-flex items-center gap-2 transition"
               >
-                <Award className="h-4 w-4" /> 이력서 다운로드
+                <Icon name="award" /> 이력서 다운로드
               </Link>
             </div>
           </div>

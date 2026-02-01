@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowUpRight, ImageOff } from 'lucide-react';
+import { Icon } from '@/shared/ui/Icons';
 import { Badge } from '@/shared/ui/Badge';
 import { FEATURED_PROJECTS } from '@/entities/project/model/projects';
 import { cardClassName } from './constants';
@@ -12,7 +12,10 @@ type ProjectCardProps = {
 
 export function ProjectCard({ project, index }: ProjectCardProps) {
   return (
-    <Link href={project.links.caseStudy ?? '/portfolio'} className="group block transition-all duration-300">
+    <Link
+      href={project.links.caseStudy ?? '/portfolio'}
+      className="group block transition-all duration-300"
+    >
       <div className={['overflow-hidden', cardClassName].join(' ')}>
         <div className="bg-depth-2 relative aspect-[16/10] overflow-hidden">
           {project.image ? (
@@ -25,7 +28,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
             />
           ) : (
             <div className="text-muted-foreground absolute inset-0 flex flex-col items-center justify-center gap-3">
-              <ImageOff className="h-12 w-12 opacity-50" />
+              <Icon name="imageOff" size={48} className="opacity-50" />
               <span className="text-sm">프로젝트 스크린샷</span>
             </div>
           )}
@@ -62,7 +65,10 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
 
           <div className="text-primary flex items-center gap-2 text-sm font-semibold">
             자세히 보기
-            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
+            <Icon
+              name="arrowUpRight"
+              className="transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"
+            />
           </div>
         </div>
       </div>

@@ -3,13 +3,12 @@
 import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cn } from '@/lib/utils';
-import { Loader2 } from 'lucide-react';
+import { Icon } from '@/shared/ui/Icons';
 import { buttonVariants } from '@/shared/ui/Button.styles';
 import type { VariantProps } from 'class-variance-authority';
 
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   asChild?: boolean;
   isLoading?: boolean;
 }
@@ -42,7 +41,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={isLoading || props.disabled}
         {...props}
       >
-        {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+        {isLoading && <Icon name="loader2" size={16} className="mr-2 animate-spin" />}
         {children}
       </Comp>
     );

@@ -5,7 +5,7 @@ import * as PopoverPrimitive from '@radix-ui/react-popover';
 import { Calendar } from './Calendar';
 import { cn } from '@/lib/utils';
 import dayjs from 'dayjs';
-import { Calendar as CalendarIcon, ChevronDown } from 'lucide-react';
+import { Icon } from '@/shared/ui/Icons';
 
 type DatePickerProps = {
   value?: Date;
@@ -32,21 +32,20 @@ export function DatePicker({
         <button
           type="button"
           className={cn(
-            'flex min-w-[150px] max-w-[220px] items-center justify-between gap-2 rounded-lg border border-border bg-depth-1 px-3 py-2 text-sm text-foreground shadow-sm transition hover:bg-depth-2',
+            'border-border bg-depth-1 text-foreground hover:bg-depth-2 flex min-w-[150px] max-w-[220px] items-center justify-between gap-2 rounded-lg border px-3 py-2 text-sm shadow-sm transition',
             className
           )}
           aria-haspopup="dialog"
           aria-expanded={open}
         >
           <div className="flex items-center gap-2">
-            <CalendarIcon className="h-4 w-4 text-primary" />
+            <Icon name="calendar" size={16} className="text-primary" />
             <span className={!value ? 'text-muted-foreground' : ''}>{displayValue}</span>
           </div>
-          <ChevronDown
-            className={cn(
-              'h-4 w-4 text-muted-foreground transition-transform',
-              open && 'rotate-180'
-            )}
+          <Icon
+            name="chevronDown"
+            size={16}
+            className={cn('text-muted-foreground transition-transform', open && 'rotate-180')}
           />
         </button>
       </PopoverPrimitive.Trigger>

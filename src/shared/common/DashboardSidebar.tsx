@@ -10,18 +10,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/shared/ui/Accordion';
-import {
-  BookOpen,
-  Briefcase,
-  FlaskConical,
-  Layers,
-  Workflow,
-  Menu,
-  Moon,
-  NotebookPen,
-  Sun,
-  UserRound,
-} from 'lucide-react';
+import { Icon } from '@/shared/ui/Icons';
+import type { IconName } from '@/shared/ui/Icons';
 import { useEffect, useMemo, useState } from 'react';
 import { useSupabaseSession } from '@/hooks/useSupabaseSession';
 import { useTheme } from '@/shared/providers/ThemeProvider';
@@ -103,26 +93,35 @@ export function DashboardSidebar() {
   }, [activeAccordionGroupLabel]);
 
   const groupIcon = (label: string) => {
+    let iconName: IconName = 'userRound';
+    
     switch (label.toLowerCase()) {
       case 'about':
-        return <UserRound className="h-4 w-4" />;
+        iconName = 'userRound';
+        break;
       case 'architecture':
-        return <Layers className="h-4 w-4" />;
+        iconName = 'layers';
+        break;
       case 'fe flowset':
-        return <Workflow className="h-4 w-4" />;
+        iconName = 'workflow';
+        break;
       case 'portfolio':
-        return <Briefcase className="h-4 w-4" />;
+        iconName = 'briefcase';
+        break;
       case 'guide':
-        return <BookOpen className="h-4 w-4" />;
+        iconName = 'bookOpen';
+        break;
       case 'note':
-        return <NotebookPen className="h-4 w-4" />;
+        iconName = 'notebookPen';
+        break;
       case 'playground':
-        return <FlaskConical className="h-4 w-4" />;
-      // case 'work':
-      //   return <Briefcase className="h-4 w-4" />;
+        iconName = 'flaskConical';
+        break;
       default:
-        return <UserRound className="h-4 w-4" />;
+        iconName = 'userRound';
     }
+    
+    return <Icon name={iconName} size={16} />;
   };
 
   const iconButtonClassName =
@@ -165,10 +164,8 @@ export function DashboardSidebar() {
             >
               {!mounted ? (
                 <div className="h-4.5 w-4.5" />
-              ) : theme === 'dark' ? (
-                <Sun className="h-4.5 w-4.5" />
               ) : (
-                <Moon className="h-4.5 w-4.5" />
+                <Icon name={theme === 'dark' ? 'sun' : 'moon'} size={18} />
               )}
             </button>
           )}
@@ -179,7 +176,7 @@ export function DashboardSidebar() {
             className={iconButtonClassName}
             title={collapsed ? '사이드바 펼치기' : '사이드바 접기'}
           >
-            <Menu className="h-4.5 w-4.5" />
+            <Icon name="menu" size={18} />
           </button>
         </div>
       </div>
@@ -268,8 +265,6 @@ export function DashboardSidebar() {
                   <span
                     className="flex flex-1 items-center gap-2"
                     onClick={(e) => {
-                      // "Icon/label click" should navigate (not toggle).
-                      // Chevron click should only toggle.
                       e.stopPropagation();
                       const target = group.children?.[0]?.href ?? group.href;
                       if (target && !groupActive) router.push(target);
@@ -322,7 +317,7 @@ export function DashboardSidebar() {
       <div className="border-border border-t px-5 py-4">
         <div className="flex items-center gap-3">
           <div className="bg-depth-3 text-icon-primary flex h-10 w-10 items-center justify-center rounded-full">
-            <UserRound className="h-5 w-5" />
+            <Icon name="userRound" size={20} />
           </div>
           {!collapsed &&
             (user?.email ? (

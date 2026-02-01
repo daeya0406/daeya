@@ -5,19 +5,8 @@ import { Button } from '@/shared/ui/Button';
 import { Input } from '@/shared/ui/Input';
 import { Textarea } from '@/shared/ui/Textarea';
 
-import {
-  Sun,
-  Moon,
-  Github,
-  Menu,
-  X,
-  ChevronDown,
-  Copy,
-  Loader2,
-  ChevronUp,
-  Check,
-  EllipsisVertical,
-} from 'lucide-react';
+import { Icon } from '@/shared/ui/Icons';
+import type { IconName } from '@/shared/ui/Icons';
 
 import { toast } from 'sonner';
 import {
@@ -57,20 +46,21 @@ import {
 } from '@/shared/ui/Table';
 import { Badge } from '@/shared/ui/Badge';
 
+const ICON_LIST: IconName[] = [
+  'sun',
+  'moon',
+  'github',
+  'menu',
+  'x',
+  'chevronDown',
+  'copy',
+  'loader2',
+  'chevronUp',
+  'check',
+];
+
 export default function UISection() {
   const [pickedDate, setPickedDate] = useState<Date | undefined>();
-  const icons = {
-    Sun,
-    Moon,
-    Github,
-    Menu,
-    X,
-    ChevronDown,
-    Copy,
-    Loader2,
-    ChevronUp,
-    Check,
-  };
 
   return (
     <>
@@ -162,7 +152,7 @@ export default function UISection() {
           <DropdownOption>
             <DropdownOptionTrigger asChild>
               <Button variant="outline" className="w-[40px] px-0">
-                <EllipsisVertical className="text-muted-foreground" />
+                <Icon name="ellipsisVertical" className="text-muted-foreground" />
               </Button>
             </DropdownOptionTrigger>
 
@@ -176,42 +166,43 @@ export default function UISection() {
 
         {/* Icon */}
         <div className="flex flex-col gap-3">
-          <div className="flex items-center gap-2">
-            <p className="text-md font-normal">Icons</p>
-            <Badge variant="outline">Lucide</Badge>
-          </div>
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button variant="outline" className="w-[180px]">
-                아이콘 보기
-              </Button>
-            </DialogTrigger>
+  <div className="flex items-center gap-2">
+    <p className="text-md font-normal">Icons</p>
+    <Badge variant="outline">Shared Icon</Badge>
+  </div>
 
-            <DialogContent className="max-w-2xl">
-              <DialogTitle>Icon Library</DialogTitle>
-              <DialogDescription className="text-muted-foreground mt-1 text-sm">
-                클릭하면 JSX 코드가 복사됩니다.
-              </DialogDescription>
+  <Dialog>
+    <DialogTrigger asChild>
+      <Button variant="outline" className="w-[180px]">
+        아이콘 보기
+      </Button>
+    </DialogTrigger>
 
-              <div className="mt-4 grid grid-cols-5 gap-4">
-                {Object.entries(icons).map(([name, Icon]) => (
-                  <button
-                    key={name}
-                    onClick={() => {
-                      const code = `<${name} className="h-5 w-5" />`;
-                      navigator.clipboard.writeText(code);
-                      toast.success(`Copied: ${name}`);
-                    }}
-                    className="hover:bg-muted/40 flex flex-col items-center justify-center gap-2 rounded-md p-3 transition"
-                  >
-                    <Icon className="h-6 w-6" />
-                    <span className="text-muted-foreground text-xs">{name}</span>
-                  </button>
-                ))}
-              </div>
-            </DialogContent>
-          </Dialog>
-        </div>
+    <DialogContent className="max-w-2xl">
+      <DialogTitle>Icon Library</DialogTitle>
+      <DialogDescription className="text-muted-foreground mt-1 text-sm">
+        클릭하면 JSX 코드가 복사됩니다.
+      </DialogDescription>
+
+      <div className="mt-4 grid grid-cols-5 gap-4">
+        {ICON_LIST.map((iconName) => (
+          <button
+            key={iconName}
+            onClick={() => {
+              const code = `<Icon name="${iconName}" className="h-5 w-5" />`;
+              navigator.clipboard.writeText(code);
+              toast.success(`Copied: ${iconName}`);
+            }}
+            className="hover:bg-muted/40 flex flex-col items-center justify-center gap-2 rounded-md p-3 transition"
+          >
+            <Icon name={iconName} className="h-6 w-6" />
+            <span className="text-muted-foreground text-xs">{iconName}</span>
+          </button>
+        ))}
+      </div>
+    </DialogContent>
+  </Dialog>
+</div>
 
         {/* Table */}
         <div className="flex flex-col gap-3">

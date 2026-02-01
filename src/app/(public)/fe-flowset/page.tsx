@@ -1,22 +1,34 @@
 'use client';
 
 import { useState } from 'react';
-import {
-  Workflow,
-  Server,
-  Shield,
-  CheckCircle,
-  AlertTriangle,
-  Database,
-  Monitor,
-  ArrowDown,
-  Code2,
-  Layers,
-  RefreshCw,
-  Zap,
-} from 'lucide-react';
+import { Icon } from '@/shared/ui/Icons';
+import type { IconName } from '@/shared/ui/Icons';
 
-const FLOW_DIAGRAMS = [
+interface FlowNode {
+  id: string;
+  label: string;
+  description: string;
+  icon: IconName;
+  color: string;
+  layer: number;
+  highlight?: boolean;
+  isError?: boolean;
+}
+
+interface Term {
+  term: string;
+  definition: string;
+}
+
+interface FlowDiagram {
+  id: string;
+  title: string;
+  description: string;
+  nodes: FlowNode[];
+  terms: Term[];
+}
+
+const FLOW_DIAGRAMS: FlowDiagram[] = [
   {
     id: 'api-flow',
     title: 'API 요청 플로우',
@@ -26,7 +38,7 @@ const FLOW_DIAGRAMS = [
         id: 'user',
         label: 'User / Browser',
         description: 'HTTP Request (fetch/axios)',
-        icon: Monitor,
+        icon: 'monitor',
         color: 'bg-blue-500',
         layer: 1,
       },
@@ -34,7 +46,7 @@ const FLOW_DIAGRAMS = [
         id: 'bff',
         label: 'BFF / API Server',
         description: 'Next API route / Node',
-        icon: Server,
+        icon: 'server',
         color: 'bg-green-500',
         layer: 2,
       },
@@ -42,7 +54,7 @@ const FLOW_DIAGRAMS = [
         id: 'middleware',
         label: 'Middleware',
         description: '인증/인가(토큰), 로깅/레이트리밋, 헤더/쿠키 파싱',
-        icon: Shield,
+        icon: 'shield',
         color: 'bg-purple-500',
         layer: 3,
         highlight: true,
@@ -51,7 +63,7 @@ const FLOW_DIAGRAMS = [
         id: 'schema',
         label: 'Schema Validate',
         description: 'req.body 스키마 검사, upstream 응답 스키마 검사',
-        icon: CheckCircle,
+        icon: 'checkCircle',
         color: 'bg-orange-500',
         layer: 4,
         highlight: true,
@@ -60,7 +72,7 @@ const FLOW_DIAGRAMS = [
         id: 'upstream',
         label: 'Upstream Service',
         description: '외부 API / 다른 서버 (Auth / Payments / DB)',
-        icon: Database,
+        icon: 'database',
         color: 'bg-cyan-500',
         layer: 5,
         highlight: true,
@@ -69,7 +81,7 @@ const FLOW_DIAGRAMS = [
         id: 'transform',
         label: 'BFF Transform',
         description: '필요하면 응답 형태 변환',
-        icon: RefreshCw,
+        icon: 'refreshCw',
         color: 'bg-green-500',
         layer: 6,
       },
@@ -77,7 +89,7 @@ const FLOW_DIAGRAMS = [
         id: 'react',
         label: 'React Component',
         description: 'UI 렌더링',
-        icon: Code2,
+        icon: 'code2',
         color: 'bg-blue-500',
         layer: 7,
       },
@@ -85,7 +97,7 @@ const FLOW_DIAGRAMS = [
         id: 'error-boundary',
         label: 'Error Boundary',
         description: 'UI 렌더 에러 잡는 안전망, fallback UI 보여줌',
-        icon: AlertTriangle,
+        icon: 'alertTriangle',
         color: 'bg-red-500',
         layer: 8,
         isError: true,
@@ -119,7 +131,7 @@ const FLOW_DIAGRAMS = [
         id: 'user-action',
         label: '사용자 액션',
         description: '버튼 클릭, 입력, 스크롤 등',
-        icon: Monitor,
+        icon: 'monitor',
         color: 'bg-blue-500',
         layer: 1,
       },
@@ -127,7 +139,7 @@ const FLOW_DIAGRAMS = [
         id: 'event-handler',
         label: 'Event Handler',
         description: 'onClick, onChange, onSubmit',
-        icon: Code2,
+        icon: 'code2',
         color: 'bg-purple-500',
         layer: 2,
       },
@@ -135,7 +147,7 @@ const FLOW_DIAGRAMS = [
         id: 'state-decision',
         label: '상태 결정',
         description: 'UI/Server/Domain/Form/Control 중 선택',
-        icon: Layers,
+        icon: 'layers',
         color: 'bg-orange-500',
         layer: 3,
         highlight: true,
@@ -144,7 +156,7 @@ const FLOW_DIAGRAMS = [
         id: 'state-update',
         label: '상태 업데이트',
         description: 'setState / mutation / dispatch',
-        icon: RefreshCw,
+        icon: 'refreshCw',
         color: 'bg-green-500',
         layer: 4,
       },
@@ -152,7 +164,7 @@ const FLOW_DIAGRAMS = [
         id: 'reconciliation',
         label: 'React Reconciliation',
         description: 'Virtual DOM 비교 및 실제 DOM 업데이트',
-        icon: Zap,
+        icon: 'zap',
         color: 'bg-cyan-500',
         layer: 5,
         highlight: true,
@@ -161,7 +173,7 @@ const FLOW_DIAGRAMS = [
         id: 'ui-render',
         label: 'UI 리렌더',
         description: '변경된 부분만 화면에 반영',
-        icon: Monitor,
+        icon: 'monitor',
         color: 'bg-blue-500',
         layer: 6,
       },
@@ -186,7 +198,7 @@ const FLOW_DIAGRAMS = [
         id: 'error-source',
         label: '에러 발생',
         description: 'Upstream 500, Timeout, Network Error',
-        icon: AlertTriangle,
+        icon: 'alertTriangle',
         color: 'bg-red-500',
         layer: 1,
       },
@@ -194,7 +206,7 @@ const FLOW_DIAGRAMS = [
         id: 'bff-catch',
         label: 'BFF에서 Catch',
         description: 'try-catch로 에러 잡기',
-        icon: Shield,
+        icon: 'shield',
         color: 'bg-orange-500',
         layer: 2,
       },
@@ -202,7 +214,7 @@ const FLOW_DIAGRAMS = [
         id: 'transform-error',
         label: 'ApiError 변환',
         description: '표준 에러 형태로 통일 (code, message)',
-        icon: RefreshCw,
+        icon: 'refreshCw',
         color: 'bg-purple-500',
         layer: 3,
         highlight: true,
@@ -211,7 +223,7 @@ const FLOW_DIAGRAMS = [
         id: 'send-error',
         label: 'Front로 전송',
         description: 'JSON 에러 응답 (4xx/5xx)',
-        icon: Server,
+        icon: 'server',
         color: 'bg-green-500',
         layer: 4,
       },
@@ -219,7 +231,7 @@ const FLOW_DIAGRAMS = [
         id: 'error-handling',
         label: 'UI 에러 처리',
         description: 'Toast / Error Page / Retry 버튼',
-        icon: Monitor,
+        icon: 'monitor',
         color: 'bg-blue-500',
         layer: 5,
       },
@@ -227,7 +239,7 @@ const FLOW_DIAGRAMS = [
         id: 'logging',
         label: 'Logging / Monitoring',
         description: 'Sentry 같은 도구로 에러 추적',
-        icon: Database,
+        icon: 'database',
         color: 'bg-cyan-500',
         layer: 6,
       },
@@ -256,7 +268,7 @@ export default function FrontendFlowset() {
         {/* 헤더 */}
         <div className="text-center">
           <div className="bg-primary/10 text-primary mb-4 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold">
-            <Workflow className="h-4 w-4" />
+            <Icon name="workflow" />
             프론트엔드 플로우셋
           </div>
           <h2 className="text-foreground mb-3 text-2xl font-bold sm:text-3xl">
@@ -295,7 +307,6 @@ export default function FrontendFlowset() {
             {/* 노드 플로우 */}
             <div className="space-y-3">
               {currentFlow.nodes.map((node, idx) => {
-                const Icon = node.icon;
                 const isHighlight = node.highlight;
                 const isError = node.isError;
 
@@ -317,11 +328,11 @@ export default function FrontendFlowset() {
                       />
 
                       <div className="relative flex items-start gap-4">
-                        {/* 아이콘 */}
+                        {/* 아이콘 - w-5 h-5 급은 size 20 적용 */}
                         <div
                           className={`${node.color} flex-shrink-0 rounded-lg p-2.5 text-white shadow-sm`}
                         >
-                          <Icon className="h-5 w-5" />
+                          <Icon name={node.icon} size={20} />
                         </div>
 
                         {/* 내용 */}
@@ -351,10 +362,10 @@ export default function FrontendFlowset() {
                       </div>
                     </div>
 
-                    {/* 화살표 */}
+                    {/* 화살표 - h-5 w-5 급은 size 20 적용 */}
                     {idx < currentFlow.nodes.length - 1 && (
                       <div className="flex justify-center py-2">
-                        <ArrowDown className="text-muted-foreground h-5 w-5" />
+                        <Icon name="arrowDown" size={20} className="text-muted-foreground" />
                       </div>
                     )}
                   </div>
@@ -366,7 +377,7 @@ export default function FrontendFlowset() {
             {currentFlow.terms && currentFlow.terms.length > 0 && (
               <div className="border-border bg-depth-2 space-y-3 rounded-xl border p-5">
                 <h4 className="text-foreground flex items-center gap-2 text-sm font-bold">
-                  <Code2 className="h-4 w-4" />
+                  <Icon name="code2" />
                   핵심 용어
                 </h4>
                 <div className="grid gap-3 sm:grid-cols-2">

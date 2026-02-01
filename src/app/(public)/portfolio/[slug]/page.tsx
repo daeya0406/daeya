@@ -1,16 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import {
-  ArrowLeft,
-  ArrowUpRight,
-  ExternalLink,
-  Github,
-  ImageOff,
-  Calendar,
-  Users,
-  Code2,
-} from 'lucide-react';
+import { Icon } from '@/shared/ui/Icons';
 import { FadeUp } from '@/shared/motion/FadeUp';
 import { Badge } from '@/shared/ui/Badge';
 import { PROJECTS } from '@/entities/project/model/projects';
@@ -70,7 +61,7 @@ export default async function PortfolioCaseStudyPage({
             href="/portfolio"
             className="text-muted-foreground hover:text-primary inline-flex items-center gap-2 text-sm font-semibold transition"
           >
-            <ArrowLeft className="h-4 w-4" /> 포트폴리오
+            <Icon name="arrowLeft" /> 포트폴리오
           </Link>
 
           <div className={['overflow-hidden p-0', cardClassName].join(' ')}>
@@ -86,7 +77,7 @@ export default async function PortfolioCaseStudyPage({
                 />
               ) : (
                 <div className="text-muted-foreground absolute inset-0 flex flex-col items-center justify-center gap-3">
-                  <ImageOff className="h-12 w-12 opacity-50" />
+                  <Icon name="imageOff" size={48} className="opacity-50" />
                   <span className="text-sm">프로젝트 대표 이미지 영역</span>
                 </div>
               )}
@@ -98,7 +89,7 @@ export default async function PortfolioCaseStudyPage({
                   <span className="text-primary text-xs font-semibold uppercase tracking-[0.08em]">
                     Case Study
                   </span>
-                  <h2 className="text-foreground mt-2 text-2xl text-3xl font-bold lg:text-4xl">
+                  <h2 className="text-foreground mt-2 text-2xl font-bold sm:text-3xl lg:text-4xl">
                     {project.title}
                   </h2>
                   <p className="text-muted-foreground mt-4 text-lg font-normal leading-relaxed">
@@ -109,7 +100,7 @@ export default async function PortfolioCaseStudyPage({
                 <div className="flex flex-wrap gap-6">
                   {project.role && (
                     <div className="flex items-center gap-1">
-                      <Code2 className="text-primary h-5 w-5" />
+                      <Icon name="code2" size={20} className="text-primary" />
                       <div className="flex items-center gap-2">
                         <span className="text-muted-foreground text-xs tracking-[0.01em]">
                           Role
@@ -122,7 +113,7 @@ export default async function PortfolioCaseStudyPage({
                   )}
                   {project.period && (
                     <div className="flex items-center gap-1">
-                      <Calendar className="text-primary h-5 w-5" />
+                      <Icon name="calendar" size={20} className="text-primary" />
                       <div className="flex items-center gap-2">
                         <span className="text-muted-foreground text-xs tracking-[0.01em]">
                           Period
@@ -150,7 +141,7 @@ export default async function PortfolioCaseStudyPage({
                       target="_blank"
                       className="bg-depth-2 hover:bg-depth-3 text-foreground inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition"
                     >
-                      <Github className="h-4 w-4" /> GitHub
+                      <Icon name="github" /> GitHub
                     </Link>
                   )}
                   {project.links.live && (
@@ -159,7 +150,7 @@ export default async function PortfolioCaseStudyPage({
                       target="_blank"
                       className="bg-primary hover:bg-primary/90 text-primary-foreground inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition"
                     >
-                      <ExternalLink className="h-4 w-4" /> Live Demo
+                      <Icon name="externalLink" /> Live Demo
                     </Link>
                   )}
                 </div>
@@ -231,7 +222,6 @@ export default async function PortfolioCaseStudyPage({
                       </div>
                     </div>
 
-                    {/* 코드 or 다이어그램 영역 - 필요시 활성 */}
                     {challenge.code && (
                       <div className="bg-depth-2 mt-6 overflow-hidden rounded-2xl">
                         <div className="border-border/50 border-b px-4 py-2">
@@ -296,7 +286,7 @@ export default async function PortfolioCaseStudyPage({
               href="/portfolio"
               className="bg-primary hover:bg-primary/90 text-primary-foreground inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold transition"
             >
-              전체 프로젝트 보기 <ArrowUpRight className="h-4 w-4" />
+              전체 프로젝트 보기 <Icon name="arrowUpRight" />
             </Link>
           </div>
         </section>

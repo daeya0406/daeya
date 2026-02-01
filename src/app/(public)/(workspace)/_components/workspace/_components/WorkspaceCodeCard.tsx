@@ -1,6 +1,6 @@
 'use client';
 
-import { Check, Copy, FileCode } from 'lucide-react';
+import { Icon } from '@/shared/ui/Icons';
 import { cn } from '@/lib/utils';
 import { CodeBlock } from '@/shared/common/CodeBlock';
 
@@ -19,7 +19,7 @@ export function WorkspaceCodeCard({ label, code, copied, onCopy }: WorkspaceCode
       <div className="border-border from-depth-2/50 relative flex items-center justify-between border-b bg-gradient-to-r to-transparent px-6 py-4">
         <div className="flex items-center gap-3">
           <div className="bg-primary/10 text-primary rounded-lg p-2">
-            <FileCode className="h-4 w-4" />
+            <Icon name="fileCode" />
           </div>
           <div>
             <h3 className="text-foreground text-sm font-semibold">{label}</h3>
@@ -37,12 +37,12 @@ export function WorkspaceCodeCard({ label, code, copied, onCopy }: WorkspaceCode
         >
           {copied ? (
             <>
-              <Check className="h-4 w-4" />
+              <Icon name="check" />
               <span>복사됨</span>
             </>
           ) : (
             <>
-              <Copy className="h-4 w-4 transition-transform group-hover/btn:scale-110" />
+              <Icon name="copy" className="transition-transform group-hover/btn:scale-110" />
               <span>복사</span>
             </>
           )}

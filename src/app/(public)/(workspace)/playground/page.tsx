@@ -5,8 +5,7 @@ import { toast } from 'sonner';
 import { extractTabsFromNav } from '@/shared/common/navigation';
 import { playgroundItems } from '@/app/(public)/(workspace)/playground/_components/playgroundData';
 import { useSyncedTab } from '@/hooks/useSyncedTab';
-import { cn } from '@/lib/utils';
-import { Code2 } from 'lucide-react';
+import { Icon } from '@/shared/ui/Icons';
 import {
   TabbedWorkspaceLayout,
   WorkspaceSearchInput,
@@ -131,14 +130,6 @@ function PlaygroundPageContent() {
                   description={item.description}
                   tags={item.tags}
                   active={isActive}
-                  icon={
-                    <Code2
-                      className={cn(
-                        'mt-0.5 h-4 w-4 flex-shrink-0 transition-transform group-hover:scale-110',
-                        isActive ? 'text-primary' : 'text-muted-foreground'
-                      )}
-                    />
-                  }
                   onClick={() => setActiveId(item.id)}
                 />
               );
@@ -176,7 +167,7 @@ function PlaygroundPageContent() {
           <WorkspaceEmptyState
             title="항목을 선택하세요"
             description="왼쪽 목록에서 보고 싶은 데모를 클릭하세요"
-            icon={<Code2 className="h-16 w-16" />}
+            icon={<Icon name="code2" />}
           />
         )
       }

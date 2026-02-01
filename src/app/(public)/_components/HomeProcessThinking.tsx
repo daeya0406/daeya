@@ -1,11 +1,21 @@
 'use client';
 
-import { Lightbulb, Palette, Code2, Zap, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Icon, IconName } from '@/shared/ui/Icons';
 
-const PROCESS_STEPS = [
+interface ProcessStep {
+  phase: string;
+  icon: IconName;
+  color: string;
+  textColor: string;
+  bgLight: string;
+  questions: string[];
+  thinking: string;
+}
+
+const PROCESS_STEPS: ProcessStep[] = [
   {
     phase: '기획',
-    icon: Lightbulb,
+    icon: 'lightbulb',
     color: 'bg-yellow-500',
     textColor: 'text-yellow-600',
     bgLight: 'bg-yellow-50',
@@ -14,7 +24,7 @@ const PROCESS_STEPS = [
   },
   {
     phase: '디자인',
-    icon: Palette,
+    icon: 'palette',
     color: 'bg-pink-500',
     textColor: 'text-pink-600',
     bgLight: 'bg-pink-50',
@@ -23,7 +33,7 @@ const PROCESS_STEPS = [
   },
   {
     phase: '퍼블리싱',
-    icon: Code2,
+    icon: 'code2',
     color: 'bg-blue-500',
     textColor: 'text-blue-600',
     bgLight: 'bg-blue-50',
@@ -32,7 +42,7 @@ const PROCESS_STEPS = [
   },
   {
     phase: '프론트엔드',
-    icon: Zap,
+    icon: 'zap',
     color: 'bg-purple-500',
     textColor: 'text-purple-600',
     bgLight: 'bg-purple-50',
@@ -48,7 +58,7 @@ export function HomeProcessThinking() {
         {/* 헤더 */}
         <div className="text-center">
           <div className="bg-primary/10 text-primary mb-4 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold">
-            <CheckCircle2 className="h-4 w-4" />
+            <Icon name="checkCircle2" />
             전체 프로세스를 생각합니다
           </div>
           <h2 className="text-foreground mb-4 text-2xl font-bold sm:text-3xl">
@@ -69,7 +79,7 @@ export function HomeProcessThinking() {
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {PROCESS_STEPS.map((step, idx) => {
-              const Icon = step.icon;
+              const IconName = step.icon;
 
               return (
                 <div key={step.phase} className="group relative">
@@ -78,7 +88,7 @@ export function HomeProcessThinking() {
                     <div
                       className={`${step.color} relative z-10 rounded-xl p-3 text-white shadow-lg transition-transform`}
                     >
-                      <Icon className="h-6 w-6" />
+                      <Icon name={IconName} size={24} />
                     </div>
                     <div>
                       <div className="text-muted-foreground text-xs font-medium">
@@ -105,7 +115,7 @@ export function HomeProcessThinking() {
 
                   {/* 화살표 (모바일) */}
                   {idx < PROCESS_STEPS.length - 1 && (
-                    <ArrowRight className="text-muted-foreground mx-auto my-4 h-6 w-6 rotate-90 lg:hidden" />
+                    <Icon name="arrowRight" size={24} className="text-muted-foreground mx-auto my-4 rotate-90 lg:hidden" />
                   )}
                 </div>
               );
@@ -116,7 +126,7 @@ export function HomeProcessThinking() {
         {/* 하단 요약 */}
         <div className="border-border bg-depth-2 space-y-4 rounded-2xl border p-6">
           <h3 className="text-foreground flex items-center gap-2 text-base font-bold">
-            <Zap className="text-primary h-5 w-5" />
+            <Icon name="zap" size={20} className="text-primary" />
             이런 경험이 어떻게 도움이 될까요?
           </h3>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

@@ -3,12 +3,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Sun, Moon, ChevronDown, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { navItems } from './navigation';
 import { Button, ButtonNowrap } from '@/shared/ui/Button';
+import { Icon } from '@/shared/ui/Icons';
 import { useTheme, type Theme } from '@/shared/providers/ThemeProvider';
 
 export default function Header() {
@@ -100,10 +100,12 @@ function MobileMenu({
       >
         {!mounted ? (
           <div className="h-5 w-5" />
-        ) : theme === 'dark' ? (
-          <Sun className="h-5 w-5 text-yellow-300" />
         ) : (
-          <Moon className="text-foreground h-5 w-5" />
+          <Icon
+            name={theme === 'dark' ? 'sun' : 'moon'}
+            size={20}
+            className={theme === 'dark' ? 'text-yellow-300' : 'text-foreground'}
+          />
         )}
       </Button>
 
@@ -115,20 +117,7 @@ function MobileMenu({
         className="h-10 w-10"
       >
         <span className="sr-only">메뉴 열기</span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="h-5 w-5"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-          />
-        </svg>
+        <Icon name="menu" size={20} />
       </Button>
 
       {typeof document !== 'undefined'
@@ -163,8 +152,11 @@ function MobileMenu({
                     ref={panelRef}
                     tabIndex={-1}
                   >
-                    <div className="flex items-center justify-between border-b border-border px-4 py-4">
-                      <span id="mobile-menu-title" className="text-foreground text-sm font-semibold">
+                    <div className="border-border flex items-center justify-between border-b px-4 py-4">
+                      <span
+                        id="mobile-menu-title"
+                        className="text-foreground text-sm font-semibold"
+                      >
                         메뉴
                       </span>
                       <ButtonNowrap
@@ -173,7 +165,7 @@ function MobileMenu({
                         size="icon"
                         className="h-9 w-9"
                       >
-                        <X className="h-4 w-4" />
+                        <Icon name="x" size={16} />
                       </ButtonNowrap>
                     </div>
 
@@ -195,13 +187,13 @@ function MobileMenu({
                                 }`}
                               >
                                 <span className="flex items-center gap-2">
-                                  {item.icon ? (
-                                    <item.icon
-                                      className={`h-4 w-4 ${
-                                        active ? 'text-primary' : 'text-muted-foreground'
-                                      }`}
+                                  {item.icon && (
+                                    <Icon
+                                      name={item.icon}
+                                      size={16}
+                                      className={active ? 'text-primary' : 'text-muted-foreground'}
                                     />
-                                  ) : null}
+                                  )}
                                   {item.label}
                                   {item.badge && (
                                     <span className="bg-primary-100 text-primary rounded-full px-2 text-[10px] font-semibold">
@@ -209,8 +201,10 @@ function MobileMenu({
                                     </span>
                                   )}
                                 </span>
-                                <ChevronDown
-                                  className={`h-4 w-4 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+                                <Icon
+                                  name="chevronDown"
+                                  size={16}
+                                  className={`transition-transform ${isExpanded ? 'rotate-180' : ''}`}
                                 />
                               </button>
                             ) : (
@@ -223,13 +217,13 @@ function MobileMenu({
                                     : 'text-muted-foreground hover:bg-depth-2 hover:text-foreground'
                                 }`}
                               >
-                                {item.icon ? (
-                                  <item.icon
-                                    className={`h-4 w-4 ${
-                                      active ? 'text-primary' : 'text-muted-foreground'
-                                    }`}
+                                {item.icon && (
+                                  <Icon
+                                    name={item.icon}
+                                    size={16}
+                                    className={active ? 'text-primary' : 'text-muted-foreground'}
                                   />
-                                ) : null}
+                                )}
                                 {item.label}
                                 {item.badge && (
                                   <span className="bg-primary-100 text-primary rounded-full px-2 text-[10px] font-semibold">

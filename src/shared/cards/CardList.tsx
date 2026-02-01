@@ -2,7 +2,7 @@
 
 import type { Card } from '@/types/card';
 import { Button } from '@/shared/ui/Button';
-import { Pencil, Trash2 } from 'lucide-react';
+import { Icon } from '@/shared/ui/Icons';
 
 interface Props {
   cards: Card[];
@@ -26,7 +26,7 @@ export default function CardList({
       {cards.map((card) => (
         <div
           key={card.id}
-          className="group flex flex-col rounded-md border border-border bg-depth-1 p-4 text-left transition hover:border-primary/50 hover:shadow-sm"
+          className="border-border bg-depth-1 hover:border-primary/50 group flex flex-col rounded-md border p-4 text-left transition hover:shadow-sm"
         >
           <div className="flex items-start justify-between gap-3">
             <button onClick={() => onSelect(card.id)} className="text-left">
@@ -41,7 +41,7 @@ export default function CardList({
                   disabled={Boolean(deletingId)}
                   onClick={() => onEdit?.(card)}
                 >
-                  <Pencil className="h-4 w-4" />
+                  <Icon name="pencil" />
                 </Button>
                 <Button
                   size="icon"
@@ -49,7 +49,7 @@ export default function CardList({
                   onClick={() => onDelete?.(card.id)}
                   isLoading={deletingId === card.id}
                 >
-                  {deletingId === card.id ? null : <Trash2 className="h-4 w-4" />}
+                  {deletingId === card.id ? null : <Icon name="trash2" />}
                 </Button>
               </div>
             )}

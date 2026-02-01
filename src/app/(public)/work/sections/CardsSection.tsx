@@ -1,9 +1,10 @@
 'use client';
 
-import { Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import CardList from '@/shared/cards/CardList';
 import type { Card } from '@/types/card';
 import { Button } from '@/shared/ui/Button';
+import { Icon } from '@/shared/ui/Icons';
 import { useSupabaseSession } from '@/hooks/useSupabaseSession';
 import { supabase } from '@/lib/supabase';
 import { toast } from 'sonner';
@@ -12,7 +13,6 @@ import { Pagination } from '@/shared/ui/Pagination';
 import { CardFormDialog } from '@/shared/cards/CardFormDialog';
 import { CardDeleteDialog } from '@/shared/cards/CardDeleteDialog';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Pencil, Trash2 } from 'lucide-react';
 
 export default function CardsSection() {
   const [cards, setCards] = useState<Card[]>([]);
@@ -139,7 +139,7 @@ export default function CardsSection() {
       <div className="flex items-start justify-between gap-3">
         <div>
           <h3 className="text-xl font-semibold">Cards</h3>
-          <span className="text-xs tracking-[0.01em] text-muted-foreground block">
+          <span className="block text-xs tracking-[0.01em] text-muted-foreground">
             카드 목록과 모달을 Work 탭에서 바로 확인하세요.
           </span>
         </div>
@@ -150,13 +150,13 @@ export default function CardsSection() {
         )}
       </div>
 
-      <div className="border-border bg-depth-1/80 rounded-2xl border p-4 shadow-sm">
+      <div className="rounded-2xl border border-border bg-depth-1/80 p-4 shadow-sm">
         {loading && (
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
             {Array.from({ length: 10 }).map((_, idx) => (
-              <div key={idx} className="border-border bg-depth-2 rounded-lg border p-4 shadow-sm">
-                <div className="bg-depth-3 mb-2 h-4 w-1/2 animate-pulse rounded" />
-                <div className="bg-depth-3 h-3 w-3/4 animate-pulse rounded" />
+              <div key={idx} className="rounded-lg border border-border bg-depth-2 p-4 shadow-sm">
+                <div className="mb-2 h-4 w-1/2 animate-pulse rounded bg-depth-3" />
+                <div className="h-3 w-3/4 animate-pulse rounded bg-depth-3" />
               </div>
             ))}
           </div>
@@ -195,7 +195,7 @@ export default function CardsSection() {
           <DialogContent>
             <DialogTitle>{selectedCard.title}</DialogTitle>
             <DialogDescription asChild>
-              <span className="text-md font-normal text-muted-foreground mt-2 text-sm">
+              <span className="mt-2 text-sm font-normal text-muted-foreground">
                 {selectedCard.description}
               </span>
             </DialogDescription>
@@ -207,7 +207,7 @@ export default function CardsSection() {
                   disabled={Boolean(deletingId)}
                   onClick={() => setEditTarget(selectedCard)}
                 >
-                  <Pencil className="h-4 w-4" />
+                  <Icon name="pencil" />
                 </Button>
                 <Button
                   size="icon"
@@ -215,7 +215,7 @@ export default function CardsSection() {
                   onClick={() => setDeleteTarget(selectedCard)}
                   isLoading={deletingId === selectedCard.id}
                 >
-                  {deletingId === selectedCard.id ? null : <Trash2 className="h-4 w-4" />}
+                  {deletingId === selectedCard.id ? null : <Icon name="trash2" />}
                 </Button>
               </div>
             )}

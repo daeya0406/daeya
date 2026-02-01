@@ -15,17 +15,103 @@ import type { PlaygroundItem } from '@/types/playground';
 
 export const jsItems: PlaygroundItem[] = [
   {
+    id: 'string-methods',
+    title: '문자열 메서드',
+    tags: ['String'],
+    description: 'slice / length / includes / trim / replace / split / join',
+    categories: ['js'],
+    codes: [
+      {
+        label: '01. 자르기',
+        code: `string.slice(start, end)`,
+      },
+      {
+        label: '02. 길이',
+        code: `string.length('text')`,
+      },
+      {
+        label: '03. 포함 여부',
+        code: `string.includes('text')`,
+      },
+      {
+        label: '04. 대소문자',
+        code: `string.toUpperCase()
+string.toLowerCase()`,
+      },
+      {
+        label: '05. 공백 제거',
+        code: `string.trim()`,
+      },
+      {
+        label: '06. 치환',
+        code: `string.replace('a', 'b')
+string.replaceAll('-', '')`,
+      },
+      {
+        label: '07. 분리 / 합치기',
+        code: `string.split(',')
+array.join(',')`,
+      },
+    ],
+  },
+  {
+    id: 'number-methods',
+    title: '숫자형 메서드',
+    tags: ['Number'],
+    description: '',
+    categories: ['js'],
+    codes: [
+      {
+        label: '01. 반올림',
+        code: `Math.round() // 반올림
+Math.floor() // 내림
+Math.ceil()  // 올림`,
+      },
+      {
+        label: '02. 소수점 자리',
+        code: `Math.toFixed(2)`,
+      },
+      {
+        label: '03. 문자열 → 숫자',
+        code: `Number(value)
+parseInt(value, 10)
+parseFloat(value)`,
+      },
+      {
+        label: '04. NaN 체크',
+        code: `Number.isNaN(value)`,
+      },
+    ],
+  },
+  {
     id: 'object-methods',
     title: '객체 메서드',
     tags: ['Object'],
-    description: 'keys/values/entries/fromEntries/assign',
+    description: 'keys / values / entries / fromEntries / assign',
     categories: ['js'],
     demo: <ObjectMethodsDemo />,
-    code: `const user = { id: 1, name: 'Daeya' };
+    codes: [
+      {
+        label: '01. Demo',
+        code: `const user = { id: 1, name: 'Daeya' };
 Object.keys(user);        // ['id','name']
 Object.entries(user);     // [['id',1],['name','Daeya']]
 Object.assign(...user, { active: true });
 Object.fromEntries(Object.entries(user));`,
+      },
+      {
+        label: '02. 객체 병합',
+        code: `...obj`,
+      },
+      {
+        label: '03. 배열 → 객체',
+        code: `Object.fromEntries(arr)`,
+      },
+      {
+        label: '04. 객체 → 배열',
+        code: `Object.entries(obj).map(...)`,
+      },
+    ],
   },
   {
     id: 'array-methods',
@@ -36,7 +122,7 @@ Object.fromEntries(Object.entries(user));`,
     demo: <ArrayMethodsDemo />,
     codes: [
       {
-        label: '01. basic',
+        label: '01. Demo',
         code: `const nums = [1,2,3,4];
 nums.map((n) => n * 2);          // [2,4,6,8]
 nums.filter((n) => n % 2 === 0); // [2,4]

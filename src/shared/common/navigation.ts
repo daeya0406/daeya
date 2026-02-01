@@ -1,33 +1,23 @@
-import {
-  BookOpen,
-  Briefcase,
-  FlaskConical,
-  Home,
-  Layers,
-  NotebookPen,
-  UserRound,
-  Workflow,
-} from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
+import { IconName } from '@/shared/ui/Icons';
 
 export type NavItem = {
   label: string;
   href?: string;
   badge?: string;
   children?: NavItem[];
-  icon?: LucideIcon;
+  icon?: IconName;
 };
 
 export const navItems: NavItem[] = [
-  { label: 'Home', href: '/', icon: Home },
-  { label: 'About', href: '/about', icon: UserRound },
-  { label: 'Architecture', href: '/architecture', icon: Layers },
-  { label: 'FE Flowset', href: '/fe-flowset', icon: Workflow },
-  { label: 'Portfolio', href: '/portfolio', icon: Briefcase },
+  { label: 'Home', href: '/', icon: 'home' },
+  { label: 'About', href: '/about', icon: 'userRound' },
+  { label: 'Architecture', href: '/architecture', icon: 'layers' },
+  { label: 'FE Flowset', href: '/fe-flowset', icon: 'workflow' },
+  { label: 'Portfolio', href: '/portfolio', icon: 'briefcase' },
   {
     label: 'Guide',
     href: '/guide',
-    icon: BookOpen,
+    icon: 'bookOpen',
     children: [
       { label: 'UI', href: '/guide?tab=ui' },
       { label: 'Font', href: '/guide?tab=font' },
@@ -38,7 +28,7 @@ export const navItems: NavItem[] = [
   {
     label: 'Note',
     href: '/note',
-    icon: NotebookPen,
+    icon: 'notebookPen',
     children: [
       { label: 'JS', href: '/note?tab=js' },
       { label: 'React', href: '/note?tab=react' },
@@ -51,7 +41,7 @@ export const navItems: NavItem[] = [
   {
     label: 'Playground',
     href: '/playground',
-    icon: FlaskConical,
+    icon: 'flaskConical',
     children: [
       { label: 'Templates', href: '/playground?tab=templates' },
       { label: 'UI', href: '/playground?tab=ui' },
@@ -60,15 +50,6 @@ export const navItems: NavItem[] = [
       { label: 'Testing', href: '/playground?tab=testing', badge: 'New' },
     ],
   },
-  // {
-  //   label: 'Work',
-  //   children: [
-  //     { label: 'Portfolio', href: '/work?tab=portfolio', badge: 'Soon' },
-  //     { label: 'Blog', href: '/work?tab=blog', badge: 'Soon' },
-  //     { label: 'Dashboard', href: '/work?tab=dashboard', badge: 'Private' },
-  //     { label: 'Cards', href: '/work?tab=cards' },
-  //   ],
-  // },
 ];
 
 export function findNavItem(label: string) {
