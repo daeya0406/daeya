@@ -23,7 +23,7 @@ export function HomeStats() {
           <Icon name="code" size={24} />
         </div>
         <div className="text-foreground text-3xl font-bold">3</div>
-        <div className="text-muted-foreground mt-1 text-sm">완료 프로젝트</div>
+        <div className="text-muted-foreground mt-1 text-sm">완료 FE 프로젝트</div>
       </div>
     </div>
   );

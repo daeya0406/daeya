@@ -42,10 +42,10 @@ function GuidePageContent() {
   }
 
   return (
-    <section className="mx-auto max-w-5xl px-4 py-10">
+    <section>
       <div className="mb-6 space-y-2">
-        <h2 className="text-2xl font-bold">Guide</h2>
-        <span className="text-xs tracking-[0.01em]">해당 포트폴리오 기술스택 정리</span>
+        <h2 className="text-foreground mb-2 text-3xl font-bold">Guide</h2>
+        <span className="text-muted-foreground">해당 포트폴리오 디자인토큰, 기술스택 정리</span>
       </div>
 
       <Tabs.Root value={activeTab} defaultValue={defaultKey} onValueChange={onChange}>

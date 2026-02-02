@@ -133,7 +133,7 @@ export default function Architecture() {
   const selectedState = STATE_SCHEMAS.find((s) => s.id === selectedSchema);
 
   return (
-    <section className="mx-auto max-w-5xl space-y-8 px-4 py-10">
+    <section className="mx-auto max-w-5xl space-y-8">
       {/* 헤더 - 단독 카드 */}
       <div className="bg-depth-1/80 rounded-2xl p-6 shadow-md backdrop-blur-sm md:p-10">
         <div className="space-y-3">
