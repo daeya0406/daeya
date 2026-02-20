@@ -7,7 +7,8 @@ import { CopyTextButton } from '@/shared/common/CopyTextButton';
 import { HOME_HERO } from '@/entities/home/model/home';
 import { PROFILE } from '@/entities/profile/model/profile';
 
-const BASE_URL = 'https://hurnvaxkciwzrvzpcfbs.supabase.co/storage/v1/object/public/scroll-animation';
+const BASE_URL =
+  'https://hurnvaxkciwzrvzpcfbs.supabase.co/storage/v1/object/public/scroll-animation';
 const FRAME_COUNT = 100;
 
 function getFrameUrl(index: number) {
@@ -73,21 +74,20 @@ export function HomeHero() {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll(); // 초기 렌더링
-    
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <section className="relative min-h-[200vh]">
-      <div className="sticky top-30 lg:top-20 lg:h-[calc(100vh-80px)] overflow-hidden">
-
+      <div className="top-30 sticky overflow-hidden lg:top-20 lg:h-[calc(100vh-80px)]">
         {/* 콘텐츠 */}
-        <div className="relative flex h-auto lg:h-full items-center justify-center px-4">
+        <div className="relative flex h-auto items-center justify-center px-4 lg:h-full">
           <div className="mx-auto w-full max-w-6xl pt-0">
             <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
               {/* 왼쪽 - Canvas */}
               <div className="flex justify-center lg:justify-end">
-                <div className="relative overflow-hidden rounded-3xl bg-depth-1 ring-1 ring-border">
+                <div className="bg-depth-1 ring-border relative overflow-hidden rounded-3xl ring-1">
                   <canvas
                     ref={canvasRef}
                     width={480}
@@ -95,7 +95,7 @@ export function HomeHero() {
                     className="block h-auto w-full"
                     style={{ maxWidth: '360px' }}
                   />
-                  
+
                   <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
                     <h1 className="text-3xl font-bold text-white drop-shadow-2xl lg:text-8xl">
                       Scroll Motion

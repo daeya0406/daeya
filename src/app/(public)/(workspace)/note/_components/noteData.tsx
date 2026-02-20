@@ -6,6 +6,7 @@ import { reactItems } from './data/react';
 import { hookItems } from './data/hooks';
 import { tsItems } from './data/ts';
 import { nextItems } from './data/nextjs';
+import { tailwind } from './data/tailwind';
 import { troubleshootingItems } from './data/troubleshooting';
 
 export const noteItems: PlaygroundItem[] = [
@@ -14,5 +15,6 @@ export const noteItems: PlaygroundItem[] = [
   ...hookItems,
   ...tsItems,
   ...nextItems,
+  ...tailwind,
   ...troubleshootingItems,
 ];
