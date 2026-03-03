@@ -1,5 +1,5 @@
 export { FocusDemo } from './FocusDemo';
-export { MotionDemo } from './MotionDemo';
+export { NumberMotionDemo } from './NumberMotionDemo';
 export { ToastDemo } from './ToastDemo';
 export { OptimisticDemo } from './OptimisticDemo';
 export { SkeletonDemo } from './SkeletonDemo';

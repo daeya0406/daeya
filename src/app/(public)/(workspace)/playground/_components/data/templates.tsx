@@ -15,24 +15,61 @@ export const templateItems: PlaygroundItem[] = [
     description: '무한 스크롤 구현 패턴',
     categories: ['templates'],
     demo: <InfinityScrollDemo />,
-    code: `useEffect(() => {
-    const el = sentinelRef.current; // 찾을 DOM 요소
-    if (!el) return; // 안보이면 early return
-  
-    const observer = new IntersectionObserver((entries) => {
-      const entry = entries[0];
-      if (!entry.isIntersecting) return;
-      if (isLoading || !hasMore) return;
-  
-      setOffset((prev) => prev + limit);
+    code: `const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        // 요소가 뷰포트에 들어왔을 때
+        console.log("보임!");
+      }
     });
-  
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [isLoading, hasMore]);
-  
-  {/* sentinel: 해당 div가 화면에 보이는 순간 옵저버 콜백이 실행 */}
-  <div ref={sentinelRef} style={{ height: 1 }} />`,
+  },
+  {
+    threshold: 0.8, // 80% 이상 보일 때 콜백 실행
+    rootMargin: "0px", // 뷰포트 여백 조정
+  },
+);
+
+// 관찰 시작
+observer.observe(targetElement);
+
+// 관찰 중단 (컴포넌트 언마운트 시 정리)
+observer.unobserve(targetElement);
+observer.disconnect();`,
+  },
+  {
+    id: 'infinity-scroll-api',
+    title: '무한스크롤(라이브러리)',
+    tags: ['React', 'useRef'],
+    description: '라이브러리 활용해 무한 스크롤 간단하게 구현',
+    categories: ['templates'],
+    codes: [
+      {
+        label: '설치',
+        code: `npm install react-intersection-observer`,
+      },
+      {
+        label: 'useInView 훅 코드 예시',
+        code: `import { useInView } from "react-intersection-observer";
+
+function Component() {
+  const { ref, inView } = useInView({
+    threshold: 0.8, // 80% 보일 때 트리거
+    triggerOnce: true, // 한 번만 실행
+  });
+
+  return <div ref={ref}>{inView ? "보임!" : "안보임"}</div>;
+}`,
+      },
+      {
+        label: '[다른 방식] InView 컴포넌트 방식',
+        code: `import { InView } from "react-intersection-observer";
+
+<InView threshold={0.5} triggerOnce>
+  {({ ref, inView }) => <div ref={ref}>{inView ? "보임!" : "안보임"}</div>}
+</InView>;`,
+      },
+    ],
   },
   {
     id: 'form-pattern',
