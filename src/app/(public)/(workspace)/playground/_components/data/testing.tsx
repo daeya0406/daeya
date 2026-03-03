@@ -1,4 +1,3 @@
-import { TestGroundDemo1, TestGroundDemo2, TestGroundDemo3 } from '../examples/testing';
 import type { PlaygroundItem } from '@/types/playground';
 
 const CustomButton = () => {
@@ -9,111 +8,205 @@ export { CustomButton };
 
 export const testingItems: PlaygroundItem[] = [
   {
-    id: 'testing-3',
-    title: '객체 리스트 CRUD 버튼 렌더링',
-    tags: ['React'],
-    description: 'React',
+    id: 'jest-setup',
+    title: 'Jest 설치 및 설정',
+    tags: ['Jest', 'Testing'],
+    description: 'Jest 테스트 환경 설정하기',
     categories: ['testing'],
-    demo: <TestGroundDemo3 />,
-    code: `const initialUsers = [
-  { id: 1, name: 'A', age: 20 },
-  { id: 2, name: 'B', age: 25 },
-  { id: 3, name: 'C', age: 30 },
-];
-
-const [users, setUsers] = useState(initialUsers);
-
-<section>
-  <p>
-    {users.map((u) => (
-      <span key={u.id}>{u.name}</span>
-    ))}
-  </p>
-  <div>
-    <Button onClick={() => setUsers((prev) => [...prev, { id: 4, name: 'D', age: 35 }])}>
-      추가
-    </Button>
-    <Button
-      onClick={() =>
-        setUsers((prev) =>
-          prev.map((user) => (user.id === 1 ? { id: 1, name: 'Z', age: 15 } : user))
-        )
-      }
-    >
-      수정 (A를 Z로)
-    </Button>
-    <Button onClick={() => setUsers((prev) => prev.filter((user) => user.name !== 'B'))}>
-      삭제 (B 제거)
-    </Button>
-    <Button onClick={() => setUsers((prev) => prev.filter((user) => user.age >= 25))}>
-      필터 (나이 25 이상)
-    </Button>
-  </div>
-</section>`,
+    codes: [
+      {
+        label: '설치',
+        code: `npm install --save-dev jest @types/jest`,
+      },
+      {
+        label: 'package.json 설정',
+        code: `{
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch"
+  }
+}`,
+      },
+      {
+        label: 'jest.config.js',
+        code: `module.exports = {
+  testEnvironment: 'node',
+  collectCoverageFrom: ['src/**/*.js'],
+  testMatch: ['**/__tests__/**/*.js', '**/?(*.)+(spec|test).js'],
+};`,
+      },
+    ],
   },
   {
-    id: 'testing-2',
-    title: '객체 리스트 CRUD',
-    tags: ['JS'],
-    description: 'JS',
+    id: 'jest-basic-test',
+    title: '기본 테스트 작성',
+    tags: ['Jest', 'Testing'],
+    description: 'Jest의 기본 문법과 테스트 작성 방법',
     categories: ['testing'],
-    demo: <TestGroundDemo2 />,
-    code: `const users = [
-  { id: 1, name: 'A', age: 20 },
-  { id: 2, name: 'B', age: 25 },
-  { id: 3, name: 'C', age: 30 },
-];
+    codes: [
+      {
+        label: '함수 테스트 예시',
+        code: `function sum(a, b) {
+  return a + b;
+}
 
-// 1. 추가
-const added = [...users, {id: 4, name: 'D', age: 35}];
+describe('sum 함수', () => {
+  test('두 수를 더한 결과를 반환해야 함', () => {
+    expect(sum(1, 2)).toBe(3);
+  });
 
-// 2. 수정
-const updated = users.map((user) => user.id === 1 ? {...user, age: 15} : user);
+  test('음수도 더할 수 있어야 함', () => {
+    expect(sum(-1, -2)).toBe(-3);
+  });
+});`,
+      },
+      {
+        label: '다양한 Matcher 사용',
+        code: `describe('Matcher 예시', () => {
+  test('toBe - 정확한 값 비교', () => {
+    expect(2 + 2).toBe(4);
+  });
 
-// 3. 삭제
-const removed = users.filter((user) => user.id !== 2 );
+  test('toEqual - 객체 비교', () => {
+    const user = { name: 'John', age: 30 };
+    expect(user).toEqual({ name: 'John', age: 30 });
+  });
 
-// 4. 정렬
-const sorted = users.filter((user) => user.age >= 25);`,
+  test('toContain - 배열 포함 확인', () => {
+    expect([1, 2, 3]).toContain(2);
+  });
+
+  test('toBeTruthy / toBeFalsy', () => {
+    expect(true).toBeTruthy();
+    expect(false).toBeFalsy();
+  });
+
+  test('toThrow - 에러 발생 확인', () => {
+    expect(() => {
+      throw new Error('에러!');
+    }).toThrow('에러!');
+  });
+});`,
+      },
+    ],
   },
   {
-    id: 'testing-1',
-    title: '객체 리스트 메서드',
-    tags: ['JS'],
-    description: '연습',
+    id: 'aaa-pattern',
+    title: 'AAA 패턴',
+    tags: ['Jest', 'Testing', 'Best Practice'],
+    description: 'Arrange(준비) → Act(실행) → Assert(검증) 패턴으로 테스트 코드 구조화하기',
     categories: ['testing'],
-    demo: <TestGroundDemo1 />,
-    code: `const users = [
-  { id: 1, name: 'A', age: 20 },
-  { id: 2, name: 'B', age: 25 },
-  { id: 3, name: 'C', age: 30 },
-];
+    codes: [
+      {
+        label: '기본 예제',
+        code: `function add(a, b) {
+  return a + b;
+}
 
-1.	map
-    {users.map((user) => user.name).join(', ')}
+test('두 수를 더한 결과를 반환한다', () => {
+  // Arrange: 테스트에 필요한 값 준비
+  const a = 2;
+  const b = 3;
 
-2.	filter
-    {users
-      .filter((user) => user.age >= 25)
-      .map((user) => user.name)
-      .join(', ')}
-  
-3.	find
-    {users.find((user) => user.age >= 25)?.name}
+  // Act: 테스트 대상 함수 실행
+  const result = add(a, b);
 
-4.	추가
-    {[...users, { id: 4, name: 'D', age: 35 }].map((user) => user.name).join(', ')}
+  // Assert: 결과 검증
+  expect(result).toBe(5);
+});`,
+      },
+    ],
+  },
+  {
+    id: 'jest-async-test',
+    title: 'Async 테스트',
+    tags: ['Jest', 'Testing', 'Async'],
+    description: 'Promise와 async/await 테스트 방법',
+    categories: ['testing'],
+    codes: [
+      {
+        label: 'Promise 테스트',
+        code: `function fetchUser(id) {
+  return Promise.resolve({ id, name: 'John' });
+}
 
-5.	수정
-    {users
-      .map((user) => (user.id === 2 ? { ...user, name: 'Z', age: 40 } : user))
-      .map((user) => user.name)
-      .join(', ')}
-  
-6.	삭제
-      {users
-      .filter((user) => user.id !== 1)
-      .map((user) => user.name)
-      .join(', ')}`,
+describe('fetchUser', () => {
+  test('Promise 반환 테스트', () => {
+    return fetchUser(1).then(user => {
+      expect(user.name).toBe('John');
+    });
+  });
+
+  test('resolves matcher 사용', () => {
+    return expect(fetchUser(1)).resolves.toEqual({
+      id: 1,
+      name: 'John'
+    });
+  });
+});`,
+      },
+      {
+        label: 'async/await 테스트',
+        code: `describe('async/await 테스트', () => {
+  test('async 함수 테스트', async () => {
+    const user = await fetchUser(1);
+    expect(user.name).toBe('John');
+  });
+
+  test('reject 처리', async () => {
+    await expect(fetchUser(-1)).rejects.toThrow();
+  });
+});`,
+      },
+    ],
+  },
+  {
+    id: 'jest-mock-test',
+    title: 'Mock 함수 사용',
+    tags: ['Jest', 'Testing', 'Mock'],
+    description: '함수 호출 추적 및 Mock 데이터 사용',
+    categories: ['testing'],
+    codes: [
+      {
+        label: 'Mock 함수 기본',
+        code: `describe('Mock 함수', () => {
+  test('mock 함수 호출 확인', () => {
+    const mockFn = jest.fn();
+    
+    mockFn('hello');
+    mockFn('world');
+
+    expect(mockFn).toHaveBeenCalled();
+    expect(mockFn).toHaveBeenCalledTimes(2);
+    expect(mockFn).toHaveBeenCalledWith('hello');
+  });
+
+  test('mock 함수 반환값 설정', () => {
+    const mockFn = jest.fn().mockReturnValue(42);
+    
+    expect(mockFn()).toBe(42);
+  });
+});`,
+      },
+      {
+        label: 'Module Mock',
+        code: `// api.js
+export function fetchData() {
+  // 실제 API 호출
+}
+
+// api.test.js
+jest.mock('./api');
+import { fetchData } from './api';
+
+describe('API Mock', () => {
+  test('mock된 API 테스트', () => {
+    fetchData.mockResolvedValue({ data: 'mocked' });
+    
+    return expect(fetchData()).resolves.toEqual({ data: 'mocked' });
+  });
+});`,
+      },
+    ],
   },
 ];
