@@ -105,7 +105,7 @@ function PlaygroundPageContent() {
   return (
     <TabbedWorkspaceLayout
       title="Playground"
-      description="항목을 선택하면 데모/코드 흐름을 볼 수 있습니다."
+      description="실무에서 쓰는 UI·UX·폼 패턴을 브라우저에서 바로 돌려보는 공간입니다"
       itemCount={filteredItems.length}
       tabs={tabs}
       activeTab={activeTab}

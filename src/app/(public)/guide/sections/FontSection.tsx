@@ -1,6 +1,7 @@
 'use client';
 
 import { toast } from 'sonner';
+import { GuideSectionIntro } from '../GuideSectionIntro';
 
 type Scale = {
   label: string;
@@ -168,26 +169,25 @@ export default function FontSection() {
 
   return (
     <div className="space-y-6">
-      <div className="line-bottom space-y-1">
-        <h3 className="text-xl font-semibold text-primary">Font Tokens</h3>
-        <span className="text-xs tracking-[0.01em] text-muted-foreground">
-          Pretendard 스케일(토큰 기준). 카드 클릭 시 컴포넌트 스니펫이 복사됩니다.
-        </span>
-      </div>
+      <GuideSectionIntro
+        title="Font"
+        description="Pretendard 스케일입니다. 카드를 클릭하면 스니펫이 복사됩니다."
+      />
 
       <div className="space-y-4">
-        <p className="text-md leading-[17px] font-bold text-foreground">Headings</p>
+        <h3 className="text-foreground text-sm font-semibold">Headings</h3>
         <div className="grid gap-3 sm:grid-cols-2">
           {headingTokens.map((t) => (
             <button
               key={t.label}
+              type="button"
               onClick={() => copy(t.snippet, t.label)}
-              className="border-border bg-depth-1 group flex flex-col items-start rounded-lg border p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+              className="border-border bg-depth-2/50 hover:bg-depth-2 group flex flex-col items-start rounded-xl border p-4 text-left transition"
             >
               <div className="text-foreground">
                 <span className={t.className}>Pretendard</span>
               </div>
-              <div className="text-muted-foreground group-hover:text-primary text-xs">
+              <div className="text-muted-foreground group-hover:text-primary mt-2 text-xs">
                 {t.label} · {t.size}
               </div>
             </button>
@@ -196,18 +196,19 @@ export default function FontSection() {
       </div>
 
       <div className="space-y-4">
-        <p className="text-md leading-[17px] font-bold text-foreground">Scale & Body</p>
+        <h3 className="text-foreground text-sm font-semibold">Scale & Body</h3>
         <div className="grid gap-3 sm:grid-cols-2">
           {tokens.map((t) => (
             <button
               key={t.label}
+              type="button"
               onClick={() => copy(t.snippet, t.label)}
-              className="border-border bg-depth-1 group flex flex-col items-start rounded-lg border p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+              className="border-border bg-depth-2/50 hover:bg-depth-2 group flex flex-col items-start rounded-xl border p-4 text-left transition"
             >
               <div className="text-foreground">
                 <span className={t.className}>Pretendard</span>
               </div>
-              <div className="text-muted-foreground group-hover:text-primary text-xs">
+              <div className="text-muted-foreground group-hover:text-primary mt-2 text-xs">
                 {t.label} · {t.size}
               </div>
             </button>

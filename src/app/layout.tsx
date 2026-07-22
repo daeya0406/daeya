@@ -9,8 +9,11 @@ import { LayoutModeProvider } from '@/shared/providers/LayoutModeProvider';
 import { ReactQueryProvider } from '@/shared/providers/ReactQueryProvider';
 import { ThemeProvider, type Theme } from '@/shared/providers/ThemeProvider';
 export const metadata = {
-  title: 'Daeya Portfolio',
-  description: '프론트엔드 개발자 김정대 포트폴리오',
+  title: {
+    default: 'Daeya',
+    template: '%s · Daeya',
+  },
+  description: '퍼블리싱 경험 기반 프론트엔드 개발자 김정대 포트폴리오',
   icons: {
     icon: '/daeya-favicon.ico',
   },

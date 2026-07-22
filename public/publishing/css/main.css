@@ -1,0 +1,235 @@
+/* Main Section */
+main > section{padding:80px 0;}
+.main-section1{background-color:#F8F8F8;}
+.main-section2{background-color:#EFF2F4;}
+.main-section3{background-color:#FFFFFF;}
+.main-section4{background-color:#EFF2F4;}
+.section-title-main{display:flex; flex-direction:column; gap:16px; margin-bottom:16px;}
+.section-title-main > h3{text-align:center; font-size:18px; font-weight:600; color:#187ED1;}
+.section-title-main > h2{display:flex; justify-content:center; align-items:center; flex-wrap:wrap; text-align:center; gap:16px;}
+.section-title-main > h2 > img{display:inline;}
+
+.section-title{display:flex; flex-direction:column; justify-content:center; align-items:center; gap:8px; margin-bottom:24px;}
+.p-txt{text-align:center; font-size:15px;}
+
+.h2-wrap{text-align:center;}
+h2{display:inline; font-family:'SBAggro'; font-weight:500; font-size:42px;}
+.h2-wrap::after{content:''; display:inline-block; width:10px; height:10px; transform:translateY(10px); margin-left:8px; ; background-color:#187ED1; border-radius:2px;}
+
+.btn-main-wrap{display:flex; justify-content:center; gap:6px;}
+.btn-main-blue{font-size:17px; font-weight:500; background-color:#187ED1; color:#fff; padding:8px 16px; border-radius:6px;}
+.btn-main-gray{font-size:17px; font-weight:500; background-color:#5C6C79; color:#fff; padding:8px 16px; border-radius:6px;}
+
+/* main-banner */
+.main-banner {position:relative;}
+.main-banner ul {display: flex; align-items: center; margin: 0.7rem 0;}
+.main-banner ul li {width: 240px; height:100px; background-color: #fff; border-radius: 8px; margin:0 0.4rem; overflow: hidden; text-align: center; float: left; display: flex; align-items: center; justify-content: center;}
+.main-banner ul li:hover {box-shadow: 0px 2px 14.7px 0.3px rgba(0, 0, 0, 0.08); border: 0;}
+.main-banner ul li > img {max-width:200px; max-height:40px;}
+.loop-banner {transition: animation 0.4s ease-in-out; display: flex; overflow: hidden;}
+.loop-banner ul {float: left; display: flex;}
+.loop-banner ul:first-child {animation: jsLoopSlide 60s -30s linear infinite;}
+.loop-banner ul:last-child {animation: jsLoopSlide2 60s linear infinite;}
+.loop-banner.bottom-banner ul:first-child {animation: jsLoopSlide3 60s -30s linear infinite;}
+.loop-banner.bottom-banner ul:last-child {animation: jsLoopSlide4 60s linear infinite;padding-left: 1rem;}
+/* .loop-banner:hover ul, .loop-banner.bottom-banner:hover ul {animation-play-state: paused;} */
+
+@keyframes jsLoopSlide {
+   0% {
+       transform: translateX(100%);
+   }
+
+   100% {
+       transform: translateX(-100%);
+   }
+}
+
+@keyframes jsLoopSlide2 {
+   0% {
+       transform: translateX(0);
+   }
+
+   100% {
+       transform: translateX(-200%);
+   }
+}
+
+@keyframes jsLoopSlide3 {
+   0% {
+       transform: translateX(-100%);
+   }
+
+   100% {
+       transform: translateX(100%);
+   }
+}
+
+@keyframes jsLoopSlide4 {
+   0% {
+       transform: translateX(-200%);
+   }
+
+   100% {
+       transform: translateX(0);
+   }
+}
+
+/* Working Mind */
+.mind-box{width:100%; background-color:#F8FBFD; padding:0 16px; border-radius:20px;}
+.mind-box ul{display:flex;}
+.mind-box ul li{flex:1 1 0; min-width:0; width:33.333%; display:flex; flex-direction:column; align-items:center; gap:24px; padding:40px 16px; box-sizing:border-box;}
+.mind-box ul li i{font-size:42px; color:#187ED1;}
+.mind-box ul li > svg{width:42px; height:42px; color:#187ED1; flex-shrink:0;}
+.mind-box-txt{display:flex; flex-direction:column; align-items:center; gap:8px; text-align:center; width:100%;}
+.mind-box-txt h3{display:flex; flex-wrap:wrap; justify-content:center; gap:8px; font-family:'SBAggro'; font-weight:500; font-size:24px;}
+.mind-box-txt h3 span{color:#187ED1; font-weight:700; font-size:22px;}
+.mind-box-txt p{width:100%; word-break:keep-all;}
+
+/* project */
+.slide1-wrap{position:relative; display:flex; align-items:center;}
+.slide1{height:100%; width:calc(100% - 100px);}
+.slide1 .swiper-wrapper{height:100%;}
+.slide1 .swiper-wrapper .swiper-slide{height:100%; text-align:center; display:flex; justify-content:center; align-items:center;}
+.slide1 .swiper-wrapper .swiper-slide a{display:block;}
+.slide1 .swiper-wrapper .swiper-slide a h5{display:flex; justify-content:center; align-items:center; flex-wrap:wrap; font-size:15px; font-weight:400;}
+.slide1 .swiper-wrapper .swiper-slide a h5 span{font-weight:500; margin-right:2px;}
+.slide1 .project-thumb{width:min(520px, 100%); margin:0 auto 12px; border-radius:12px; overflow:hidden; background:#e8eaed; aspect-ratio:16/10;}
+.slide1 .project-thumb img{width:100%; height:100%; object-fit:cover; display:block;}
+.slide1 .slide-btn{width:calc(100% + 40px);}
+.slide1-wrap .slide-nav,
+.slide2-wrap .slide-nav{
+    position:relative;
+    width:48px;
+    height:48px;
+    margin:0;
+    padding:0;
+    border:0;
+    background:transparent;
+    color:#454A50;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+}
+.slide1-wrap .slide-nav svg,
+.slide2-wrap .slide-nav svg{
+    display:block;
+    width:28px;
+    height:28px;
+}
+.slide1-wrap .slide-nav.is-disabled,
+.slide2-wrap .slide-nav.is-disabled{opacity:0.35; cursor:default; pointer-events:none;}
+.slide-expand .slide-nav{display:none !important;}
+
+/* 서브 슬라이드 */
+.slide-wrap{position:relative;}
+.slide-wrap .swiper{max-width:calc(100% - 100px); margin:0 auto; overflow:hidden;}
+
+/* 슬라이드 접고펼치기 */
+.slide-expand .swiper{max-width:100% !important;}
+.slide-expand .swiper-wrapper{display:flex; justify-content:center; flex-wrap:wrap; transform:none !important; gap:24px;}
+.slide-expand .swiper-slide{width:calc(33.33% - 16px) !important; margin-right:0 !important;}
+.slide-expand .library-img{width:120px; height:180px; margin-bottom:10px;}
+.btn-slide-expand{white-space:nowrap; display:flex; justify-content:center; align-items:center; width:106px; font-size:17px; line-height:32px; padding:0 12px; border:1px solid #187ED1; transition:all 0.3s;}
+.btn-slide-expand:before{font-size:19px; margin-right:6px;}
+/* .btn-slide-expand:before{content:'\f07e'; font-family:'Font Awesome 6 Free'; font-weight:900;} */
+.btn-slide-expand:after{content:'펼쳐서 보기';}
+.btn-slide-expand.on{background-color:#e0ecff; color:#187ED1; border:1px solid #187ED1;}
+/* .btn-slide-expand.on:before{content:'\f07e'; font-family:'Font Awesome 6 Free'; font-weight:900;} */
+.btn-slide-expand.on:after{content:'다시 접기';}
+
+/* 목업 */
+.mockup-pc{position:relative;}
+.mockup-pc > img{position:relative; max-width:100%;}
+.mockup-pc::after{content:''; position:absolute; left:50.5%; transform:translateX(-50%); top:7%; width:78%; height:79%; background-color:#161616; background-size:cover;}
+
+/* 목업 내용 */
+.mockup-pc:hover::after{animation:screenmove 8s linear infinite;}
+.mockup-pc1::after{background-image:url(../img/page/1.png);}
+.mockup-pc2::after{background-image:url(../img/page/2.png);}
+.mockup-pc3::after{background-image:url(../img/page/3.png);}
+.mockup-pc4::after{background-image:url(../img/page/4.png);}
+.mockup-pc5::after{background-image:url(../img/page/5.png);}
+.mockup-pc6::after{background-image:url(../img/page/6.jpg);}
+.mockup-pc7::after{background-image:url(../img/page/7.png);}
+.mockup-pc8::after{background-image:url(../img/page/codeit/one-bite.png);}
+.mockup-pc9::after{background-image:url(../img/page/codeit/the-julge.png);}
+.mockup-pc10::after{background-image:url(../img/page/codeit/rolling-paper.png);}
+.mockup-pc11::after{background-image:url(../img/page/ajd/interior.png);}
+@keyframes screenmove{
+    0%{
+        background-position:top;
+    }
+    50%{
+        background-position:bottom;
+    }
+    100%{
+        background-position:top;
+    }
+}
+
+/* Career 슬라이드 */
+.career-box{display:flex; gap:8px;}
+.career-box-year{width:120px; background-color:#187ED1; padding:40px 16px; border-radius:8px;}
+.career-box-year h5{color:#fff; font-size:20px;}
+.career-box-content{width:calc(100% - 120px); background-color:#fff; padding:40px 40px; border-radius:8px;}
+.career-box-content ul{display:flex; flex-direction:column; gap:16px;}
+.career-box-content li{display:flex; gap:8px;}
+.career-box-content li h6{color:#187ED1; font-size:17px; width:160px; text-align:left; font-weight:600;}
+.career-box-content li p{display:flex; flex-wrap:wrap; text-align:left; color:#333; font-size:17px;}
+.career-box-content li p span{margin-right:4px; font-weight:500;}
+
+.slide2-area{position:relative; display:flex; flex-direction:column; align-items:center; gap:24px;}
+.slide2-wrap{position:relative; display:flex; justify-content:center; align-items:center; gap:16px; width:100%;}
+.slide2{height:100%; max-width:800px; width:calc(100% - 100px);}
+.slide2.swiper{margin-left:0; margin-right:0; overflow:hidden;}
+.slide2 .swiper-wrapper{height:100%;}
+.slide2 .swiper-wrapper .swiper-slide{height:100%; text-align:center; display:flex; justify-content:center; align-items:center;}
+.slide2 .slide-btn{width:calc(100% + 40px);}
+
+/* 카드 밖 아래 pagination — Swiper가 swiper-pagination 클래스를 붙여도 absolute 안 먹게 */
+.slide2-area > .career-pagination{
+    position:static !important;
+    left:auto !important;
+    right:auto !important;
+    bottom:auto !important;
+    top:auto !important;
+    width:auto !important;
+    display:flex !important;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    margin-top:4px;
+}
+.slide2-area > .career-pagination .swiper-pagination-bullet{
+    width:8px;
+    height:8px;
+    margin:0 !important;
+    background:#c5c9ce;
+    opacity:1;
+    border-radius:999px;
+    transition:width 0.25s ease, background-color 0.25s ease;
+}
+.slide2-area > .career-pagination .swiper-pagination-bullet-active{
+    width:28px;
+    background:#187ED1;
+}
+
+/* Responsive */
+@media screen and (max-width: 900px) {
+    .mind-box{padding:16px 0;}
+    .mind-box ul{flex-direction: column;}
+    .mind-box ul li{width:100%; padding:20px 16px;}
+    .career-box{flex-direction:column; width:100%;}
+    .career-box-year{width:100%; padding:16px;}
+    .career-box-content{padding: 24px;}
+    .career-box-content{width:100%;}
+    .career-box-content li{flex-direction:column;}
+    .career-box-content li h6{width:100%;}
+  }
+
+  @media screen and (max-width: 600px) {
+    .slide-nav{display:none !important;}
+    .swiper{width:100% !important;}
+  }

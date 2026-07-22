@@ -1,6 +1,7 @@
 'use client';
 
 import ColorChip from '@/shared/guide/ColorChip';
+import { GuideSectionIntro } from '../GuideSectionIntro';
 
 type ColorToken = { name: string; value: string };
 
@@ -49,17 +50,15 @@ const palette: Record<string, ColorToken[]> = {
 export default function ColorSection() {
   return (
     <div className="space-y-8">
-      <div className="line-bottom space-y-1">
-        <h3 className="text-xl font-semibold text-primary">Color Tokens</h3>
-        <span className="text-xs tracking-[0.01em] text-muted-foreground">
-          globals.css 토큰 기반 팔레트. 칩을 클릭하면 text-/bg- 클래스가 복사됩니다.
-        </span>
-      </div>
+      <GuideSectionIntro
+        title="Color"
+        description="globals.css 토큰 기반 팔레트입니다. 칩을 클릭하면 text-/bg- 클래스가 복사됩니다."
+      />
 
       <div className="flex flex-col gap-6">
         {Object.entries(palette).map(([group, tokens]) => (
           <div key={group} className="space-y-2">
-            <span className="text-md leading-[17px] text-foreground capitalize">{group}</span>
+            <h3 className="text-foreground text-sm font-semibold capitalize">{group}</h3>
             <div className="flex flex-wrap gap-3">
               {tokens.map((t) => (
                 <ColorChip key={t.name} name={t.name} step="default" hex={t.value} />

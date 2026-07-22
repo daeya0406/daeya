@@ -4,9 +4,11 @@ export const PROFILE = {
   role: 'Frontend Developer',
   email: 'daeya0406@gmail.com',
   links: {
-    github: 'https://github.com/',
+    github: 'https://github.com/daeya0406',
     resume: '/resume.pdf',
-    publishingPortfolio: 'http://daeya.kro.kr/',
+    publishingPortfolio: '/publishing/index.html',
+    pdChallenge: 'https://daeya0406.github.io/2026-toss-pd-challenge/index.html',
+    playgroundOrg: 'https://github.com/orgs/daeya-playground/',
   },
   career: {
     total: {
@@ -19,7 +21,7 @@ export const PROFILE = {
       id: 'projects',
       label: '프론트엔드 프로젝트',
       description: '프론트엔드',
-      value: '신입',
+      value: '전환 중',
     },
     publishing: { id: 'study', label: '퍼블리싱 프로젝트', description: '퍼블리싱', value: '50+' },
   },

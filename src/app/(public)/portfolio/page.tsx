@@ -4,18 +4,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Icon } from '@/shared/ui/Icons';
 import { Badge } from '@/shared/ui/Badge';
-import { Button } from '@/shared/ui/Button';
-import { FadeUp } from '@/shared/motion/FadeUp';
 import { PROJECTS } from '@/entities/project/model/projects';
-import { PORTFOLIO_CTA, PORTFOLIO_FOCUS_POINTS } from '@/entities/portfolio/model/portfolio';
+import { PORTFOLIO_INTRO } from '@/entities/portfolio/model/portfolio';
 import { PROFILE } from '@/entities/profile/model/profile';
 
-const cardClassName = 'rounded-3xl bg-depth-1 shadow-sm ring-1 ring-border';
+const cardClassName = 'rounded-2xl bg-depth-1 shadow-sm ring-1 ring-border';
 
 function ProjectCard({ project }: { project: (typeof PROJECTS)[0] }) {
   return (
-    <article className={['h-full p-6 transition', cardClassName].join(' ')}>
-      <div className="bg-depth-2 relative mb-6 aspect-video overflow-hidden rounded-2xl">
+    <article className={['flex h-full flex-col overflow-hidden', cardClassName].join(' ')}>
+      <div className="bg-depth-2 relative aspect-[16/10] overflow-hidden">
         {project.image ? (
           <Image
             src={project.image}
@@ -27,77 +25,68 @@ function ProjectCard({ project }: { project: (typeof PROJECTS)[0] }) {
         ) : (
           <div className="text-muted-foreground absolute inset-0 flex flex-col items-center justify-center gap-2 text-sm">
             <Icon name="imageOff" size={32} className="opacity-70" />
-            <span>No image</span>
+            <span>이미지 없음</span>
           </div>
         )}
       </div>
 
-      <div className="space-y-4">
+      <div className="flex flex-1 flex-col gap-4 p-5 lg:p-6">
         <div>
-          <span className="text-primary text-xs font-semibold uppercase tracking-[0.08em]">
-            Project
-          </span>
-          <h3 className="text-foreground text-xl font-semibold">{project.title}</h3>
-          <p className="text-md text-muted-foreground mt-3 font-normal">{project.summary}</p>
+          <div className="text-muted-foreground mb-1 flex flex-wrap gap-x-3 gap-y-0.5 text-xs">
+            {project.role && <span>{project.role}</span>}
+            {project.period && <span>{project.period}</span>}
+          </div>
+          <h3 className="text-foreground text-xl font-bold">{project.title}</h3>
+          <p className="text-muted-foreground mt-2 text-sm leading-relaxed">{project.summary}</p>
         </div>
 
-        <div className="bg-depth-2 grid gap-3 rounded-2xl p-4 text-sm">
-          <div className="flex items-center gap-2">
-            <span className="text-muted-foreground text-xs">역할</span>
-            <span className="text-md text-foreground font-bold">{project.role}</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-muted-foreground text-xs">기간</span>
-            <span className="text-md text-foreground font-bold">{project.period}</span>
-          </div>
-        </div>
+        {project.highlights && project.highlights.length > 0 && (
+          <ul className="space-y-1.5">
+            {project.highlights.slice(0, 3).map((highlight) => (
+              <li key={highlight} className="text-muted-foreground flex gap-2 text-sm">
+                <span className="bg-primary mt-2 h-1 w-1 shrink-0 rounded-full" />
+                <span className="text-foreground/90 leading-relaxed">{highlight}</span>
+              </li>
+            ))}
+          </ul>
+        )}
 
-        <div className="flex flex-wrap gap-2">
-          {project.tags.map((tag) => (
-            <Badge key={tag} variant="subtle" size="md">
+        <div className="flex flex-wrap gap-1.5">
+          {project.tags.slice(0, 5).map((tag) => (
+            <Badge key={tag} variant="subtle" size="sm">
               {tag}
             </Badge>
           ))}
         </div>
 
-        <div className="space-y-2">
-          {project.highlights?.map((highlight) => (
-            <div key={highlight} className="text-muted-foreground flex items-center gap-2 text-sm">
-              <span className="bg-primary h-1.5 w-1.5 flex-shrink-0 rounded-full" />
-              <span>{highlight}</span>
-            </div>
-          ))}
-        </div>
-
-        <div className="flex flex-wrap gap-2">
-          {project.metrics.map((metric) => (
-            <Badge key={`${metric.label}-${metric.value}`} variant="ghost" size="md">
-              {metric.label} : {metric.value}
-            </Badge>
-          ))}
-        </div>
-
-        <div className="flex flex-wrap gap-3 pt-2">
+        <div className="mt-auto flex flex-wrap gap-2 pt-1">
           {project.links.caseStudy && (
-            <Button asChild size="sm" className="rounded-xl">
-              <Link href={project.links.caseStudy}>
-                상세 보기 <Icon name="arrowUpRight" size={14} />
-              </Link>
-            </Button>
+            <Link
+              href={project.links.caseStudy}
+              className="bg-primary hover:bg-primary/90 text-primary-foreground inline-flex items-center gap-1.5 rounded-xl px-3.5 py-2 text-sm font-semibold transition"
+            >
+              상세 보기 <Icon name="arrowUpRight" size={14} />
+            </Link>
           )}
           {project.links.github && (
-            <Button asChild variant="outline" size="sm" className="rounded-xl">
-              <Link href={project.links.github} target="_blank">
-                <Icon name="github" size={14} /> GitHub
-              </Link>
-            </Button>
+            <Link
+              href={project.links.github}
+              target="_blank"
+              rel="noreferrer"
+              className="text-foreground hover:bg-muted border-border inline-flex items-center gap-1.5 rounded-xl border px-3.5 py-2 text-sm font-semibold transition"
+            >
+              <Icon name="github" size={14} /> GitHub
+            </Link>
           )}
           {project.links.live && (
-            <Button asChild variant="outline" size="sm" className="rounded-xl">
-              <Link href={project.links.live} target="_blank">
-                <Icon name="externalLink" size={14} /> Live
-              </Link>
-            </Button>
+            <Link
+              href={project.links.live}
+              target="_blank"
+              rel="noreferrer"
+              className="text-foreground hover:bg-muted border-border inline-flex items-center gap-1.5 rounded-xl border px-3.5 py-2 text-sm font-semibold transition"
+            >
+              <Icon name="externalLink" size={14} /> Live
+            </Link>
           )}
         </div>
       </div>
@@ -107,106 +96,50 @@ function ProjectCard({ project }: { project: (typeof PROJECTS)[0] }) {
 
 export default function PortfolioPage() {
   return (
-    <div className="space-y-12">
-      <FadeUp>
-        <section className={['p-8 lg:p-12', cardClassName].join(' ')}>
-          <div className="max-w-3xl">
-            <span className="text-primary text-xs font-semibold uppercase tracking-[0.08em]">
-              Portfolio
-            </span>
-            <h2 className="text-foreground mt-3 text-2xl font-bold sm:text-3xl lg:text-4xl">
-              프로젝트 포트폴리오
-            </h2>
-            <p className="text-muted-foreground mt-4 text-lg font-normal">
-              서비스 맥락과 사용자 흐름을 이해한 뒤, 설계-구현-검증까지 책임지는 방식으로 일합니다.
-              아래 프로젝트는 성과, 역할, 기술 선택 이유를 중심으로 정리했습니다.
-            </p>
+    <div className="mx-auto max-w-6xl space-y-10">
+      <header className="max-w-2xl">
+        <h1 className="text-foreground text-3xl font-bold">{PORTFOLIO_INTRO.title}</h1>
+        <p className="text-muted-foreground mt-3 leading-relaxed">{PORTFOLIO_INTRO.description}</p>
+      </header>
 
-            <div className="mt-6 flex flex-wrap gap-2">
-              <Badge variant="outline" size="lg">
-                성능 최적화
-              </Badge>
-              <Badge variant="subtle" size="lg">
-                디자인 시스템
-              </Badge>
-              <Badge variant="subtle" size="lg">
-                협업 경험
-              </Badge>
-              <Badge variant="subtle" size="lg">
-                코드 품질
-              </Badge>
-            </div>
-          </div>
-        </section>
-      </FadeUp>
+      <section className="grid gap-6 md:grid-cols-2">
+        {PROJECTS.map((project) => (
+          <ProjectCard key={project.id} project={project} />
+        ))}
+      </section>
 
-      <section className="space-y-6">
-        <FadeUp delay={0.1}>
+      <section className={['px-6 py-8 lg:px-8', cardClassName].join(' ')}>
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h2 className="text-foreground text-2xl font-bold">주요 프로젝트</h2>
-            <p className="text-md text-muted-foreground mt-2 font-normal">
-              실제 성과와 기술적 판단을 중심으로 정리했습니다
+            <h2 className="text-foreground text-lg font-bold">퍼블리싱 · 소개</h2>
+            <p className="text-muted-foreground mt-1 text-sm">
+              SI·퍼블리싱 작업물은 별도 포트폴리오에서, 경력·연락은 About에서 볼 수 있습니다
             </p>
           </div>
-        </FadeUp>
-        <div className="grid gap-6 lg:grid-cols-2">
-          {PROJECTS.map((project, idx) => (
-            <FadeUp key={project.id} delay={0.15 + idx * 0.05}>
-              <ProjectCard project={project} />
-            </FadeUp>
-          ))}
+          <div className="flex flex-wrap gap-2">
+            <Link
+              href={PROFILE.links.publishingPortfolio}
+              target="_blank"
+              rel="noreferrer"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition"
+            >
+              퍼블리싱 포트폴리오 <Icon name="externalLink" size={16} />
+            </Link>
+            <Link
+              href={PROFILE.links.resume}
+              className="text-foreground hover:bg-muted border-border inline-flex items-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-semibold transition"
+            >
+              <Icon name="fileText" size={16} /> 이력서
+            </Link>
+            <Link
+              href="/about"
+              className="text-foreground hover:bg-muted border-border inline-flex items-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-semibold transition"
+            >
+              About <Icon name="arrowUpRight" size={16} />
+            </Link>
+          </div>
         </div>
       </section>
-
-      <section className="grid gap-6">
-        <FadeUp delay={0.2}>
-          <div className={['p-8', cardClassName].join(' ')}>
-            <h3 className="text-foreground text-xl font-semibold">프로젝트에서의 강점</h3>
-            <div className="mt-6 space-y-4">
-              {PORTFOLIO_FOCUS_POINTS.map((point) => (
-                <div
-                  key={point.title}
-                  className="bg-depth-2 text-primary flex items-center gap-2 rounded-2xl p-4"
-                >
-                  <span className="text-md text-foreground font-bold leading-[17px]">
-                    {point.title}
-                  </span>
-                  <span className="text-muted-foreground text-xs tracking-[0.01em]">
-                    {point.description}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </FadeUp>
-      </section>
-
-      <FadeUp delay={0.3}>
-        <section className={['p-8 lg:p-12', cardClassName].join(' ')}>
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-            <div>
-              <h3 className="text-foreground text-xl font-semibold">{PORTFOLIO_CTA.title}</h3>
-              <p className="text-md text-muted-foreground mt-2 font-normal">
-                {PORTFOLIO_CTA.description}
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href={PROFILE.links.resume}
-                className="bg-primary hover:bg-primary/90 text-primary-foreground inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold transition"
-              >
-                <Icon name="fileText" /> 이력서
-              </Link>
-              <Link
-                href="/about"
-                className="text-foreground hover:bg-muted inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold transition"
-              >
-                소개 <Icon name="arrowUpRight" />
-              </Link>
-            </div>
-          </div>
-        </section>
-      </FadeUp>
     </div>
   );
 }

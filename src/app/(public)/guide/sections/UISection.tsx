@@ -45,6 +45,7 @@ import {
   TableEmpty,
 } from '@/shared/ui/Table';
 import { Badge } from '@/shared/ui/Badge';
+import { GuideSectionIntro } from '../GuideSectionIntro';
 
 const ICON_LIST: IconName[] = [
   'sun',
@@ -64,12 +65,10 @@ export default function UISection() {
 
   return (
     <>
-      <div className="line-bottom mb-8 space-y-2">
-        <h3 className="text-xl font-semibold text-primary">UI Components</h3>
-        <span className="text-xs tracking-[0.01em] block">
-          프로젝트에서 UI 컴포넌트입니다.
-        </span>
-      </div>
+      <GuideSectionIntro
+        title="UI"
+        description="이 포트폴리오에서 쓰는 공통 UI 컴포넌트입니다."
+      />
 
       <div className="flex flex-col gap-10">
         {/* Button */}

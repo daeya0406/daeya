@@ -2,11 +2,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Icon } from '@/shared/ui/Icons';
-import { FadeUp } from '@/shared/motion/FadeUp';
 import { Badge } from '@/shared/ui/Badge';
 import { PROJECTS } from '@/entities/project/model/projects';
 
-const cardClassName = 'rounded-3xl bg-depth-1 shadow-sm ring-1 ring-border';
+const cardClassName = 'rounded-2xl bg-depth-1 shadow-sm ring-1 ring-border';
+
 const CASE_STUDY_ALIASES: Record<string, string> = {
   'global-nomad': 'activity-bite',
 };
@@ -37,6 +37,19 @@ export function generateStaticParams() {
   return [...base, { slug: 'global-nomad' }];
 }
 
+function BulletList({ items }: { items: string[] }) {
+  return (
+    <ul className="space-y-2">
+      {items.map((item) => (
+        <li key={item} className="flex gap-2 text-sm">
+          <span className="bg-primary mt-2 h-1 w-1 shrink-0 rounded-full" />
+          <span className="text-muted-foreground leading-relaxed">{item}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export default async function PortfolioCaseStudyPage({
   params,
 }: {
@@ -54,243 +67,160 @@ export default async function PortfolioCaseStudyPage({
     project.metrics.map((metric) => ({ label: metric.label, value: metric.value }));
 
   return (
-    <div className="mx-auto max-w-5xl space-y-16">
-      <FadeUp>
-        <div className="space-y-6">
-          <Link
-            href="/portfolio"
-            className="text-muted-foreground hover:text-primary inline-flex items-center gap-2 text-sm font-semibold transition"
-          >
-            <Icon name="arrowLeft" /> 포트폴리오
-          </Link>
+    <div className="mx-auto max-w-3xl space-y-10">
+      <Link
+        href="/portfolio"
+        className="text-muted-foreground hover:text-foreground inline-flex items-center gap-2 text-sm font-semibold transition"
+      >
+        <Icon name="arrowLeft" size={16} /> Portfolio
+      </Link>
 
-          <div className={['overflow-hidden p-0', cardClassName].join(' ')}>
-            <div className="bg-depth-2 relative aspect-[2/1] w-full overflow-hidden">
-              {project.image ? (
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  sizes="(max-width: 1280px) 100vw, 1280px"
-                  className="object-cover"
-                  priority
-                />
-              ) : (
-                <div className="text-muted-foreground absolute inset-0 flex flex-col items-center justify-center gap-3">
-                  <Icon name="imageOff" size={48} className="opacity-50" />
-                  <span className="text-sm">프로젝트 대표 이미지 영역</span>
-                </div>
-              )}
+      <header className={['overflow-hidden', cardClassName].join(' ')}>
+        <div className="bg-depth-2 relative aspect-[2/1] w-full overflow-hidden">
+          {project.image ? (
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              sizes="(max-width: 768px) 100vw, 768px"
+              className="object-cover"
+              priority
+            />
+          ) : (
+            <div className="text-muted-foreground absolute inset-0 flex flex-col items-center justify-center gap-2">
+              <Icon name="imageOff" size={40} className="opacity-50" />
+              <span className="text-sm">이미지 없음</span>
             </div>
+          )}
+        </div>
 
-            <div className="p-8 lg:p-12">
-              <div className="space-y-6">
-                <div>
-                  <span className="text-primary text-xs font-semibold uppercase tracking-[0.08em]">
-                    Case Study
-                  </span>
-                  <h2 className="text-foreground mt-2 text-2xl font-bold sm:text-3xl lg:text-4xl">
-                    {project.title}
-                  </h2>
-                  <p className="text-muted-foreground mt-4 text-lg font-normal leading-relaxed">
-                    {caseStudy.overview || project.summary}
-                  </p>
-                </div>
-
-                <div className="flex flex-wrap gap-6">
-                  {project.role && (
-                    <div className="flex items-center gap-1">
-                      <Icon name="code2" size={20} className="text-primary" />
-                      <div className="flex items-center gap-2">
-                        <span className="text-muted-foreground text-xs tracking-[0.01em]">
-                          Role
-                        </span>
-                        <span className="text-md text-foreground font-bold leading-[17px]">
-                          {project.role}
-                        </span>
-                      </div>
-                    </div>
-                  )}
-                  {project.period && (
-                    <div className="flex items-center gap-1">
-                      <Icon name="calendar" size={20} className="text-primary" />
-                      <div className="flex items-center gap-2">
-                        <span className="text-muted-foreground text-xs tracking-[0.01em]">
-                          Period
-                        </span>
-                        <span className="text-md text-foreground font-bold leading-[17px]">
-                          {project.period}
-                        </span>
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <Badge key={tag} variant="subtle" size="lg">
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-
-                <div className="flex flex-wrap gap-3 pt-4">
-                  {project.links.github && (
-                    <Link
-                      href={project.links.github}
-                      target="_blank"
-                      className="bg-depth-2 hover:bg-depth-3 text-foreground inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition"
-                    >
-                      <Icon name="github" /> GitHub
-                    </Link>
-                  )}
-                  {project.links.live && (
-                    <Link
-                      href={project.links.live}
-                      target="_blank"
-                      className="bg-primary hover:bg-primary/90 text-primary-foreground inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition"
-                    >
-                      <Icon name="externalLink" /> Live Demo
-                    </Link>
-                  )}
-                </div>
-              </div>
+        <div className="space-y-5 p-6 lg:p-8">
+          <div>
+            <div className="text-muted-foreground mb-2 flex flex-wrap gap-x-3 gap-y-1 text-sm">
+              {project.role && <span>{project.role}</span>}
+              {project.period && <span>{project.period}</span>}
             </div>
+            <h1 className="text-foreground text-3xl font-bold">{project.title}</h1>
+            <p className="text-muted-foreground mt-3 leading-relaxed">
+              {caseStudy.overview || project.summary}
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-1.5">
+            {project.tags.map((tag) => (
+              <Badge key={tag} variant="subtle" size="sm">
+                {tag}
+              </Badge>
+            ))}
+          </div>
+
+          <div className="flex flex-wrap gap-2">
+            {project.links.github && (
+              <Link
+                href={project.links.github}
+                target="_blank"
+                rel="noreferrer"
+                className="text-foreground hover:bg-muted border-border inline-flex items-center gap-2 rounded-xl border px-4 py-2 text-sm font-semibold transition"
+              >
+                <Icon name="github" size={16} /> GitHub
+              </Link>
+            )}
+            {project.links.live && (
+              <Link
+                href={project.links.live}
+                target="_blank"
+                rel="noreferrer"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold transition"
+              >
+                <Icon name="externalLink" size={16} /> Live
+              </Link>
+            )}
           </div>
         </div>
-      </FadeUp>
+      </header>
 
-      {(caseStudy.responsibilities || caseStudy.features) && (
-        <FadeUp delay={0.15}>
-          <section className={['p-8 lg:p-12', cardClassName].join(' ')}>
-            <h2 className="text-foreground mb-6 text-2xl font-bold">주요 작업</h2>
-            <div className="grid gap-8 lg:grid-cols-2">
-              {caseStudy.responsibilities && caseStudy.responsibilities.length > 0 && (
-                <div>
-                  <h3 className="text-foreground mb-4 text-xl font-semibold">담당한 역할</h3>
-                  <ul className="space-y-3">
-                    {caseStudy.responsibilities.map((item) => (
-                      <li key={item} className="flex gap-3">
-                        <span className="bg-primary mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full" />
-                        <p className="text-md text-muted-foreground font-normal">{item}</p>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-              {caseStudy.features && caseStudy.features.length > 0 && (
-                <div>
-                  <h3 className="text-foreground mb-4 text-xl font-semibold">구현한 기능</h3>
-                  <ul className="space-y-3">
-                    {caseStudy.features.map((item) => (
-                      <li key={item} className="flex gap-3">
-                        <span className="bg-primary mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full" />
-                        <p className="text-md text-muted-foreground font-normal">{item}</p>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-          </section>
-        </FadeUp>
+      {outcomes.length > 0 && (
+        <section className={['p-6 lg:p-8', cardClassName].join(' ')}>
+          <h2 className="text-foreground mb-4 text-lg font-bold">결과 · 역할</h2>
+          <dl className="grid gap-3 sm:grid-cols-2">
+            {outcomes.map((item) => (
+              <div key={`${item.label}-${item.value}`} className="bg-depth-2 rounded-xl p-4">
+                <dt className="text-muted-foreground text-xs">{item.label}</dt>
+                <dd className="text-foreground mt-1 text-sm font-semibold">{item.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      )}
+
+      {(caseStudy.responsibilities?.length || caseStudy.features?.length) && (
+        <section className={['p-6 lg:p-8', cardClassName].join(' ')}>
+          <h2 className="text-foreground mb-5 text-lg font-bold">주요 작업</h2>
+          <div className="grid gap-6 sm:grid-cols-2">
+            {caseStudy.responsibilities && caseStudy.responsibilities.length > 0 && (
+              <div>
+                <h3 className="text-foreground mb-3 text-sm font-semibold">담당한 역할</h3>
+                <BulletList items={caseStudy.responsibilities} />
+              </div>
+            )}
+            {caseStudy.features && caseStudy.features.length > 0 && (
+              <div>
+                <h3 className="text-foreground mb-3 text-sm font-semibold">구현한 기능</h3>
+                <BulletList items={caseStudy.features} />
+              </div>
+            )}
+          </div>
+        </section>
       )}
 
       {caseStudy.challenges && caseStudy.challenges.length > 0 && (
-        <FadeUp delay={0.2}>
-          <section className="space-y-8">
-            <div className="text-center">
-              <h2 className="text-foreground text-2xl font-bold">기술적 시도와 문제 해결</h2>
-              <p className="text-md text-muted-foreground mt-2 font-normal">
-                프로젝트에서 해본 기술적 시도와 문제 해결 과정입니다
-              </p>
-            </div>
-
-            <div className="space-y-6">
-              {caseStudy.challenges.map((challenge, idx) => (
-                <div key={challenge.title} className={['p-8 lg:p-10', cardClassName].join(' ')}>
-                  <div className="space-y-4">
-                    <div className="flex items-start gap-4">
-                      <div className="bg-primary/10 text-primary flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl text-lg font-bold">
-                        {idx + 1}
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="text-foreground text-xl font-semibold">{challenge.title}</h3>
-                        <p className="text-md text-muted-foreground mt-3 font-normal leading-relaxed">
-                          {challenge.detail}
-                        </p>
-                      </div>
-                    </div>
-
+        <section className="space-y-4">
+          <h2 className="text-foreground text-lg font-bold">문제와 해결</h2>
+          <div className="space-y-4">
+            {caseStudy.challenges.map((challenge, idx) => (
+              <div key={challenge.title} className={['p-5 lg:p-6', cardClassName].join(' ')}>
+                <div className="flex gap-3">
+                  <span className="text-primary w-5 shrink-0 text-sm font-bold">{idx + 1}</span>
+                  <div className="min-w-0 flex-1 space-y-3">
+                    <h3 className="text-foreground font-semibold">{challenge.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {challenge.detail}
+                    </p>
                     {challenge.code && (
-                      <div className="bg-depth-2 mt-6 overflow-hidden rounded-2xl">
-                        <div className="border-border/50 border-b px-4 py-2">
-                          <span className="text-muted-foreground text-xs tracking-[0.01em]">
-                            Code Example
-                          </span>
-                        </div>
-                        <pre className="text-foreground overflow-x-auto p-4 text-sm">
-                          <code>{challenge.code}</code>
-                        </pre>
-                      </div>
+                      <pre className="bg-depth-2 text-foreground overflow-x-auto rounded-xl p-4 text-xs leading-relaxed">
+                        <code>{challenge.code}</code>
+                      </pre>
                     )}
                   </div>
                 </div>
-              ))}
-            </div>
-          </section>
-        </FadeUp>
+              </div>
+            ))}
+          </div>
+        </section>
       )}
 
       {caseStudy.architecture && caseStudy.architecture.length > 0 && (
-        <FadeUp delay={0.25}>
-          <section className={['p-8 lg:p-12', cardClassName].join(' ')}>
-            <h2 className="text-foreground mb-6 text-2xl font-bold">아키텍처 & 기술 선택</h2>
-            <ul className="space-y-3">
-              {caseStudy.architecture.map((item) => (
-                <li key={item} className="flex gap-3">
-                  <span className="bg-primary mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full" />
-                  <p className="text-md text-muted-foreground font-normal">{item}</p>
-                </li>
-              ))}
-            </ul>
-          </section>
-        </FadeUp>
+        <section className={['p-6 lg:p-8', cardClassName].join(' ')}>
+          <h2 className="text-foreground mb-4 text-lg font-bold">아키텍처 · 기술 선택</h2>
+          <BulletList items={caseStudy.architecture} />
+        </section>
       )}
 
       {caseStudy.learnings && caseStudy.learnings.length > 0 && (
-        <FadeUp delay={0.3}>
-          <section className={['p-8 lg:p-12', cardClassName].join(' ')}>
-            <h2 className="text-foreground mb-6 text-2xl font-bold">배운 점</h2>
-            <div className="space-y-4">
-              {caseStudy.learnings.map((learning) => (
-                <div key={learning} className="bg-depth-2 rounded-2xl p-6">
-                  <p className="text-md text-foreground font-normal leading-relaxed">{learning}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-        </FadeUp>
+        <section className={['p-6 lg:p-8', cardClassName].join(' ')}>
+          <h2 className="text-foreground mb-4 text-lg font-bold">배운 점</h2>
+          <BulletList items={caseStudy.learnings} />
+        </section>
       )}
 
-      <FadeUp delay={0.35}>
-        <section className={['p-8 lg:p-12', cardClassName].join(' ')}>
-          <div className="flex flex-col items-center gap-6 text-center">
-            <div>
-              <h3 className="text-foreground text-xl font-semibold">더 많은 프로젝트 살펴보기</h3>
-              <p className="text-md text-muted-foreground mt-2 font-normal">
-                다른 프로젝트에서 어떤 문제를 해결했는지 확인해보세요
-              </p>
-            </div>
-            <Link
-              href="/portfolio"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold transition"
-            >
-              전체 프로젝트 보기 <Icon name="arrowUpRight" />
-            </Link>
-          </div>
-        </section>
-      </FadeUp>
+      <div className="flex justify-center pb-4">
+        <Link
+          href="/portfolio"
+          className="text-primary hover:text-primary/80 inline-flex items-center gap-1.5 text-sm font-semibold"
+        >
+          전체 프로젝트 <Icon name="arrowUpRight" size={16} />
+        </Link>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,351 @@
+/* ----------------------------------------
+   공통 레이아웃 및 스타일
+---------------------------------------- */
+* {
+  font-family: 'Pretendard';
+  color: #333;
+  box-sizing: border-box;
+  line-height: 1.4;
+}
+
+/* Screen Mode */
+.screen-mode {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 0;
+}
+.screen-mode.active {
+  display: block;
+}
+.screen-mode > .btn-wrap {
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+}
+.screen-mode > .btn-wrap > button {
+  padding: 8px 12px;
+  border-radius: 4px;
+  min-width: 80px;
+}
+.screen-mode > .btn-wrap > button.on {
+  background-color: #5863b4;
+  color: #fff;
+}
+
+/* Common */
+.blind {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  border: 0;
+}
+.total-wrap {
+  background-color: #f8f8f8;
+  overflow: hidden;
+}
+.screen-wrap {
+  width: calc(100% - 100px);
+  background-color: #fff;
+}
+.inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header */
+header {
+  padding: 16px 0;
+  background-color: #ffffff;
+}
+header > .inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+h1 {
+  width: 122px;
+  height: 20px;
+  background: url(../img/common/logo.png) no-repeat;
+}
+nav ul {
+  display: flex;
+  gap: 32px;
+}
+nav li a {
+  font-family: 'SBAggro';
+  font-size: 14px;
+  font-weight: 500;
+}
+nav li a.on {
+  color: #187ed1;
+}
+nav li a.nav-external i {
+  margin-left: 4px;
+  font-size: 11px;
+  opacity: 0.7;
+  vertical-align: 1px;
+}
+
+/* aside wrap */
+aside {
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+  height: 100vh;
+  box-shadow: 0px 0px 2px rgba(0, 0, 2, 0.25);
+}
+.gnb-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  background-color: #187ed1;
+}
+.gnb-modal {
+  display: none;
+  position: fixed;
+  z-index: 97 !important;
+  left: 0;
+  top: 0;
+  width: calc(100% - 100px);
+  height: 100vh;
+  background-color: rgba(40, 40, 40, 0.8);
+  backdrop-filter: blur(3px);
+}
+.gnb-popup {
+  position: fixed;
+  z-index: 98;
+  top: 0;
+  right: -100%;
+  width: 300px;
+  max-width: calc(100% - 200px);
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(5px);
+  transition: all 0.3s;
+}
+.gnb-popup.on {
+  right: 100px;
+}
+.gnb-popup ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.gnb-popup li {
+  width: 100%;
+}
+.gnb-popup li a {
+  display: block;
+  width: 100%;
+  padding: 20px 40px;
+  text-align: left;
+  font-size: 20px;
+  color: #393f43;
+}
+.gnb-popup li a:hover {
+  background-color: #fff;
+  color: #187ed1;
+}
+.btn-gnb {
+  position: relative;
+  display: block;
+  width: 28px;
+  height: 24px;
+  cursor: pointer;
+}
+.btn-gnb .btn-gnb-cont:before {
+  content: '';
+  position: absolute;
+  top: calc(50% - 2px);
+  display: block;
+  width: 70%;
+  right: 0;
+  height: 4px;
+  border-radius: 2px;
+  background-color: #fff;
+  transition: all 0.3s;
+}
+.btn-gnb .btn-gnb-cont:after {
+  content: '';
+  position: absolute;
+  top: calc(50% - 2px);
+  display: block;
+  width: 70%;
+  right: 0;
+  height: 4px;
+  border-radius: 2px;
+  background-color: #fff;
+  transition: all 0.3s;
+}
+.btn-gnb:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  display: block;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background-color: #fff;
+  transition: all 0.3s;
+}
+.btn-gnb:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background-color: #fff;
+  transition: all 0.3s;
+}
+.btn-gnb.on .btn-gnb-cont:before {
+  transform: rotate(45deg);
+  width: 100%;
+  background-color: #b9dfff;
+}
+.btn-gnb.on .btn-gnb-cont:after {
+  transform: rotate(-45deg);
+  width: 100%;
+  background-color: #b9dfff;
+}
+.btn-gnb.on:before {
+  top: calc(50% - 2px);
+  opacity: 0;
+}
+.btn-gnb.on:after {
+  bottom: calc(50% - 2px);
+  opacity: 0;
+}
+.btn-aside1 {
+  position: relative;
+  width: 100%;
+  height: calc(40% - 100px);
+  background-color: #3b91d7;
+}
+.btn-aside1 > p {
+  position: absolute;
+  left: -39%;
+  top: 44%;
+  width: 180px;
+  display: inline-block;
+  transform: rotate(90deg);
+  transform-origin: 50% 50%;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  color: #fff;
+}
+.btn-aside2 {
+  position: relative;
+  width: 100%;
+  height: calc(60% - 100px);
+  background-color: #ffffff;
+}
+.btn-aside2 > p {
+  position: absolute;
+  left: -39%;
+  top: 45%;
+  width: 180px;
+  display: inline-block;
+  transform: rotate(90deg);
+  transform-origin: 50% 50%;
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+  color: #187ed1;
+}
+.btn-aside3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  height: 100px;
+  background-color: #414141;
+  color: #fff;
+  font-size: 15px;
+}
+.btn-aside3 > i {
+  color: #fff;
+}
+
+/* Footer */
+footer {
+  background-color: #dde6ee;
+  padding: 20px 0;
+  text-align: center;
+}
+footer > .inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 16px 20px;
+}
+.footer-l ul {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.footer-l li {
+  display: flex;
+  align-items: center;
+  color: #606c76;
+  font-size: 17px;
+}
+.footer-l li i {
+  color: #97b3c9;
+  margin-right: 16px;
+}
+.footer-r {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 40px;
+  text-align: right;
+}
+.footer-r p {
+  color: #606c76;
+}
+
+/* Responsive */
+@media screen and (max-width: 900px) {
+}
+
+@media screen and (max-width: 600px) {
+  nav ul {
+    display: flex;
+    gap: 16px;
+  }
+  .screen-wrap {
+    width: 100%;
+  }
+  .gnb-modal {
+    display: none !important;
+  }
+  .gnb-popup {
+    display: none;
+  }
+  aside {
+    display: none;
+  }
+  footer > .inner {
+    flex-direction: column;
+  }
+}

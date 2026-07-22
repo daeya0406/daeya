@@ -1,5 +1,7 @@
 'use client';
 
+import { GuideSectionIntro } from '../GuideSectionIntro';
+
 type StackGroup = {
   title: string;
   items: { name: string; desc: string }[];
@@ -63,31 +65,27 @@ const stacks: StackGroup[] = [
 export default function StackSection() {
   return (
     <div className="space-y-6">
-      <div className="line-bottom mb-8 space-y-2">
-        <h3 className="text-xl font-semibold text-primary">Stack</h3>
-        <span className="text-xs tracking-[0.01em] block">
-          프로젝트에서 사용하는 프레임워크·라이브러리·패턴 리스트입니다.
-        </span>
-      </div>
+      <GuideSectionIntro
+        title="Stack"
+        description="이 사이트에서 쓰는 프레임워크·라이브러리·패턴입니다."
+      />
 
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid gap-3 md:grid-cols-2">
         {stacks.map((group) => (
           <div
             key={group.title}
-            className="rounded-2xl border border-border bg-depth-1 p-6 shadow-sm ring-1 ring-primary/5 backdrop-blur md:p-8"
+            className="border-border bg-depth-2/50 rounded-xl border p-5"
           >
-            <h4 className="text-2lg font-bold text-foreground">{group.title}</h4>
-            <ul className="mt-4 space-y-3 text-sm text-text-default">
+            <h3 className="text-foreground text-sm font-bold">{group.title}</h3>
+            <ul className="mt-3 space-y-2.5 text-sm">
               {group.items.map((item) => (
                 <li key={item.name} className="flex items-start gap-2">
-                  <span className="mt-[9px] h-1.5 w-1.5 rounded-full bg-primary" />
-                  <div className="space-y-1">
-                    <span className="font-semibold text-foreground">
-                      {item.name}
-                    </span>
-                    <div className="leading-relaxed text-muted-foreground">
+                  <span className="bg-primary mt-2 h-1 w-1 shrink-0 rounded-full" />
+                  <div>
+                    <span className="text-foreground font-semibold">{item.name}</span>
+                    <p className="text-muted-foreground mt-0.5 text-xs leading-relaxed">
                       {item.desc}
-                    </div>
+                    </p>
                   </div>
                 </li>
               ))}

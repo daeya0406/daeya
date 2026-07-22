@@ -15,6 +15,16 @@ export type CareerYear = {
 
 export const CAREER_TIMELINE: CareerYear[] = [
   {
+    year: '2026',
+    entries: [
+      {
+        period: '2026.05 ~ 2026.06',
+        client: '안전보건공단',
+        project: 'jsp, Spring, C# 활용 EDU-HUB AI 키오스크',
+      },
+    ],
+  },
+  {
     year: '2025',
     entries: [
       {
@@ -23,7 +33,7 @@ export const CAREER_TIMELINE: CareerYear[] = [
         project: '프론트엔드 개발 과정',
       },
       {
-        period: '2025.02 ~ 2026.06',
+        period: '2025.02 ~ 2025.06',
         client: '아정당 FE팀',
         project: '홈페이지 리뉴얼 및 확장 플랫폼들 퍼블리싱',
       },
@@ -46,7 +56,11 @@ export const CAREER_TIMELINE: CareerYear[] = [
     entries: [
       { period: '2023.07 ~ 2023.12', client: '한전원자력연료', project: 'MES' },
       { period: '2023.03 ~ 2023.04', client: '산업인력공단', project: '한국어능력시험 CBT' },
-      { period: '2022.12 ~ 2023.02', client: '산업인력공단', project: 'TODO: 프로젝트명' },
+      {
+        period: '2022.12 ~ 2023.02',
+        client: '산업인력공단',
+        project: '한국어능력시험 시스템',
+      },
     ],
   },
   {

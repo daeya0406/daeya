@@ -63,7 +63,11 @@ export const PROJECTS: Project[] = [
       overview:
         '체험(액티비티) 탐색·예약·관리 흐름을 제공하는 서비스로 FSD + DDD-lite를 적용했습니다.',
       goals: ['FSD 구조 정착', '도메인 로직 확장성 확보'],
-      responsibilities: ['TODO: 담당한 기능/페이지를 적어주세요.'],
+      responsibilities: [
+        '테마(다크모드) 상태 관리',
+        '모달 매니저(Zustand stack) 통합',
+        '개별 페이지 구현',
+      ],
       architecture: [
         'app은 라우팅/레이아웃만 담당',
         '비즈니스 로직은 features/entities에만 배치',
@@ -101,7 +105,10 @@ lite DDD :
         { label: '공통', value: 'FSD + DDD-lite 구조로 작업' },
         { label: '역할', value: '테마 상태관리 및 Modal, 개별 페이지 작업' },
       ],
-      learnings: ['TODO: 구조화/아키텍처 관점의 인사이트를 적어주세요.'],
+      learnings: [
+        '디렉토리 규칙을 CI로 고정하면 구조가 흔들리지 않음',
+        '테마·모달처럼 전역 UX는 한곳에서 관리하는 편이 예측 가능함',
+      ],
     },
   },
   {
@@ -134,15 +141,19 @@ lite DDD :
       features: ['react-hook-form + zod 검증', '공통 UI 컴포넌트 패턴'],
       challenges: [
         {
-          title: 'TODO: 역할별 플로우 설계',
-          detail: '역할 분기와 UI 상태 관리를 어떻게 정리했는지 적어주세요.',
+          title: '폼 검증 패턴 통일',
+          detail:
+            'react-hook-form + zod로 입력·에러 메시지를 스키마 기준으로 맞춰, 페이지마다 검증 로직이 갈라지지 않게 했습니다.',
         },
       ],
       outcomes: [
         { label: '배포', value: 'Vercel' },
         { label: '품질 도구', value: 'ESLint/Prettier/Husky' },
       ],
-      learnings: ['TODO: 협업 규칙/워크플로우 개선점을 적어주세요.'],
+      learnings: [
+        '공통 UI와 폼 스키마를 먼저 잡으면 CRUD 화면 속도가 빨라짐',
+        '커스텀 훅으로 페이지네이션·모달을 묶으면 페이지 코드가 얇아짐',
+      ],
     },
   },
   {
@@ -177,15 +188,19 @@ lite DDD :
       features: ['무한 스크롤', '관리자 모드 토글 및 메시지 삭제', '슬라이드 UI'],
       challenges: [
         {
-          title: 'TODO: 성능/UX 이슈',
-          detail: '여기에 실제 겪었던 문제와 해결 과정을 적어주세요.',
+          title: '반응형 슬라이드·무한스크롤',
+          detail:
+            '모바일·PC에서 카드 슬라이드와 무한스크롤이 자연스럽게 이어지도록 레이아웃과 로딩 경계를 맞춰 구현했습니다.',
         },
       ],
       outcomes: [
-        { label: '반응형 대응', value: '완료' },
-        { label: '접근성 개선', value: 'TODO' },
+        { label: '반응형', value: '모바일·PC 대응' },
+        { label: '역할', value: '세팅·배포·생성/작성 플로우' },
       ],
-      learnings: ['TODO: 협업/기술적으로 얻은 인사이트를 적어주세요.'],
+      learnings: [
+        '브랜치 전략을 초기에 합의하면 협업 충돌이 줄어듦',
+        '리스트 UX(슬라이드·무한스크롤)는 반응형 단위로 먼저 설계하는 편이 안전함',
+      ],
     },
   },
 ];

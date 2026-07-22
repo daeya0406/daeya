@@ -1,0 +1,38 @@
+.project-list{}
+.project-list ul{display:flex; flex-wrap:wrap; justify-content:space-between; gap:24px; width:100%;}
+.project-list li{width:calc(33% - 18px);}
+.project-list > ul > li:nth-child(3n-1){margin-top:20px;}
+.project-img-wrap{display:flex; justify-content:center; align-items:center; width:100%; height:360px; margin-bottom:16px; background-color:#ccc; border-radius:30px; overflow:hidden; object-fit:cover;}
+.project-list h5{font-size:16px; font-weight:500; color: #187ED1;;}
+.project-list h6{font-size:24px; font-weight:700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap}
+
+.project-list > ul > li:nth-child(1) .project-img-wrap{background-color:#7EB6FF;}
+.project-list > ul > li:nth-child(2) .project-img-wrap{background-color:#FFB4A2;}
+.project-list > ul > li:nth-child(3) .project-img-wrap{background-color:#C9B1FF;}
+.project-list > ul > li:nth-child(4) .project-img-wrap{background-color:#FFD684;}
+.project-list > ul > li:nth-child(5) .project-img-wrap{background-color:#91d68b;}
+.project-list > ul > li:nth-child(6) .project-img-wrap{background-color:#e2d6b0;}
+.project-list > ul > li:nth-child(7) .project-img-wrap{background-color:#f5a9b8;}
+.project-list > ul > li:nth-child(8) .project-img-wrap{background-color:#9ad0ec;}
+.project-list > ul > li:nth-child(9) .project-img-wrap{background-color:#c5b783;}
+.project-list > ul > li:nth-child(10) .project-img-wrap{background-color:#b8d4c8;}
+.project-list > ul > li:nth-child(11) .project-img-wrap{background-color:#a8c5d4;}
+.project-list > ul > li:nth-child(12) .project-img-wrap{background-color:#d4b8c8;}
+.project-img-wrap .mockup-pc{width:78%; max-width:280px;}
+.project-device{height:86%; max-height:310px; display:flex; align-items:center; justify-content:center;}
+.project-device img{display:block; height:100%; width:auto; max-width:100%; object-fit:contain; border-radius:20px; box-shadow:0 8px 24px rgba(0,0,0,0.18);}
+.project-device-kiosk img{border-radius:10px;}
+.project-thumb{width:100%; height:100%;}
+.project-thumb img{width:100%; height:100%; object-fit:cover; object-position:top;}
+
+
+@media screen and (max-width: 1200px) {
+    .project-list li{width:calc(50% - 18px);}
+    .project-list > ul > li:nth-child(3n-1){margin-top:0;}
+    .project-list > ul > li:nth-child(2n){margin-top:30px;}
+}
+
+@media screen and (max-width: 800px) {
+    .project-list li{width:100%;}
+    .project-list > ul > li:nth-child(2n){margin-top:0;}
+}

@@ -99,14 +99,17 @@ export function DashboardSidebar() {
       case 'about':
         iconName = 'userRound';
         break;
+      case 'portfolio':
+        iconName = 'briefcase';
+        break;
+      case 'lab':
+        iconName = 'flaskConical';
+        break;
       case 'architecture':
         iconName = 'layers';
         break;
       case 'fe flowset':
         iconName = 'workflow';
-        break;
-      case 'portfolio':
-        iconName = 'briefcase';
         break;
       case 'guide':
         iconName = 'bookOpen';

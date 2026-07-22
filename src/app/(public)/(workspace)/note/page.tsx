@@ -106,7 +106,7 @@ function NotePageContent() {
   return (
     <TabbedWorkspaceLayout
       title="Note"
-      description="JavaScript, React, TypeScript 등 학습하며 정리"
+      description="JS·React·TS·Next 학습하며 정리한 코드 노트입니다"
       itemCount={filteredItems.length}
       tabs={tabs}
       activeTab={activeTab}

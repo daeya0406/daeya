@@ -31,7 +31,7 @@ export default function Header() {
               height={17}
               style={{ width: 'auto', height: 'auto' }}
             />
-            <span className="text-foreground text-lg font-bold">Daeya Portfolio</span>
+            <span className="text-foreground text-lg font-bold">Daeya</span>
           </Link>
 
           <MobileMenu mounted={mounted} theme={theme} setTheme={setTheme} />
@@ -171,8 +171,16 @@ function MobileMenu({
 
                     <div className="flex flex-col gap-1 p-3">
                       {navItems.map((item) => {
-                        const active = item.href && pathname.startsWith(item.href.split('?')[0]);
                         const hasChildren = Boolean(item.children?.length);
+                        const pathOf = (href?: string) => href?.split('?')[0] ?? '';
+                        const active = hasChildren
+                          ? Boolean(
+                              item.children?.some((child) =>
+                                pathname.startsWith(pathOf(child.href))
+                              ) ||
+                                (item.href && pathname.startsWith(pathOf(item.href)))
+                            )
+                          : Boolean(item.href && pathname.startsWith(pathOf(item.href)));
                         const isExpanded = expanded[item.label];
                         return (
                           <div key={item.label} className="rounded-lg">

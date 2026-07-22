@@ -13,42 +13,24 @@ type WorkspaceCodeCardProps = {
 
 export function WorkspaceCodeCard({ label, code, copied, onCopy }: WorkspaceCodeCardProps) {
   return (
-    <div className="border-border to-depth-1 dark:from-depth-1 dark:via-depth-1 dark:to-depth-2 group relative overflow-hidden rounded-2xl border bg-gradient-to-br from-white via-white shadow-sm">
-      <div className="bg-primary/5 absolute right-0 top-0 h-24 w-24 -translate-y-8 translate-x-8 rounded-full opacity-0 blur-2xl transition-opacity group-hover:opacity-100" />
-
-      <div className="border-border from-depth-2/50 relative flex items-center justify-between border-b bg-gradient-to-r to-transparent px-6 py-4">
-        <div className="flex items-center gap-3">
-          <div className="bg-primary/10 text-primary rounded-lg p-2">
-            <Icon name="fileCode" />
-          </div>
-          <div>
-            <h3 className="text-foreground text-sm font-semibold">{label}</h3>
-            <p className="text-muted-foreground text-xs">클릭하여 복사</p>
-          </div>
-        </div>
+    <div className="border-border bg-depth-1 overflow-hidden rounded-2xl border shadow-sm">
+      <div className="border-border flex items-center justify-between gap-3 border-b px-4 py-3">
+        <h3 className="text-foreground text-sm font-semibold">{label}</h3>
         <button
+          type="button"
           onClick={onCopy}
           className={cn(
-            'group/btn flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition-all',
+            'inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition',
             copied
-              ? 'bg-primary text-primary-foreground shadow-primary/20 shadow-sm'
+              ? 'bg-primary text-primary-foreground'
               : 'text-muted-foreground hover:bg-depth-2 hover:text-foreground'
           )}
         >
-          {copied ? (
-            <>
-              <Icon name="check" />
-              <span>복사됨</span>
-            </>
-          ) : (
-            <>
-              <Icon name="copy" className="transition-transform group-hover/btn:scale-110" />
-              <span>복사</span>
-            </>
-          )}
+          <Icon name={copied ? 'check' : 'copy'} size={14} />
+          {copied ? '복사됨' : '복사'}
         </button>
       </div>
-      <div className="relative p-6">
+      <div className="p-4">
         <CodeBlock code={code} />
       </div>
     </div>
