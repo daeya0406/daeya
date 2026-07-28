@@ -4,12 +4,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { navItems } from '@/shared/common/navigation';
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/shared/ui/Accordion';
 import { Icon } from '@/shared/ui/Icons';
 import type { IconName } from '@/shared/ui/Icons';
 import { useEffect, useMemo, useState } from 'react';
@@ -27,6 +21,15 @@ function isActiveHref(pathname: string, searchParams: URLSearchParams, href?: st
   }
 
   return true;
+}
+
+function isGroupActive(
+  pathname: string,
+  searchParams: URLSearchParams,
+  group: (typeof navItems)[number]
+) {
+  if (isActiveHref(pathname, searchParams, group.href)) return true;
+  return (group.children ?? []).some((c) => isActiveHref(pathname, searchParams, c.href));
 }
 
 const SIDEBAR_COLLAPSED_KEY = 'dashboard_sidebar_collapsed';
@@ -48,82 +51,38 @@ export function DashboardSidebar() {
     try {
       const saved = window.localStorage.getItem(SIDEBAR_COLLAPSED_KEY);
       queueMicrotask(() => setCollapsed(saved === '1'));
-    } catch {
-      // 생략
-    }
+    } catch {}
   }, []);
 
   useEffect(() => {
     try {
       window.localStorage.setItem(SIDEBAR_COLLAPSED_KEY, collapsed ? '1' : '0');
-    } catch {
-      // 생략
-    }
+    } catch {}
   }, [collapsed]);
 
-  const groups = useMemo(() => {
-    return navItems.filter((g) => g.label !== 'Home');
-  }, []);
-
-  const activeAccordionGroupLabel = useMemo(() => {
-    const currentParams = new URLSearchParams(searchParams.toString());
-    for (const group of groups) {
-      const hasChildren = Boolean(group.children?.length);
-      if (!hasChildren) continue;
-
-      if (isActiveHref(pathname, currentParams, group.href)) return group.label;
-      for (const child of group.children ?? []) {
-        if (isActiveHref(pathname, currentParams, child.href)) return group.label;
-      }
-    }
-    return null;
-  }, [groups, pathname, searchParams]);
-
-  const firstAccordionGroupLabel = useMemo(() => {
-    return groups.find((g) => Boolean(g.children?.length))?.label;
-  }, [groups]);
-
-  const [openGroup, setOpenGroup] = useState<string | undefined>(
-    activeAccordionGroupLabel ?? firstAccordionGroupLabel
+  const groups = useMemo(() => navItems.filter((g) => g.label !== 'Home'), []);
+  const currentParams = useMemo(
+    () => new URLSearchParams(searchParams.toString()),
+    [searchParams]
   );
 
-  useEffect(() => {
-    if (!activeAccordionGroupLabel) return;
-    queueMicrotask(() => setOpenGroup(activeAccordionGroupLabel));
-  }, [activeAccordionGroupLabel]);
+  const groupIcon = (label: string, icon?: IconName) => {
+    if (icon) return <Icon name={icon} size={16} />;
 
-  const groupIcon = (label: string) => {
     let iconName: IconName = 'userRound';
-    
     switch (label.toLowerCase()) {
-      case 'about':
+      case 'me':
         iconName = 'userRound';
         break;
-      case 'portfolio':
+      case 'work':
         iconName = 'briefcase';
         break;
-      case 'lab':
-        iconName = 'flaskConical';
-        break;
-      case 'architecture':
-        iconName = 'layers';
-        break;
-      case 'fe flowset':
-        iconName = 'workflow';
-        break;
-      case 'guide':
-        iconName = 'bookOpen';
-        break;
-      case 'note':
-        iconName = 'notebookPen';
-        break;
-      case 'playground':
+      case 'hobby':
         iconName = 'flaskConical';
         break;
       default:
         iconName = 'userRound';
     }
-    
     return <Icon name={iconName} size={16} />;
   };
 
@@ -137,7 +96,6 @@ export function DashboardSidebar() {
         collapsed ? 'w-[92px]' : 'w-[280px]',
       ].join(' ')}
     >
-      {/* Top bar */}
       <div
         className={[
           'flex items-center gap-3 px-5 py-4',
@@ -186,21 +144,11 @@ export function DashboardSidebar() {
 
       {!collapsed && <div className="bg-border/70 mx-5 h-px" />}
 
-      {/* Navigation */}
       <nav className="flex-1 overflow-y-auto px-4 py-4">
-        <Accordion
-          type="single"
-          collapsible
-          value={openGroup}
-          onValueChange={setOpenGroup}
-          className="flex flex-col gap-2"
-        >
+        <div className={collapsed ? 'flex flex-col gap-2' : 'flex flex-col gap-6'}>
           {groups.map((group) => {
-            const currentParams = new URLSearchParams(searchParams.toString());
             const groupHasChildren = Boolean(group.children?.length);
-            const groupActive =
-              isActiveHref(pathname, currentParams, group.href) ||
-              (group.children ?? []).some((c) => isActiveHref(pathname, currentParams, c.href));
+            const groupActive = isGroupActive(pathname, currentParams, group);
 
             if (collapsed) {
               return (
@@ -211,14 +159,13 @@ export function DashboardSidebar() {
                   onClick={() => {
                     if (groupHasChildren) {
                       setCollapsed(false);
-                      setOpenGroup(group.label);
                       if (!groupActive) {
                         const target = group.children?.[0]?.href ?? group.href;
                         if (target) router.push(target);
                       }
                       return;
                     }
-                    if (group.href) window.location.href = group.href;
+                    if (group.href) router.push(group.href);
                   }}
                   className={[
                     'flex w-full items-center justify-center rounded-xl border border-transparent px-3 py-3 transition',
@@ -227,94 +174,65 @@ export function DashboardSidebar() {
                       : 'text-text-default hover:bg-depth-2',
                   ].join(' ')}
                 >
-                  {groupIcon(group.label)}
+                  {groupIcon(group.label, group.icon)}
                 </button>
               );
             }
 
             if (!groupHasChildren) {
               return (
-                <Link
-                  key={group.label}
-                  href={group.href ?? '#'}
-                  className={[
-                    'flex items-center gap-2 rounded-xl px-3 py-2 text-sm transition',
-                    groupActive
-                      ? 'bg-primary-100 text-primary'
-                      : 'text-text-default hover:bg-depth-2',
-                  ].join(' ')}
-                >
-                  <span
+                <div key={group.label} className="space-y-2">
+                  <p className="text-muted-foreground px-3 text-[11px] font-medium tracking-[0.08em]">
+                    {group.label}
+                  </p>
+                  <Link
+                    href={group.href ?? '#'}
                     className={[
-                      'inline-flex h-7 w-7 items-center justify-center',
-                      groupActive ? 'text-primary' : 'text-icon-primary',
+                      'flex items-center rounded-xl px-3 py-2 text-sm transition',
+                      groupActive
+                        ? 'bg-brand-secondary text-primary'
+                        : 'text-text-default hover:bg-depth-2',
                     ].join(' ')}
                   >
-                    {groupIcon(group.label)}
-                  </span>
-                  <span className="font-semibold">{group.label}</span>
-                </Link>
+                    {group.label}
+                  </Link>
+                </div>
               );
             }
 
             return (
-              <AccordionItem key={group.label} value={group.label} className="border-none">
-                <AccordionTrigger
-                  className={[
-                    'hover:bg-depth-2 rounded-xl px-3 py-2 text-sm hover:no-underline',
-                    groupActive ? 'text-text-primary' : 'text-text-default',
-                  ].join(' ')}
-                >
-                  <span
-                    className="flex flex-1 items-center gap-2"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      const target = group.children?.[0]?.href ?? group.href;
-                      if (target && !groupActive) router.push(target);
-                    }}
-                  >
-                    <span
-                      className={[
-                        'inline-flex h-7 w-7 items-center justify-center',
-                        groupActive ? 'text-primary' : 'text-icon-primary',
-                      ].join(' ')}
-                    >
-                      {groupIcon(group.label)}
-                    </span>
-                    <span className="font-semibold">{group.label}</span>
-                  </span>
-                </AccordionTrigger>
-
-                <AccordionContent className="pb-2">
-                  <div className="space-y-1 pl-10">
-                    {(group.children ?? []).map((child) => {
-                      const active = isActiveHref(pathname, currentParams, child.href);
-                      return (
-                        <Link
-                          key={child.label}
-                          href={child.href ?? '#'}
-                          className={[
-                            'flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm transition',
-                            active
-                              ? 'bg-brand-secondary text-primary'
-                              : 'text-text-default hover:bg-depth-2',
-                          ].join(' ')}
-                        >
-                          <span>{child.label}</span>
-                          {child.badge ? (
-                            <span className="bg-brand-secondary text-primary rounded-full px-2 py-0.5 text-[10px] font-semibold">
-                              {child.badge}
-                            </span>
-                          ) : null}
-                        </Link>
-                      );
-                    })}
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
+              <div key={group.label} className="space-y-2">
+                <p className="text-muted-foreground px-3 text-[11px] font-medium tracking-[0.08em]">
+                  {group.label}
+                </p>
+                <div className="space-y-1">
+                  {(group.children ?? []).map((child) => {
+                    const active = isActiveHref(pathname, currentParams, child.href);
+                    return (
+                      <Link
+                        key={child.label}
+                        href={child.href ?? '#'}
+                        className={[
+                          'flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm transition',
+                          active
+                            ? 'bg-brand-secondary text-primary'
+                            : 'text-text-default hover:bg-depth-2',
+                        ].join(' ')}
+                      >
+                        <span>{child.label}</span>
+                        {child.badge ? (
+                          <span className="bg-brand-secondary text-primary rounded-full px-2 py-0.5 text-[10px] font-semibold">
+                            {child.badge}
+                          </span>
+                        ) : null}
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
             );
           })}
-        </Accordion>
+        </div>
       </nav>
 
       <div className="border-border border-t px-5 py-4">

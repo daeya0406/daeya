@@ -1,5 +1,5 @@
 import {
-  // UI / 공통
+  // UI
   Check,
   CheckCircle,
   CheckCircle2,
@@ -13,7 +13,7 @@ import {
   Trash2,
   Search,
 
-  // 화살표 / 네비
+  // Arrow
   ArrowLeft,
   ArrowRight,
   ArrowUp,
@@ -24,14 +24,14 @@ import {
   ChevronLeft,
   ChevronRight,
 
-  // 테마 / 상태
+  // Theme
   Sun,
   Moon,
   RefreshCw,
   AlertTriangle,
   Info,
 
-  // 개발 / 기술
+  // Dev
   Code,
   Code2,
   FileCode,
@@ -46,7 +46,7 @@ import {
   Layers,
   Zap,
 
-  // 기타
+  // Etc
   Home,
   Calendar,
   Calendar as CalendarIcon,
@@ -93,14 +93,14 @@ export const Icons = {
   chevronLeft: ChevronLeft,
   chevronRight: ChevronRight,
 
-  // Theme / State
+  // Theme
   sun: Sun,
   moon: Moon,
   refreshCw: RefreshCw,
   alertTriangle: AlertTriangle,
   info: Info,
 
-  // Dev / Tech
+  // Dev
   code: Code,
   code2: Code2,
   fileCode: FileCode,

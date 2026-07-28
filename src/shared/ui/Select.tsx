@@ -9,7 +9,6 @@ export const Select = SelectPrimitive.Root;
 export const SelectGroup = SelectPrimitive.Group;
 export const SelectValue = SelectPrimitive.Value;
 
-/* Trigger (입력창 부분) */
 export const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
@@ -30,7 +29,6 @@ export const SelectTrigger = React.forwardRef<
 ));
 SelectTrigger.displayName = 'SelectTrigger';
 
-/* Content (드롭다운 컨테이너) */
 export const SelectContent = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>
@@ -62,7 +60,6 @@ export const SelectContent = React.forwardRef<
 ));
 SelectContent.displayName = 'SelectContent';
 
-/* Item (드롭다운 내부 항목) */
 export const SelectItem = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item>
@@ -87,7 +84,6 @@ export const SelectItem = React.forwardRef<
 ));
 SelectItem.displayName = 'SelectItem';
 
-/* Label */
 export const SelectLabel = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Label>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Label>
@@ -100,7 +96,6 @@ export const SelectLabel = React.forwardRef<
 ));
 SelectLabel.displayName = 'SelectLabel';
 
-/* Separator */
 export const SelectSeparator = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Separator>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Separator>

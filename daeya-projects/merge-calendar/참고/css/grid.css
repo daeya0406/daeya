@@ -1,0 +1,39 @@
+/* Weekly time grid — shared sizing (host · attendee · components) */
+
+.grid-wrap {
+  padding: var(--grid-wrap-pad);
+}
+
+.grid.input-grid .day {
+  padding: 4px;
+}
+
+.heatmap .cell,
+.layer-grid .layer-cell {
+  height: var(--grid-cell-h);
+  min-height: var(--grid-cell-h);
+  max-height: var(--grid-cell-h);
+  aspect-ratio: unset;
+}
+
+.grid.input-grid .cell {
+  width: 100%;
+  height: var(--grid-cell-h-input);
+  min-height: var(--grid-cell-h-input);
+  max-height: var(--grid-cell-h-input);
+  aspect-ratio: unset;
+}
+
+.heatmap .cell .avail-badge.heat {
+  font-size: 10px;
+  padding: 2px 4px;
+}
+
+.heatmap .cell .cell-label {
+  font-size: 10px;
+  line-height: 1.1;
+}
+
+.heatmap .cell .cell-label.impossible {
+  font-size: 10px;
+}

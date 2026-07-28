@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>일정 맞추기 — 회의 조율 프로토타입</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/hub.css" />
+</head>
+<body class="proto-hub">
+  <div class="hub-wrap">
+    <header class="hub-top">
+      <div>
+        <h1>일정 맞추기</h1>
+        <p class="lead">6명의 일정을 받아 한눈에 맞추는 회의 조율 프로토타입입니다.</p>
+      </div>
+      <nav class="hub-nav flow-entry-nav" aria-label="플로우 바로가기">
+        <a href="create.html">회의 만들기</a>
+        <a href="respond.html">일정 입력</a>
+        <a href="merge.html" class="primary">가능한 시간</a>
+      </nav>
+    </header>
+
+    <section class="intro-hero">
+      <div class="intro-hero-main">
+        <h2>6명 회의, 한눈에 맞추기</h2>
+        <p>주최자는 회의를 만들고 시간을 정하고, 참석자는 불가·비선호 일정만 입력합니다.</p>
+        <div class="flow-entry-row">
+          <a class="flow-entry-btn" href="create.html">
+            <span class="flow-entry-role">주최자</span>
+            <span class="flow-entry-label">회의 만들기</span>
+          </a>
+          <a class="flow-entry-btn" href="respond.html">
+            <span class="flow-entry-role">참석자</span>
+            <span class="flow-entry-label">일정 입력</span>
+          </a>
+          <a class="flow-entry-btn" href="merge.html">
+            <span class="flow-entry-role">주최자</span>
+            <span class="flow-entry-label">가능한 시간</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="path-card">
+      <h2>한 줄 요약</h2>
+      <p>참석자는 <strong>언제 안 되는지</strong>만 입력하고, 주최자는 6명 결과를 <strong>한 타임테이블에 겹쳐</strong> 봅니다.</p>
+      <div class="path-steps">
+        <span class="step">1. 회의 만들기</span>
+        <span class="arrow">→</span>
+        <span class="step">2. 참석자 일정 입력</span>
+        <span class="arrow">→</span>
+        <span class="step">3. 가능한 시간 · 확정</span>
+      </div>
+    </section>
+
+    <details class="hub-details">
+      <summary>전체 플로우 · 화면별 딥링크</summary>
+    <section class="hub-section hub-section-nested">
+      <h2>전체 플로우</h2>
+      <div class="flow-diagram">
+        <div class="flow-row">
+          <div class="flow-block">
+            <div class="flow-block-head">
+              <span class="flow-role host">주최자</span>
+              <h3>회의 만들기</h3>
+            </div>
+            <div class="flow-steps">
+              <a class="flow-step" href="create.html?screen=1">
+                <span class="num">1</span>
+                <span><span class="label">회의 이름</span></span>
+              </a>
+              <a class="flow-step" href="create.html?screen=2">
+                <span class="num">2</span>
+                <span><span class="label">조율 기간</span><br><span class="hint">평일 캘린더 · 최대 2주</span></span>
+              </a>
+              <a class="flow-step" href="create.html?screen=3">
+                <span class="num">3</span>
+                <span><span class="label">참석자</span><br><span class="hint">필수 / 선택</span></span>
+              </a>
+              <a class="flow-step" href="create.html?screen=4">
+                <span class="num">4</span>
+                <span><span class="label">검토 · 요청 발송</span></span>
+              </a>
+            </div>
+          </div>
+
+          <div class="flow-connector">링크<br>공유</div>
+
+          <div class="flow-block">
+            <div class="flow-block-head">
+              <span class="flow-role attendee">참석자</span>
+              <h3>일정 입력</h3>
+            </div>
+            <div class="flow-steps">
+              <a class="flow-step" href="respond.html?screen=0">
+                <span class="num">0</span>
+                <span><span class="label">이름 확인</span></span>
+              </a>
+              <a class="flow-step" href="respond.html?screen=3">
+                <span class="num">3</span>
+                <span><span class="label">요일 전체 불가</span><br><span class="hint">외근 요일</span></span>
+              </a>
+              <a class="flow-step" href="respond.html?screen=2">
+                <span class="num">2</span>
+                <span><span class="label">시간 그리드</span><br><span class="hint">불가 · 선호</span></span>
+              </a>
+              <a class="flow-step" href="respond.html?screen=4">
+                <span class="num">4</span>
+                <span><span class="label">입력 완료</span></span>
+              </a>
+            </div>
+          </div>
+
+          <div class="flow-connector">집계</div>
+
+          <div class="flow-block">
+            <div class="flow-block-head">
+              <span class="flow-role output">주최자</span>
+              <h3>가능한 시간</h3>
+            </div>
+            <div class="flow-steps">
+              <a class="flow-step" href="merge.html?screen=1">
+                <span class="num">1</span>
+                <span><span class="label">입력 현황</span></span>
+              </a>
+              <a class="flow-step" href="merge.html?screen=2">
+                <span class="num">2</span>
+                <span><span class="label">합산 히트맵</span><br><span class="hint">한눈에 비교</span></span>
+              </a>
+              <a class="flow-step" href="merge.html?screen=6">
+                <span class="num">↳</span>
+                <span><span class="label">개별 일정 겹쳐보기</span><br><span class="hint">이름 토글 · 레이어 합성</span></span>
+              </a>
+              <a class="flow-step" href="merge.html?screen=4">
+                <span class="num">4</span>
+                <span><span class="label">조율 요청</span></span>
+              </a>
+              <a class="flow-step" href="merge.html?screen=5">
+                <span class="num">5</span>
+                <span><span class="label">확정 완료</span></span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <p class="flow-note">
+          <strong>핵심 아이디어:</strong> 참석자는 구조화된 입력(요일·시간)만 하고, 주최자는 6명의 결과를 한 타임테이블에 겹쳐 봅니다.
+          히트맵에서 한눈에 보거나, <strong>개별 일정 겹쳐보기</strong>에서 이름을 토글하며 레이어를 합성할 수 있어요.
+        </p>
+      </div>
+    </section>
+
+    <section class="hub-section hub-section-nested">
+      <h2>플로우별 바로가기</h2>
+      <div class="flow-grid">
+        <article class="flow-card">
+          <h3>회의 만들기</h3>
+          <p class="file">create.html</p>
+          <p class="desc">주최자가 회의 정보를 설정하고 참석자에게 입력 링크를 보냅니다.</p>
+          <div class="chip-row">
+            <a class="chip" href="create.html?screen=1">이름</a>
+            <a class="chip" href="create.html?screen=2">기간</a>
+            <a class="chip" href="create.html?screen=3">참석자</a>
+            <a class="chip" href="create.html?screen=4">검토</a>
+          </div>
+          <div class="btn-row">
+            <a href="create.html" class="primary">시작</a>
+          </div>
+        </article>
+
+        <article class="flow-card">
+          <h3>일정 입력</h3>
+          <p class="file">respond.html</p>
+          <p class="desc">참석자가 이름 확인 후, 불가 요일과 시간을 그리드로 입력합니다.</p>
+          <div class="chip-row">
+            <a class="chip" href="respond.html?screen=0">이름</a>
+            <a class="chip" href="respond.html?screen=3">요일</a>
+            <a class="chip" href="respond.html?screen=2">시간</a>
+            <a class="chip" href="respond.html?screen=4">완료</a>
+            <a class="chip" href="respond.html?screen=1">재입력</a>
+          </div>
+          <div class="btn-row">
+            <a href="respond.html" class="primary">시작</a>
+          </div>
+        </article>
+
+        <article class="flow-card">
+          <h3>가능한 시간</h3>
+          <p class="file">merge.html</p>
+          <p class="desc">입력 현황 확인 → 히트맵에서 후보 선택 → 조율 또는 확정.</p>
+          <div class="chip-row">
+            <a class="chip" href="merge.html?screen=1">현황</a>
+            <a class="chip" href="merge.html?screen=2">히트맵</a>
+            <a class="chip" href="merge.html?screen=6">레이어</a>
+            <a class="chip" href="merge.html?screen=3">후보 없음</a>
+            <a class="chip" href="merge.html?screen=4">조율</a>
+            <a class="chip" href="merge.html?screen=5">확정</a>
+          </div>
+          <div class="btn-row">
+            <a href="merge.html" class="primary">시작</a>
+            <a href="merge.html?screen=2">히트맵만</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="hub-section hub-section-nested" id="overlays">
+      <h2>오버레이 · 피드백</h2>
+      <div class="overlay-grid">
+        <div class="overlay-item">
+          <div class="type">참석자 · 바텀시트</div>
+          <div class="title">이대로 입력을 완료할까요?</div>
+          <a href="overlays/view.html?title=이대로+입력을%0A완료할까요%3F&message=회의가+확정되기+전까지+다시+수정할+수+있어요.&confirm=완료하기&cancel=더+수정할게요&bg=../respond.html%3Fscreen%3D2">보기 →</a>
+        </div>
+        <div class="overlay-item">
+          <div class="type">주최자 · 바텀시트</div>
+          <div class="title">일정 입력 요청 보내기</div>
+          <a href="overlays/view.html?title=참석자에게%0A일정+입력을+요청할까요%3F&message=6명에게+입력+링크가+전달돼요.&confirm=요청+보내기&cancel=취소&bg=../create.html%3Fscreen%3D4">보기 →</a>
+        </div>
+        <div class="overlay-item">
+          <div class="type">주최자 · 바텀시트</div>
+          <div class="title">수 14:00 회의 확정</div>
+          <a href="overlays/view.html?title=수+14%3A00에%0A회의를+확정할까요%3F&message=6명+중+4명은+참석+가능해요.&confirm=확정하기&cancel=다시+볼게요&bg=../merge.html%3Fscreen%3D2">보기 →</a>
+        </div>
+        <div class="overlay-item">
+          <div class="type">토스트 · warning</div>
+          <div class="title">참석자 이름 미입력</div>
+          <a href="overlays/view.html?toast=참석자+이름을+입력해주세요&toastType=warning&bg=../create.html%3Fscreen%3D3">보기 →</a>
+        </div>
+        <div class="overlay-item">
+          <div class="type">토스트 · success</div>
+          <div class="title">입력 완료</div>
+          <a href="overlays/view.html?toast=일정+입력을+완료했어요&bg=../respond.html%3Fscreen%3D4">보기 →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="hub-section hub-section-nested">
+      <h2>디자인 시스템</h2>
+      <div class="flow-card">
+        <p class="desc" style="margin-bottom:12px">토큰 · 간격 · 레이아웃 패턴 — <code>base.css</code> · <a href="docs/view.html?doc=layout" style="color:var(--blue);font-weight:600">레이아웃 가이드</a></p>
+        <div class="btn-row">
+          <a href="components.html" class="primary">components.html 보기</a>
+        </div>
+      </div>
+    </section>
+    </details>
+
+    <section class="hub-section hub-section-muted">
+      <h2>설계 문서</h2>
+      <p class="hub-section-lead">문제 정의와 설계 결정을 함께 읽을 수 있어요.</p>
+      <div class="doc-grid">
+        <a class="doc-card" href="docs/view.html?doc=problem">
+          <h3>문제 정의</h3>
+          <p>주최자·참석자·조건 불일치 상황</p>
+        </a>
+        <a class="doc-card" href="docs/view.html?doc=process">
+          <h3>설계 프로세스</h3>
+          <p>7단계 프레임워크 정리</p>
+        </a>
+        <a class="doc-card" href="docs/view.html?doc=decisions">
+          <h3>설계 결정</h3>
+          <p>히트맵 규칙 · 의도적 미구현</p>
+        </a>
+        <a class="doc-card" href="docs/view.html?doc=heatmap-rules">
+          <h3>히트맵 규칙</h3>
+          <p>필수/선택 · 요일 블록</p>
+        </a>
+        <a class="doc-card" href="docs/view.html?doc=layout">
+          <h3>레이아웃 가이드</h3>
+          <p>4pt 그리드 · 간격 토큰</p>
+        </a>
+        <a class="doc-card" href="docs/view.html?doc=states">
+          <h3>화면 상태</h3>
+          <p>플로우별 상태 정리</p>
+        </a>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

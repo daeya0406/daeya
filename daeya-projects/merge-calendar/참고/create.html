@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>일정 맞추기 — 회의 만들기</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/ui.css" />
+  <style>
+    :root {
+      --blue: #3182F6;
+      --blue-50: #E8F3FF;
+      --bg: #F2F4F6;
+      --white: #FFFFFF;
+      --grey-900: #191F28;
+      --grey-700: #4E5968;
+      --grey-500: #8B95A1;
+      --grey-300: #D1D6DB;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #e5e8eb;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 24px;
+    }
+    .phone {
+      width: 390px;
+      min-height: 844px;
+      background: var(--bg);
+      border-radius: 40px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,.15);
+      position: relative;
+    }
+    .screen { display: none; min-height: 844px; padding-bottom: 100px; }
+    .screen.has-secondary-cta { padding-bottom: 160px; }
+    .screen.active { display: block; }
+    .status { height: 44px; padding: 14px 24px; font-weight: 600; font-size: 15px; }
+    .nav { display: flex; align-items: center; justify-content: center; height: 56px; position: relative; }
+    .nav .back { position: absolute; left: 20px; cursor: pointer; background: none; border: none; }
+    .nav h1 { font-size: 17px; font-weight: 600; }
+    .progress-bar {
+      display: flex; margin: 0 24px 16px; background: var(--grey-300); border-radius: 10px; overflow: hidden;
+    }
+    .progress-step {
+      flex: 1; height: 4px; background: var(--grey-300);
+      transition: background .2s ease;
+    }
+    .progress-step.done, .progress-step.active { background: var(--blue); }
+    .content { padding: 0 24px 16px; }
+    h2 { font-size: 22px; font-weight: 700; color: var(--grey-900); line-height: 1.4; margin-bottom: 8px; }
+    .sub { font-size: 14px; color: var(--grey-700); margin-bottom: 20px; }
+    .card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+    .card h3 { font-size: 13px; color: var(--grey-500); margin-bottom: 4px; }
+    .card p { font-size: 17px; font-weight: 600; color: var(--grey-900); }
+    .member { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .member-left { display: flex; align-items: center; gap: 12px; min-width: 0; flex: 1; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 40px;
+      font-size: 11px; font-weight: 600; padding: 4px 8px; border-radius: 6px;
+      text-align: center;
+      line-height: 1;
+    }
+    .badge.required { background: #E8F3FF; color: var(--blue); }
+    .badge.optional { background: var(--grey-300); color: var(--grey-700); }
+    .mandatory-mark { color: var(--blue); font-weight: 600; }
+    .field-card { padding: 16px; }
+    .field-card h3 { margin-bottom: 10px; }
+    .field-input {
+      width: 100%; border: none; background: transparent;
+      font-size: 17px; font-weight: 600; color: var(--grey-900);
+      outline: none; padding: 0;
+    }
+    .field-input::placeholder { color: var(--grey-500); font-weight: 500; }
+    .add-member {
+      width: 100%; padding: 16px; border: 1.5px dashed var(--grey-300);
+      border-radius: 16px; background: transparent; color: var(--blue);
+      font-size: 15px; font-weight: 600; cursor: pointer;
+    }
+    .cta {
+      position: absolute; bottom: 24px; left: 24px; right: 24px;
+      background: var(--blue); color: var(--white); border: none;
+      border-radius: 16px; height: 56px; font-size: 17px; font-weight: 600;
+      cursor: pointer;
+    }
+    .cta:disabled { opacity: .45; cursor: not-allowed; }
+    .cta.secondary {
+      background: var(--white); color: var(--blue);
+      border: 1.5px solid var(--blue);
+      bottom: 92px;
+    }
+
+    /* Calendar */
+    .calendar-card h3 { margin-bottom: 12px; }
+    .cal-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .cal-header span { font-size: 15px; font-weight: 600; color: var(--grey-900); }
+    .cal-nav {
+      border: none; background: none; color: var(--grey-700);
+      cursor: pointer; padding: 4px 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cal-weekdays {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px;
+      margin-bottom: 4px;
+    }
+    .cal-weekdays span {
+      text-align: center; font-size: 11px; font-weight: 600; color: var(--grey-500);
+      padding: 4px 0;
+    }
+    .cal-grid {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px;
+    }
+    .cal-day {
+      aspect-ratio: 1; border: none; background: transparent;
+      border-radius: 8px; font-size: 13px; font-weight: 500; color: var(--grey-900);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+    .cal-day.empty { pointer-events: none; }
+    .cal-day:hover:not(.empty):not(.range):not(.start):not(.end) { background: var(--bg); }
+    .cal-day.range { background: var(--blue-50); color: var(--blue); }
+    .cal-day.start, .cal-day.end { background: var(--blue); color: var(--white); font-weight: 600; }
+    .cal-day.disabled { color: var(--grey-300); cursor: not-allowed; pointer-events: none; }
+    .card .cal-selected { font-size: 12px; font-weight: 500; color: var(--grey-500); margin-top: 20px; text-align: right; }
+
+    /* Editable member row */
+    .member-row {
+      display: flex; align-items: center; gap: 8px;
+      position: relative;
+    }
+    .member-row:has(.role-select-trigger[aria-expanded="true"]) {
+      z-index: 40;
+    }
+    .member-row .member-left {
+      display: inline-flex; align-items: center; gap: 8px;
+      min-width: 0; flex: 0 1 auto;
+    }
+    .member-row .member-name {
+      width: auto; min-width: 3ch; max-width: 10em;
+      field-sizing: content;
+      border: none; background: transparent;
+      font-size: 15px; font-weight: 500; color: var(--grey-900); outline: none;
+      padding: 0;
+    }
+    .member-row .member-name::placeholder { color: var(--grey-500); }
+    .host-tag { font-size: 13px; color: var(--grey-500); flex-shrink: 0; white-space: nowrap; }
+
+    .role-select {
+      position: relative;
+      flex-shrink: 0;
+    }
+    .role-select-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      border: none;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 5px 4px 5px 8px;
+      cursor: pointer;
+      transition: opacity .15s ease;
+      line-height: 1;
+    }
+    .role-select-trigger.required { background: #E8F3FF; color: var(--blue); }
+    .role-select-trigger.optional { background: var(--grey-300); color: var(--grey-700); }
+    .role-select-trigger[aria-expanded="true"] { opacity: 0.92; }
+    .role-select-chevron {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: inherit;
+      opacity: 0.7;
+      transition: transform .2s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+    .role-select-trigger[aria-expanded="true"] .role-select-chevron {
+      transform: rotate(180deg);
+    }
+    .role-select-content {
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 0;
+      min-width: 88px;
+      background: var(--white);
+      border-radius: 12px;
+      padding: 4px;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.04);
+      z-index: 30;
+      transform-origin: top right;
+      opacity: 0;
+      transform: scale(0.96) translateY(-4px);
+      pointer-events: none;
+      transition: opacity .16s ease, transform .16s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+    .role-select-content.open {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+      pointer-events: auto;
+    }
+    .role-select-item {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 10px 10px 10px 12px;
+      border: none;
+      background: transparent;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--grey-900);
+      cursor: pointer;
+      text-align: left;
+    }
+    .role-select-item:hover,
+    .role-select-item:focus-visible {
+      background: var(--bg);
+      outline: none;
+    }
+    .role-select-item[aria-selected="true"] {
+      font-weight: 600;
+    }
+    .role-select-check {
+      width: 16px;
+      height: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--blue);
+      flex-shrink: 0;
+    }
+
+    .member-delete {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      margin-left: auto;
+      border: none;
+      background: transparent;
+      color: var(--grey-500);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      transition: color .15s ease;
+    }
+    .member-delete:hover { color: var(--grey-700); }
+    .member-delete svg { width: 16px; height: 16px; }
+    .member-row[data-host="true"] .member-delete { visibility: hidden; pointer-events: none; }
+  </style>
+</head>
+<body>
+  <div class="phone" id="app">
+    <!-- Step 1: Meeting name -->
+    <div class="screen active" data-screen="1">
+      <div class="status">9:41</div>
+      <div class="nav"><h1>회의 만들기</h1></div>
+      <div class="progress-bar" data-progress="1">
+        <div class="progress-step active"></div>
+        <div class="progress-step"></div>
+        <div class="progress-step"></div>
+      </div>
+      <div class="content">
+        <h2>회의 이름을 입력해요</h2>
+        <p class="sub">참석자에게 보이는 회의 제목이에요</p>
+        <div class="card field-card">
+          <h3>회의 이름</h3>
+          <input class="field-input" id="meeting-name" type="text" value="팀 킥오프 미팅" aria-label="회의 이름" />
+        </div>
+      </div>
+      <button type="button" class="cta" id="step1-next">다음</button>
+    </div>
+
+    <!-- Step 2: Period -->
+    <div class="screen" data-screen="2">
+      <div class="status">9:41</div>
+      <div class="nav"><button type="button" class="back" onclick="go(1)">←</button><h1>회의 만들기</h1></div>
+      <div class="progress-bar" data-progress="2">
+        <div class="progress-step done"></div>
+        <div class="progress-step active"></div>
+        <div class="progress-step"></div>
+      </div>
+      <div class="content">
+        <h2>조율 기간을 선택해요</h2>
+        <p class="sub">이 기간 안에서 회의 시간을 맞춰요</p>
+        <div class="card calendar-card">
+          <div class="cal-header">
+            <button type="button" class="cal-nav" id="cal-prev" aria-label="이전 달">‹</button>
+            <span id="cal-month-label">2026년 7월</span>
+            <button type="button" class="cal-nav" id="cal-next" aria-label="다음 달">›</button>
+          </div>
+          <div class="cal-weekdays">
+            <span>월</span><span>화</span><span>수</span><span>목</span><span>금</span>
+          </div>
+          <div class="cal-grid" id="cal-grid"></div>
+          <p class="cal-selected" id="cal-selected"></p>
+        </div>
+      </div>
+      <button type="button" class="cta" onclick="go(3)">다음</button>
+    </div>
+
+    <!-- Step 3: Members -->
+    <div class="screen" data-screen="3">
+      <div class="status">9:41</div>
+      <div class="nav"><button type="button" class="back" onclick="go(2)">←</button><h1>회의 만들기</h1></div>
+      <div class="progress-bar" data-progress="3">
+        <div class="progress-step done"></div>
+        <div class="progress-step done"></div>
+        <div class="progress-step active"></div>
+      </div>
+      <div class="content">
+        <h2>참석자를 추가해요</h2>
+        <p class="sub">필수·선택 참석 여부를 설정해요</p>
+        <div class="member-editor">
+          <div id="member-list" class="member-list"></div>
+          <button type="button" class="add-member" id="add-member-btn"><span class="icon-plus"></span> 인원 추가</button>
+        </div>
+      </div>
+      <button type="button" class="cta" id="step3-next">회의 만들기</button>
+    </div>
+
+    <!-- Step 4: Review & send -->
+    <div class="screen has-secondary-cta" data-screen="4">
+      <div class="status">9:41</div>
+      <div class="nav"><button type="button" class="back" onclick="go(3)">←</button><h1>회의 만들기</h1></div>
+      <div class="content">
+        <h2>이대로 요청을 보낼까요?</h2>
+        <div class="card review-summary">
+          <dl class="review-facts">
+            <div class="review-fact">
+              <dt>회의 이름</dt>
+              <dd id="review-name">팀 킥오프 미팅</dd>
+            </div>
+            <div class="review-fact">
+              <dt>기간</dt>
+              <dd id="review-period">7/13 (월) – 7/24 (금)</dd>
+            </div>
+          </dl>
+        </div>
+        <p class="review-section-label" id="review-member-count">참석자 (6명)</p>
+        <ul class="member-list" id="review-members"></ul>
+      </div>
+      <button type="button" class="cta secondary" id="copy-link-btn">요청 링크 복사하기</button>
+      <button type="button" class="cta" id="send-request-btn">일정 입력 요청 보내기</button>
+    </div>
+  </div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/flow-nav.js"></script>
+  <script>
+    const REQUEST_URL = 'https://toss.im/schedule/k7x2m9';
+    const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토'];
+    const PRESET_MEMBERS = [
+      { name: '김다연', required: true, host: true },
+      { name: '김민수', required: true },
+      { name: '이지영', required: true },
+      { name: '박현우', required: false },
+      { name: '최수진', required: false },
+      { name: '정태호', required: false },
+    ];
+    const MAX_WEEKDAYS = 10;
+
+    let calYear;
+    let calMonth;
+    let rangeStart;
+    let rangeEnd;
+    let pickingEnd = false;
+
+    function startOfDay(d = new Date()) {
+      const x = new Date(d);
+      x.setHours(0, 0, 0, 0);
+      return x;
+    }
+
+    function isWeekday(d) {
+      const day = d.getDay();
+      return day >= 1 && day <= 5;
+    }
+
+    function nextWeekday(d) {
+      const x = startOfDay(d);
+      while (!isWeekday(x)) x.setDate(x.getDate() + 1);
+      return x;
+    }
+
+    function getMondayOfWeek(d) {
+      const x = startOfDay(d);
+      const day = x.getDay();
+      x.setDate(x.getDate() - (day === 0 ? 6 : day - 1));
+      return x;
+    }
+
+    function addWeekdays(start, count) {
+      const d = startOfDay(start);
+      let weekdays = 1;
+      while (weekdays < count) {
+        d.setDate(d.getDate() + 1);
+        if (isWeekday(d)) weekdays++;
+      }
+      return d;
+    }
+
+    function weekdayCountBetween(a, b) {
+      const start = startOfDay(a);
+      const end = startOfDay(b);
+      const [s, e] = start <= end ? [start, end] : [end, start];
+      let count = 0;
+      const d = new Date(s);
+      while (d <= e) {
+        if (isWeekday(d)) count++;
+        d.setDate(d.getDate() + 1);
+      }
+      return count;
+    }
+
+    function initDefaultRange() {
+      rangeStart = nextWeekday(new Date());
+      rangeEnd = addWeekdays(rangeStart, MAX_WEEKDAYS);
+      calYear = rangeStart.getFullYear();
+      calMonth = rangeStart.getMonth();
+      pickingEnd = false;
+    }
+
+    function showScreen(n) {
+      const target = document.querySelector(`[data-screen="${n}"]`);
+      if (!target) return;
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      target.classList.add('active');
+      if (n <= 3) updateProgress(n);
+    }
+
+    const nav = FlowNav.wrap(showScreen, { defaultScreen: 1 });
+    const go = nav.go;
+
+    function updateProgress(step) {
+      document.querySelectorAll('.progress-bar').forEach(bar => {
+        const steps = bar.querySelectorAll('.progress-step');
+        steps.forEach((el, i) => {
+          const n = i + 1;
+          el.classList.toggle('done', n < step);
+          el.classList.toggle('active', n === step);
+        });
+      });
+    }
+
+    function fmtShort(d) {
+      return `${d.getMonth() + 1}/${d.getDate()} (${WEEKDAYS[d.getDay()]})`;
+    }
+
+    function fmtDisplayRange() {
+      return `${fmtShort(visibleRangeStart())} – ${fmtShort(visibleRangeEnd())}`;
+    }
+
+    function fmtRange() {
+      const start = visibleRangeStart();
+      const end = visibleRangeEnd();
+      return `${start.getMonth() + 1}/${start.getDate()} – ${end.getMonth() + 1}/${end.getDate()}`;
+    }
+
+    function sameDay(a, b) {
+      return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+    }
+
+    function inRange(d) {
+      const t = new Date(d).setHours(0, 0, 0, 0);
+      const s = new Date(rangeStart).setHours(0, 0, 0, 0);
+      const e = new Date(rangeEnd).setHours(0, 0, 0, 0);
+      return t >= Math.min(s, e) && t <= Math.max(s, e);
+    }
+
+    function dayDiff(a, b) {
+      return Math.round((new Date(b).setHours(0, 0, 0, 0) - new Date(a).setHours(0, 0, 0, 0)) / 86400000);
+    }
+
+    function clampRange(start, end) {
+      let s = startOfDay(start);
+      let e = startOfDay(end);
+      if (s > e) [s, e] = [e, s];
+      if (weekdayCountBetween(s, e) > MAX_WEEKDAYS) {
+        e = addWeekdays(s, MAX_WEEKDAYS);
+      }
+      return [s, e];
+    }
+
+    function visibleRangeStart() {
+      let start = startOfDay(rangeStart);
+      const end = startOfDay(rangeEnd);
+      if (isWeekday(start)) return start;
+      const d = new Date(start);
+      while (d <= end) {
+        if (isWeekday(d)) return new Date(d);
+        d.setDate(d.getDate() + 1);
+      }
+      return start;
+    }
+
+    function visibleRangeEnd() {
+      let end = startOfDay(rangeEnd);
+      const start = startOfDay(rangeStart);
+      if (end < start) end = new Date(start);
+      if (isWeekday(end)) return end;
+      const d = new Date(end);
+      while (d >= start) {
+        if (isWeekday(d)) return new Date(d);
+        d.setDate(d.getDate() - 1);
+      }
+      return end;
+    }
+
+    function updateCalLabel() {
+      document.getElementById('cal-selected').textContent =
+        `${fmtDisplayRange()} 선택됨`;
+    }
+
+    function appendDayCell(grid, d) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+
+      if (d.getMonth() !== calMonth) {
+        btn.className = 'cal-day empty';
+        grid.appendChild(btn);
+        return;
+      }
+
+      btn.className = 'cal-day';
+      btn.textContent = d.getDate();
+
+      const visStart = visibleRangeStart();
+      const visEnd = visibleRangeEnd();
+      if (sameDay(d, visStart)) btn.classList.add('start');
+      if (sameDay(d, visEnd)) btn.classList.add('end');
+      if (!sameDay(d, visStart) && !sameDay(d, visEnd) && inRange(new Date(d))) {
+        btn.classList.add('range');
+      }
+
+      if (pickingEnd && weekdayCountBetween(rangeStart, d) > MAX_WEEKDAYS) {
+        btn.classList.add('disabled');
+      }
+
+      btn.onclick = () => {
+        if (btn.classList.contains('disabled')) return;
+        if (!pickingEnd) {
+          rangeStart = new Date(d);
+          rangeEnd = new Date(d);
+          pickingEnd = true;
+        } else {
+          [rangeStart, rangeEnd] = clampRange(rangeStart, d);
+          pickingEnd = false;
+        }
+        updateCalLabel();
+        renderCalendar();
+      };
+      grid.appendChild(btn);
+    }
+
+    function renderCalendar() {
+      const grid = document.getElementById('cal-grid');
+      document.getElementById('cal-month-label').textContent = `${calYear}년 ${calMonth + 1}월`;
+      grid.innerHTML = '';
+
+      const monthEnd = new Date(calYear, calMonth + 1, 0);
+      let weekStart = getMondayOfWeek(new Date(calYear, calMonth, 1));
+      const lastMonday = getMondayOfWeek(monthEnd);
+
+      while (weekStart <= lastMonday) {
+        for (let i = 0; i < 5; i++) {
+          const d = new Date(weekStart);
+          d.setDate(weekStart.getDate() + i);
+          appendDayCell(grid, d);
+        }
+        weekStart.setDate(weekStart.getDate() + 7);
+      }
+    }
+
+    document.getElementById('cal-prev').onclick = () => {
+      calMonth--;
+      if (calMonth < 0) { calMonth = 11; calYear--; }
+      renderCalendar();
+    };
+    document.getElementById('cal-next').onclick = () => {
+      calMonth++;
+      if (calMonth > 11) { calMonth = 0; calYear++; }
+      renderCalendar();
+    };
+
+    let openRoleSelect = null;
+
+    function closeRoleSelect(roleSelect) {
+      const content = roleSelect.querySelector('.role-select-content');
+      const trigger = roleSelect.querySelector('.role-select-trigger');
+      content.classList.remove('open');
+      trigger.setAttribute('aria-expanded', 'false');
+      setTimeout(() => { content.hidden = true; }, 160);
+      if (openRoleSelect === roleSelect) openRoleSelect = null;
+    }
+
+    function openRoleSelectMenu(roleSelect) {
+      if (openRoleSelect && openRoleSelect !== roleSelect) closeRoleSelect(openRoleSelect);
+      const content = roleSelect.querySelector('.role-select-content');
+      const trigger = roleSelect.querySelector('.role-select-trigger');
+      content.hidden = false;
+      requestAnimationFrame(() => content.classList.add('open'));
+      trigger.setAttribute('aria-expanded', 'true');
+      openRoleSelect = roleSelect;
+    }
+
+    function setRoleValue(roleSelect, value) {
+      roleSelect.dataset.value = value;
+      roleSelect.querySelector('.role-select-label').textContent = value === 'required' ? '필수' : '선택';
+      const trigger = roleSelect.querySelector('.role-select-trigger');
+      trigger.classList.toggle('required', value === 'required');
+      trigger.classList.toggle('optional', value === 'optional');
+      roleSelect.querySelectorAll('.role-select-item').forEach((item) => {
+        const selected = item.dataset.value === value;
+        item.setAttribute('aria-selected', selected ? 'true' : 'false');
+        item.querySelector('.role-select-check').innerHTML = selected
+          ? LucideIcons.svg('check', { size: 14, strokeWidth: 2.5 })
+          : '';
+      });
+    }
+
+    function bindRoleSelect(roleSelect) {
+      const trigger = roleSelect.querySelector('.role-select-trigger');
+      trigger.onclick = (e) => {
+        e.stopPropagation();
+        const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+        if (isOpen) closeRoleSelect(roleSelect);
+        else openRoleSelectMenu(roleSelect);
+      };
+      roleSelect.querySelectorAll('.role-select-item').forEach((item) => {
+        item.onclick = (e) => {
+          e.stopPropagation();
+          setRoleValue(roleSelect, item.dataset.value);
+          closeRoleSelect(roleSelect);
+        };
+      });
+    }
+
+    document.addEventListener('click', () => {
+      if (openRoleSelect) closeRoleSelect(openRoleSelect);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && openRoleSelect) closeRoleSelect(openRoleSelect);
+    });
+
+    function syncMemberNameWidth(input) {
+      const text = input.value || input.placeholder || '이름';
+      input.size = Math.max(text.length, 2);
+    }
+
+    function createMemberRow({ name = '', required = true, host = false } = {}) {
+      const card = document.createElement('div');
+      card.className = 'card member-row';
+      if (host) card.dataset.host = 'true';
+      const initial = required ? 'required' : 'optional';
+      card.innerHTML = `
+        <div class="member-left">
+          <div class="role-select" data-value="${initial}" aria-label="필수/선택">
+            <button type="button" class="role-select-trigger ${initial}" aria-haspopup="listbox" aria-expanded="false">
+              <span class="role-select-label">${initial === 'required' ? '필수' : '선택'}</span>
+              <span class="role-select-chevron">${LucideIcons.svg('chevron-down', { size: 12, strokeWidth: 2.5 })}</span>
+            </button>
+            <div class="role-select-content" role="listbox" hidden>
+              <button type="button" class="role-select-item" data-value="required" role="option" aria-selected="${required}">
+                <span>필수</span>
+                <span class="role-select-check">${required ? LucideIcons.svg('check', { size: 14, strokeWidth: 2.5 }) : ''}</span>
+              </button>
+              <button type="button" class="role-select-item" data-value="optional" role="option" aria-selected="${!required}">
+                <span>선택</span>
+                <span class="role-select-check">${!required ? LucideIcons.svg('check', { size: 14, strokeWidth: 2.5 }) : ''}</span>
+              </button>
+            </div>
+          </div>
+          <input class="member-name" type="text" placeholder="이름" aria-label="참석자 이름" value="${name}" />
+        </div>
+        <button type="button" class="member-delete" aria-label="삭제">${LucideIcons.svg('x', { size: 16, strokeWidth: 2 })}</button>
+      `;
+      bindRoleSelect(card.querySelector('.role-select'));
+      const nameInput = card.querySelector('.member-name');
+      syncMemberNameWidth(nameInput);
+      nameInput.addEventListener('input', () => syncMemberNameWidth(nameInput));
+      card.querySelector('.member-delete').onclick = async (e) => {
+        e.stopPropagation();
+        const memberName = card.querySelector('.member-name').value.trim() || '이 참석자';
+        const ok = await TossUI.confirm({
+          title: `${memberName}님을\n목록에서 삭제할까요?`,
+          confirmText: '삭제하기',
+          cancelText: '취소',
+        });
+        if (ok) {
+          card.remove();
+          TossUI.toast('참석자를 삭제했어요', { type: 'success' });
+        }
+      };
+      return card;
+    }
+
+    function initMembers() {
+      const list = document.getElementById('member-list');
+      PRESET_MEMBERS.forEach(m => list.appendChild(createMemberRow(m)));
+    }
+
+    document.getElementById('add-member-btn').onclick = () => {
+      document.getElementById('member-list').appendChild(createMemberRow({ required: false }));
+    };
+
+    const meetingNameInput = document.getElementById('meeting-name');
+    const step1Next = document.getElementById('step1-next');
+
+    function validateStep1() {
+      step1Next.disabled = !meetingNameInput.value.trim();
+    }
+
+    meetingNameInput.addEventListener('input', validateStep1);
+    step1Next.onclick = () => {
+      if (!meetingNameInput.value.trim()) {
+        TossUI.toast('회의 이름을 입력해주세요', { type: 'warning' });
+        meetingNameInput.focus();
+        return;
+      }
+      go(2);
+    };
+
+    function validateMembers() {
+      const rows = [...document.querySelectorAll('#member-list .member-row')];
+      if (!rows.length) {
+        TossUI.toast('참석자를 한 명 이상 추가해주세요', { type: 'warning' });
+        return false;
+      }
+      const emptyInput = rows
+        .map(row => row.querySelector('.member-name'))
+        .find(input => !input.value.trim());
+      if (emptyInput) {
+        TossUI.toast('참석자 이름을 입력해주세요', { type: 'warning' });
+        emptyInput.focus();
+        return false;
+      }
+      return true;
+    }
+
+    function getAllMembers() {
+      return [...document.querySelectorAll('#member-list .member-row')].map(row => ({
+        name: row.querySelector('.member-name').value.trim(),
+        required: row.querySelector('.role-select').dataset.value === 'required',
+        host: row.dataset.host === 'true',
+      }));
+    }
+
+    function reviewMemberBadge(m) {
+      if (m.host) return '<span class="badge host">주최</span>';
+      return `<span class="badge ${m.required ? 'required' : 'optional'}">${m.required ? '필수' : '선택'}</span>`;
+    }
+
+    function renderReviewMembers(members) {
+      const el = document.getElementById('review-members');
+      el.innerHTML = members.map(m => `
+        <li class="card member">
+          <span class="member-name">${m.name}</span>
+          ${reviewMemberBadge(m)}
+        </li>
+      `).join('');
+    }
+
+    function goToReview() {
+      if (!validateMembers()) return;
+      const members = getAllMembers();
+      const req = members.filter(m => m.required).length;
+      const opt = members.filter(m => !m.required).length;
+      const name = meetingNameInput.value.trim() || '팀 킥오프 미팅';
+      document.getElementById('review-name').textContent = name;
+      document.getElementById('review-period').textContent = fmtDisplayRange();
+      document.getElementById('review-member-count').textContent = `참석자 (${members.length}명)`;
+      renderReviewMembers(members);
+      go(4);
+    }
+
+    function copyRequestLink() {
+      navigator.clipboard.writeText(REQUEST_URL)
+        .then(() => TossUI.toast('요청 링크를 복사했어요', { type: 'success' }))
+        .catch(() => TossUI.toast('복사에 실패했어요', { type: 'warning' }));
+    }
+
+    async function sendRequest() {
+      const ok = await TossUI.confirm({
+        title: '참석자에게\n일정 입력을 요청할까요?',
+        message: '6명에게 입력 링크가 전달돼요.',
+        confirmText: '요청 보내기',
+        cancelText: '취소',
+      });
+      if (!ok) return;
+      TossUI.toast('일정 입력 요청을 보냈어요', { type: 'success' });
+      setTimeout(() => { location.href = 'merge.html'; }, 900);
+    }
+
+    document.getElementById('copy-link-btn').onclick = copyRequestLink;
+    document.getElementById('send-request-btn').onclick = sendRequest;
+    document.getElementById('step3-next').onclick = goToReview;
+
+    initDefaultRange();
+    renderCalendar();
+    updateCalLabel();
+    initMembers();
+    validateStep1();
+
+    function bindEnterToPrimaryCta() {
+      document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Enter') return;
+        if (e.target.tagName === 'TEXTAREA') return;
+        if (e.target.closest('button.cta, .cal-grid, .bar-tab')) return;
+        if (e.target.matches('button.role-select-trigger, button.role-select-item, button.member-delete, button.cal-nav, button.add-member, button.back')) return;
+
+        const active = document.querySelector('.screen.active');
+        const cta = active?.querySelector('button.cta:not(.secondary):not(:disabled)');
+        if (!cta) return;
+
+        e.preventDefault();
+        cta.click();
+      });
+    }
+
+    bindEnterToPrimaryCta();
+    nav.init();
+    initLucideIcons();
+  </script>
+</body>
+</html>

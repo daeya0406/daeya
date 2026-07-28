@@ -1,0 +1,22 @@
+'use client';
+
+import { useState, useMemo } from 'react';
+import { DatePicker } from '@/shared/ui/DatePicker';
+import { Badge } from '@/shared/ui/Badge';
+import dayjs from 'dayjs';
+
+const DEFAULT_DATE = dayjs('2025-12-04').toDate(); // SSR/CSR 포맷 맞춤
+
+export function DatePickerDemo() {
+  const [date, setDate] = useState<Date | null>(DEFAULT_DATE);
+  const display = useMemo(() => (date ? dayjs(date).format('YYYY.MM.DD') : '선택 전'), [date]);
+
+  return (
+    <div className="space-y-3">
+      <DatePicker value={date ?? undefined} onChange={(d) => setDate(d)} />
+      <span className="block text-xs tracking-[0.01em]">
+        선택 날짜: <Badge variant="outline">{display}</Badge>
+      </span>
+    </div>
+  );
+}

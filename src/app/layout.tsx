@@ -31,8 +31,20 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
       data-theme={initialTheme}
       className={initialTheme === 'dark' ? 'dark' : undefined}
     >
-      <body className="flex min-h-screen flex-col transition-colors">
-        {/* GA 추가 Start */}
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css"
+        />
+      </head>
+      <body className="relative flex min-h-[100dvh] flex-col transition-colors">
+        <div
+          aria-hidden
+          className="pointer-events-none fixed inset-0 z-[60] opacity-[0.028] mix-blend-overlay dark:opacity-[0.04]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+          }}
+        />
         <Script
           id="gtm-head"
           strategy="afterInteractive"
@@ -60,7 +72,6 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
             `,
           }}
         />
-        {/* GA 추가 End */}
         <ThemeProvider initialTheme={initialTheme}>
           <LayoutModeProvider>
             <ReactQueryProvider>

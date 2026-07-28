@@ -1,0 +1,85 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+@import "tailwindcss";
+
+:root {
+  --blue: #3182f6;
+  --blue-50: #e8f3ff;
+  --bg: #f2f4f6;
+  --grey-900: #191f28;
+  --grey-700: #4e5968;
+  --grey-500: #8b95a1;
+  --grey-300: #d1d6db;
+  --red: #f04452;
+  --amber: #ffdc64;
+}
+
+@theme inline {
+  --color-toss-blue: var(--blue);
+  --color-toss-blue-50: var(--blue-50);
+  --color-toss-bg: var(--bg);
+  --color-toss-ink: var(--grey-900);
+  --color-toss-muted: var(--grey-700);
+  --color-toss-faint: var(--grey-500);
+  --color-toss-line: var(--grey-300);
+  --color-toss-red: var(--red);
+  --color-toss-amber: var(--amber);
+  --font-sans: "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: #e5e8eb;
+  color: var(--grey-900);
+  min-height: 100vh;
+}
+
+/* Field cards — kill Safari/Chrome autofill & default focus box */
+.field-card {
+  display: block;
+  border-radius: 16px;
+  background: #fff;
+  padding: 16px;
+  transition: box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.field-card:focus-within {
+  box-shadow: 0 0 0 2px var(--blue);
+}
+
+.field-input {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  font-size: 17px;
+  line-height: 1.4;
+  color: var(--grey-900);
+  outline: none;
+  box-shadow: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.field-input::placeholder {
+  color: var(--grey-500);
+}
+
+.field-input:focus,
+.field-input:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Autofill paints a harsh rect — force it to match the white card */
+.field-input:-webkit-autofill,
+.field-input:-webkit-autofill:hover,
+.field-input:-webkit-autofill:focus,
+.field-input:-webkit-autofill:active {
+  -webkit-text-fill-color: var(--grey-900);
+  caret-color: var(--grey-900);
+  box-shadow: 0 0 0 1000px #fff inset;
+  transition: background-color 99999s ease-out;
+}

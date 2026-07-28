@@ -1,3 +1,7 @@
-export { HomeHero } from './HomeHero';
-export { HomeProjects } from './HomeProjects';
-export { HomeCta } from './HomeCta';
+export {
+  HomeHero,
+  HomeWorkPreview,
+  HomeCareerSection,
+  HomeHobbyTeaser,
+  HomeCta,
+} from './HomeSections';

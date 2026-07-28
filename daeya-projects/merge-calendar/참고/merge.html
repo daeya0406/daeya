@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>일정 맞추기 — 가능한 시간</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/ui.css" />
+  <style>
+    :root {
+      --blue: #3182F6;
+      --blue-50: #E8F3FF;
+      --bg: #F2F4F6;
+      --white: #FFFFFF;
+      --grey-900: #191F28;
+      --grey-700: #4E5968;
+      --grey-500: #8B95A1;
+      --grey-300: #D1D6DB;
+      --red: #F04452;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #e5e8eb;
+      display: flex; justify-content: center; align-items: flex-start;
+      min-height: 100vh; padding: 24px;
+    }
+    .phone {
+      width: 390px; min-height: 844px; background: var(--bg);
+      border-radius: 40px; overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,.15); position: relative;
+    }
+    .screen { display: none; min-height: 844px; padding-bottom: 100px; }
+    .screen.has-secondary-cta { padding-bottom: 188px; }
+    .screen.active { display: block; }
+    .screen.active:has(.check),
+    .screen.active:has(.empty-state) {
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 0;
+    }
+    .status { height: 44px; padding: 14px 24px; font-weight: 600; font-size: 15px; }
+    .nav { display: flex; align-items: center; justify-content: center; height: 56px; position: relative; }
+    .nav .back { position: absolute; left: 20px; cursor: pointer; background: none; border: none; }
+    .mandatory-mark { color: var(--blue); font-weight: 600; }
+    .badge {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 40px; font-size: 11px; font-weight: 600;
+      padding: 4px 8px; border-radius: 6px; line-height: 1;
+    }
+    .badge.done { background: #E8F3FF; color: var(--blue); min-width: 48px; }
+    .badge.wait { background: var(--grey-300); color: var(--grey-500); min-width: 48px; }
+    .badge.attend { background: #E8F3FF; color: var(--blue); min-width: 40px; }
+    .badge.pending { background: #FFF5E0; color: #B8730A; min-width: 48px; }
+    .badge.absent { background: rgba(240,68,82,.12); color: var(--red); min-width: 40px; }
+    .attendee-row { display: flex; align-items: center; justify-content: space-between; padding: 4px 0; font-size: 14px; }
+    .bar-tabs { display: flex; position: relative; margin-bottom: 20px; border-bottom: 1px solid var(--grey-300); }
+    .bar-tab {
+      flex: 1; padding: 12px 0 14px; text-align: center;
+      font-size: 15px; font-weight: 500; color: var(--grey-500);
+      background: none; border: none; cursor: pointer; position: relative;
+    }
+    .bar-tab.active { color: var(--blue); font-weight: 600; }
+    .bar-tab.active::after {
+      content: ''; position: absolute; bottom: -1px; left: 0; right: 0;
+      height: 2px; background: var(--blue);
+    }
+    .grid-wrap { background: var(--white); border-radius: 16px; overflow-x: auto; }
+    .grid-wrap.interactive { user-select: none; -webkit-user-select: none; }
+    .grid { display: grid; grid-template-columns: 36px repeat(5, 1fr); gap: 2px; font-size: 10px; }
+    .grid .day { text-align: center; font-weight: 600; color: var(--grey-700); padding: 4px; }
+    .grid .hour { color: var(--grey-500); display: flex; align-items: center; }
+    .heatmap .cell.best { background: var(--blue-50); border: 2px solid transparent; }
+    .heatmap .cell.coord { background: rgba(49,130,246,.12); border: 2px solid transparent; }
+    .heatmap .cell.ok { background: rgba(209,214,219,.3); border: 2px solid transparent; }
+    .heatmap .cell.bad, .heatmap .cell.disabled {
+      background: rgba(209,214,219,.55); opacity: 0.55;
+      cursor: not-allowed; pointer-events: none;
+    }
+    .heatmap .cell.inactive { cursor: default; pointer-events: none; }
+    .heatmap .cell.inactive.coord { opacity: 0.85; }
+    .heatmap .cell.selectable {
+      cursor: pointer;
+      transition: border-color .15s ease, background .15s ease;
+    }
+    .heatmap .cell.selectable:hover { border-color: rgba(49,130,246,.35); }
+    .heatmap .cell.selectable.selected {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 1px rgba(49,130,246,.08);
+    }
+    .heatmap .cell.selectable.selected:not(.best) { background: var(--white); }
+    .heatmap .cell.selectable.selected.best { background: var(--white); }
+    .heatmap .cell {
+      position: relative; display: flex; align-items: center; justify-content: center;
+      padding: 2px; overflow: hidden;
+      border-radius: 4px;
+    }
+    .cell-pills {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 3px; width: 100%; pointer-events: none;
+    }
+    .avail-badge.heat {
+      display: inline-flex; align-items: center; justify-content: center;
+      max-width: 100%; font-size: 11px; font-weight: 600;
+      padding: 3px 5px; border-radius: 4px; line-height: 1;
+    }
+    .avail-badge.unavail { background: rgba(240,68,82,.2); color: var(--red); }
+    .avail-badge.pref { background: rgba(255,220,100,.45); color: #8B6914; }
+    .avail-badge.heat .mandatory-mark { font-size: 11px; }
+    .cell-label { font-size: 12px; font-weight: 600; text-align: center; line-height: 1.15; pointer-events: none; }
+    .cell-label.all-ok { color: var(--blue); }
+    .cell-label.impossible { color: var(--grey-500); font-size: 11px; font-weight: 600; }
+    .cta {
+      position: absolute; bottom: 24px; left: 24px; right: 24px;
+      background: var(--blue); color: var(--white); border: none;
+      border-radius: 16px; height: 56px; font-size: 17px; font-weight: 600; cursor: pointer;
+    }
+    .cta:disabled { opacity: .5; cursor: not-allowed; }
+    .cta.secondary {
+      background: var(--white); color: var(--blue);
+      border: 1.5px solid var(--blue);
+    }
+    .cta-assist {
+      position: absolute;
+      bottom: 92px;
+      left: 24px;
+      right: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 8px;
+    }
+    .cta-assist-hint {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--grey-500);
+      text-align: center;
+      line-height: 1.4;
+    }
+    .cta-assist .cta.secondary {
+      position: static;
+      width: 100%;
+    }
+    .cta.ghost {
+      background: transparent; color: var(--grey-700);
+      border: none; bottom: 160px; font-weight: 500;
+    }
+    .screen:not(:has(.cta:not(.ghost))) .cta.ghost { bottom: 24px; }
+    .cta-stack {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      right: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .cta-stack .cta {
+      position: static;
+    }
+    .cta-stack .cta.text-link {
+      background: transparent;
+      border: none;
+      color: var(--grey-700);
+      height: 44px;
+      font-size: 15px;
+      font-weight: 500;
+    }
+    .coord-target { background: var(--white); border-radius: 16px; padding: 16px; margin-bottom: 12px; }
+    .coord-target .section-label { font-size: 13px; color: var(--grey-500); margin-bottom: 12px; }
+    .coord-target .coord-time { font-size: 17px; font-weight: 600; color: var(--grey-900); }
+    .coord-target .coord-name-row { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+    .coord-target .coord-name { font-size: 15px; font-weight: 600; }
+    .avail-badge {
+      display: inline-flex; font-size: 11px; font-weight: 600;
+      padding: 4px 8px; border-radius: 6px;
+    }
+    .message-preview .section-label { font-size: 13px; color: var(--grey-500); margin-bottom: 8px; }
+    .message-preview .message-body { font-size: 15px; color: var(--grey-900); line-height: 1.5; }
+    #confirmed-time { font-size: 20px; font-weight: 600; color: var(--blue); margin: 12px 0; }
+    .member-toggles {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px;
+    }
+    .member-toggle {
+      display: inline-flex; align-items: center;
+      padding: 8px 12px; border-radius: 20px;
+      border: 1.5px solid var(--grey-300); background: var(--white);
+      font-size: 13px; font-weight: 600; color: var(--grey-700);
+      cursor: pointer; transition: all .15s ease;
+    }
+    .member-toggle.active {
+      border-color: var(--blue); background: var(--blue-50); color: var(--blue);
+    }
+    .member-toggle.pending {
+      cursor: not-allowed;
+      border: 1px solid #EEF0F2;
+      background: #F9FAFB;
+      color: #C5CBD3;
+      font-weight: 500;
+    }
+    .member-toggle.pending .mandatory-mark { color: #C5CBD3; }
+    .member-toggle .mandatory-mark { font-size: 12px; }
+    .layer-grid-wrap { position: relative; }
+    .layer-grid .layer-cell {
+      position: relative;
+      border-radius: 4px; overflow: hidden;
+      background: rgba(209, 214, 219, 0.22);
+      transition: background .2s ease, box-shadow .2s ease;
+    }
+    .layer-grid .layer-cell.is-blocked {
+      background: rgba(209, 214, 219, 0.55) !important;
+    }
+    .layer-density-key {
+      display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px;
+    }
+    .layer-density-key span {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; color: var(--grey-700); font-weight: 500;
+    }
+    .layer-density-key i {
+      display: inline-block; width: 28px; height: 12px; border-radius: 3px;
+      border: 1px solid rgba(0,0,0,.06);
+    }
+  </style>
+  <link rel="stylesheet" href="css/grid.css" />
+</head>
+<body>
+  <div class="phone" id="app">
+    <!-- 1. 입력 현황 -->
+    <div class="screen active" data-screen="1">
+      <div class="status">9:41</div>
+      <div class="nav"><button type="button" class="back" onclick="location.href='create.html'">←</button><h1>입력 현황</h1></div>
+      <div class="content">
+        <header class="screen-head">
+          <h2>팀 킥오프 미팅</h2>
+          <p class="screen-meta">4 / 6명 입력 완료</p>
+          <p class="sub">모두 입력되면 가능한 시간을 확인해요</p>
+        </header>
+        <ul class="member-list">
+          <li class="card member"><span class="member-name">김민수<span class="mandatory-mark">*</span></span><span class="badge done">완료</span></li>
+          <li class="card member"><span class="member-name">이지영<span class="mandatory-mark">*</span></span><span class="badge done">완료</span></li>
+          <li class="card member"><span class="member-name">박현우</span><span class="badge done">완료</span></li>
+          <li class="card member"><span class="member-name">최수진</span><span class="badge done">완료</span></li>
+          <li class="card member"><span class="member-name is-pending">정태호</span><span class="badge wait">대기중</span></li>
+          <li class="card member"><span class="member-name is-pending">김다연<span class="mandatory-mark">*</span></span><span class="badge wait">대기중</span></li>
+        </ul>
+      </div>
+      <button type="button" class="cta" id="view-results-btn">결과 보기</button>
+    </div>
+
+    <!-- 2. 가능한 시간 -->
+    <div class="screen has-secondary-cta" data-screen="2">
+      <div class="status">9:41</div>
+      <div class="nav"><button type="button" class="back" onclick="go(1)">←</button><h1>가능한 시간</h1></div>
+      <div class="content">
+        <h2>참여율 높은 시간</h2>
+        <p class="sub">참여율이 높은 시간을 확인할 수 있어요</p>
+        <div class="bar-tabs week-bar-tabs" data-week-tabs="heat">
+          <button type="button" class="bar-tab active" data-week="1">7/7 – 7/13</button>
+          <button type="button" class="bar-tab" data-week="2">7/14 – 7/20</button>
+        </div>
+        <div class="grid-wrap heatmap interactive">
+          <div class="grid" id="heat-grid"></div>
+        </div>
+      </div>
+      <div class="cta-assist">
+        <p class="cta-assist-hint">원하는 시간이 안 보이나요?</p>
+        <button type="button" class="cta secondary" id="open-layer-view-btn">일정 겹쳐보기</button>
+      </div>
+      <button type="button" class="cta" id="confirm-meeting-btn">수 14:00 확정하기</button>
+    </div>
+
+    <!-- 6. 개별 일정 겹쳐보기 -->
+    <div class="screen" data-screen="6">
+      <div class="status">9:41</div>
+      <div class="nav"><button type="button" class="back" onclick="go(2)">←</button><h1>개별 일정 겹쳐보기</h1></div>
+      <div class="content">
+        <h2>일정을 겹쳐볼게요</h2>
+        <p class="sub">참여자를 선택해 일정을 겹쳐 볼 수 있어요</p>
+        <div class="member-toggles" id="layer-toggles"></div>
+        <div class="bar-tabs week-bar-tabs" data-week-tabs="layer">
+          <button type="button" class="bar-tab active" data-week="1">7/7 – 7/13</button>
+          <button type="button" class="bar-tab" data-week="2">7/14 – 7/20</button>
+        </div>
+        <div class="grid-wrap layer-grid-wrap">
+          <div class="grid layer-grid" id="layer-grid"></div>
+        </div>
+        <div class="layer-density-key" aria-hidden="true">
+          <span><i style="background:linear-gradient(rgba(49,130,246,.2),rgba(49,130,246,.2)),#e8eaed"></i>가능</span>
+          <span><i style="background:linear-gradient(rgba(255,220,100,.4),rgba(255,220,100,.4)),#e8eaed"></i>비선호</span>
+          <span><i style="background:linear-gradient(rgba(240,68,82,.4),rgba(240,68,82,.4)),#e8eaed"></i>불가</span>
+        </div>
+      </div>
+      <button type="button" class="cta" id="layer-back-btn">돌아가기</button>
+    </div>
+
+    <!-- 3. 후보 없음 -->
+    <div class="screen" data-screen="3">
+      <div class="status">9:41</div>
+      <div class="nav"><button type="button" class="back" onclick="go(1)">←</button><h1>가능한 시간</h1></div>
+      <div class="empty-state">
+        <div class="empty-icon" id="empty-icon"></div>
+        <h2>가능한 시간이 없어요</h2>
+        <p class="sub">필수 참석자 일정이 모두 겹치거나,<br>조율 가능한 후보가 없어요.</p>
+      </div>
+      <div class="cta-stack">
+        <button type="button" class="cta" onclick="location.href='create.html'">회의 다시 만들기</button>
+        <button type="button" class="cta text-link" onclick="go(1)">입력 현황 보기</button>
+      </div>
+    </div>
+
+    <!-- 4. 유연 조율 -->
+    <div class="screen" data-screen="4">
+      <div class="status">9:41</div>
+      <div class="nav"><button type="button" class="back" onclick="go(2)">←</button><h1>조율 요청</h1></div>
+      <div class="content">
+        <h2>조율 필요한 시간이에요</h2>
+        <p class="sub">3순위 · 필수 3명 가능 · 선택 1명 불가</p>
+        <div class="coord-target">
+          <p class="section-label">조율 대상</p>
+          <p class="coord-time">목 15:00</p>
+          <div class="coord-name-row">
+            <p class="coord-name">정태호</p>
+            <span class="avail-badge unavail">불가</span>
+          </div>
+        </div>
+        <div class="card message-preview">
+          <p class="section-label">보낼 메시지</p>
+          <p class="message-body">정태호님, 목 15:00 팀 일정 조율 가능하실까요?<br>다른 분은 모두 가능해요 🙏</p>
+        </div>
+      </div>
+      <button type="button" class="cta" id="send-coord-btn">정태호님에게 확인 요청 보내기</button>
+    </div>
+
+    <!-- 5. 확정 완료 -->
+    <div class="screen" data-screen="5">
+      <div class="status">9:41</div>
+      <div class="check">
+        <div class="success-check" aria-hidden="true"></div>
+        <h2>회의 시간이 확정됐어요</h2>
+        <p id="confirmed-time">수요일 14:00 – 15:00</p>
+        <p class="sub">6명 중 4명 참석 · 1명 조율중 · 1명 불참</p>
+        <div class="card" style="text-align:left;margin:24px;min-width:240px;">
+          <p style="font-weight:600">팀 킥오프 미팅</p>
+          <p style="margin-top:8px;color:var(--grey-700)">7/9 (수) 14:00 · 1시간</p>
+          <p style="font-size:12px;color:var(--grey-500);margin:16px 0 8px">참석자</p>
+          <div class="attendee-row"><span>김민수<span class="mandatory-mark">*</span></span><span class="badge attend">참석</span></div>
+          <div class="attendee-row"><span>이지영<span class="mandatory-mark">*</span></span><span class="badge attend">참석</span></div>
+          <div class="attendee-row"><span>박현우</span><span class="badge attend">참석</span></div>
+          <div class="attendee-row"><span>최수진</span><span class="badge pending">조율중</span></div>
+          <div class="attendee-row"><span>정태호</span><span class="badge absent">불참</span></div>
+          <div class="attendee-row"><span>김다연<span class="mandatory-mark">*</span> (주최)</span><span class="badge attend">참석</span></div>
+        </div>
+      </div>
+      <div class="cta-stack">
+        <button type="button" class="cta" id="add-calendar-btn">캘린더에 추가</button>
+        <button type="button" class="cta text-link" onclick="location.href='create.html'">새로운 일정 조율</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/mock-data.js"></script>
+  <script src="js/flow-nav.js"></script>
+  <script>
+    const days = ScheduleMock.DAYS;
+    const hours = ScheduleMock.HOURS;
+    const params = new URLSearchParams(location.search);
+    const isEmptyDemo = params.get('empty') === '1';
+
+    let heatWeek = 1;
+    let selectedHeatSlot = { week: 1, key: '14-2', label: '수 14:00', type: 'best' };
+
+    const heatData = ScheduleMock.buildHeatData(isEmptyDemo);
+
+    let layerWeek = 1;
+    const layerActive = new Set(ScheduleMock.DEFAULT_LAYER_ACTIVE);
+
+    function buildLayerToggles() {
+      const wrap = document.getElementById('layer-toggles');
+      if (!wrap) return;
+      ScheduleMock.MEMBERS.filter(m => m.pending).forEach(m => layerActive.delete(m.id));
+      wrap.innerHTML = ScheduleMock.MEMBERS.map(m => {
+        const mark = m.required ? '<span class="mandatory-mark">*</span>' : '';
+        const active = !m.pending && layerActive.has(m.id) ? 'active' : '';
+        const pending = m.pending ? 'pending' : '';
+        const disabled = m.pending ? 'disabled' : '';
+        return `<button type="button" class="member-toggle ${active} ${pending}" data-id="${m.id}" ${disabled} aria-pressed="${!m.pending && layerActive.has(m.id)}" aria-disabled="${m.pending}">
+          ${m.name}${mark}
+        </button>`;
+      }).join('');
+      wrap.querySelectorAll('.member-toggle:not(:disabled)').forEach(btn => {
+        btn.onclick = () => {
+          const id = btn.dataset.id;
+          if (layerActive.has(id)) layerActive.delete(id);
+          else layerActive.add(id);
+          btn.classList.toggle('active', layerActive.has(id));
+          btn.setAttribute('aria-pressed', layerActive.has(id) ? 'true' : 'false');
+          buildLayerGrid(document.getElementById('layer-grid'), layerWeek);
+        };
+      });
+    }
+
+    function buildLayerGrid(el, week) {
+      if (!el) return;
+      const blockedCols = ScheduleMock.getBlockedCols(week);
+      el.innerHTML = '<div></div>' + days.map(d => `<div class="day">${d}</div>`).join('');
+
+      hours.forEach(h => {
+        el.innerHTML += `<div class="hour">${h}</div>`;
+        days.forEach((_, di) => {
+          const key = `${h}-${di}`;
+          const blocked = blockedCols.includes(di);
+          const activeIds = [...layerActive];
+
+          if (blocked) {
+            el.innerHTML += `<div class="layer-cell is-blocked" data-key="${key}"></div>`;
+            return;
+          }
+
+          const mix = ScheduleMock.computeLayerCell(activeIds, week, key);
+          const cellClass = ['layer-cell', mix.allClear ? 'all-clear' : ''].filter(Boolean).join(' ');
+
+          el.innerHTML += `<div class="${cellClass}" data-key="${key}" style="background:${mix.background}"></div>`;
+        });
+      });
+    }
+
+    function openLayerView() {
+      layerWeek = heatWeek;
+      document.querySelectorAll('[data-week-tabs="layer"] .bar-tab').forEach(tab => {
+        tab.classList.toggle('active', Number(tab.dataset.week) === layerWeek);
+      });
+      buildLayerToggles();
+      buildLayerGrid(document.getElementById('layer-grid'), layerWeek);
+      go(6);
+    }
+
+    function showScreen(n) {
+      const target = document.querySelector(`[data-screen="${n}"]`);
+      if (!target) return;
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      target.classList.add('active');
+    }
+
+    function onFlowScreen(screen) {
+      if (screen === 2) {
+        initDefaultSelection();
+        buildHeatmap(document.getElementById('heat-grid'), heatWeek);
+      }
+      if (screen === 6) {
+        buildLayerToggles();
+        buildLayerGrid(document.getElementById('layer-grid'), layerWeek);
+      }
+    }
+
+    const nav = FlowNav.wrap(showScreen, {
+      defaultScreen: 1,
+      resolveInitialScreen: () => (isEmptyDemo ? 3 : 1),
+      onNavigate: onFlowScreen,
+    });
+    const go = nav.go;
+
+    function getHeatCells(week) {
+      return heatData.cells[week] || {};
+    }
+
+    function countSelectableInWeek(week) {
+      const blockedCols = ScheduleMock.getBlockedCols(week);
+      const cells = getHeatCells(week);
+      return Object.entries(cells).filter(([key, meta]) => {
+        const di = Number(key.split('-')[1]);
+        if (blockedCols.includes(di)) return false;
+        return (meta.type === 'best' || meta.type === 'coord') && meta.rank >= 1 && meta.rank <= 3;
+      }).length;
+    }
+
+    function hasAnySelectableSlot() {
+      return countSelectableInWeek(1) + countSelectableInWeek(2) > 0;
+    }
+
+    function slotLabelFromKey(key) {
+      return ScheduleMock.slotLabel(key);
+    }
+
+    function formatConfirmedTime(label) {
+      const dayMap = { 월: '월요일', 화: '화요일', 수: '수요일', 목: '목요일', 금: '금요일' };
+      const m = label.match(/^(.)\s(\d+):00$/);
+      if (!m) return label;
+      const h = Number(m[2]);
+      return `${dayMap[m[1]]} ${m[2]}:00 – ${h + 1}:00`;
+    }
+
+    function updateConfirmCta() {
+      const btn = document.getElementById('confirm-meeting-btn');
+      if (!btn) return;
+      const onCurrentWeek = heatWeek === selectedHeatSlot.week && selectedHeatSlot.key;
+      if (!onCurrentWeek) {
+        btn.disabled = true;
+        btn.textContent = '시간을 선택해주세요';
+        return;
+      }
+      btn.disabled = false;
+      btn.textContent = `${selectedHeatSlot.label} 확정하기`;
+    }
+
+    function applyHeatSelection(gridEl) {
+      gridEl.querySelectorAll('.cell[data-key]').forEach(cell => {
+        const selected = heatWeek === selectedHeatSlot.week && cell.dataset.key === selectedHeatSlot.key;
+        cell.classList.toggle('selected', selected);
+        cell.setAttribute('aria-pressed', selected ? 'true' : 'false');
+      });
+      updateConfirmCta();
+    }
+
+    function bindHeatCells(gridEl, week) {
+      gridEl.querySelectorAll('.cell.selectable').forEach(cell => {
+        cell.onclick = () => {
+          selectedHeatSlot = {
+            week,
+            key: cell.dataset.key,
+            label: slotLabelFromKey(cell.dataset.key),
+            type: cell.dataset.type,
+          };
+          applyHeatSelection(gridEl);
+        };
+        cell.onkeydown = (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            cell.click();
+          }
+        };
+      });
+      applyHeatSelection(gridEl);
+    }
+
+    function buildHeatmap(el, week) {
+      const blockedCols = ScheduleMock.getBlockedCols(week);
+      const heatCells = getHeatCells(week);
+      const heatPills = heatData.pills[week] || {};
+
+      function pillHtml(entries) {
+        if (!entries?.length) return '';
+        return `<div class="cell-pills">${entries.map(p => {
+          const mark = p.required ? '<span class="mandatory-mark">*</span>' : '';
+          return `<span class="avail-badge heat ${p.status}">${p.name}${mark}</span>`;
+        }).join('')}</div>`;
+      }
+
+      function cellContent(t, key) {
+        if (t === 'best') return '<span class="cell-label all-ok">전원 가능</span>';
+        if (t === 'coord') return pillHtml(heatPills[key]);
+        return '';
+      }
+
+      el.innerHTML = '<div></div>' + days.map(d => `<div class="day">${d}</div>`).join('');
+
+      hours.forEach(h => {
+        el.innerHTML += `<div class="hour">${h}</div>`;
+        days.forEach((d, di) => {
+          const key = `${h}-${di}`;
+          const blocked = blockedCols.includes(di);
+          const meta = heatCells[key];
+          const t = blocked ? 'bad' : (meta?.type ?? 'impossible');
+          const rank = meta?.rank ?? 0;
+          const viable = t === 'best' || t === 'coord';
+          const canSelect = !blocked && viable && rank >= 1 && rank <= 3;
+          let classes = `cell ${blocked || t === 'impossible' ? 'bad' : t}`;
+          if (blocked || t === 'impossible') classes += ' disabled';
+          else if (canSelect) classes += ' selectable';
+          else classes += ' inactive';
+          const attrs = canSelect
+            ? ` data-key="${key}" data-type="${t}" data-rank="${rank}" role="button" tabindex="0"`
+            : ` data-key="${key}" data-type="${t}" data-rank="${rank}" aria-disabled="true"`;
+          el.innerHTML += `<div class="${classes}"${attrs}>${cellContent(t, key)}</div>`;
+        });
+      });
+
+      bindHeatCells(el, week);
+    }
+
+    function bindWeekTabs(group, onChange) {
+      document.querySelectorAll(`[data-week-tabs="${group}"] .bar-tab`).forEach(tab => {
+        tab.onclick = () => {
+          document.querySelectorAll(`[data-week-tabs="${group}"] .bar-tab`).forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          onChange(Number(tab.dataset.week));
+        };
+      });
+    }
+
+    function initDefaultSelection() {
+      if (!hasAnySelectableSlot()) return;
+      const firstWeek = countSelectableInWeek(1) > 0 ? 1 : 2;
+      const cells = getHeatCells(firstWeek);
+      const best = Object.entries(cells).find(([, m]) => m.rank === 1);
+      const entry = best || Object.entries(cells).find(([, m]) => m.rank <= 3);
+      if (!entry) return;
+      selectedHeatSlot = {
+        week: firstWeek,
+        key: entry[0],
+        label: slotLabelFromKey(entry[0]),
+        type: entry[1].type,
+      };
+      heatWeek = firstWeek;
+    }
+
+    function viewResults() {
+      if (hasAnySelectableSlot()) {
+        initDefaultSelection();
+        if (heatWeek === 2) {
+          document.querySelector('[data-week-tabs="heat"] .bar-tab[data-week="2"]')?.click();
+        }
+        buildHeatmap(document.getElementById('heat-grid'), heatWeek);
+        go(2);
+      } else {
+        go(3);
+      }
+    }
+
+    bindWeekTabs('heat', w => {
+      heatWeek = w;
+      buildHeatmap(document.getElementById('heat-grid'), w);
+    });
+
+    bindWeekTabs('layer', w => {
+      layerWeek = w;
+      buildLayerGrid(document.getElementById('layer-grid'), w);
+    });
+
+    document.getElementById('view-results-btn').onclick = viewResults;
+    document.getElementById('open-layer-view-btn').onclick = openLayerView;
+    document.getElementById('layer-back-btn').onclick = () => {
+      heatWeek = layerWeek;
+      document.querySelectorAll('[data-week-tabs="heat"] .bar-tab').forEach(tab => {
+        tab.classList.toggle('active', Number(tab.dataset.week) === heatWeek);
+      });
+      buildHeatmap(document.getElementById('heat-grid'), heatWeek);
+      go(2);
+    };
+
+    document.getElementById('confirm-meeting-btn').onclick = async () => {
+      if (heatWeek !== selectedHeatSlot.week || !selectedHeatSlot.key) return;
+      const { label, type } = selectedHeatSlot;
+      const needsCoord = type === 'coord';
+      const ok = await TossUI.confirm({
+        title: `${label}에\n회의를 확정할까요?`,
+        message: needsCoord
+          ? '일부 참석자는 조율이 필요해요. 확정 후 확인 요청을 보낼 수 있어요.'
+          : '6명 중 4명은 참석 가능해요. 나머지는 조율·불참 상태로 기록돼요.',
+        confirmText: '확정하기',
+        cancelText: '다시 볼게요',
+      });
+      if (ok) {
+        document.getElementById('confirmed-time').textContent = formatConfirmedTime(label);
+        go(5);
+      }
+    };
+
+    document.getElementById('send-coord-btn').onclick = async () => {
+      const ok = await TossUI.confirm({
+        title: '정태호님에게\n확인 요청을 보낼까요?',
+        message: '목 15:00 · 다른 분은 모두 가능해요.',
+        confirmText: '보내기',
+        cancelText: '취소',
+      });
+      if (ok) {
+        TossUI.toast('확인 요청을 보냈어요', { type: 'success' });
+        go(5);
+      }
+    };
+
+    document.getElementById('add-calendar-btn').onclick = () => {
+      TossUI.toast('캘린더에 추가했어요', { type: 'success' });
+    };
+
+    document.getElementById('empty-icon').innerHTML = LucideIcons.svg('calendar-x', { size: 32, strokeWidth: 1.75 });
+
+    nav.init();
+    if (!isEmptyDemo && nav.getCurrent() === 1) {
+      initDefaultSelection();
+      buildHeatmap(document.getElementById('heat-grid'), heatWeek);
+    }
+
+    initLucideIcons();
+  </script>
+</body>
+</html>

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>일정 맞추기 — UI Components</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/ui.css" />
+  <link rel="stylesheet" href="css/hub.css" />
+  <link rel="stylesheet" href="css/flow-patterns.css" />
+  <link rel="stylesheet" href="css/grid.css" />
+</head>
+<body class="proto-hub">
+  <div class="hub-wrap">
+    <header class="hub-top">
+      <div>
+        <h1>UI Components</h1>
+        <p class="lead">마크업·토큰 참고 · <code>css/base.css</code> · <a href="docs/view.html?doc=layout" style="color:var(--blue);font-weight:600">레이아웃 가이드</a></p>
+      </div>
+      <nav class="hub-nav">
+        <a href="index.html">← 플로우 맵</a>
+        <a href="docs/view.html?doc=states">화면 상태</a>
+        <a href="create.html" class="primary">프로토타입</a>
+      </nav>
+    </header>
+
+    <section class="comp-section">
+      <h2>Colors</h2>
+      <p class="comp-desc">프로토타입 전역 토큰 — <code>css/base.css</code></p>
+      <div class="comp-card">
+        <div class="color-row">
+          <div class="color-swatch"><div class="swatch" style="background:#3182F6"></div><span>--blue</span></div>
+          <div class="color-swatch"><div class="swatch" style="background:#E8F3FF"></div><span>--blue-50</span></div>
+          <div class="color-swatch"><div class="swatch" style="background:#F2F4F6"></div><span>--bg</span></div>
+          <div class="color-swatch"><div class="swatch" style="background:#191F28"></div><span>--grey-900</span></div>
+          <div class="color-swatch"><div class="swatch" style="background:#F04452"></div><span>--red</span></div>
+          <div class="color-swatch"><div class="swatch" style="background:#FFDC64"></div><span>--yellow</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="comp-section">
+      <h2>Layout & Spacing</h2>
+      <p class="comp-desc">4pt 그리드 · 화면 제목 블록 · 리스트 — <a href="docs/view.html?doc=layout" style="color:var(--blue);font-weight:600">레이아웃 가이드</a></p>
+      <div class="comp-grid">
+        <div class="comp-card">
+          <h3>Spacing tokens</h3>
+          <div class="spacing-row">
+            <div class="spacing-block"><i style="width:4px;height:24px"></i>--s-1 · 4</div>
+            <div class="spacing-block"><i style="width:8px;height:24px"></i>--s-2 · 8</div>
+            <div class="spacing-block"><i style="width:16px;height:24px"></i>--s-4 · 16</div>
+            <div class="spacing-block"><i style="width:24px;height:24px"></i>--s-6 · 24</div>
+          </div>
+          <p style="font-size:12px;color:var(--grey-500);margin-top:14px">페이지 좌우 <code>--page-x</code> · 카드 gap <code>--card-gap</code> · 섹션 <code>--section-gap</code></p>
+        </div>
+        <div class="comp-card">
+          <h3>Type scale</h3>
+          <div class="type-scale">
+            <div class="row"><span class="label">h2 · --text-title</span><span class="h2">팀 킥오프 미팅</span></div>
+            <div class="row"><span class="label">screen-meta</span><span class="cell" style="color:var(--blue);font-size:15px;font-weight:600">4 / 6명 입력 완료</span></div>
+            <div class="row"><span class="label">sub · --text-sub</span><span class="sub" style="margin:0">모두 입력되면 가능한 시간을 확인해요</span></div>
+            <div class="row"><span class="label">member-name</span><span style="font-size:17px;font-weight:600">김민수*</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="comp-section">
+      <h2>Buttons & Badges</h2>
+      <p class="comp-desc"><code>create</code> · <code>merge</code> CTA · 상태 뱃지 — <code>css/base.css</code></p>
+      <div class="comp-grid">
+        <div class="comp-card">
+          <h3>CTA</h3>
+          <div class="showcase-cta-row">
+            <button type="button" class="cta">다음</button>
+            <button type="button" class="cta secondary">요청 링크 복사</button>
+            <button type="button" class="cta ghost">입력 현황 보기</button>
+            <button type="button" class="cta" disabled>시간을 선택해주세요</button>
+          </div>
+          <p class="showcase-source"><a href="create.html?screen=1">create · screen 1</a></p>
+        </div>
+        <div class="comp-card">
+          <h3>Badges</h3>
+          <div class="comp-demo">
+            <span class="badge required">필수</span>
+            <span class="badge optional">선택</span>
+            <span class="badge host">주최</span>
+            <span class="badge done">완료</span>
+            <span class="badge wait">대기중</span>
+            <span class="badge attend">참석</span>
+            <span class="badge pending">조율중</span>
+            <span class="badge absent">불참</span>
+          </div>
+          <p class="showcase-source"><a href="create.html?screen=4">create · 검토</a> · <a href="merge.html?screen=1">merge · 입력 현황</a> · <a href="merge.html?screen=5">확정</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="comp-section">
+      <h2>Progress & Week tabs</h2>
+      <p class="comp-desc">회의 만들기 단계 · 주간 전환</p>
+      <div class="comp-grid">
+        <div class="comp-card">
+          <h3>Progress bar (create)</h3>
+          <div class="showcase-panel" style="padding-top:8px">
+            <div class="progress-bar">
+              <div class="progress-step done"></div>
+              <div class="progress-step active"></div>
+              <div class="progress-step"></div>
+            </div>
+          </div>
+          <p class="showcase-source"><a href="create.html?screen=2">create · screen 2</a></p>
+        </div>
+        <div class="comp-card">
+          <h3>Week tabs</h3>
+          <div class="showcase-panel">
+            <div class="bar-tabs">
+              <button type="button" class="bar-tab active">7/7 – 7/13</button>
+              <button type="button" class="bar-tab">7/14 – 7/20</button>
+            </div>
+          </div>
+          <p class="showcase-source"><a href="respond.html?screen=2">respond · 시간 입력</a> · <a href="merge.html?screen=2">merge · 히트맵</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="comp-section">
+      <h2>Field card</h2>
+      <p class="comp-desc">회의 이름 · 참석자 이름 입력</p>
+      <div class="comp-card">
+        <div class="showcase-panel">
+          <div class="card field-card">
+            <h3>이름</h3>
+            <input class="field-input" type="text" value="김민수" readonly />
+          </div>
+          <div class="card field-card" style="margin-top:12px">
+            <h3>회의 이름</h3>
+            <input class="field-input" type="text" value="팀 킥오프 미팅" readonly />
+          </div>
+        </div>
+        <p class="showcase-source"><a href="create.html?screen=1">create · screen 1</a> · <a href="respond.html?screen=0">respond · 이름</a></p>
+      </div>
+    </section>
+
+    <section class="comp-section">
+      <h2>Calendar</h2>
+      <p class="comp-desc">평일만 · range 선택 — <code>create.html</code> screen 2와 동일</p>
+      <div class="comp-card">
+        <div class="showcase-panel">
+          <div class="card calendar-card">
+            <h3>조율 기간 (최대 2주)</h3>
+            <div class="cal-header">
+              <button type="button" class="cal-nav" aria-label="이전 달">‹</button>
+              <span>2026년 7월</span>
+              <button type="button" class="cal-nav" aria-label="다음 달">›</button>
+            </div>
+            <div class="cal-weekdays">
+              <span>월</span><span>화</span><span>수</span><span>목</span><span>금</span>
+            </div>
+            <div class="cal-grid">
+              <span class="cal-day empty"></span><span class="cal-day empty"></span><span class="cal-day empty"></span>
+              <button type="button" class="cal-day start">10</button>
+              <button type="button" class="cal-day range">11</button>
+              <button type="button" class="cal-day range">14</button>
+              <button type="button" class="cal-day range">15</button>
+              <button type="button" class="cal-day range">16</button>
+              <button type="button" class="cal-day range">17</button>
+              <button type="button" class="cal-day range">18</button>
+              <button type="button" class="cal-day range">21</button>
+              <button type="button" class="cal-day range">22</button>
+              <button type="button" class="cal-day end">23</button>
+              <button type="button" class="cal-day">24</button>
+              <button type="button" class="cal-day">25</button>
+            </div>
+            <p class="cal-selected">7/7 (월) – 7/18 (금) 선택됨</p>
+          </div>
+        </div>
+        <p class="showcase-source"><a href="create.html?screen=2">create · screen 2</a></p>
+      </div>
+    </section>
+
+    <section class="comp-section">
+      <h2>Member row · Role select</h2>
+      <p class="comp-desc"><code>[필수/선택]</code> → 이름 → 삭제 — create 3단계 실제 패턴</p>
+      <div class="comp-card">
+        <div class="showcase-panel member-editor" id="member-showcase">
+          <div class="member-list">
+          <div class="card member-row" data-host="true">
+            <div class="member-left">
+              <div class="role-select" data-value="required" aria-label="필수/선택">
+                <button type="button" class="role-select-trigger required" aria-haspopup="listbox" aria-expanded="false">
+                  <span class="role-select-label">필수</span>
+                  <span class="role-select-chevron"></span>
+                </button>
+                <div class="role-select-content" role="listbox" hidden>
+                  <button type="button" class="role-select-item" data-value="required" role="option" aria-selected="true">
+                    <span>필수</span><span class="role-select-check"></span>
+                  </button>
+                  <button type="button" class="role-select-item" data-value="optional" role="option" aria-selected="false">
+                    <span>선택</span><span class="role-select-check"></span>
+                  </button>
+                </div>
+              </div>
+              <input class="member-name" type="text" value="김다연*" readonly aria-label="참석자 이름" />
+            </div>
+            <button type="button" class="member-delete" aria-label="삭제"></button>
+          </div>
+          <div class="card member-row">
+            <div class="member-left">
+              <div class="role-select" data-value="required" aria-label="필수/선택">
+                <button type="button" class="role-select-trigger required" aria-haspopup="listbox" aria-expanded="false">
+                  <span class="role-select-label">필수</span>
+                  <span class="role-select-chevron"></span>
+                </button>
+                <div class="role-select-content" role="listbox" hidden>
+                  <button type="button" class="role-select-item" data-value="required" role="option" aria-selected="true">
+                    <span>필수</span><span class="role-select-check"></span>
+                  </button>
+                  <button type="button" class="role-select-item" data-value="optional" role="option" aria-selected="false">
+                    <span>선택</span><span class="role-select-check"></span>
+                  </button>
+                </div>
+              </div>
+              <input class="member-name" type="text" value="김민수" readonly aria-label="참석자 이름" />
+            </div>
+            <button type="button" class="member-delete" aria-label="삭제"></button>
+          </div>
+          <div class="card member-row">
+            <div class="member-left">
+              <div class="role-select" data-value="optional" aria-label="필수/선택">
+                <button type="button" class="role-select-trigger optional" aria-haspopup="listbox" aria-expanded="false">
+                  <span class="role-select-label">선택</span>
+                  <span class="role-select-chevron"></span>
+                </button>
+                <div class="role-select-content" role="listbox" hidden>
+                  <button type="button" class="role-select-item" data-value="required" role="option" aria-selected="false">
+                    <span>필수</span><span class="role-select-check"></span>
+                  </button>
+                  <button type="button" class="role-select-item" data-value="optional" role="option" aria-selected="true">
+                    <span>선택</span><span class="role-select-check"></span>
+                  </button>
+                </div>
+              </div>
+              <input class="member-name" type="text" value="박현우" readonly aria-label="참석자 이름" />
+            </div>
+            <button type="button" class="member-delete" aria-label="삭제"></button>
+          </div>
+          </div>
+          <button type="button" class="add-member"><span class="icon-plus"></span> 인원 추가</button>
+        </div>
+        <p class="showcase-source"><a href="create.html?screen=3">create · screen 3</a></p>
+      </div>
+    </section>
+
+    <section class="comp-section">
+      <h2>Host · 입력 현황</h2>
+      <p class="comp-desc"><code>screen-head</code> + <code>member-list</code> — merge 1단계 기준 레이아웃</p>
+      <div class="comp-card">
+        <div class="showcase-panel">
+          <header class="screen-head">
+            <h2>팀 킥오프 미팅</h2>
+            <p class="screen-meta">4 / 6명 입력 완료</p>
+            <p class="sub">모두 입력되면 가능한 시간을 확인해요</p>
+          </header>
+          <ul class="member-list">
+            <li class="card member"><span class="member-name">이지영<span class="mandatory-mark">*</span></span><span class="badge done">완료</span></li>
+            <li class="card member"><span class="member-name is-pending">정태호</span><span class="badge wait">대기중</span></li>
+          </ul>
+        </div>
+        <p class="showcase-source"><a href="merge.html?screen=1">merge · screen 1</a></p>
+      </div>
+    </section>
+
+    <section class="comp-section">
+      <h2>Day row</h2>
+      <p class="comp-desc">요일 전체 불가 — respond 3단계</p>
+      <div class="comp-card">
+        <div class="showcase-panel day-list">
+          <button type="button" class="day-row"><span>7/8 (화)</span><span class="day-row-hint">탭하여 설정</span></button>
+          <button type="button" class="day-row blocked"><span>7/11 (금)</span><span class="day-row-status">전체 불가</span></button>
+        </div>
+        <p class="showcase-source"><a href="respond.html?screen=3">respond · screen 3</a></p>
+      </div>
+    </section>
+
+    <section class="comp-section">
+      <h2>Time grid</h2>
+      <p class="comp-desc">참석자 입력 · 주최자 히트맵</p>
+      <div class="comp-grid">
+        <div class="comp-card">
+          <h3>Input grid (respond)</h3>
+          <div class="showcase-panel">
+            <div class="grid-wrap">
+              <div class="mode-toggle">
+                <button type="button" class="unavail">불가</button>
+                <button type="button" class="pref inactive">선호하지 않음</button>
+              </div>
+              <div class="grid input-grid">
+                <span></span><span class="day">월</span><span class="day">화</span><span class="day">수</span><span class="day">목</span><span class="day">금</span>
+                <span class="hour">14</span><span class="cell"></span><span class="cell unavail"></span><span class="cell"></span><span class="cell pref"></span><span class="cell"></span>
+                <span class="hour">15</span><span class="cell"></span><span class="cell"></span><span class="cell"></span><span class="cell"></span><span class="cell blocked"></span>
+              </div>
+            </div>
+          </div>
+          <p class="showcase-source"><a href="respond.html?screen=2">respond · screen 2</a></p>
+        </div>
+        <div class="comp-card">
+          <h3>Heatmap (merge)</h3>
+          <div class="showcase-panel">
+            <div class="grid-wrap heatmap">
+              <div class="grid">
+                <span></span><span class="day">월</span><span class="day">화</span><span class="day">수</span><span class="day">목</span><span class="day">금</span>
+                <span class="hour">14</span>
+                <span class="cell coord selectable"><span class="cell-label all-ok">전원 가능</span></span>
+                <span class="cell coord selectable selected"><div class="cell-pills"><span class="avail-badge heat unavail">박현우</span></div></span>
+                <span class="cell best selectable"><span class="cell-label all-ok">전원 가능</span></span>
+                <span class="cell ok selectable"></span>
+                <span class="cell bad disabled"></span>
+                <span class="hour">15</span>
+                <span class="cell ok selectable"></span><span class="cell ok selectable"></span><span class="cell ok selectable"></span><span class="cell ok selectable"></span><span class="cell bad disabled"></span>
+              </div>
+            </div>
+          </div>
+          <p class="showcase-source"><a href="merge.html?screen=2">merge · screen 2</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="comp-section">
+      <h2>Layer toggles</h2>
+      <p class="comp-desc">개별 일정 겹쳐보기 — merge 6단계</p>
+      <div class="comp-card">
+        <div class="showcase-panel">
+          <div class="member-toggles">
+            <button type="button" class="member-toggle active">김민수<span class="mandatory-mark">*</span></button>
+            <button type="button" class="member-toggle active">이지영<span class="mandatory-mark">*</span></button>
+            <button type="button" class="member-toggle">박현우</button>
+            <button type="button" class="member-toggle pending" disabled>정태호</button>
+          </div>
+        </div>
+        <p class="showcase-source"><a href="merge.html?screen=6">merge · screen 6</a></p>
+      </div>
+    </section>
+
+    <section class="comp-section">
+      <h2>Validation & Overlay</h2>
+      <p class="comp-desc">토스트 · 인라인 에러 · 바텀시트 — <code>js/ui.js</code></p>
+      <div class="comp-grid">
+        <div class="comp-card">
+          <h3>Toast · warning</h3>
+          <div class="comp-phone-preview">
+            <div class="toss-toast show">
+              <span class="toss-toast-icon toss-toast-icon--warning">!</span>
+              <span class="toss-toast-text">참석자 이름을 입력해주세요</span>
+            </div>
+          </div>
+          <p class="showcase-source"><a href="overlays/view.html">overlays/view.html</a></p>
+        </div>
+        <div class="comp-card">
+          <h3>Inline error (respond)</h3>
+          <div class="showcase-panel">
+            <div class="card field-card is-error">
+              <h3>이름</h3>
+              <input class="field-input" type="text" value="홍길동" readonly />
+            </div>
+            <p class="name-error">참석 명단에 없는 이름이에요</p>
+          </div>
+          <p class="showcase-source"><a href="respond.html?screen=0">respond · 이름 불일치</a></p>
+        </div>
+        <div class="comp-card comp-card--overlay">
+          <h3>Bottom sheet</h3>
+          <p class="comp-overlay-note">배경 화면 + 딤 + 시트가 함께 떠야 맥락이 보여요. 정적 카드 대신 실제 오버레이 미리보기를 씁니다.</p>
+          <div class="comp-overlay-embed">
+            <iframe
+              title="바텀시트 미리보기"
+              loading="lazy"
+              src="overlays/view.html?title=수+14%3A00에%0A회의를+확정할까요%3F&message=6명+중+4명은+참석+가능해요.&confirm=확정하기&cancel=다시+볼게요&bg=../merge.html%3Fscreen%3D2"
+            ></iframe>
+          </div>
+          <p class="showcase-source">
+            <a href="overlays/view.html?title=수+14%3A00에%0A회의를+확정할까요%3F&message=6명+중+4명은+참석+가능해요.&confirm=확정하기&cancel=다시+볼게요&bg=../merge.html%3Fscreen%3D2">전체 화면</a>
+            · <a href="index.html#overlays">오버레이 목록</a>
+            · <a href="merge.html?screen=2">merge · 히트맵</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="comp-section">
+      <h2>구현 현황</h2>
+      <p class="comp-desc">대표 상태만 요약 · 전체는 <a href="docs/view.html?doc=states" style="color:var(--blue);font-weight:600">화면 상태</a></p>
+      <div class="comp-card">
+        <div class="state-table-wrap">
+          <table class="state-table">
+            <thead>
+              <tr><th>영역</th><th>상태</th><th>구현</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>create</td><td>role-select · 캘린더 · member-row</td><td><span class="state-pill done">구현</span></td></tr>
+              <tr><td>respond</td><td>이름 불일치 인라인 에러</td><td><span class="state-pill done">구현</span></td></tr>
+              <tr><td>merge</td><td>히트맵 · 일정 겹쳐보기 · 미제출 disabled</td><td><span class="state-pill done">구현</span></td></tr>
+              <tr><td>merge</td><td>입력 집계 로딩 스켈레톤</td><td><span class="state-pill spec">설계</span></td></tr>
+              <tr><td>create</td><td>참석자 이름 중복</td><td><span class="state-pill spec">설계</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="js/icons.js"></script>
+  <script>
+    (function initRoleSelects() {
+      let openRoleSelect = null;
+
+      function closeRoleSelect(roleSelect) {
+        const content = roleSelect.querySelector('.role-select-content');
+        const trigger = roleSelect.querySelector('.role-select-trigger');
+        content.classList.remove('open');
+        content.hidden = true;
+        trigger.setAttribute('aria-expanded', 'false');
+        if (openRoleSelect === roleSelect) openRoleSelect = null;
+      }
+
+      function openRoleSelectMenu(roleSelect) {
+        if (openRoleSelect && openRoleSelect !== roleSelect) closeRoleSelect(openRoleSelect);
+        const content = roleSelect.querySelector('.role-select-content');
+        const trigger = roleSelect.querySelector('.role-select-trigger');
+        content.hidden = false;
+        requestAnimationFrame(() => content.classList.add('open'));
+        trigger.setAttribute('aria-expanded', 'true');
+        openRoleSelect = roleSelect;
+      }
+
+      function setRoleValue(roleSelect, value) {
+        roleSelect.dataset.value = value;
+        roleSelect.querySelector('.role-select-label').textContent = value === 'required' ? '필수' : '선택';
+        const trigger = roleSelect.querySelector('.role-select-trigger');
+        trigger.classList.remove('required', 'optional');
+        trigger.classList.add(value === 'required' ? 'required' : 'optional');
+        roleSelect.querySelectorAll('.role-select-item').forEach((item) => {
+          const selected = item.dataset.value === value;
+          item.setAttribute('aria-selected', selected ? 'true' : 'false');
+          item.querySelector('.role-select-check').innerHTML = selected
+            ? LucideIcons.svg('check', { size: 14, strokeWidth: 2.5 })
+            : '';
+        });
+      }
+
+      document.querySelectorAll('#member-showcase .role-select').forEach((roleSelect) => {
+        const trigger = roleSelect.querySelector('.role-select-trigger');
+        trigger.querySelector('.role-select-chevron').innerHTML = LucideIcons.svg('chevron-down', { size: 12, strokeWidth: 2.5 });
+        roleSelect.querySelectorAll('.role-select-item').forEach((item) => {
+          if (item.getAttribute('aria-selected') === 'true') {
+            item.querySelector('.role-select-check').innerHTML = LucideIcons.svg('check', { size: 14, strokeWidth: 2.5 });
+          }
+        });
+        trigger.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+          if (isOpen) closeRoleSelect(roleSelect);
+          else openRoleSelectMenu(roleSelect);
+        });
+        roleSelect.querySelectorAll('.role-select-item').forEach((item) => {
+          item.addEventListener('click', () => {
+            setRoleValue(roleSelect, item.dataset.value);
+            closeRoleSelect(roleSelect);
+          });
+        });
+      });
+
+      document.querySelectorAll('#member-showcase .member-delete').forEach((btn) => {
+        btn.innerHTML = LucideIcons.svg('x', { size: 16, strokeWidth: 2 });
+      });
+
+      document.addEventListener('click', () => {
+        if (openRoleSelect) closeRoleSelect(openRoleSelect);
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && openRoleSelect) closeRoleSelect(openRoleSelect);
+      });
+    })();
+  </script>
+</body>
+</html>

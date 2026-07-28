@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>일정 맞추기 — 일정 입력</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/ui.css" />
+  <link rel="stylesheet" href="css/flow-patterns.css" />
+  <style>
+    .grid-wrap .mode-toggle { margin: 0 0 12px; }
+    .mode-toggle {
+      display: flex; gap: 4px; padding: 4px;
+      background: var(--bg); border-radius: 12px;
+    }
+    .mode-toggle button {
+      flex: 1; height: 40px; border: none; border-radius: 10px;
+      font-size: 15px; cursor: pointer; transition: all .15s ease;
+    }
+    .mode-toggle button.unavail { background: var(--red); color: var(--white); font-weight: 600; }
+    .mode-toggle button.unavail.inactive { background: transparent; color: var(--grey-700); font-weight: 500; }
+    .mode-toggle button.pref { background: var(--amber-bg); color: #8B6914; font-weight: 600; }
+    .mode-toggle button.pref.inactive { background: transparent; color: var(--grey-700); font-weight: 500; }
+    .grid-wrap { background: var(--white); border-radius: 16px; overflow-x: auto; }
+    .grid-wrap.interactive { user-select: none; -webkit-user-select: none; }
+    .grid { display: grid; grid-template-columns: 36px repeat(5, 1fr); gap: 2px; font-size: 10px; }
+    .grid.input-grid .day { font-size: 11px; font-weight: 600; color: var(--grey-700); text-align: center; }
+    .grid.input-grid .hour { font-size: 10px; color: var(--grey-500); display: flex; align-items: center; justify-content: flex-end; padding-right: 6px; align-self: center; }
+    .cell { border-radius: 4px; background: rgba(209,214,219,.3); cursor: pointer; touch-action: none; }
+    .cell.unavail { background: rgba(240,68,82,.25); }
+    .cell.pref { background: rgba(255,220,100,.35); }
+    .cell.blocked { background: rgba(209,214,219,.6); cursor: not-allowed; }
+    .name-error { font-size: 14px; color: var(--red); margin-top: 8px; }
+    .name-hint { font-size: 13px; color: var(--grey-500); margin-top: 12px; line-height: 1.5; }
+  </style>
+  <link rel="stylesheet" href="css/grid.css" />
+</head>
+<body>
+  <div class="phone" id="app">
+    <div class="screen active" data-screen="0">
+      <div class="status">9:41</div>
+      <div class="nav"><h1>일정 입력</h1></div>
+      <div class="content">
+        <h2>이름을 입력해주세요</h2>
+        <p class="sub" id="meeting-title-sub">팀 킥오프 미팅</p>
+        <div class="card field-card">
+          <h3>이름</h3>
+          <input class="field-input" id="attendee-name" type="text" value="김민수" aria-label="이름" autocomplete="name" />
+        </div>
+        <p class="name-error" id="name-error" hidden>참석 명단에 없는 이름이에요</p>
+        <p class="name-hint">초대된 이름과 똑같이 입력해야 해요</p>
+      </div>
+      <button type="button" class="cta" id="name-submit">시작하기</button>
+    </div>
+
+    <div class="screen has-secondary-cta" data-screen="1">
+      <div class="status">9:41</div>
+      <div class="nav"><h1>일정 입력</h1></div>
+      <div class="check">
+        <div class="success-check" aria-hidden="true"></div>
+        <h2>이미 일정을 입력했어요</h2>
+        <p class="sub">회의가 확정되기 전까지<br>다시 수정할 수 있어요</p>
+      </div>
+      <button type="button" class="cta secondary" id="keep-submission-btn">그대로 두기</button>
+      <button type="button" class="cta" id="edit-submission-btn">수정하기</button>
+    </div>
+
+    <div class="screen" data-screen="2">
+      <div class="status">9:41</div>
+      <div class="nav"><button class="back" onclick="go(3)">←</button><h1>일정 입력</h1></div>
+      <div class="content">
+        <h2>나머지 안 되는 시간을 찍어주세요</h2>
+        <p class="sub">화·금 외근 요일은 이미 전체 불가 · 드래그로 여러 칸 선택</p>
+        <div class="bar-tabs week-bar-tabs" data-week-tabs="input">
+          <button type="button" class="bar-tab active" data-week="1">7/7 – 7/13</button>
+          <button type="button" class="bar-tab" data-week="2">7/14 – 7/20</button>
+        </div>
+        <div class="grid-wrap interactive" id="input-grid-wrap">
+          <div class="mode-toggle">
+            <button type="button" class="unavail" id="mode-unavail">불가</button>
+            <button type="button" class="pref inactive" id="mode-pref">선호하지 않음</button>
+          </div>
+          <div class="grid input-grid" id="input-grid"></div>
+        </div>
+      </div>
+      <button type="button" class="cta" id="input-complete-btn">입력 완료</button>
+    </div>
+
+    <div class="screen" data-screen="3">
+      <div class="status">9:41</div>
+      <div class="nav"><h1>요일 전체 불가</h1></div>
+      <div class="content">
+        <h2>외근이 많은 요일을<br>선택해주세요</h2>
+        <p class="sub">날짜를 탭하면 해당 요일 전체가 불가 처리됩니다</p>
+        <div class="bar-tabs week-bar-tabs" data-week-tabs="day">
+          <button type="button" class="bar-tab active" data-week="1">7/7 – 7/13</button>
+          <button type="button" class="bar-tab" data-week="2">7/14 – 7/20</button>
+        </div>
+        <div id="day-list" class="day-list"></div>
+      </div>
+      <button class="cta" onclick="go(2)">다음</button>
+    </div>
+
+    <div class="screen" data-screen="4">
+      <div class="status">9:41</div>
+      <div class="check">
+        <div class="success-check" aria-hidden="true"></div>
+        <h2>입력을 완료했어요</h2>
+        <p class="sub">주최자가 일정을 확정하면 알려드릴게요.<br>확정 전까지는 아래에서 수정할 수 있어요.</p>
+      </div>
+      <button type="button" class="cta secondary" id="edit-from-done-btn">수정하기</button>
+    </div>
+  </div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/flow-nav.js"></script>
+  <script src="js/respond.js"></script>
+</body>
+</html>

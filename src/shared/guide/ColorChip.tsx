@@ -3,9 +3,9 @@
 import { toast } from 'sonner';
 
 interface ColorChipProps {
-  name: string; // point, red, blue ...
-  step: string; // 500, 600, default...
-  hex: string; // #197ed1
+  name: string;
+  step: string;
+  hex: string;
 }
 
 export default function ColorChip({ name, step, hex }: ColorChipProps) {
@@ -31,7 +31,6 @@ export default function ColorChip({ name, step, hex }: ColorChipProps) {
     >
       <span className="absolute bottom-1 left-1 text-[12px] text-white/80">{step}</span>
 
-      {/* Hover Overlay */}
       <div className="pointer-events-none absolute inset-0 flex rounded-md bg-black/40 text-[14px] text-white opacity-0 transition-opacity duration-200 group-hover:opacity-80">
         <div className="flex w-1/2 items-center justify-center border-r border-white/30">text</div>
         <div className="flex w-1/2 items-center justify-center">bg</div>

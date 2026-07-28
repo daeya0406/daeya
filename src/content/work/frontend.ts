@@ -1,0 +1,204 @@
+import { frontendProjectSchema, type FrontendProject } from '../schema';
+
+export const FRONTEND_INTRO = {
+  title: '프론트엔드',
+  description: '프론트엔드 작업물입니다. 역할·결정·결과 중심으로 정리해 두었습니다.',
+};
+
+export const FRONTEND_PROJECTS: FrontendProject[] = [
+  {
+    id: 'activity-bite',
+    title: '체험 한입',
+    summary: '체험 탐색·예약·관리 플로우를 제공하는 FSD 기반 Next.js 프로젝트',
+    image: '/images/projects/activity-bite2.png',
+    role: '프론트엔드',
+    period: '2025.12 - 2026.01',
+    featured: true,
+    tags: ['Next.js', 'TypeScript', 'Tailwind', 'FSD', 'DDD-lite'],
+    metrics: [
+      { label: '아키텍처', value: 'FSD + DDD-lite' },
+      { label: '워크플로우', value: 'Husky/commitlint' },
+    ],
+    highlights: [
+      'App Router는 라우팅/레이아웃만 담당하도록 분리',
+      '도메인 로직을 entities/features로 구분해 확장성 확보',
+      'BFF 레이어를 통한 인증/요청 흐름 정리',
+    ],
+    codeSnippets: [
+      'const theme = useThemeStore((s) => s.theme);',
+      'features/modal/model/useModalStack.ts',
+      'export const ActivityCard = () => { ... }',
+    ],
+    links: {
+      caseStudy: '/work/frontend/activity-bite',
+      github: 'https://github.com/FE19-Team3/global_nomad',
+      live: 'https://global-nomad-rust.vercel.app/',
+    },
+    caseStudy: {
+      overview:
+        '체험(액티비티) 탐색·예약·관리 흐름을 제공하는 서비스로 FSD + DDD-lite를 적용했습니다.',
+      goals: ['FSD 구조 정착', '도메인 로직 확장성 확보'],
+      responsibilities: [
+        '테마(다크모드) 상태 관리',
+        '모달 매니저(Zustand stack) 통합',
+        '개별 페이지 구현',
+      ],
+      architecture: [
+        'app은 라우팅/레이아웃만 담당',
+        '비즈니스 로직은 features/entities에만 배치',
+        'API 네이밍은 Swagger 기준 정렬',
+      ],
+      features: ['예약/관리 플로우', '알림/리뷰/프로필 영역 구성'],
+      challenges: [
+        {
+          title: 'FSD + DDD-lite 구조 정착',
+          detail:
+            'page는 조립만 담당하고 features/entities에 로직을 고정하였습니다. Lint/CI로 디렉토리 규칙을 자동 검증해 구조가 흔들리지 않도록 유지하였습니다.',
+          code: `FSD :
+page(화면 조립)
+features(기능 로직)
+entities(공통 상태·규칙)
+shared(기술적 재사용 요소)
+
+lite DDD :
+규모 대비 복잡도가 과도해질 수 있음을 고려하여
+완전한 DDD의 Entity 구현이 아닌,
+타입/스키마로 구조 및 제약을 표현`,
+        },
+        {
+          title: '다크 모드 상태 관리 일관화',
+          detail:
+            '쿠키로 초기 테마를 결정한 뒤 Provider에서 상태를 관리하고, data-theme로 스타일을 전환하였습니다. CSS 변수와 Tailwind 매핑으로 유지보수 비용을 줄였습니다.',
+        },
+        {
+          title: '모달 매니저 통합',
+          detail:
+            'Zustand + stack(LIFO) 구조로 모달을 중앙 관리하고 Portal로 렌더링하였습니다. z-index 순서와 공통 UX(ESC/배경 클릭)를 통일해 예측 가능한 흐름을 만들었습니다.',
+        },
+      ],
+      outcomes: [
+        { label: '공통', value: 'FSD + DDD-lite 구조로 작업' },
+        { label: '역할', value: '테마 상태관리 및 Modal, 개별 페이지 작업' },
+      ],
+      learnings: [
+        '디렉토리 규칙을 CI로 고정하면 구조가 흔들리지 않음',
+        '테마·모달처럼 전역 UX는 한곳에서 관리하는 편이 예측 가능함',
+      ],
+    },
+  },
+  {
+    id: 'the-julge',
+    title: 'The-Julge',
+    summary: '인증/신청 플로우를 갖춘 웹 애플리케이션 구축 프로젝트',
+    image: '/images/projects/the-julge.png',
+    role: '프론트엔드',
+    period: '2025.11 - 2025.12',
+    featured: true,
+    tags: ['Next.js', 'React', 'TypeScript', 'Tailwind', 'React Hook Form', 'Zod'],
+    metrics: [
+      { label: '공통', value: 'Next.js 기반 프로젝트 구조 적응' },
+      { label: '역할', value: 'CRUD 기반 작업, 작업 전 필요한 부분 세팅' },
+    ],
+    highlights: [
+      '공통 UI 컴포넌트 구축과 폼 검증 패턴 정리',
+      '커스텀 훅으로 페이지네이션과 모달 동작 관리',
+      'API 클라이언트 구성과 타입 유틸 정리',
+    ],
+    codeSnippets: [
+      'const form = useForm<SignUpInput>({ resolver: zodResolver(schema) });',
+      'export function usePagination({ total, pageSize }) { ... }',
+    ],
+    links: {
+      caseStudy: '/work/frontend/the-julge',
+      github: 'https://github.com/TEAM3-5/The-Julge',
+      live: 'https://the-julge-git-dev-chldntjr1321s-projects.vercel.app/',
+    },
+    caseStudy: {
+      overview: '인증과 신청 흐름을 중심으로 사용자 역할별 화면을 구성한 웹 애플리케이션입니다.',
+      goals: ['폼 검증/상태 흐름 정리', '공통 UI 컴포넌트 재사용성 확보'],
+      responsibilities: ['글로벌 폰트/컬러 정의', '리스트 테이블과 지역 필터 컴포넌트 개발'],
+      features: ['react-hook-form + zod 검증', '공통 UI 컴포넌트 패턴'],
+      challenges: [
+        {
+          title: '폼 검증 패턴 통일',
+          detail:
+            'react-hook-form + zod로 입력·에러 메시지를 스키마 기준으로 맞춰, 페이지마다 검증 로직이 갈라지지 않게 했습니다.',
+        },
+      ],
+      outcomes: [
+        { label: '배포', value: 'Vercel' },
+        { label: '품질 도구', value: 'ESLint/Prettier/Husky' },
+      ],
+      learnings: [
+        '공통 UI와 폼 스키마를 먼저 잡으면 CRUD 화면 속도가 빨라짐',
+        '커스텀 훅으로 페이지네이션·모달을 묶으면 페이지 코드가 얇아짐',
+      ],
+    },
+  },
+  {
+    id: 'rolling-paper',
+    title: 'Rolling Paper',
+    summary: '서로 메시지를 남길 수 있는 온라인 롤링페이퍼 제작 서비스',
+    image: '/images/projects/rolling.png',
+    role: '프론트엔드',
+    period: '2025.09 - 2025.10',
+    featured: true,
+    tags: ['React', 'Vite', 'React Router', 'SCSS'],
+    metrics: [
+      { label: '공통', value: 'CRUD 기반 API 호출 작업' },
+      { label: '역할', value: 'Git-branch 전략 등 프로젝트 설계' },
+    ],
+    highlights: [
+      '반응형 UI와 접근성 고려한 컴포넌트 설계',
+      '슬라이드 반응형과 무한스크롤 로직 구현',
+      '롤링페이지 생성 및 메시지 전송 플로우 구축',
+    ],
+    codeSnippets: [
+      'const { data, fetchNextPage } = useInfiniteQuery({ ... });',
+      'export const MessageCard = ({ message }) => { ... }',
+    ],
+    links: {
+      caseStudy: '/work/frontend/rolling-paper',
+      github: 'https://github.com/daeya0406/rolling-part2-team2',
+    },
+    caseStudy: {
+      overview: '누구나 쉽게 롤링페이퍼를 만들고 공유할 수 있는 메시지 기반 웹 서비스입니다.',
+      goals: ['반응형 UI와 접근성 강화', '롤링페이지 생성/메시지 작성 플로우 제공'],
+      responsibilities: [
+        '프로젝트 세팅과 배포 환경 구성',
+        '롤링페이지 생성/메시지 작성 페이지 개발',
+      ],
+      features: ['무한 스크롤', '관리자 모드 토글 및 메시지 삭제', '슬라이드 UI'],
+      challenges: [
+        {
+          title: '반응형 슬라이드·무한스크롤',
+          detail:
+            '모바일·PC에서 카드 슬라이드와 무한스크롤이 자연스럽게 이어지도록 레이아웃과 로딩 경계를 맞춰 구현했습니다.',
+        },
+      ],
+      outcomes: [
+        { label: '반응형', value: '모바일·PC 대응' },
+        { label: '역할', value: '세팅·배포·생성/작성 플로우' },
+      ],
+      learnings: [
+        '브랜치 전략을 초기에 합의하면 협업 충돌이 줄어듦',
+        '리스트 UX(슬라이드·무한스크롤)는 반응형 단위로 먼저 설계하는 편이 안전함',
+      ],
+    },
+  },
+];
+
+FRONTEND_PROJECTS.forEach((project) => frontendProjectSchema.parse(project));
+
+export const FEATURED_FRONTEND_PROJECTS = FRONTEND_PROJECTS.filter((p) => p.featured);
+
+export const FRONTEND_STACK = [
+  'React',
+  'Next.js',
+  'TypeScript',
+  'Tailwind CSS',
+  'Zustand',
+  'React Query',
+  'Zod',
+  'Framer Motion',
+];

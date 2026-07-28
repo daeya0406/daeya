@@ -31,7 +31,6 @@ export function DialogContent({
 }: React.ComponentProps<typeof DialogPrimitive.Content>) {
   return (
     <DialogPrimitive.Portal>
-      {/* 배경 */}
       <DialogPrimitive.Overlay asChild forceMount>
         <motion.div
           className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
@@ -41,7 +40,6 @@ export function DialogContent({
         />
       </DialogPrimitive.Overlay>
 
-      {/* 모달 콘텐츠 */}
       <AnimatePresence>
         <DialogPrimitive.Content asChild forceMount {...props}>
           <motion.div
@@ -57,7 +55,6 @@ export function DialogContent({
           >
             {children}
 
-            {/* 닫기 버튼 */}
             <DialogPrimitive.Close className="absolute right-3 top-3 rounded-md ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none">
               <Icon name="x" size={20} className="text-foreground/60 hover:text-foreground transition" />
               <span className="sr-only">Close</span>

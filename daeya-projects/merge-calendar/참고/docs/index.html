@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>설계 문서 — 일정 맞추기</title>
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/hub.css" />
+  <style>
+    .docs-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--blue);
+      margin-bottom: 24px;
+      text-decoration: none;
+    }
+    .docs-section {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 28px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+    .docs-section h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .docs-section h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin: 20px 0 8px;
+      color: var(--grey-900);
+    }
+    .docs-section p,
+    .docs-section li {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--grey-700);
+    }
+    .docs-section ul { margin: 8px 0 0 20px; }
+    .docs-section blockquote {
+      margin: 12px 0;
+      padding: 12px 16px;
+      background: var(--bg);
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--grey-900);
+      line-height: 1.5;
+    }
+    .docs-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin-top: 12px;
+    }
+    .docs-table th,
+    .docs-table td {
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+    .docs-table th {
+      background: var(--bg);
+      font-weight: 600;
+      color: var(--grey-900);
+    }
+    .docs-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .docs-nav a {
+      padding: 8px 14px;
+      background: var(--white);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--grey-700);
+      text-decoration: none;
+    }
+    .docs-nav a:hover { border-color: var(--blue); color: var(--blue); }
+  </style>
+</head>
+<body class="proto-hub">
+  <div class="hub-wrap">
+    <a class="docs-back" href="../index.html">← 프로토타입 허브</a>
+    <header class="hub-top">
+      <div>
+        <h1>설계 문서</h1>
+        <p class="lead">문제 정의와 설계 결정 요약입니다. 프로토타입은 <a href="../index.html" style="color:var(--blue);font-weight:600">index.html</a>에서 플로우별로 둘러볼 수 있어요.</p>
+      </div>
+    </header>
+
+    <nav class="docs-nav" aria-label="문서 목차">
+      <a href="#problem">문제 정의</a>
+      <a href="#decisions">설계 결정</a>
+      <a href="#process">프로세스</a>
+      <a href="#heatmap">가능한 시간 규칙</a>
+      <a href="#more">더 보기</a>
+    </nav>
+
+    <section class="docs-section" id="problem">
+      <h2>문제 정의</h2>
+      <p>처음 아이디어는 <strong>6명 일정을 같은 주간 그리드에 겹쳐 보는 것</strong>이었다. 각자 일정은 있는데 한 타임테이블에 겹쳐 보이지 않으면, 주최자는 머릿속으로 합치거나 한 명씩 다시 물어봐야 한다.</p>
+
+      <h3>기존 방식의 한계</h3>
+      <p>캘린더·일정 투표는 가능 시간만 표로 모을 뿐, <strong>같은 칸에 어떻게 겹치는지</strong> 한눈에 읽기 어렵다.</p>
+
+      <h3>설계에서 정한 것 · 겹치면서 나온 경우의 수</h3>
+      <p>겹치기만 하면 끝이 아니라, 칸마다 어떻게 보여줄지 규칙이 필요했다. 필수/선택에 따라 같은 불가도 다르게 읽히고, 요일 전체 불가와 시간 칸 불가를 나눴으며, 애매한 칸은 <strong>가능한 시간</strong>에서 비우고 <strong>일정 겹쳐보기</strong>로 넘긴다.</p>
+      <table class="docs-table">
+        <thead><tr><th>겹친 조합 (예)</th><th>화면</th></tr></thead>
+        <tbody>
+          <tr><td>전원 가능</td><td>파랑 · 전원 가능</td></tr>
+          <tr><td>필수 1명 불가</td><td>회색 · 후보 제외</td></tr>
+          <tr><td>선택 1명 불가</td><td>이름 뱃지 · 조율</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="docs-section" id="decisions">
+      <h2>설계 결정 (핵심)</h2>
+      <ul>
+        <li><strong>역할 분리</strong> — 주최자(create·merge) / 참석자(respond) 플로우 분리</li>
+        <li><strong>언제만 입력</strong> — 불가·비선호만 받고 사유는 조율(채팅)로</li>
+        <li><strong>요일 → 시간</strong> — 외근은 요일 전체 불가 후 시간 그리드</li>
+        <li><strong>필수/선택</strong> — 100% 합의 없이 확정 가능</li>
+        <li><strong>가능한 시간</strong> — 참여율 높은 시간 그리드 · 전원 가능 / 이름 뱃지</li>
+        <li><strong>일정 겹쳐보기</strong> — 이름 토글로 레이어 확인 (merge screen 6)</li>
+      </ul>
+      <p style="margin-top:16px"><a href="../merge.html?screen=6" style="color:var(--blue);font-weight:600">→ 일정 겹쳐보기 화면 열기</a></p>
+    </section>
+
+    <section class="docs-section" id="process">
+      <h2>설계 프로세스</h2>
+      <p>7단계 프레임워크(목표 → 오디언스 → 컨텍스트 → 아이디어 → 플로우 → UI → 검증)에 맞춰 정리했습니다.</p>
+      <p>핵심 목표: <strong>6명 일정을 같은 주간 그리드에 겹쳐 보이게 한다.</strong></p>
+    </section>
+
+    <section class="docs-section" id="heatmap">
+      <h2>가능한 시간 · 규칙</h2>
+      <ul>
+        <li>필수 참석자가 요일 전체 불가 → 해당 요일 열 전체 회색</li>
+        <li>선택 참석자만 요일 불가 → 열은 유지, 해당 인원만 전 시간 불가</li>
+        <li>전원 가능 칸 → 「전원 가능」</li>
+        <li>필수 비선호 → 이름 뱃지에 <code>*</code> 표시</li>
+      </ul>
+      <p style="margin-top:16px"><a href="../merge.html?screen=2" style="color:var(--blue);font-weight:600">→ 가능한 시간 화면 열기</a></p>
+    </section>
+
+    <section class="docs-section hub-section-muted" id="more">
+      <h2>전체 문서</h2>
+      <p class="hub-section-lead">마크다운 원문을 HTML로 렌더링해 읽기 쉽게 보여 줍니다.</p>
+      <div class="doc-grid">
+        <a class="doc-card" href="view.html?doc=problem"><h3>문제 정의</h3><p>역할별 상황 · 핵심 문제</p></a>
+        <a class="doc-card" href="view.html?doc=decisions"><h3>설계 결정</h3><p>UX 결정과 이유</p></a>
+        <a class="doc-card" href="view.html?doc=process"><h3>설계 프로세스</h3><p>7단계 프레임워크</p></a>
+        <a class="doc-card" href="view.html?doc=heatmap-rules"><h3>가능한 시간 규칙</h3><p>슬롯 경우의 수</p></a>
+        <a class="doc-card" href="view.html?doc=layout"><h3>레이아웃 가이드</h3><p>간격 · 타이포</p></a>
+        <a class="doc-card" href="view.html?doc=states"><h3>화면 상태</h3><p>플로우별 상태표</p></a>
+        <a class="doc-card" href="view.html?doc=submit"><h3>제출 · 배포</h3><p>제출자용 체크리스트</p></a>
+        <a class="doc-card" href="view.html?doc=structure"><h3>프로토타입 구조</h3><p>파일 · 폴더 설명</p></a>
+        <a class="doc-card" href="view.html?doc=answers"><h3>제출 문항</h3><p>답변 원문</p></a>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

@@ -2,64 +2,86 @@ import { IconName } from '@/shared/ui/Icons';
 
 export type NavItem = {
   label: string;
+  id?: string;
   href?: string;
   badge?: string;
   children?: NavItem[];
   icon?: IconName;
 };
 
-/** 채용용 내비: About → Portfolio → Lab */
 export const navItems: NavItem[] = [
-  { label: 'About', href: '/about', icon: 'userRound' },
-  { label: 'Portfolio', href: '/portfolio', icon: 'briefcase' },
   {
-    label: 'Lab',
-    href: '/playground',
+    label: 'me',
+    href: '/me/profile',
+    icon: 'userRound',
+    children: [
+      { id: 'profile', label: '소개', href: '/me/profile' },
+      { id: 'career', label: '경력', href: '/me/career' },
+    ],
+  },
+  {
+    label: 'work',
+    href: '/work/frontend',
+    icon: 'briefcase',
+    children: [
+      { id: 'publishing', label: '퍼블리싱', href: '/work/publishing' },
+      { id: 'frontend', label: '프론트엔드', href: '/work/frontend' },
+      { id: 'design', label: '프로덕트 디자인', href: '/work/design' },
+    ],
+  },
+  {
+    label: 'hobby',
+    href: '/hobby/guide',
     icon: 'flaskConical',
     children: [
       {
-        label: 'Playground',
-        href: '/playground',
+        id: 'guide',
+        label: '디자인 시스템',
+        href: '/hobby/guide',
         children: [
-          { label: 'Templates', href: '/playground?tab=templates' },
-          { label: 'UI', href: '/playground?tab=ui' },
-          { label: 'UX', href: '/playground?tab=ux' },
-          { label: 'Plugin', href: '/playground?tab=plugin' },
-          { label: 'Testing', href: '/playground?tab=testing' },
+          { label: 'UI', href: '/hobby/guide?tab=ui' },
+          { label: 'Font', href: '/hobby/guide?tab=font' },
+          { label: 'Color', href: '/hobby/guide?tab=color' },
+          // { label: 'Stack', href: '/hobby/guide?tab=stack' },
         ],
       },
       {
-        label: 'Note',
-        href: '/note',
+        id: 'playground',
+        label: '실험실',
+        href: '/hobby/playground',
         children: [
-          { label: 'JS', href: '/note?tab=js' },
-          { label: 'React', href: '/note?tab=react' },
-          { label: 'Hooks', href: '/note?tab=hooks' },
-          { label: 'TS', href: '/note?tab=ts' },
-          { label: 'Next.js', href: '/note?tab=nextjs' },
-          { label: 'Tailwind', href: '/note?tab=tailwind' },
-          { label: 'Troubleshooting', href: '/note?tab=troubleshooting' },
+          { label: 'Templates', href: '/hobby/playground?tab=templates' },
+          { label: 'UI', href: '/hobby/playground?tab=ui' },
+          { label: 'UX', href: '/hobby/playground?tab=ux' },
+          { label: 'Plugin', href: '/hobby/playground?tab=plugin' },
+          { label: 'Testing', href: '/hobby/playground?tab=testing' },
         ],
       },
       {
-        label: 'Guide',
-        href: '/guide',
+        id: 'note',
+        label: '노트',
+        href: '/hobby/note',
         children: [
-          { label: 'UI', href: '/guide?tab=ui' },
-          { label: 'Font', href: '/guide?tab=font' },
-          { label: 'Color', href: '/guide?tab=color' },
-          { label: 'Stack', href: '/guide?tab=stack' },
+          { label: 'JS', href: '/hobby/note?tab=js' },
+          { label: 'React', href: '/hobby/note?tab=react' },
+          { label: 'Hooks', href: '/hobby/note?tab=hooks' },
+          { label: 'TS', href: '/hobby/note?tab=ts' },
+          { label: 'Next.js', href: '/hobby/note?tab=nextjs' },
+          { label: 'Tailwind', href: '/hobby/note?tab=tailwind' },
+          { label: 'Troubleshooting', href: '/hobby/note?tab=troubleshooting' },
         ],
       },
-      { label: 'Architecture', href: '/architecture', icon: 'layers' },
-      { label: 'FE Flowset', href: '/fe-flowset', icon: 'workflow' },
+      // { id: 'architecture', label: '아키텍처', href: '/hobby/architecture', icon: 'layers' },
+      // { id: 'fe-flowset', label: 'FE 플로우셋', href: '/hobby/fe-flowset', icon: 'workflow' },
     ],
   },
 ];
 
 export function findNavItem(label: string, items: NavItem[] = navItems): NavItem | undefined {
+  const needle = label.toLowerCase();
   for (const item of items) {
-    if (item.label.toLowerCase() === label.toLowerCase()) return item;
+    const key = (item.id ?? item.label).toLowerCase();
+    if (key === needle) return item;
     if (item.children?.length) {
       const found = findNavItem(label, item.children);
       if (found) return found;
@@ -76,7 +98,7 @@ export function extractTabsFromNav(label: string) {
     const url = new URL(child.href ?? '', 'http://localhost');
     const tab = url.searchParams.get('tab');
     return {
-      key: tab ?? child.label.toLowerCase(),
+      key: tab ?? (child.id ?? child.label).toLowerCase(),
       label: child.label,
       href: child.href,
     };

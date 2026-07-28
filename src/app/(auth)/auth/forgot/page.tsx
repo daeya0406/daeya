@@ -10,7 +10,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/shared/ui/Input';
 import { Button } from '@/shared/ui/Button';
 import { supabase } from '@/lib/supabase';
-import { PROFILE } from '@/entities/profile/model/profile';
+import { PROFILE } from '@/content/profile';
 
 export default function ForgotPage() {
   const router = useRouter();
